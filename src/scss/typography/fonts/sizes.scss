@@ -1,0 +1,75 @@
+@import "../../bootstrap/variables";
+@import "../../breakpoints.scss";
+
+// font-size
+.fs-12 {
+    font-size: 0.75rem; // 12px
+}
+
+.fs-13 {
+    font-size: 0.8125rem; // 13px
+}
+
+.fs-17 {
+    font-size: 1.0625rem !important; // 17px
+}
+
+.fs-18 {
+    font-size: 1.125rem; // 18px
+}
+
+.fs-19 {
+    font-size: 1.1875rem; // 19px
+}
+
+.fs-20 {
+    font-size: 1.25rem; // 20px
+}
+
+.fs-21 {
+    font-size: 1.3125rem; // 21px
+}
+
+.fs-22 {
+    font-size: 1.375rem; // 22px
+}
+
+.fs-23 {
+    font-size: 1.4375rem; // 23px
+}
+
+.fs-24 {
+    font-size: 1.5rem; // 24px
+}
+
+.fs-25 {
+    font-size: 1.5625rem; // 25px
+}
+
+.fs-28 {
+    font-size: 1.75rem; // 28px
+}
+
+.fs-37 {
+    font-size: 2.3125rem; // 37px
+}
+
+.fs-38 {
+    font-size: 2.375rem; // 38px
+}
+
+.fs-45 {
+    font-size: 2.8125rem; // 45px
+}
+
+.fs-50 {
+    font-size: clamp(2.5rem, 4vw, 3.125rem); // clamp(40px, 4vw, 50px)
+}
+
+.fs-55 {
+    font-size: clamp(2.5rem, 4vw, 3.4375rem); // clamp(40px, 4vw, 55px)
+}
+
+.lh-150 {
+    line-height: 31.5px !important;
+}

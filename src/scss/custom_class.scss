@@ -1,0 +1,10 @@
+@import "./bootstrap/variables";
+@import "./breakpoints.scss";
+
+.cursor-pointer {
+    cursor: pointer !important;
+}
+
+.cursor-default {
+    cursor: default !important;
+}
