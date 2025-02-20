@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from "react";
+import { AuthContext } from "@/contexts/AuthContext";
+import { useContext, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { FaRegEyeSlash, FaRegEye } from "react-icons/fa6";
 
@@ -11,13 +12,19 @@ export default function FormLogin() {
     const [password, setPassword] = useState<string>('');
     const [rememberMe, setRememberMe] = useState<boolean>(false);
 
+    const { signIn, user } = useContext(AuthContext);
+
+    useEffect(() => {
+        console.log(user)
+    }, [user])
+
     const togglePasswordVisible = () => {
         setPasswordVisible(!passwordVisible);
     }
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        console.log(email, ', ', password);
+        signIn(email, password, rememberMe);
     }
 
     function validate(): boolean {
@@ -27,7 +34,7 @@ export default function FormLogin() {
 
 
     return (
-        <Row className="container-login d-flex align-items-center justify-content-center">
+        <Row className="container-login d-flex align-items-center justify-content-center row-gap-5">
             <Col xl={4} md={8} className="p-0">
                 <h1 className="fs-38 fw-700 text-auxiliary7-project">Bem- vindo(a)</h1>
                 <span className="fs-21 text-white">
