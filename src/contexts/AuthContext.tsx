@@ -1,6 +1,8 @@
 "use client";
 
 import axios from "axios";
+import { usePathname, useRouter } from "next/navigation";
+import path from "path";
 import { createContext, useEffect, useState } from "react";
 
 interface User {
@@ -27,10 +29,30 @@ export function AuthContextProvider({ children }: Props) {
 
     const [user, setUser] = useState<User>({} as User);
 
+    const router = useRouter();
+    const pathname = usePathname();
+
     useEffect(() => {
         loadUserFromStorage();
     }, []);
 
+    useEffect(() => {
+        function checkAuth() {
+            const localUser = localStorage.getItem('user');
+            const sessionUser = sessionStorage.getItem('user');
+
+            if (sessionUser && pathname === '/login/') {
+                router.push('/');
+                return;
+            }
+            if (!localUser && !sessionUser && pathname !== '/login') {
+                router.push('/login');
+                return;
+            }
+        }
+
+        checkAuth();
+    }, [router, pathname]);
 
     function signIn(email: string, password: string, rememberMe: boolean) {
         const userObj = {} as User;
@@ -54,13 +76,15 @@ export function AuthContextProvider({ children }: Props) {
                 userObj.token = authResponse.data.token;
 
                 setUser(userObj);
-                
+
                 if (rememberMe) {
                     localStorage.setItem('user', JSON.stringify(userObj));
                 }
                 else {
                     sessionStorage.setItem('user', JSON.stringify(userObj));
                 }
+
+                router.push("/");
             })
             .catch(error => {
                 console.error(error);
@@ -76,7 +100,7 @@ export function AuthContextProvider({ children }: Props) {
     function loadUserFromStorage() {
         const localUser = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
-        
+
         if (localUser) {
             setUser(JSON.parse(localUser));
         } else if (sessionUser) {
