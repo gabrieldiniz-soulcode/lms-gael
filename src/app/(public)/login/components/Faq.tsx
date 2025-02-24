@@ -1,10 +1,10 @@
 import { Accordion, AccordionBody, AccordionHeader, AccordionItem, Col, Row } from "react-bootstrap";
 
-export function Faq() {
+export default function Faq() {
 
     return (
         <Row className="d-flex justify-content-center py-5 px-2">
-            <Col md={10}>
+            <Col xxl={8} md={19}>
                 <span>Faq</span>
                 <h2 className="fw-700 fs-28 mb-4 mt-2">Dúvidas Frequentes</h2>
 
