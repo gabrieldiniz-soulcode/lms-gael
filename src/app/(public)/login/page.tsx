@@ -17,6 +17,9 @@ export default function Login() {
             <section className="container">
                 <Depoimentos />
             </section>
+            <section>
+                <Banner />
+            </section>
         </main>
     )
 }
