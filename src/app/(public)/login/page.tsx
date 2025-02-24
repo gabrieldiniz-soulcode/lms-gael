@@ -1,3 +1,5 @@
+import Banner from "./components/Banner";
+import Depoimentos from "./components/Depoimentos";
 import FormLogin from "./components/FormLogin";
 import Header from "./components/Header";
 
@@ -11,6 +13,9 @@ export default function Login() {
                 <div className="container">
                     <FormLogin />
                 </div>
+            </section>
+            <section className="container">
+                <Depoimentos />
             </section>
         </main>
     )
