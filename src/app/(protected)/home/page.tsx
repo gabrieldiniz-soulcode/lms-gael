@@ -1,6 +1,6 @@
 export default function Home() {
 
     return (
-        <h1>SOULHUB</h1>
+        <h1 style={{height: 3000}}>SOULHUB</h1>
     )
 }
