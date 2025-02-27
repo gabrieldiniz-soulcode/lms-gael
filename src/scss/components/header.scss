@@ -1,0 +1,45 @@
+// para mudar a cor do icon de check: src\scss\bootstrap\_variables.scss pesquisar por navbar-light-icon-color
+
+.header {
+    min-height: 80px;
+
+    .header-item {
+        max-width: 200px;
+        width: 100%;
+    }
+
+
+    .form-input-header {
+        background-color: transparent;
+        border-width: 1.5px;
+        border-radius: 8px !important;
+        box-shadow: none !important;
+        color: #F9F8F1 !important;
+        border-color: #F9F8F1 !important;
+        font-size: 12px !important;
+        width: 272px;
+        height: 36px;
+
+        &::-webkit-input-placeholder {
+            font-size: 12px !important;
+            color: #F9F8F1 !important;
+        }
+    }
+
+    .form-input-icon-header {
+        position: absolute;
+        right: 16px;
+        top: 10px;
+    }
+
+    .foto-aluno-header {
+        border-radius: 50%;
+        border: 3px solid #b3ccff;
+    }
+}
+
+@media (min-width: 720px) {
+    .header {
+        padding: 0 80px;
+    }
+}

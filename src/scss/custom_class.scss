@@ -59,3 +59,9 @@ a {
     background-color: #fff !important;
     box-shadow: none !important;
 }
+
+// para mudar a cor do icon de check: src\scss\bootstrap\_variables.scss pesquisar por navbar-light-icon-color
+.navbar-toggler {
+    border: 0 !important;
+    box-shadow: none !important;
+}

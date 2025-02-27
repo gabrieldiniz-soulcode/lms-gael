@@ -2,7 +2,6 @@
 
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
-import path from "path";
 import { createContext, useEffect, useState } from "react";
 
 interface User {
