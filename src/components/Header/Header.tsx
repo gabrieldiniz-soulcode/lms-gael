@@ -16,9 +16,9 @@ import aluno from "/public/aluno_2.png";
 export default function Header() {
 
   return (
-    <Navbar expand="md" className="header bg-auxiliary1-project py-md-2 py-4 position-absolute w-100" >
+    <Navbar expand="lg" className="header bg-auxiliary1-project py-lg-2 py-4 position-absolute w-100" >
 
-      <div className='d-md-flex d-none justify-content-end w-100 align-items-center gap-5'>
+      <div className='d-lg-flex d-none justify-content-end w-100 align-items-center gap-5'>
         <div className="position-relative">
           <Form.Control className="form-input-header" type="texto" placeholder="Buscar Cursos" />
           <FaSearch className="form-input-icon-header cursor-pointer" color="#fff" />
@@ -30,13 +30,13 @@ export default function Header() {
         </a>
       </div>
 
-      <div className="d-md-none d-flex flex-nowrap justify-content-center w-100">
+      <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100">
         <Image src={logo.src} width={logo.width} height={logo.height - 20} alt="logo soulcode + passaporte digital" className="w-75 object-fit-contain" />
         <NavbarToggle aria-controls="basic-navbar-nav" />
       </div>
 
       <NavbarCollapse id="basic-navbar-nav">
-        <Nav className="me-auto d-md-none">
+        <Nav className="me-auto d-lg-none">
           <div className="d-flex flex-column align-items-center gap-1">
             <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white mt-5">
               <GoHome color="#fff" size={18} className="me-2" strokeWidth={0.5} />

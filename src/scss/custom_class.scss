@@ -53,15 +53,36 @@ a {
 .accordion-item {
     border-radius: 12px !important;
     box-shadow: none !important;
-}   
+}
 
 .accordion-button:not(.collapsed) {
     background-color: #fff !important;
     box-shadow: none !important;
 }
 
-// para mudar a cor do icon de check: src\scss\bootstrap\_variables.scss pesquisar por navbar-light-icon-color
+// para mudar a cor do icon do menu: src\scss\bootstrap\_variables.scss pesquisar por navbar-light-icon-color
 .navbar-toggler {
     border: 0 !important;
     box-shadow: none !important;
+}
+
+
+@media (min-width: 1800px) {
+    .container-ajuste {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+
+
+@media (min-width: 1600px) {
+    .container-ajuste {
+        padding-left: 100px;
+    }
+}
+@media (min-width: 960px) {
+    .container-ajuste {
+        padding-left: 100px;
+        padding-left: 150px;
+    }
 }

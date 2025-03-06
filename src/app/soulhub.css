@@ -17676,12 +17676,30 @@ a {
   box-shadow: none !important;
 }
 
+@media (min-width: 1800px) {
+  .container-ajuste {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+}
+@media (min-width: 1600px) {
+  .container-ajuste {
+    padding-left: 100px;
+  }
+}
+@media (min-width: 960px) {
+  .container-ajuste {
+    padding-left: 100px;
+    padding-left: 150px;
+  }
+}
 .sidebar {
   width: 80px;
   height: 912px;
   box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.2509803922);
   border-radius: 8px;
   max-height: 90%;
+  z-index: 999;
 }
 .sidebar .icon-aba-sidebar {
   position: absolute;
@@ -17810,6 +17828,22 @@ a {
   bottom: -145px;
   left: -110px;
   position: absolute;
+}
+
+.carrossel-carreiras .carrossel-carreiras-slide {
+  width: 375px;
+  height: 320px;
+  background-color: #fff;
+}
+@media (max-width: 400px) {
+  .carrossel-carreiras .carrossel-carreiras-slide {
+    width: 350px;
+  }
+}
+@media (max-width: 370px) {
+  .carrossel-carreiras .carrossel-carreiras-slide {
+    width: 320px;
+  }
 }
 
 /*# sourceMappingURL=soulhub.css.map */

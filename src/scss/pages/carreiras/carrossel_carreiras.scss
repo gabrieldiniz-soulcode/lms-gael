@@ -1,0 +1,19 @@
+.carrossel-carreiras {
+    .carrossel-carreiras-slide {
+        width: 375px;
+        height: 320px;
+        background-color: #fff;
+    }
+
+    @media (max-width: 400px) {
+        .carrossel-carreiras-slide {
+            width: 350px;
+        }
+    }
+
+    @media (max-width: 370px) {
+        .carrossel-carreiras-slide {
+            width: 320px;
+        }
+    }
+}
