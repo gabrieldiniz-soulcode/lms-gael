@@ -4,6 +4,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import CarrosselCarreiras from "./CarrosselCarreiras";
+import { LoaderContext } from "@/contexts/LoaderContext";
 
 interface Course {
     id: number;
@@ -23,13 +24,13 @@ interface ApiResponse {
 }
 
 export default function Categorias() {
+    
     const { user } = useContext(AuthContext);
+    const { updateResponses } = useContext(LoaderContext);
     const [course, setCourse] = useState<Course[][]>([]);
-    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
         function getCourse() {
-            setLoading(true);
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course?username=${user?.name}&database=${user?.database}`)
                 .then((res: ApiResponse) => {
                     const cursos = res.data.filter((car) => car.carreira === "sim");
@@ -44,18 +45,14 @@ export default function Categorias() {
                     console.error(err);
                 })
                 .finally(() => {
-                    setLoading(false);
+                    updateResponses();
                 });
         }
 
         if (user?.name && user?.database) {
             getCourse();
         }
-    }, [user]);
-
-    if (loading) {
-        return <div>Carregando...</div>;
-    }
+    }, [user, updateResponses]);
 
     return (
         course.map((categoria, index) => (
