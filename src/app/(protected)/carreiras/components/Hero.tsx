@@ -22,6 +22,7 @@ interface Course {
     carreira: string;
     inscrito?: number;
     destaque?: number;
+    progresso?: string;
 }
 
 interface ApiResponse {
@@ -85,9 +86,9 @@ export default function Hero() {
                         </div>
                         <div className="d-flex gap-2 align-items-center fs-12 fw-700">
                             <div className="w-100">
-                                <ProgressBar now={0} />
+                                <ProgressBar now={parseInt(course?.progresso || "0")} />
                             </div>
-                            0%
+                            {course.progresso || "0"}%
                         </div>
                     </div>
                 </div>
