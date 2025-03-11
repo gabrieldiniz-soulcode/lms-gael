@@ -4,6 +4,7 @@ import { useContext, useEffect } from "react";
 import Categorias from "./components/Categorias";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import Hero from "./components/Hero";
+import Bootcamps from "./components/Bootcamps";
 
 export default function Carreiras() {
 
@@ -17,6 +18,9 @@ export default function Carreiras() {
         <main className="py-5" >
             <section className="container container-ajuste mt-5 pt-5">
                 <Hero />
+            </section>
+            <section className="container container-ajuste mt-5">
+                <Bootcamps />
             </section>
             <section className="container container-ajuste mt-5 pe-xxl-0">
                 <Categorias />

@@ -28,7 +28,6 @@ interface ApiResponse {
     data: Course[];
 }
 
-
 export default function Hero() {
 
     const { user } = useContext(AuthContext);

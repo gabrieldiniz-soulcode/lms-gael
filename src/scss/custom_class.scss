@@ -38,6 +38,17 @@
     }
 }
 
+.btn-success {
+    background-color: var(--bs-auxiliary9-project) !important;
+    border-color: var(--bs-auxiliary9-project) !important;
+    color: #fff !important;
+
+    &:hover {
+        background-color: var(--bs-auxiliary8-project) !important;
+        border-color: var(--bs-auxiliary8-project) !important;
+    }
+}
+
 a {
     color: #000;
 }
