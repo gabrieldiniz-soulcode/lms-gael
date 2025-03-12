@@ -1,0 +1,25 @@
+.accordion-curso {
+    .accordion-button {
+        font-weight: 700;
+        color: var(--bs-auxiliary1-project) !important;
+        font-size: 18px !important;
+        font-weight: 700 !important;
+
+        &::after {
+            background-image: none !important;
+        }
+    }
+
+    .accordion-button,
+    .accordion-item {
+        border-radius: 12px !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .accordion-button:not(.collapsed) {
+        background-color: #fff !important;
+        box-shadow: none !important;
+        color: var(--bs-auxiliary1-project) !important;
+    }
+}
