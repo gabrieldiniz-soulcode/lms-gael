@@ -40,7 +40,6 @@ export default function Hero() {
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course?username=${user?.name}&database=${user?.database}`)
                 .then((res: ApiResponse) => {
                     const curso = res.data.find((car) => car.destaque === 1);
-                    console.log(curso)
                     setCourse(curso);
                 })
                 .catch((err) => {
@@ -55,6 +54,10 @@ export default function Hero() {
             getCourse();
         }
     }, [user, updateResponses]);
+
+    function removeHtmlTags(text: string) {
+        return text.replace(/<[^>]*>/g, '');
+    }
 
     return (
         course
@@ -73,13 +76,13 @@ export default function Hero() {
                     </div>
                     <div className="col-7 bg-white d-flex flex-column py-4 px-3 justify-content-between rounded-end-3">
                         <span className="fw-700 fs-21 card-title-hero">{course?.fullname}</span>
-                        <span className="card-text-hero">{course?.summary}</span>
+                        <span className="card-text-hero">{removeHtmlTags(course?.summary || "")}</span>
                         <div className="d-flex justify-content-between py-4">
                             <span className="fs-12 d-flex align-items-center">
                                 <FaRegClock className='text-auxiliary1-project me-2' />
                                 {course?.carga} DE ESTUDO
                             </span>
-                            <a href="#" className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4">
+                            <a href={`/curso?id=${course.id}`} className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4">
                                 Acessar Carreira
                                 <RiPlayMiniLine size={20} strokeWidth={0.5} className="ms-1" />
                             </a>

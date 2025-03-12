@@ -6,8 +6,8 @@ import { LoaderProvider } from "@/contexts/LoaderContext";
 
 export default function ProtectedLayout({ children, }: Readonly<{ children: React.ReactNode; }>) {
     return (
-        <>
-            <LoaderProvider>
+        <LoaderProvider>
+            <div className="d-flex flex-column min-h-100 position-relative justify-content-between">
                 <header>
                     <Header />
                 </header>
@@ -18,7 +18,7 @@ export default function ProtectedLayout({ children, }: Readonly<{ children: Reac
                 <footer>
                     <Footer />
                 </footer>
-            </LoaderProvider>
-        </>
+            </div>
+        </LoaderProvider>
     );
 }

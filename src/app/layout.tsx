@@ -25,8 +25,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="pt-br" className="h-100">
+      <body className={`${geistSans.variable} h-100 ${geistMono.variable}`}>
         <AuthContextProvider>
           {children}
         </AuthContextProvider>

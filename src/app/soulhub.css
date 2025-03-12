@@ -18455,6 +18455,10 @@ a {
     padding-left: 150px;
   }
 }
+.min-h-100 {
+  min-height: 100% !important;
+}
+
 .sidebar {
   width: 80px;
   height: 912px;
@@ -18625,6 +18629,27 @@ a {
   line-clamp: 4;
   overflow: hidden;
   -webkit-box-orient: vertical;
+}
+
+.accordion-curso .accordion-button {
+  font-weight: 700;
+  color: var(--bs-auxiliary1-project) !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+}
+.accordion-curso .accordion-button::after {
+  background-image: none !important;
+}
+.accordion-curso .accordion-button,
+.accordion-curso .accordion-item {
+  border-radius: 12px !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.accordion-curso .accordion-button:not(.collapsed) {
+  background-color: #fff !important;
+  box-shadow: none !important;
+  color: var(--bs-auxiliary1-project) !important;
 }
 
 /*# sourceMappingURL=soulhub.css.map */

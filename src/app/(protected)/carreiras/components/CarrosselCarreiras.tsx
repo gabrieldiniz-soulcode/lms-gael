@@ -45,7 +45,7 @@ export default function CarrosselCarreiras({ carreiras }: Props) {
                                     <FaRegClock className='text-auxiliary1-project me-2' />
                                     {carreira.carga}H DE ESTUDO
                                 </span>
-                                <a href="#" className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4">
+                                <a href={`/curso?id=${carreira.id}`} className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4">
                                     Acessar Carreira
                                     <RiPlayMiniLine size={20} strokeWidth={0.5} className="ms-1" />
                                 </a>

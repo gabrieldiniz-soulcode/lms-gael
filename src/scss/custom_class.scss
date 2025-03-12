@@ -91,9 +91,14 @@ a {
         padding-left: 100px;
     }
 }
+
 @media (min-width: 960px) {
     .container-ajuste {
         padding-right: 100px;
         padding-left: 150px;
     }
+}
+
+.min-h-100 {
+    min-height: 100% !important;
 }
