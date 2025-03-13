@@ -10,7 +10,7 @@ interface Props {
 
 export default function Loader({ children }: Props) {
 
-    const { isLoading } = useContext(LoaderContext)
+    const { isLoading } = useContext(LoaderContext);
 
     return (
         <>

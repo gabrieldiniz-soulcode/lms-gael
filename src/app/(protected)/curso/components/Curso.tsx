@@ -42,12 +42,18 @@ export default function Curso() {
     const { updateResponses } = useContext(LoaderContext);
 
     const searchParams = useSearchParams();
-    const search = searchParams.get('id');
+    const id = searchParams.get('id');
 
     useEffect(() => {
 
         function getModule() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module?course=${search}&database=${user?.database}&userid=${user?.id}`)
+            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
+                headers: {
+                    "database": user?.database,
+                    "course": id,
+                    "userid": user?.id,
+                }
+            })
                 .then((res: ApiResponse) => {
                     res.data.map((item) => {
                         if (item.sequence[0]?.module == "mdl_forum" || item.sequence[1]?.module == "mdl_forum") {
@@ -71,11 +77,17 @@ export default function Curso() {
             return getModule();
         }
 
-    }, [user, updateResponses, search]);
+    }, [user, updateResponses, id]);
 
-    function getSubCurso(id: number, database: string, userId: string) {
+    function getSubCurso(courseId: number, database: string, userId: string) {
         setSubCursoLoading(true);
-        axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module?course=${id}&database=${database}&userid=${userId}`)
+        axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
+            headers: {
+                "database": database,
+                "course": courseId,
+                "userid": userId,
+            }
+        })
             .then((res: ApiResponse) => {
                 setSubCurso(res.data);
             })

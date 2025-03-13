@@ -37,7 +37,12 @@ export default function Hero() {
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course?username=${user?.name}&database=${user?.database}`)
+            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course`, {
+                headers: {
+                    "username": user?.name,
+                    "database": user?.database
+                }
+            })
                 .then((res: ApiResponse) => {
                     const curso = res.data.find((car) => car.destaque === 1);
                     setCourse(curso);

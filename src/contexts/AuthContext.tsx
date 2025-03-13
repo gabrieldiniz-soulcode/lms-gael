@@ -57,8 +57,18 @@ export function AuthContextProvider({ children }: Props) {
         const userObj = {} as User;
 
         Promise.all([
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/login?username=${email}`),
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/auth?username=${email}&password=${password}&database=${process.env.NEXT_PUBLIC_DATABASE}`)
+            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/login`, {
+                headers: {
+                    "username": email
+                }
+            }),
+            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/auth?username=${email}&password=${password}&database=${process.env.NEXT_PUBLIC_DATABASE}`, {
+                headers: {
+                    "username": email,
+                    "password": password,
+                    "database": process.env.NEXT_PUBLIC_DATABASE
+                }
+            })
         ])
             .then(([loginResponse, authResponse]) => {
                 if (authResponse.data.message) {

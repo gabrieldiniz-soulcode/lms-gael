@@ -33,7 +33,12 @@ export default function Carreira() {
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course?username=${user?.name}&database=${user?.database}`)
+            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course`, {
+                headers: {
+                    "username": user?.name,
+                    "database": user?.database
+                }
+            })
                 .then((res: ApiResponse) => {
                     setCarreira(res.data.find((item) => item.id == parseInt(search || "0")));
                 })

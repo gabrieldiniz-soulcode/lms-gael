@@ -24,14 +24,19 @@ interface ApiResponse {
 }
 
 export default function Categorias() {
-    
+
     const { user } = useContext(AuthContext);
     const { updateResponses } = useContext(LoaderContext);
     const [course, setCourse] = useState<Course[][]>([]);
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course?username=${user?.name}&database=${user?.database}`)
+            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course`, {
+                headers: {
+                    "username": user?.name,
+                    "database": user?.database
+                }
+            })
                 .then((res: ApiResponse) => {
                     const cursos = res.data.filter((car) => car.carreira === "sim");
                     const categorias = [...new Set(cursos.map(curso => curso.category))];
