@@ -22,10 +22,10 @@ export default function Sidebar() {
 
             <Image src={logo.src} width={logo.width} height={logo.width} alt="Logo Soulcode Passaporte Digital" className="mb-5" />
 
-            <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>
+            <a href="/carreiras" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>
                 <GoHome color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Home'}
-            </div>
+            </a>
             <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <MdOutlineDashboard color="#fff" size={20} />
                 {open && 'Dashboard'}

@@ -25,6 +25,7 @@ interface Sequence {
     complete: boolean;
     data_module: {
         name: string;
+        course: number;
         refcourse: number;
         content: string;
     }
@@ -73,11 +74,11 @@ export default function Curso() {
                 });
         }
 
-        if (user.database) {
+        if (user?.database && user?.id && id && !curso) {
             return getModule();
         }
 
-    }, [user, updateResponses, id]);
+    }, [user, updateResponses, id, curso]);
 
     function getSubCurso(courseId: number, database: string, userId: string) {
         setSubCursoLoading(true);
@@ -100,7 +101,6 @@ export default function Curso() {
     }
 
     function getSubCursoComponent(mobile: boolean) {
-        console.log(forum)
 
         return (
             subCursoLoading
@@ -112,7 +112,7 @@ export default function Curso() {
                 </div>
                 :
                 <div className={`${mobile ? 'd-xl-none' : 'd-xl-block d-none'}`}>
-                    <SubCurso subCurso={subCurso} />
+                    <SubCurso subCurso={subCurso} carreiraId={id || ""} />
                 </div>
         );
     }
@@ -140,7 +140,7 @@ export default function Curso() {
                                 {cur.data_module.name}
                             </span>
                             {
-                                index == activeIndex
+                                (index == activeIndex && subCurso)
                                 &&
                                 getSubCursoComponent(true)
                             }
@@ -150,6 +150,8 @@ export default function Curso() {
             </div>
             <div className="col-6 flex-column gap-3">
                 {
+                    subCurso
+                    &&
                     getSubCursoComponent(false)
                 }
             </div>

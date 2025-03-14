@@ -18459,6 +18459,15 @@ a {
   min-height: 100% !important;
 }
 
+.dangerouslySetInnerHTML div, .dangerouslySetInnerHTML p, .dangerouslySetInnerHTML span, .dangerouslySetInnerHTML h1, .dangerouslySetInnerHTML .h1, .dangerouslySetInnerHTML h2, .dangerouslySetInnerHTML .h2, .dangerouslySetInnerHTML h3, .dangerouslySetInnerHTML .h3, .dangerouslySetInnerHTML h4, .dangerouslySetInnerHTML .h4, .dangerouslySetInnerHTML h5, .dangerouslySetInnerHTML .h5 {
+  background-color: transparent !important;
+  color: var(--bs-auxiliar1-project) !important;
+}
+
+.table tr, .table th, .table td {
+  background-color: var(--bs-auxiliary6-project) !important;
+}
+
 .sidebar {
   width: 80px;
   height: 912px;
@@ -18489,6 +18498,7 @@ a {
   font-size: 14px;
   border-radius: 8px;
   cursor: pointer;
+  text-decoration: none;
 }
 .sidebar .div-icon-sidebar:hover {
   transition: 0.1s;

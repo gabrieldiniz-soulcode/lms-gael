@@ -20,16 +20,17 @@ interface Sequence {
     complete: boolean;
     data_module: {
         name: string;
-        refcourse: number;
+        course: number;
         content: string;
     }
 }
 
 interface Props {
     subCurso: Module[];
+    carreiraId: string;
 }
 
-export default function SubCurso({ subCurso }: Props) {
+export default function SubCurso({ subCurso, carreiraId }: Props) {
 
     function getIcon(module: string) {
         switch (module) {
@@ -62,7 +63,7 @@ export default function SubCurso({ subCurso }: Props) {
                                     <div className="d-flex flex-column gap-3">
                                         {
                                             sub.sequence.map((aula) => (
-                                                <a href="" key={aula.cmid} className="d-flex align-items-center gap-3 text-decoration-none">
+                                                <a href={`/aula?id=${aula.cmid}&cursoId=${sub.course}&carreiraId=${carreiraId}`} key={aula.cmid} className="d-flex align-items-center gap-3 text-decoration-none">
                                                     {getIcon(aula.module)}
                                                     {aula?.data_module.name}
                                                     {

@@ -102,3 +102,16 @@ a {
 .min-h-100 {
     min-height: 100% !important;
 }
+
+.dangerouslySetInnerHTML {
+    div, p, span, h1, h2, h3, h4, h5 {
+        background-color: transparent !important;
+        color: var(--bs-auxiliar1-project) !important;
+    }
+}
+
+.table {
+    tr, th, td {
+        background-color: var(--bs-auxiliary6-project) !important;   
+    }
+}

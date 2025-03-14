@@ -1,9 +1,9 @@
 "use client";
 
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 
 type DataContextData = {
-    aula: Sequence;
+    aula?: Sequence;
     setAula: (newAula: Sequence) => void;
 }
 
@@ -26,7 +26,7 @@ const DataContext = createContext({} as DataContextData);
 
 const DataProvider = ({ children }: Props) => {
 
-    const [aula, setAula] = useState<Sequence>({} as Sequence);
+    const [aula, setAula] = useState<Sequence>();
 
     return (
         <DataContext.Provider value={{ aula, setAula }}>

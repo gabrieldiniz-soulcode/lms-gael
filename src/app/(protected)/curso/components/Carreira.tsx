@@ -25,11 +25,11 @@ interface ApiResponse {
 export default function Carreira() {
 
     const { user } = useContext(AuthContext);
-    const { updateResponses } = useContext(LoaderContext);
+    const { updateResponses, responses } = useContext(LoaderContext);
     const [carreira, setCarreira] = useState<Course>();
 
     const searchParams = useSearchParams();
-    const search = searchParams.get('id');
+    const id = searchParams.get('id');
 
     useEffect(() => {
         function getCourse() {
@@ -40,7 +40,7 @@ export default function Carreira() {
                 }
             })
                 .then((res: ApiResponse) => {
-                    setCarreira(res.data.find((item) => item.id == parseInt(search || "0")));
+                    setCarreira(res.data.find((item) => item.id == parseInt(id || "0")));
                 })
                 .catch((err) => {
                     console.error(err);
@@ -50,10 +50,10 @@ export default function Carreira() {
                 });
         }
 
-        if (user?.name && user?.database) {
+        if (user?.name && user?.database && !responses?.every((value) => value === true)) {
             getCourse();
         }
-    }, [user, updateResponses, search]);
+    }, [user, updateResponses, id, responses]);
 
     function removeHtmlTags(text: string) {
         return text.replace(/<[^>]*>/g, '');
