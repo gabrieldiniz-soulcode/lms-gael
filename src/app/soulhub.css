@@ -18388,6 +18388,10 @@ body {
   background-color: #fff !important;
 }
 
+.btn {
+  border-radius: 8px;
+}
+
 .btn-primary {
   background-color: var(--bs-primary-project) !important;
   color: #fff !important;
@@ -18459,15 +18463,55 @@ a {
   min-height: 100% !important;
 }
 
-.dangerouslySetInnerHTML div, .dangerouslySetInnerHTML p, .dangerouslySetInnerHTML span, .dangerouslySetInnerHTML h1, .dangerouslySetInnerHTML .h1, .dangerouslySetInnerHTML h2, .dangerouslySetInnerHTML .h2, .dangerouslySetInnerHTML h3, .dangerouslySetInnerHTML .h3, .dangerouslySetInnerHTML h4, .dangerouslySetInnerHTML .h4, .dangerouslySetInnerHTML h5, .dangerouslySetInnerHTML .h5 {
+.dangerouslySetInnerHTML div,
+.dangerouslySetInnerHTML p,
+.dangerouslySetInnerHTML span,
+.dangerouslySetInnerHTML h1,
+.dangerouslySetInnerHTML .h1,
+.dangerouslySetInnerHTML h2,
+.dangerouslySetInnerHTML .h2,
+.dangerouslySetInnerHTML h3,
+.dangerouslySetInnerHTML .h3,
+.dangerouslySetInnerHTML h4,
+.dangerouslySetInnerHTML .h4,
+.dangerouslySetInnerHTML h5,
+.dangerouslySetInnerHTML .h5 {
   background-color: transparent !important;
   color: var(--bs-auxiliar1-project) !important;
 }
 
-.table tr, .table th, .table td {
+.table tr,
+.table th,
+.table td {
   background-color: var(--bs-auxiliary6-project) !important;
 }
 
+@media (max-width: 720px) {
+  .table tr,
+  .table th,
+  .table td {
+    font-size: 12px !important;
+  }
+}
+.loading-ellipsis:after {
+  content: "...";
+  animation: ellipsis 2s infinite;
+}
+
+@keyframes ellipsis {
+  0% {
+    content: ".";
+  }
+  33% {
+    content: "..";
+  }
+  66% {
+    content: "...";
+  }
+  100% {
+    content: ".";
+  }
+}
 .sidebar {
   width: 80px;
   height: 912px;
@@ -18660,6 +18704,11 @@ a {
   background-color: #fff !important;
   box-shadow: none !important;
   color: var(--bs-auxiliary1-project) !important;
+}
+
+.notas textarea:focus-visible {
+  outline-color: var(--bs-auxiliary6-project) !important;
+  outline: 0 !important;
 }
 
 /*# sourceMappingURL=soulhub.css.map */

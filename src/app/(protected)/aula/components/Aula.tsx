@@ -1,14 +1,13 @@
 import { AuthContext } from "@/contexts/AuthContext";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
 import MdlQuiz from "./MdlQuiz";
 import MdlPage from "./MdlPage";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import MdlUrl from "./MdlUrl";
 import MdlCustomcert from "./MdlCustomcert";
-import { headers } from "next/headers";
 
 interface Module {
     name: string;
@@ -45,6 +44,9 @@ export default function Aula() {
     const { updateResponses } = useContext(LoaderContext);
 
     const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
+
     const id = searchParams.get('id');
     const cursoId = searchParams.get('cursoId');
     const carreiraId = searchParams.get('carreiraId');
@@ -94,18 +96,29 @@ export default function Aula() {
                 }
             })
                 .then((res) => {
-                    console.log(res)
+                    console.log(res);
                 })
-                .catch((err) => {
-                    console.error(err);
-                });
+                .catch(() => { });
         }
 
-        if (aulas[activeIndex] && user && cursoId) {
+        if (aulas[activeIndex] && user && cursoId && !aulas[activeIndex].complete) {
             completeModule();
         }
 
     }, [aulas, activeIndex, user, cursoId]);
+
+    useEffect(() => {
+        function updateIdSearchParam() {
+            const params = new URLSearchParams(searchParams.toString());
+            params.set("id", aulas[activeIndex].cmid.toString());
+            replace(`${pathname}?${params.toString()}`);
+        }
+
+        if (aulas[activeIndex]) {
+            updateIdSearchParam();
+        }
+
+    }, [activeIndex, aulas, pathname, replace, searchParams]);
 
     function prevOrNext(next: boolean) {
         setPaused(true);
@@ -162,7 +175,6 @@ export default function Aula() {
                     {getDisplay()}
                 </div>
             </div>
-
         </div>
     )
 }

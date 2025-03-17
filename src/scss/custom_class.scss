@@ -20,6 +20,10 @@
     }
 }
 
+.btn {
+    border-radius: 8px;
+}
+
 .btn-primary {
     background-color: var(--bs-primary-project) !important;
     color: #fff !important;
@@ -104,14 +108,59 @@ a {
 }
 
 .dangerouslySetInnerHTML {
-    div, p, span, h1, h2, h3, h4, h5 {
+
+    div,
+    p,
+    span,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
         background-color: transparent !important;
         color: var(--bs-auxiliar1-project) !important;
     }
 }
 
 .table {
-    tr, th, td {
-        background-color: var(--bs-auxiliary6-project) !important;   
+
+    tr,
+    th,
+    td {
+        background-color: var(--bs-auxiliary6-project) !important;
+    }
+}
+
+@media (max-width: 720px) {
+    .table {
+
+        tr,
+        th,
+        td {
+            font-size: 12px !important;
+        }
+    }
+}
+
+.loading-ellipsis:after {
+    content: "...";
+    animation: ellipsis 2s infinite;
+}
+
+@keyframes ellipsis {
+    0% {
+        content: ".";
+    }
+
+    33% {
+        content: "..";
+    }
+
+    66% {
+        content: "...";
+    }
+
+    100% {
+        content: ".";
     }
 }

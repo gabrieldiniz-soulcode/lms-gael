@@ -57,7 +57,7 @@ export default function MdlPage({ sequence, paused, setPaused }: Props) {
                     src={getVideoLink()}
                     controls={!paused}
                     ref={videoRef}
-                    className="w-100 rounded-3 position-relative bg-white"
+                    className="w-100 rounded-3 position-relative bg-auxiliary6-project"
                     onClick={play}
                 >
                 </video>
