@@ -18707,7 +18707,6 @@ a {
 }
 
 .notas textarea:focus-visible {
-  outline-color: var(--bs-auxiliary6-project) !important;
   outline: 0 !important;
 }
 
