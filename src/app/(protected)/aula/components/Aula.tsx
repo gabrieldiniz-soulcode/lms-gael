@@ -8,6 +8,7 @@ import MdlPage from "./MdlPage";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 import MdlUrl from "./MdlUrl";
 import MdlCustomcert from "./MdlCustomcert";
+import { headers } from "next/headers";
 
 interface Module {
     name: string;
@@ -80,6 +81,31 @@ export default function Aula() {
         }
 
     }, [id, updateResponses, user, cursoId, aulas]);
+
+    useEffect(() => {
+        function completeModule() {
+            axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/module/completion`, {
+                cmid: aulas[activeIndex].cmid,
+                userid: user.id,
+                course: aulas[activeIndex].data_module.course,
+            }, {
+                headers: {
+                    "database": user.database
+                }
+            })
+                .then((res) => {
+                    console.log(res)
+                })
+                .catch((err) => {
+                    console.error(err);
+                });
+        }
+
+        if (aulas[activeIndex] && user && cursoId) {
+            completeModule();
+        }
+
+    }, [aulas, activeIndex, user, cursoId]);
 
     function prevOrNext(next: boolean) {
         setPaused(true);
