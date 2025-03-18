@@ -41,7 +41,7 @@
   --bs-auxiliary7-project: #F9B040;
   --bs-auxiliary8-project: #10169F;
   --bs-auxiliary9-project: #93C01F;
-  --bs-auxiliary10-project: #000;
+  --bs-auxiliary10-project: #F9F8F1;
   --bs-auxiliary11-project: #FE2C54;
   --bs-auxiliary12-project: #FE2C54;
   --bs-auxiliary13-project: #FE2C54;
@@ -68,7 +68,7 @@
   --bs-auxiliary7-project-rgb: 249, 176, 64;
   --bs-auxiliary8-project-rgb: 16, 22, 159;
   --bs-auxiliary9-project-rgb: 147, 192, 31;
-  --bs-auxiliary10-project-rgb: 0, 0, 0;
+  --bs-auxiliary10-project-rgb: 249, 248, 241;
   --bs-auxiliary11-project-rgb: 254, 44, 84;
   --bs-auxiliary12-project-rgb: 254, 44, 84;
   --bs-auxiliary13-project-rgb: 254, 44, 84;
@@ -3315,7 +3315,7 @@ textarea.form-control-lg {
   padding-left: 2.5em;
 }
 .form-switch .form-check-input {
-  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23D9D9D9'/%3e%3c/svg%3e");
   width: 2em;
   margin-left: -2.5em;
   background-image: var(--bs-form-switch-bg);
@@ -3329,11 +3329,11 @@ textarea.form-control-lg {
   }
 }
 .form-switch .form-check-input:focus {
-  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%238080ff'/%3e%3c/svg%3e");
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23D9D9D9'/%3e%3c/svg%3e");
 }
 .form-switch .form-check-input:checked {
   background-position: right center;
-  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%2393C01F'/%3e%3c/svg%3e");
 }
 .form-switch.form-check-reverse {
   padding-right: 2.5em;
@@ -3361,7 +3361,7 @@ textarea.form-control-lg {
 }
 
 [data-bs-theme=dark] .form-switch .form-check-input:not(:checked):not(:focus) {
-  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%28255, 255, 255, 0.25%29'/%3e%3c/svg%3e");
+  --bs-form-switch-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23D9D9D9'/%3e%3c/svg%3e");
 }
 
 .form-range {
@@ -4073,20 +4073,20 @@ textarea.form-control-lg {
 }
 
 .btn-auxiliary10-project {
-  --bs-btn-color: #fff;
-  --bs-btn-bg: #000;
-  --bs-btn-border-color: #000;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: black;
-  --bs-btn-hover-border-color: black;
-  --bs-btn-focus-shadow-rgb: 38, 38, 38;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: black;
-  --bs-btn-active-border-color: black;
+  --bs-btn-color: #000;
+  --bs-btn-bg: #F9F8F1;
+  --bs-btn-border-color: #F9F8F1;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #faf9f3;
+  --bs-btn-hover-border-color: #faf9f2;
+  --bs-btn-focus-shadow-rgb: 212, 211, 205;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #faf9f4;
+  --bs-btn-active-border-color: #faf9f2;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #000;
-  --bs-btn-disabled-border-color: #000;
+  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-bg: #F9F8F1;
+  --bs-btn-disabled-border-color: #F9F8F1;
 }
 
 .btn-auxiliary11-project {
@@ -4532,19 +4532,19 @@ textarea.form-control-lg {
 }
 
 .btn-outline-auxiliary10-project {
-  --bs-btn-color: #000;
-  --bs-btn-border-color: #000;
-  --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #000;
-  --bs-btn-hover-border-color: #000;
-  --bs-btn-focus-shadow-rgb: 0, 0, 0;
-  --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #000;
-  --bs-btn-active-border-color: #000;
+  --bs-btn-color: #F9F8F1;
+  --bs-btn-border-color: #F9F8F1;
+  --bs-btn-hover-color: #000;
+  --bs-btn-hover-bg: #F9F8F1;
+  --bs-btn-hover-border-color: #F9F8F1;
+  --bs-btn-focus-shadow-rgb: 249, 248, 241;
+  --bs-btn-active-color: #000;
+  --bs-btn-active-bg: #F9F8F1;
+  --bs-btn-active-border-color: #F9F8F1;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
-  --bs-btn-disabled-color: #000;
+  --bs-btn-disabled-color: #F9F8F1;
   --bs-btn-disabled-bg: transparent;
-  --bs-btn-disabled-border-color: #000;
+  --bs-btn-disabled-border-color: #F9F8F1;
   --bs-gradient: none;
 }
 
@@ -9672,7 +9672,7 @@ textarea.form-control-lg {
 }
 
 .text-bg-auxiliary10-project {
-  color: #fff !important;
+  color: #000 !important;
   background-color: RGBA(var(--bs-auxiliary10-project-rgb), var(--bs-bg-opacity, 1)) !important;
 }
 
@@ -9855,8 +9855,8 @@ textarea.form-control-lg {
   text-decoration-color: RGBA(var(--bs-auxiliary10-project-rgb), var(--bs-link-underline-opacity, 1)) !important;
 }
 .link-auxiliary10-project:hover, .link-auxiliary10-project:focus {
-  color: RGBA(0, 0, 0, var(--bs-link-opacity, 1)) !important;
-  text-decoration-color: RGBA(0, 0, 0, var(--bs-link-underline-opacity, 1)) !important;
+  color: RGBA(250, 249, 244, var(--bs-link-opacity, 1)) !important;
+  text-decoration-color: RGBA(250, 249, 244, var(--bs-link-underline-opacity, 1)) !important;
 }
 
 .link-auxiliary11-project {
@@ -18288,6 +18288,18 @@ body {
   font-weight: 700;
 }
 
+.fs-09 {
+  font-size: 9px;
+}
+
+.fs-10 {
+  font-size: 10px;
+}
+
+.fs-11 {
+  font-size: 11px;
+}
+
 .fs-12 {
   font-size: 0.75rem !important;
 }
@@ -18512,6 +18524,11 @@ a {
     content: ".";
   }
 }
+.tooltip {
+  position: fixed !important;
+  z-index: 1050;
+}
+
 .sidebar {
   width: 80px;
   height: 912px;
@@ -18708,6 +18725,17 @@ a {
 
 .notas textarea:focus-visible {
   outline: 0 !important;
+}
+
+.perfil-perfil .form-check-input {
+  width: 44px;
+  height: 24px;
+  border: var(--bs-auxiliar1-project) solid 1px !important;
+}
+.perfil-perfil .frequency {
+  border-radius: 2px;
+  width: 12px;
+  height: 12px;
 }
 
 /*# sourceMappingURL=soulhub.css.map */

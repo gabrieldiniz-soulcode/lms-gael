@@ -1,0 +1,15 @@
+.perfil-perfil {
+
+    // src\scss\bootstrap\_variables.scss & src\scss\bootstrap\_variables-dark.scss pesquisar por form-switch-focus-color, form-switch-focus-color e form-switch-checked-color
+    .form-check-input {
+        width: 44px;
+        height: 24px;
+        border: var(--bs-auxiliar1-project) solid 1px !important;
+    }
+
+    .frequency {
+        border-radius: 2px;
+        width: 12px;
+        height: 12px;
+    }
+}

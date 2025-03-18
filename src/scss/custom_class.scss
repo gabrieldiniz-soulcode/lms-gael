@@ -164,3 +164,8 @@ a {
         content: ".";
     }
 }
+
+.tooltip {
+    position: fixed !important;
+    z-index: 1050;
+}
