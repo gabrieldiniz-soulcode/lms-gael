@@ -23,7 +23,7 @@ export default function Header() {
           <Form.Control className="form-input-header" type="texto" placeholder="Buscar Cursos" />
           <FaSearch className="form-input-icon-header cursor-pointer" color="#fff" />
         </div>
-        <a href="#" className="d-flex gap-2 align-items-center">
+        <a href="/perfil" className="d-flex gap-2 align-items-center">
           <Image src={aluno.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" />
           <span className="fw-300 fs-12 text-white">Olá, Estudante</span>
           <FaChevronRight color="#fff" size={18} />
@@ -38,10 +38,10 @@ export default function Header() {
       <NavbarCollapse id="basic-navbar-nav">
         <Nav className="me-auto d-lg-none">
           <div className="d-flex flex-column align-items-center gap-1">
-            <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white mt-5">
-              <GoHome color="#fff" size={18} className="me-2" strokeWidth={0.5} />
+            <a href="/carreiras" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar mt-5 text-white">
+              <GoHome color="#fff" size={20} strokeWidth={0.5} className="me-2" />
               Home
-            </div>
+            </a>
             <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <MdOutlineDashboard color="#fff" size={18} className="me-2" />
               Dashboard

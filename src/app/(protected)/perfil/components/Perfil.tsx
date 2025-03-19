@@ -59,7 +59,6 @@ export default function Perfil() {
                     console.log(err);
                 })
                 .finally(() => {
-                    console.log('a')
                     updateResponses();
                 });
         }
@@ -73,7 +72,7 @@ export default function Perfil() {
     return (
         perfil
         &&
-        <div className="rounded-3 bg-auxiliary1-project p-4 perfil-perfil position-relative">
+        <div className="rounded-3 bg-auxiliary1-project p-4 perfil-perfil position-relative mt-5">
             <div className="row row-gap-4 align-items-center mt-3">
                 <div className="col-xxl-5">
                     <div className="row">

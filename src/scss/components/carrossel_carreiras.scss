@@ -5,6 +5,14 @@
         background-color: #fff;
     }
 
+    .carrossel-carreiras-slide-progresso {
+        height: 350px;
+
+        .carrossel-carreiras-infos {
+            height: 190px;
+        }
+    }
+
     @media (max-width: 400px) {
         .carrossel-carreiras-slide {
             width: 350px;

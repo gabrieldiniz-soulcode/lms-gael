@@ -18593,6 +18593,7 @@ a {
 .header .header-item {
   max-width: 200px;
   width: 100%;
+  text-decoration: none;
 }
 .header .form-input-header {
   background-color: transparent;
@@ -18624,6 +18625,28 @@ a {
     padding: 0 80px;
   }
 }
+.carrossel-carreiras .carrossel-carreiras-slide {
+  width: 375px;
+  height: 320px;
+  background-color: #fff;
+}
+.carrossel-carreiras .carrossel-carreiras-slide-progresso {
+  height: 350px;
+}
+.carrossel-carreiras .carrossel-carreiras-slide-progresso .carrossel-carreiras-infos {
+  height: 190px;
+}
+@media (max-width: 400px) {
+  .carrossel-carreiras .carrossel-carreiras-slide {
+    width: 350px;
+  }
+}
+@media (max-width: 370px) {
+  .carrossel-carreiras .carrossel-carreiras-slide {
+    width: 320px;
+  }
+}
+
 .header-login {
   height: 80px;
 }
@@ -18665,22 +18688,6 @@ a {
   bottom: -145px;
   left: -110px;
   position: absolute;
-}
-
-.carrossel-carreiras .carrossel-carreiras-slide {
-  width: 375px;
-  height: 320px;
-  background-color: #fff;
-}
-@media (max-width: 400px) {
-  .carrossel-carreiras .carrossel-carreiras-slide {
-    width: 350px;
-  }
-}
-@media (max-width: 370px) {
-  .carrossel-carreiras .carrossel-carreiras-slide {
-    width: 320px;
-  }
 }
 
 .hero-carreiras .box-shadow-hero {
