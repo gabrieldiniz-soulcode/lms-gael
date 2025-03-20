@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react"
 import { Button, Spinner } from "react-bootstrap";
+import Quiz from "./Quiz";
 
 interface Props {
     userid: string,
@@ -31,7 +32,7 @@ interface Tentativa {
 interface Resposta {
     message: string;
     action: string;
-    attempt_id: null | string;
+    attempt_id: number;
     userid: string;
     cmid: string;
     attempts: Tentativa[];
@@ -44,6 +45,7 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
 
     const [quiz, setQuiz] = useState<Resposta>();
     const [loading, setLoading] = useState<boolean>(true);
+    const [quizAttempt, setQuizAttempt] = useState<boolean>(false);
 
     useEffect(() => {
 
@@ -67,11 +69,11 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
                 });
         }
 
-        if (cmid && database && userid && instance) {
+        if (cmid && database && userid && instance && !quizAttempt) {
             getQuiz();
         }
 
-    }, [cmid, database, userid, instance]);
+    }, [cmid, database, userid, instance, quizAttempt]);
 
     function formatData(timestamp: number): string {
         if (!timestamp) {
@@ -94,32 +96,46 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
                 </Spinner>
             </div>
             :
-            quiz
-            &&
-            <div className="w-100">
-                <Button className="px-3">{quiz.message}</Button>
-                <table className="table mt-4">
-                    <thead>
-                        <tr>
-                            <th scope="col d-flex justify-content-center">Tentativa</th>
-                            <th scope="col">Estado</th>
-                            <th scope="col">Nota / 10.00</th>
-                            <th scope="col">Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            quiz.attempts.map((attempt, index) => (
-                                <tr key={index}>
-                                    <th className="text-center">{attempt.attempt}</th>
-                                    <td>{attempt.state}</td>
-                                    <td>{parseInt(attempt.sumgrades).toFixed(2)}</td>
-                                    <td>{attempt.state == "finished" ? `Conclusão: ${formatData(attempt.timefinish)}` : `Início: ${new Date(formatData(attempt.timestart))}`}</td>
+            quiz && (
+                quizAttempt
+                    ?
+                    <Quiz
+                        cmid={cmid}
+                        database={database}
+                        instance={(quiz?.action == "continue_attempt" ? quiz.attempt_id : instance)}
+                        userid={userid}
+                        newAttempt={(quiz?.action == "continue_attempt" ? false : true)}
+                        setQuizAttempt={setQuizAttempt}
+                    />
+                    :
+                    <div className="w-100">
+                        <Button className="px-3" onClick={() => setQuizAttempt(true)}>{quiz.message}</Button>
+                        <table className="table mt-4">
+                            <thead>
+                                <tr>
+                                    <th scope="col d-flex justify-content-center">Tentativa</th>
+                                    <th scope="col">Estado</th>
+                                    <th scope="col">Nota / 10.00</th>
+                                    <th scope="col">Data</th>
                                 </tr>
-                            ))
-                        }
-                    </tbody>
-                </table>
-            </div>
-    )
+                            </thead>
+                            <tbody>
+                                {
+                                    quiz.attempts.map((attempt, index) => (
+                                        <tr key={index}>
+                                            <th className="text-center">
+                                                {attempt.attempt}
+                                                {/* {attempt.uniqueid} */}
+                                            </th>
+                                            <td>{attempt.state}</td>
+                                            <td>{parseInt(attempt.sumgrades || "0").toFixed(2)}</td>
+                                            <td>{attempt.state == "finished" ? `Conclusão: ${formatData(attempt.timefinish)}` : `Início: ${formatData(attempt.timestart)}`}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+            )
+    );
 }

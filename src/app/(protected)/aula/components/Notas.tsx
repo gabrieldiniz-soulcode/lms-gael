@@ -14,7 +14,8 @@ interface ApiResponse {
 
 export default function Notas() {
 
-    const [data, setData] = useState<string>();
+    const [data, setData] = useState<string>("");
+    const [prevData, setPrevData] = useState<string>("");
     const [loading, setLoading] = useState<boolean>(true);
 
     const { user } = useContext(AuthContext);
@@ -33,6 +34,7 @@ export default function Notas() {
                 }
             }).
                 then((res: ApiResponse) => {
+                    setPrevData(res.data.content);
                     setData(res.data.content);
                 })
                 .catch((err) => {
@@ -65,7 +67,9 @@ export default function Notas() {
                 "database": user.database
             }
         })
-            .then(() => { })
+            .then(() => {
+                setPrevData(data);
+            })
             .catch((err) => {
                 console.error(err);
             });
@@ -84,7 +88,7 @@ export default function Notas() {
                     }
                 </div>
                 <div className="d-flex justify-content-end mt-2">
-                    <Button disabled={!data} onClick={postNotes} className="px-4 rounded-4">Salvar</Button>
+                    <Button disabled={prevData == data} onClick={postNotes} className="px-4 rounded-4">Salvar</Button>
                 </div>
             </div>
         </div>

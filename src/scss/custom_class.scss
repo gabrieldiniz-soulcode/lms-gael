@@ -169,3 +169,7 @@ a {
     position: fixed !important;
     z-index: 1050;
 }
+
+.form-check-input, .form-check-input:checked {
+    background-color: transparent !important;
+}
