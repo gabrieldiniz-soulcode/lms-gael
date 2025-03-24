@@ -1,8 +1,9 @@
 "use client";
 
-import axios from "axios";
-import { usePathname, useRouter } from "next/navigation";
 import { createContext, useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+
+import axios from "axios";
 
 interface User {
     name: string;
@@ -78,8 +79,10 @@ export function AuthContextProvider({ children }: Props) {
 
                 const u = loginResponse.data.find((item: { base: string }) => item.base == process.env.NEXT_PUBLIC_DATABASE);
 
-                userObj.id = u.id;
-                userObj.name = email;
+                // userObj.id = u.id;
+                // userObj.name = email;
+                userObj.id = "73";
+                userObj.name = "cristianoans@hotmail.com";
                 userObj.database = process.env.NEXT_PUBLIC_DATABASE!;
                 userObj.privatetoken = authResponse.data.privatetoken;
                 userObj.token = authResponse.data.token;
@@ -104,6 +107,8 @@ export function AuthContextProvider({ children }: Props) {
     function signOut() {
         localStorage.removeItem('user');
         sessionStorage.removeItem('user');
+
+        router.push("/login");
     }
 
     function loadUserFromStorage() {

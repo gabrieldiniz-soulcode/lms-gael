@@ -1,11 +1,12 @@
-import { AuthContext } from "@/contexts/AuthContext";
-import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
-import Image from "next/image";
-import { useContext, useEffect, useState } from "react";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
-import { MdOutlineModeEditOutline } from "react-icons/md";
+import { useContext, useEffect, useState } from "react";
+
+import { AuthContext } from "@/contexts/AuthContext";
+import Image from "next/image";
 import { IoMailSharp } from "react-icons/io5";
+import { LoaderContext } from "@/contexts/LoaderContext";
+import { MdOutlineModeEditOutline } from "react-icons/md";
+import axios from "axios";
 
 interface UserFrequency {
     [date: string]: number;
@@ -89,10 +90,10 @@ export default function Perfil() {
                     </div>
                 </div>
                 <div className="col-xxl-4 offset-xxl-3">
-                    <button className="w-100 btn btn-primary fs-12 fw-700">
+                    <a className="w-100 btn btn-primary fs-12 fw-700" href="editar">
                         <MdOutlineModeEditOutline size={22} className="me-2" />
                         Editar Perfil
-                    </button>
+                    </a>
                     <button disabled className="w-100 fs-12 fw-700 text-auxiliary10-project opacity-100 d-flex align-items-center gap-3 justify-content-center btn btn-outline-light mt-3">
                         Disponível para ofertas de emprego?
                         <Form.Switch

@@ -18533,6 +18533,10 @@ a {
   background-color: transparent !important;
 }
 
+.btn-outline-light:hover {
+  background-color: transparent !important;
+}
+
 .sidebar {
   width: 80px;
   height: 912px;

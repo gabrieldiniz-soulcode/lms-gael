@@ -1,19 +1,23 @@
 "use client";
 
-import { useState } from "react";
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import logo from "/public/logos/logo_soulcode_passaporte_digital_vertical.png";
-import Image from "next/image";
-import { GoHome } from "react-icons/go";
-import { MdOutlineDashboard } from "react-icons/md";
-import { PiStudentBold } from "react-icons/pi";
-import { MdOutlineForum } from "react-icons/md";
-import { LiaCertificateSolid } from "react-icons/lia";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useContext, useState } from "react";
+
+import { AuthContext } from "@/contexts/AuthContext";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
+import { GoHome } from "react-icons/go";
+import Image from "next/image";
+import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
+import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineForum } from "react-icons/md";
+import { PiStudentBold } from "react-icons/pi";
+import logo from "/public/logos/logo_soulcode_passaporte_digital_vertical.png";
 
 export default function Sidebar() {
+
+    const { signOut } = useContext(AuthContext);
 
     const [open, setOpen] = useState<boolean>(false);
 
@@ -57,7 +61,7 @@ export default function Sidebar() {
             </div>
 
 
-            <div className={`${open ? 'w-100 icon-18-sidebar py-2' : ''} logout-sidebar align-item-center justify-content-center fs-12 text-auxiliary1-project div-icon-sidebar mt-auto bg-white`}>
+            <div className={`${open ? 'w-100 icon-18-sidebar py-2' : ''} logout-sidebar align-item-center justify-content-center fs-12 text-auxiliary1-project div-icon-sidebar mt-auto bg-white`} onClick={signOut}>
                 <MdLogout className="text-auxiliary1-project" size={20} />
                 {open && 'Sair'}
             </div>

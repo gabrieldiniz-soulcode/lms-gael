@@ -1,15 +1,16 @@
+import { useContext, useEffect, useState } from "react";
+
+import { AuthContext } from "@/contexts/AuthContext";
+import { FaRegClock } from "react-icons/fa";
 import Image from "next/image";
+import { IoRadioSharp } from "react-icons/io5";
+import { LoaderContext } from "@/contexts/LoaderContext";
+import { ProgressBar } from "react-bootstrap";
+import { RiPlayMiniLine } from "react-icons/ri";
+import axios from "axios";
 import bannerDiscord from "/public/discord.png";
 import bannerDiscord2 from "/public/discord_2.png";
 import bannerYT from "/public/ao_vivo_yt.png";
-import { FaRegClock } from "react-icons/fa";
-import { RiPlayMiniLine } from "react-icons/ri";
-import { ProgressBar } from "react-bootstrap";
-import { IoRadioSharp } from "react-icons/io5";
-import { useContext, useEffect, useState } from "react";
-import { AuthContext } from "@/contexts/AuthContext";
-import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
 
 interface Course {
     id: number;
@@ -55,10 +56,10 @@ export default function Hero() {
                 });
         }
 
-        if (user?.name && user?.database) {
+        if (user?.name && user?.database && !course) {
             getCourse();
         }
-    }, [user, updateResponses]);
+    }, [user, updateResponses, course]);
 
     function removeHtmlTags(text: string) {
         return text.replace(/<[^>]*>/g, '');
