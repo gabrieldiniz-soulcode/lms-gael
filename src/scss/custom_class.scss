@@ -177,3 +177,17 @@ a {
 .btn-outline-light:hover {
     background-color: transparent !important;
 }
+
+.btn-outline {
+    background-color: transparent !important;
+}
+
+.btn-outline-2 {
+    background-color: transparent !important;
+    color: var(--bs-auxiliary1-project) !important;
+    border-color: var(--bs-auxiliary1-project) !important;
+
+    &:hover {
+        background-color: transparent !important;
+    }
+}
