@@ -1,7 +1,9 @@
+import { Button, Form, Spinner } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react";
+
+import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { Button, Form, Spinner } from "react-bootstrap";
 
 interface Props {
     userid: string;
@@ -54,19 +56,27 @@ interface Question {
     category: number;
     contextid: number;
     q_answers: QuestionAnswer[];
+    selected_answer_index: number | null;
+}
+
+interface Quiz {
+    slots: Question[];
+    question_usages_id: number;
 }
 interface ApiResponse {
-    data: Question[];
+    data: Quiz;
 }
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
 export default function Quiz({ userid, database, cmid, instance, newAttempt, setQuizAttempt }: Props) {
 
-    const [quiz, setQuiz] = useState<Question[]>();
+    const [quiz, setQuiz] = useState<Quiz>();
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [selectedAnswer, setSelectedAnswer] = useState<number[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const { user } = useContext(AuthContext);
+
 
     const searchParams = useSearchParams();
     const cursoId = searchParams.get('cursoId');
@@ -74,17 +84,19 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
     useEffect(() => {
         function getQuiz() {
             axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/quiz/new_attempt`, {
-                userid,
                 cmid,
                 instance
             }, {
                 headers: {
-                    "database": database
+                    "database": database,
+                    "Authorization": `Bearer ${user?.token}`,
+                    "cmid": cmid,
+                    "instance": instance
                 }
             })
                 .then((res: ApiResponse) => {
                     setQuiz(res.data);
-                    setSelectedAnswer(res.data.map(() => 0));
+                    setSelectedAnswer(res.data.slots.map(() => 0));
                 })
                 .catch((err) => {
                     console.log(err);
@@ -98,12 +110,18 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/quiz/continue_attempt`, {
                 headers: {
                     "database": database,
-                    "attempt_id": instance
+                    "attempt_id": instance,
+                    "Authorization": `Bearer ${user?.token}`
                 }
             })
                 .then((res: ApiResponse) => {
                     setQuiz(res.data);
-                    setSelectedAnswer(res.data.map(() => 0));
+                    setSelectedAnswer(res.data.slots.map((slot) => {
+                        if (slot.selected_answer_index !== null) {
+                            return slot.q_answers[slot.selected_answer_index].id;
+                        }
+                        return 0;
+                    }));
                 })
                 .catch((err) => {
                     console.log(err);
@@ -113,7 +131,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
                 });
         }
 
-        if (cmid && userid && instance && database) {
+        if (cmid && userid && instance && database && user) {
             if (newAttempt) {
                 getQuiz();
                 return;
@@ -121,18 +139,19 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
             getQuizInProgress();
         }
 
-    }, [cmid, userid, instance, database, newAttempt, setLoading]);
+    }, [cmid, userid, instance, database, newAttempt, setLoading, user]);
 
     function saveQuestionAttempt(answerId: number) {
         if (!quiz) return;
+        console.log(quiz.question_usages_id)
         axios.put(`http://${process.env.NEXT_PUBLIC_API_URL}/quiz/save_question_attempt`, {
-            userid,
-            slot: quiz[activeIndex].slot,
-            question_usages_id: 34065,
+            slot: quiz.slots[activeIndex].slot,
+            question_usages_id: quiz.question_usages_id,
             question_answer_id: answerId
         }, {
             headers: {
-                "database": database
+                "database": database,
+                "Authorization": `Bearer ${user?.token}`
             }
         })
             .then((res) => {
@@ -149,13 +168,13 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
             return;
         }
         axios.put(`http://${process.env.NEXT_PUBLIC_API_URL}/quiz/complete_attempt`, {
-            userid,
             cmid,
-            question_usages_id: 34065,
+            question_usages_id: quiz?.question_usages_id,
             course: cursoId
         }, {
             headers: {
-                "database": database
+                "database": database,
+                "Authorization": `Bearer ${user?.token}`
             }
         })
             .then(() => {
@@ -175,7 +194,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
 
     function tryAgain() {
         if (!quiz) return;
-        setSelectedAnswer(quiz.map(() => 0));
+        setSelectedAnswer(quiz.slots.map(() => 0));
         setActiveIndex(0);
     }
 
@@ -202,7 +221,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
                 <div className="col-2 p-3 gap-3 rounded-3 bg-auxiliary6-project d-md-flex d-none flex-column">
                     <span className="text-center py-2 rounded-3 bg-primary text-white fw-700">Questões</span>
                     {
-                        quiz.map((_, index) => (
+                        quiz.slots.map((_, index) => (
                             <span key={index} className={`text-center py-2 rounded-3 ${activeIndex == index ? 'bg-auxiliary8-project text-white' : 'bg-white'}`}>Questão {index + 1}</span>
                         ))
                     }
@@ -212,9 +231,9 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
                 <div className="col-md-10 col-12 pt-md-5">
                     <div className="bg-auxiliary6-project d-flex flex-column mt-4 gap-3 p-3 rounded-3">
 
-                        <span className="fw-700 fs-18">{removeHtmlTags(quiz[activeIndex].questiontext)}</span>
+                        <span className="fw-700 fs-18">{removeHtmlTags(quiz.slots[activeIndex].questiontext)}</span>
                         {
-                            quiz[activeIndex].q_answers.map((item, index) => (
+                            quiz.slots[activeIndex].q_answers.map((item, index) => (
                                 <div key={index} className="d-flex gap-2" onClick={() => saveAnswer(item.id)}>
                                     <Form.Check
                                         type="radio"
@@ -231,7 +250,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
                     <div className="d-flex justify-content-between mt-3 gap-3">
                         <Button className="px-4" disabled={activeIndex < 1} onClick={() => setActiveIndex(activeIndex - 1)}>Pergunta Anterior</Button>
                         {
-                            activeIndex >= (quiz.length - 1)
+                            activeIndex >= (quiz.slots.length - 1)
                                 ?
                                 <Button className="px-4" onClick={completeQuizAttempt} disabled={selectedAnswer[activeIndex] == 0}>Finalizar</Button>
                                 :
@@ -241,7 +260,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
                     <div className="d-flex flex-wrap gap-md-5 mt-4 gap-3">
                         <span className="fw-700">Questão {activeIndex + 1}</span>
                         <span>{selectedAnswer[activeIndex] == 0 ? "Ainda não respondida" : "Respondida"}</span>
-                        <span>Vale {parseFloat(quiz[activeIndex].maxmark)} ponto(s)</span>
+                        <span>Vale {parseFloat(quiz.slots[activeIndex].maxmark)} ponto(s)</span>
                     </div>
                 </div>
             </div>
