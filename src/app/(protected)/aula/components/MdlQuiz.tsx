@@ -1,7 +1,9 @@
-import axios from "axios";
-import { useEffect, useState } from "react"
 import { Button, Spinner } from "react-bootstrap";
+import { useContext, useEffect, useState } from "react"
+
+import { AuthContext } from "@/contexts/AuthContext";
 import Quiz from "./Quiz";
+import axios from "axios";
 
 interface Props {
     userid: string,
@@ -47,13 +49,14 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
     const [loading, setLoading] = useState<boolean>(true);
     const [quizAttempt, setQuizAttempt] = useState<boolean>(false);
 
+    const { user } = useContext(AuthContext);
+
     useEffect(() => {
 
         function getQuiz() {
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/quiz`, {
                 headers: {
-                    "userid": userid,
-                    "database": database,
+                    "Authorization": `Bearer ${user?.token}`,
                     "cmid": cmid,
                     "instance": instance
                 }
@@ -69,11 +72,11 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
                 });
         }
 
-        if (cmid && database && userid && instance && !quizAttempt) {
+        if (cmid && database && userid && instance && !quizAttempt && user) {
             getQuiz();
         }
 
-    }, [cmid, database, userid, instance, quizAttempt]);
+    }, [cmid, database, userid, instance, quizAttempt, user]);
 
     function formatData(timestamp: number): string {
         if (!timestamp) {

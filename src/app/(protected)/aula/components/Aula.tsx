@@ -1,13 +1,14 @@
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { useContext, useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
 import { AuthContext } from "@/contexts/AuthContext";
 import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
-import { usePathname, useSearchParams, useRouter } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
-import MdlQuiz from "./MdlQuiz";
-import MdlPage from "./MdlPage";
-import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
-import MdlUrl from "./MdlUrl";
 import MdlCustomcert from "./MdlCustomcert";
+import MdlPage from "./MdlPage";
+import MdlQuiz from "./MdlQuiz";
+import MdlUrl from "./MdlUrl";
+import axios from "axios";
 
 interface Module {
     name: string;
@@ -55,9 +56,8 @@ export default function Aula() {
         function getModule() {
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
                 headers: {
-                    "database": user?.database,
                     "course": cursoId,
-                    "userid": user?.id,
+                    "Authorization": `Bearer ${user?.token}`
                 }
             })
                 .then((res: ApiResponse) => {
@@ -88,11 +88,11 @@ export default function Aula() {
         function completeModule() {
             axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/module/completion`, {
                 cmid: aulas[activeIndex].cmid,
-                userid: user.id,
                 course: aulas[activeIndex].data_module.course,
             }, {
                 headers: {
-                    "database": user.database
+                    "database": user.database,
+                    "Authorization": `Bearer ${user?.token}`
                 }
             })
                 .then((res) => {

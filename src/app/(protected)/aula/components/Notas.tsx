@@ -1,8 +1,9 @@
+import { useContext, useEffect, useState } from "react";
+
 import { AuthContext } from "@/contexts/AuthContext";
+import { Button } from "react-bootstrap";
 import axios from "axios";
 import { useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
 
 interface Nota {
     content: string;
@@ -28,8 +29,7 @@ export default function Notas() {
         function getNotes() {
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/notes`, {
                 headers: {
-                    "database": user.database,
-                    "userid": user.id,
+                    "Authorization": `Bearer ${user?.token}`,
                     "cmid": id
                 }
             }).

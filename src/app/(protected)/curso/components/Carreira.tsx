@@ -1,9 +1,10 @@
+import { useContext, useEffect, useState } from "react";
+
 import { AuthContext } from "@/contexts/AuthContext";
+import Image from "next/image";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import axios from "axios";
-import Image from "next/image";
 import { useSearchParams } from "next/navigation";
-import { useContext, useEffect, useState } from "react";
 
 interface Course {
     id: number;
@@ -35,8 +36,8 @@ export default function Carreira() {
         function getCourse() {
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course`, {
                 headers: {
-                    "username": user?.name,
-                    "database": user?.database
+                    "database": user?.database,
+                    "Authorization": `Bearer ${user?.token}`
                 }
             })
                 .then((res: ApiResponse) => {

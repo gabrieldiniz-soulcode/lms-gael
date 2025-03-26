@@ -1,12 +1,13 @@
-import { AuthContext } from "@/contexts/AuthContext";
-import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
-import { useSearchParams } from "next/navigation";
 import { Fragment, useContext, useEffect, useState } from "react";
-import SubCurso from "./SubCurso";
-import { Spinner } from "react-bootstrap";
+
+import { AuthContext } from "@/contexts/AuthContext";
 import Carreira from "./Carreira";
 import { FaChevronLeft } from "react-icons/fa6";
+import { LoaderContext } from "@/contexts/LoaderContext";
+import { Spinner } from "react-bootstrap";
+import SubCurso from "./SubCurso";
+import axios from "axios";
+import { useSearchParams } from "next/navigation";
 
 interface ApiResponse {
     data: Module[];
@@ -50,9 +51,8 @@ export default function Curso() {
         function getModule() {
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
                 headers: {
-                    "database": user?.database,
                     "course": id,
-                    "userid": user?.id,
+                    "Authorization": `Bearer ${user?.token}`
                 }
             })
                 .then((res: ApiResponse) => {
@@ -84,9 +84,8 @@ export default function Curso() {
         setSubCursoLoading(true);
         axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
             headers: {
-                "database": database,
                 "course": courseId,
-                "userid": userId,
+                "Authorization": `Bearer ${user?.token}`
             }
         })
             .then((res: ApiResponse) => {
@@ -155,7 +154,7 @@ export default function Curso() {
                     getSubCursoComponent(false)
                 }
             </div>
-            <a href="" className="col-12 text-center text-decoration-none mt-4">Fórum do Curso</a>
+            {/* <a href="" className="col-12 text-center text-decoration-none mt-4">Fórum do Curso</a> */}
         </div>
     );
 }

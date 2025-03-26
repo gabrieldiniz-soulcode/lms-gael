@@ -7,7 +7,6 @@ import axios from "axios";
 
 interface User {
     name: string;
-    privatetoken: string;
     token: string;
     database: string;
     id: string;
@@ -57,34 +56,21 @@ export function AuthContextProvider({ children }: Props) {
     function signIn(email: string, password: string, rememberMe: boolean) {
         const userObj = {} as User;
 
-        Promise.all([
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/login`, {
-                headers: {
-                    "username": email
-                }
-            }),
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/auth?username=${email}&password=${password}&database=${process.env.NEXT_PUBLIC_DATABASE}`, {
-                headers: {
-                    "username": email,
-                    "password": password,
-                    "database": process.env.NEXT_PUBLIC_DATABASE
-                }
-            })
-        ])
-            .then(([loginResponse, authResponse]) => {
-                if (authResponse.data.message) {
+        axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/auth`, {
+            username: email,
+            password: password,
+            database: process.env.NEXT_PUBLIC_DATABASE
+        })
+            .then((authResponse) => {
+
+                if (authResponse.data.error) {
                     alert('CREDENCIAIS INVÁLIDAS');
                     return;
                 }
 
-                const u = loginResponse.data.find((item: { base: string }) => item.base == process.env.NEXT_PUBLIC_DATABASE);
-
-                // userObj.id = u.id;
-                // userObj.name = email;
-                userObj.id = "73";
-                userObj.name = "cristianoans@hotmail.com";
-                userObj.database = process.env.NEXT_PUBLIC_DATABASE!;
-                userObj.privatetoken = authResponse.data.privatetoken;
+                userObj.id = authResponse.data.data.userid;
+                userObj.name = authResponse.data.data.database;
+                userObj.database = authResponse.data.data.database!;
                 userObj.token = authResponse.data.token;
 
                 setUser(userObj);

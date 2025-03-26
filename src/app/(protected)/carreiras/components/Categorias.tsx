@@ -33,8 +33,8 @@ export default function Categorias() {
         function getCourse() {
             axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course`, {
                 headers: {
-                    "username": user?.name,
-                    "database": user?.database
+                    "database": user?.database,
+                    "Authorization": `Bearer ${user?.token}`
                 }
             })
                 .then((res: ApiResponse) => {
