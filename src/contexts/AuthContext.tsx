@@ -56,7 +56,7 @@ export function AuthContextProvider({ children }: Props) {
     function signIn(email: string, password: string, rememberMe: boolean) {
         const userObj = {} as User;
 
-        axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/auth`, {
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
             username: email,
             password: password,
             database: process.env.NEXT_PUBLIC_DATABASE

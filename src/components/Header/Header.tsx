@@ -1,31 +1,71 @@
 "use client";
 
-import { Form, Nav, Navbar, NavbarCollapse, NavbarToggle } from 'react-bootstrap';
 import { FaChevronRight, FaSearch } from "react-icons/fa";
-import { GoHome } from "react-icons/go";
-import { MdOutlineDashboard } from "react-icons/md";
-import { PiStudentBold } from "react-icons/pi";
-import { MdOutlineForum } from "react-icons/md";
-import { LiaCertificateSolid } from "react-icons/lia";
+import { Form, Nav, Navbar, NavbarCollapse, NavbarToggle } from 'react-bootstrap';
+import { useContext, useEffect, useState } from 'react';
+
+import { AuthContext } from '@/contexts/AuthContext';
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
+import { GoHome } from "react-icons/go";
 import Image from 'next/image';
-import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
+import { LiaCertificateSolid } from "react-icons/lia";
+import Link from "next/link";
+import { MdOutlineDashboard } from "react-icons/md";
+import { MdOutlineForum } from "react-icons/md";
+import { PiStudentBold } from "react-icons/pi";
 import aluno from "/public/aluno_2.png";
+import axios from 'axios';
+import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
+
+interface User {
+  firstname: string;
+  imagealt: string;
+}
+
+interface ApiResponse {
+  data: User;
+}
 
 export default function Header() {
 
+  const [perfil, setPerfil] = useState<User>();
+
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    function getPerfil() {
+      axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+        headers: {
+          "database": user.database,
+          "Authorization": `Bearer ${user.token}`
+        }
+      })
+        .then((res: ApiResponse) => {
+          setPerfil(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+
+    if (user.token && !perfil) {
+      getPerfil();
+    }
+
+  }, [user]);
+
   return (
-    <Navbar expand="lg" className="header bg-auxiliary1-project py-lg-2 py-4 position-absolute w-100" >
+    <Navbar expand="lg" className="header bg-auxiliary1-project py-lg-2 py-4 position-absolute w-100" style={{zIndex: 500}}>
 
       <div className='d-lg-flex d-none justify-content-end w-100 align-items-center gap-5'>
         <div className="position-relative">
-          <Form.Control className="form-input-header" type="texto" placeholder="Buscar Cursos" />
+          <Form.Control className="form-input-header" type="texto" placeholder="Buscar Cursos" disabled />
           <FaSearch className="form-input-icon-header cursor-pointer" color="#fff" />
         </div>
         <a href="/perfil" className="d-flex gap-2 align-items-center">
-          <Image src={aluno.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" />
-          <span className="fw-300 fs-12 text-white">Olá, Estudante</span>
+          <Image src={perfil?.imagealt || aluno.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" />
+          <span className="fw-300 fs-12 text-white">Olá, {perfil?.firstname || "Estudante"}</span>
           <FaChevronRight color="#fff" size={18} />
         </a>
       </div>
@@ -47,30 +87,30 @@ export default function Header() {
               Dashboard
             </div>
 
-            <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
+            <a href="/perfil" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <PiStudentBold color="#fff" size={18} className="me-2" />
               Minhas Carreiras
-            </div>
+            </a>
 
-            <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
+            {/* <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <MdOutlineForum color="#fff" size={18} className="me-2" />
               Fórum
-            </div>
+            </div> */}
 
-            <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
+            <a href="/certificados" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <LiaCertificateSolid color="#fff" size={18} className="me-2" strokeWidth={0.5} />
               Certificados
-            </div>
+            </a>
 
             <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <FaRegCalendarAlt color="#fff" size={18} className="me-2" />
               Eventos
             </div>
 
-            <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white mb-5">
+            <a href="/perfil" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white mb-5">
               <GoGear color="#fff" size={18} className="me-2" strokeWidth={0.5} />
               Configurações
-            </div>
+            </a>
           </div>
         </Nav>
       </NavbarCollapse>

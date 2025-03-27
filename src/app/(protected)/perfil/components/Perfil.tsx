@@ -50,7 +50,7 @@ export default function Perfil() {
             axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
                 headers: {
                     "database": user.database,
-                    "userid": user.id
+                    "Authorization": `Bearer ${user.token}`
                 }
             })
                 .then((res: ApiResponse) => {
@@ -64,7 +64,7 @@ export default function Perfil() {
                 });
         }
 
-        if (user?.database && user?.id) {
+        if (user?.token) {
             getPerfil();
         }
 

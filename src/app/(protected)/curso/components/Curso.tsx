@@ -74,13 +74,14 @@ export default function Curso() {
                 });
         }
 
-        if (user && id && !curso) {
+        if (user.token && id && !curso) {
             return getModule();
         }
 
     }, [user, updateResponses, id, curso]);
 
     function getSubCurso(courseId: number, token: string) {
+        if (!token) return;
         setSubCursoLoading(true);
         axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
             headers: {

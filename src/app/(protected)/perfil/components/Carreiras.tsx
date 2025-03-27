@@ -35,7 +35,7 @@ export default function Carreiras() {
                 headers: {
                     "username": user?.name,
                     "database": user?.database,
-                    "Authorization": user?.token
+                    "Authorization": `Bearer ${user?.token}`
                 }
             })
                 .then((res: ApiResponse) => {
@@ -50,7 +50,7 @@ export default function Carreiras() {
                 });
         }
 
-        if (user?.name && user?.database) {
+        if (user?.name && user?.token) {
             getCourse();
         }
     }, [user, updateResponses]);

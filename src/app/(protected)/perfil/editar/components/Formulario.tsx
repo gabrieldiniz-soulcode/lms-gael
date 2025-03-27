@@ -77,10 +77,10 @@ export default function Formulario() {
         axios.get(`https://api.thecompaniesapi.com/v2/locations/countries?search=${search}`)
             .then((res: ApiResponseCountry) => {
                 setCountrys(res.data.countries);
-                    const country = res.data.countries.find((c) => c.code == profile.country.toLocaleLowerCase());
-                    if (country) {
-                        setSelectedCountry({ value: country.code, label: country.name });
-                    }
+                const country = res.data.countries.find((c) => c.code == profile.country.toLocaleLowerCase());
+                if (country) {
+                    setSelectedCountry({ value: country.code, label: country.name });
+                }
             });
     }, [])
 
@@ -88,7 +88,7 @@ export default function Formulario() {
         axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
             headers: {
                 "database": user.database,
-                "userid": user.id
+                "Authorization": `Bearer ${user.token}`
             }
         })
             .then((res: ApiResponse) => {
