@@ -1,5 +1,5 @@
 import { Button, Spinner } from "react-bootstrap";
-import { useContext, useEffect, useState } from "react"
+import { Suspense, useContext, useEffect, useState } from "react"
 
 import { AuthContext } from "@/contexts/AuthContext";
 import Quiz from "./Quiz";
@@ -54,7 +54,7 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
     useEffect(() => {
 
         function getQuiz() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/quiz`, {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/quiz`, {
                 headers: {
                     "Authorization": `Bearer ${user?.token}`,
                     "cmid": cmid,
@@ -102,14 +102,16 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
             quiz && (
                 quizAttempt
                     ?
-                    <Quiz
-                        cmid={cmid}
-                        database={database}
-                        instance={(quiz?.action == "continue_attempt" ? quiz.attempt_id : instance)}
-                        userid={userid}
-                        newAttempt={(quiz?.action == "continue_attempt" ? false : true)}
-                        setQuizAttempt={setQuizAttempt}
-                    />
+                    <Suspense>
+                        <Quiz
+                            cmid={cmid}
+                            database={database}
+                            instance={(quiz?.action == "continue_attempt" ? quiz.attempt_id : instance)}
+                            userid={userid}
+                            newAttempt={(quiz?.action == "continue_attempt" ? false : true)}
+                            setQuizAttempt={setQuizAttempt}
+                        />
+                    </Suspense>
                     :
                     <div className="w-100">
                         <Button className="px-3" onClick={() => setQuizAttempt(true)}>{quiz.message}</Button>

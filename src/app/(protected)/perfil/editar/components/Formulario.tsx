@@ -85,7 +85,7 @@ export default function Formulario() {
     }, [])
 
     const getPerfil = useCallback(() => {
-        axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
             headers: {
                 "database": user.database,
                 "userid": user.id
@@ -142,7 +142,7 @@ export default function Formulario() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.put(`http://${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+        axios.put(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
             userid: parseInt(user?.id),
             user_data: perfil
         }, {
@@ -162,7 +162,7 @@ export default function Formulario() {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const formData = new FormData();
         formData.append('imagem', e.target.files![0]);
-        axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/upload`, formData, {
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/upload`, formData, {
             headers: {
                 "database": user?.database,
                 "userid": user?.id

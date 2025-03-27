@@ -36,7 +36,7 @@ export default function Curso() {
 
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [curso, setCurso] = useState<Module>();
-    const [forum, setForum] = useState<Module>();
+    // const [forum, setForum] = useState<Module>();
     const [subCurso, setSubCurso] = useState<Module[]>([]);
     const [subCursoLoading, setSubCursoLoading] = useState<boolean>(true);
 
@@ -49,7 +49,7 @@ export default function Curso() {
     useEffect(() => {
 
         function getModule() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
                 headers: {
                     "course": id,
                     "Authorization": `Bearer ${user?.token}`
@@ -58,11 +58,11 @@ export default function Curso() {
                 .then((res: ApiResponse) => {
                     res.data.map((item) => {
                         if (item.sequence[0]?.module == "mdl_forum" || item.sequence[1]?.module == "mdl_forum") {
-                            setForum(item);
+                            // setForum(item);
                         }
                         if (item.sequence[1]?.module == "mdl_subcourse") {
                             setCurso(item);
-                            getSubCurso(item.sequence[0].data_module.refcourse, user?.database, user?.id);
+                            getSubCurso(item.sequence[0].data_module.refcourse, user?.token);
                         }
                     })
                 })
@@ -74,18 +74,18 @@ export default function Curso() {
                 });
         }
 
-        if (user?.database && user?.id && id && !curso) {
+        if (user && id && !curso) {
             return getModule();
         }
 
     }, [user, updateResponses, id, curso]);
 
-    function getSubCurso(courseId: number, database: string, userId: string) {
+    function getSubCurso(courseId: number, token: string) {
         setSubCursoLoading(true);
-        axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
             headers: {
                 "course": courseId,
-                "Authorization": `Bearer ${user?.token}`
+                "Authorization": `Bearer ${token}`
             }
         })
             .then((res: ApiResponse) => {
@@ -131,7 +131,7 @@ export default function Curso() {
                         <Fragment key={index}>
                             <span
                                 onClick={() => {
-                                    getSubCurso(cur.data_module.refcourse, user?.database, user?.id);
+                                    getSubCurso(cur.data_module.refcourse, user?.token);
                                     setActiveIndex(index);
                                 }}
                                 className={`${index == activeIndex ? "text-white bg-auxiliary1-project" : "bg-white"} p-2 fs-18 fw-700 rounded-3 cursor-pointer`}

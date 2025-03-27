@@ -27,7 +27,7 @@ export default function Notas() {
     useEffect(() => {
 
         function getNotes() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/notes`, {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notes`, {
                 headers: {
                     "Authorization": `Bearer ${user?.token}`,
                     "cmid": id
@@ -58,7 +58,7 @@ export default function Notas() {
             return;
         }
 
-        axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/notes`, {
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/notes`, {
             userid: user.id,
             cmid: id,
             content: data

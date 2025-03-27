@@ -47,7 +47,7 @@ export default function Perfil() {
     useEffect(() => {
 
         function getPerfil() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
                 headers: {
                     "database": user.database,
                     "userid": user.id

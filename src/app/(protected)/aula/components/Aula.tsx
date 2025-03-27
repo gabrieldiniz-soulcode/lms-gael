@@ -54,7 +54,7 @@ export default function Aula() {
 
     useEffect(() => {
         function getModule() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/module`, {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
                 headers: {
                     "course": cursoId,
                     "Authorization": `Bearer ${user?.token}`
@@ -86,7 +86,7 @@ export default function Aula() {
 
     useEffect(() => {
         function completeModule() {
-            axios.post(`http://${process.env.NEXT_PUBLIC_API_URL}/module/completion`, {
+            axios.post(`${process.env.NEXT_PUBLIC_API_URL}/module/completion`, {
                 cmid: aulas[activeIndex].cmid,
                 course: aulas[activeIndex].data_module.course,
             }, {

@@ -1,8 +1,9 @@
 "use client";
 
-import { LoaderContext } from "@/contexts/LoaderContext";
-import { useContext, useEffect } from "react";
+import { Suspense, useContext, useEffect } from "react";
+
 import Curso from "./components/Curso";
+import { LoaderContext } from "@/contexts/LoaderContext";
 
 export default function Page() {
 
@@ -15,7 +16,9 @@ export default function Page() {
     return (
         <main>
             <section className="container container-ajuste mt-5 pt-5">
-                <Curso />
+                <Suspense>
+                    <Curso />
+                </Suspense>
             </section>
         </main>
     )

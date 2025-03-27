@@ -12,7 +12,7 @@ export default function Page() {
     useEffect(() => {
         setResponses([false]);
         updateResponses();
-    }, [setResponses]);
+    }, [setResponses, updateResponses]);
 
     return (
         <main>

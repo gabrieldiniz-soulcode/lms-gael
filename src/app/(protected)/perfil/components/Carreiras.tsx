@@ -1,8 +1,9 @@
-import { AuthContext } from "@/contexts/AuthContext";
-import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import { LoaderContext } from "@/contexts/LoaderContext";
+
+import { AuthContext } from "@/contexts/AuthContext";
 import CarrosselCarreiras from "@/components/CarrosselCarreiras/CarrosselCarreiras";
+import { LoaderContext } from "@/contexts/LoaderContext";
+import axios from "axios";
 
 interface Course {
     id: number;
@@ -30,10 +31,11 @@ export default function Carreiras() {
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course`, {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
                 headers: {
                     "username": user?.name,
-                    "database": user?.database
+                    "database": user?.database,
+                    "Authorization": user?.token
                 }
             })
                 .then((res: ApiResponse) => {

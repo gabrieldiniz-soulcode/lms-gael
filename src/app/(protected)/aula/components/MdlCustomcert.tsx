@@ -17,7 +17,7 @@ interface Props {
     sequence: Sequence;
 }
 
-export default function MdlCustomcert({ sequence }: Props) {
+export default function MdlCustomcert({ }: Props) {
 
     return (
         <div className="w-100">

@@ -31,7 +31,7 @@ export default function Categorias() {
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`http://${process.env.NEXT_PUBLIC_API_URL}/course`, {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
                 headers: {
                     "database": user?.database,
                     "Authorization": `Bearer ${user?.token}`
