@@ -11,9 +11,10 @@ import Image from "next/image";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
 import { MdOutlineDashboard } from "react-icons/md";
-import { MdOutlineForum } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import logo from "/public/logos/logo_soulcode_passaporte_digital_vertical.png";
+
+// import { MdOutlineForum } from "react-icons/md";
 
 export default function Sidebar() {
 
@@ -48,7 +49,7 @@ export default function Sidebar() {
                 {open && 'Fórum'}
             </div> */}
 
-            <a href="/carreiras" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
+            <a href="/certificados" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <LiaCertificateSolid color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Certificados'}
             </a>

@@ -109,9 +109,9 @@ export default function Aula() {
 
     useEffect(() => {
         function updateIdSearchParam() {
-            const params = new URLSearchParams(searchParams.toString());
-            params.set("id", aulas[activeIndex].cmid.toString());
-            replace(`${pathname}?${params.toString()}`);
+            const params = new URLSearchParams(window.location.search);
+            params.set('id', aulas[activeIndex].cmid.toString());
+            window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
         }
 
         if (aulas[activeIndex]) {

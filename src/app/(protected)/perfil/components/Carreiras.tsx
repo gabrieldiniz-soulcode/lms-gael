@@ -50,10 +50,10 @@ export default function Carreiras() {
                 });
         }
 
-        if (user?.name && user?.token) {
+        if (user?.name && user?.token && !course) {
             getCourse();
         }
-    }, [user, updateResponses]);
+    }, [user, updateResponses, course]);
 
     return (
         course

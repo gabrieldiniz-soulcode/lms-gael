@@ -62,13 +62,17 @@ export default function Categorias() {
     return (
         course
         &&
-        course.map((categoria, index) => (
-            <div key={index}>
-                <h1 className="fs-28 fw-700 mb-4 mt-5">{categoria[0]?.category}</h1>
-                <div>
-                    <CarrosselCarreiras carreiras={categoria} />
-                </div>
-            </div>
-        ))
+        <div id="carreiras">
+            {
+                course.map((categoria, index) => (
+                    <div key={index}>
+                        <div>
+                            <CarrosselCarreiras carreiras={categoria} categoria={categoria[0]?.category} />
+                        </div>
+                    </div>
+                ))
+            }
+
+        </div>
     );
 }

@@ -1,10 +1,11 @@
 "use client";
 
-import { useContext, useEffect } from "react";
-import Categorias from "./components/Categorias";
-import { LoaderContext } from "@/contexts/LoaderContext";
-import Hero from "./components/Hero";
+import { Suspense, useContext, useEffect } from "react";
+
 import Bootcamps from "./components/Bootcamps";
+import Categorias from "./components/Categorias";
+import Hero from "./components/Hero";
+import { LoaderContext } from "@/contexts/LoaderContext";
 
 export default function Carreiras() {
 
@@ -23,7 +24,9 @@ export default function Carreiras() {
                 <Bootcamps />
             </section>
             <section className="container container-ajuste mt-5 pe-xxl-0">
-                <Categorias />
+                <Suspense>
+                    <Categorias />
+                </Suspense>
             </section>
         </main>
     )

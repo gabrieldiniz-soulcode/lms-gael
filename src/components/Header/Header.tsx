@@ -3,6 +3,7 @@
 import { FaChevronRight, FaSearch } from "react-icons/fa";
 import { Form, Nav, Navbar, NavbarCollapse, NavbarToggle } from 'react-bootstrap';
 import { useContext, useEffect, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { AuthContext } from '@/contexts/AuthContext';
 import { FaRegCalendarAlt } from "react-icons/fa";
@@ -10,9 +11,7 @@ import { GoGear } from "react-icons/go";
 import { GoHome } from "react-icons/go";
 import Image from 'next/image';
 import { LiaCertificateSolid } from "react-icons/lia";
-import Link from "next/link";
 import { MdOutlineDashboard } from "react-icons/md";
-import { MdOutlineForum } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import aluno from "/public/aluno_2.png";
 import axios from 'axios';
@@ -30,8 +29,13 @@ interface ApiResponse {
 export default function Header() {
 
   const [perfil, setPerfil] = useState<User>();
+  const [value, setValue] = useState<string>();
 
   const { user } = useContext(AuthContext);
+
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const { push } = useRouter();
 
   useEffect(() => {
     function getPerfil() {
@@ -53,15 +57,32 @@ export default function Header() {
       getPerfil();
     }
 
-  }, [user]);
+  }, [user, perfil]);
+
+  function handleSearch() {
+    if (!pathname.includes("carreiras")) {
+      push(`/carreiras?search=${value}`);
+      return;
+    }
+    if (pathname.includes("carreiras")) {
+      const params = new URLSearchParams(searchParams.toString());
+      params.set("search", value || "");
+      window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
+    }
+  }
 
   return (
-    <Navbar expand="lg" className="header bg-auxiliary1-project py-lg-2 py-4 position-absolute w-100" style={{zIndex: 500}}>
+    <Navbar expand="lg" className="header bg-auxiliary1-project py-lg-2 py-4 position-absolute w-100" style={{ zIndex: 500 }}>
 
       <div className='d-lg-flex d-none justify-content-end w-100 align-items-center gap-5'>
         <div className="position-relative">
-          <Form.Control className="form-input-header" type="texto" placeholder="Buscar Cursos" disabled />
-          <FaSearch className="form-input-icon-header cursor-pointer" color="#fff" />
+          <form onSubmit={(e) => {
+            e.preventDefault();
+            handleSearch();
+          }}>
+            <Form.Control className="form-input-header" type="texto" placeholder="Buscar Cursos" onChange={(e) => setValue(e.target.value)} />
+            <FaSearch className="form-input-icon-header cursor-pointer" color="#fff" onClick={handleSearch} />
+          </form>
         </div>
         <a href="/perfil" className="d-flex gap-2 align-items-center">
           <Image src={perfil?.imagealt || aluno.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" />

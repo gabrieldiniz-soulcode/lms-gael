@@ -147,7 +147,7 @@ export default function Formulario() {
             user_data: perfil
         }, {
             headers: {
-                "database": user?.database
+                "Authorization": `Bearer ${user.token}`
             }
         })
             .then(() => {

@@ -64,11 +64,11 @@ export default function Perfil() {
                 });
         }
 
-        if (user?.token) {
+        if (user?.token && !perfil) {
             getPerfil();
         }
 
-    }, [user, updateResponses]);
+    }, [user, updateResponses, perfil]);
 
     return (
         perfil
@@ -77,9 +77,12 @@ export default function Perfil() {
             <div className="row row-gap-4 align-items-center mt-3">
                 <div className="col-xxl-5">
                     <div className="row">
-                        <div className="col-md-4 col-12 d-flex justify-content-md-start justify-content-center">
-                            <Image src={perfil?.imagealt} width={160} height={160} alt="foto de perfil" style={{ borderRadius: '100%', border: "#93C01F 4px solid" }} />
-                        </div>
+                        {
+                            perfil?.imagealt &&
+                            <div className="col-md-4 col-12 d-flex justify-content-md-start justify-content-center">
+                                <Image src={perfil?.imagealt} width={160} height={160} alt="foto de perfil" style={{ borderRadius: '100%', border: "#93C01F 4px solid" }} />
+                            </div>
+                        }
                         <div className="d-flex ps-xxl-5 col-md-8 col-12 pt-3 gap-3 flex-column align-items-md-start align-items-center">
                             <span className="text-auxiliary10-project fs-21 fw-700">{perfil.firstname} {perfil.lastname}</span>
                             <span className="text-auxiliary10-project">
@@ -90,7 +93,7 @@ export default function Perfil() {
                     </div>
                 </div>
                 <div className="col-xxl-4 offset-xxl-3">
-                    <a className="w-100 btn btn-primary fs-12 fw-700" href="editar">
+                    <a className="w-100 btn btn-primary fs-12 fw-700" href="/perfil/editar">
                         <MdOutlineModeEditOutline size={22} className="me-2" />
                         Editar Perfil
                     </a>
