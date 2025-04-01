@@ -82,6 +82,11 @@ export function AuthContextProvider({ children }: Props) {
                     sessionStorage.setItem('user', JSON.stringify(userObj));
                 }
 
+                if (authResponse.data.data.forcepasswordchange == 1) {
+                    router.push("/perfil/alterar-senha");
+                    return;
+                }
+
                 router.push("/");
             })
             .catch(error => {
