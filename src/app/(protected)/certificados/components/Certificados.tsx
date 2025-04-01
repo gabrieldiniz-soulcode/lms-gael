@@ -43,7 +43,7 @@ export default function Certificados() {
                     </div>
                     <div className="col-xxl-2 col-xl-4">
                         <button className="w-100 btn btn-primary fs-12 fw-700">
-                            Editar Perfil
+                            Download
                         </button>
                     </div>
                 </div>

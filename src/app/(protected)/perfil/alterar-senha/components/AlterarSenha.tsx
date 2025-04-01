@@ -4,8 +4,9 @@ import { FormEvent, useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 
-type PasswordValidationResult = {
+interface PasswordValidationResult {
     hasMinLength: boolean;
     hasNumber: boolean;
     hasUppercase: boolean;
@@ -19,50 +20,51 @@ export default function AlterarSenha() {
     const [oldPasswrod, setOldPassword] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [validationResult, setValidationResult] = useState<ReturnType<typeof validatePassword> | null>(null);
+    const [validationResult, setValidationResult] = useState<PasswordValidationResult | null>(null);
     const [error, setError] = useState("");
     const [passwordVisible, setPasswordVisible] = useState<boolean[]>([false, false, false]);
 
     const { user } = useContext(AuthContext);
+    const router = useRouter();
 
     useEffect(() => {
-        setValidationResult(validatePassword());
-    }, [password])
+        const validatePassword = (): PasswordValidationResult => {
+            setError("");
+            const hasMinLength = password.length >= 8;
+            const hasNumber = /\d/.test(password);
+            const hasUppercase = /[A-Z]/.test(password);
+            const hasLowercase = /[a-z]/.test(password);
+            const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
 
-    const validatePassword = (): PasswordValidationResult => {
-        setError("");
-        const hasMinLength = password.length >= 8;
-        const hasNumber = /\d/.test(password);
-        const hasUppercase = /[A-Z]/.test(password);
-        const hasLowercase = /[a-z]/.test(password);
-        const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+            const passedChecks = [
+                hasMinLength,
+                hasNumber,
+                hasUppercase,
+                hasLowercase,
+                hasSpecialChar,
+            ].filter(Boolean).length;
 
-        const passedChecks = [
-            hasMinLength,
-            hasNumber,
-            hasUppercase,
-            hasLowercase,
-            hasSpecialChar,
-        ].filter(Boolean).length;
+            let strengthLevel: "Fraca" | "Média" | "Forte";
+            if (passedChecks <= 2) {
+                strengthLevel = "Fraca";
+            } else if (passedChecks === 3 || passedChecks === 4) {
+                strengthLevel = "Média";
+            } else {
+                strengthLevel = "Forte";
+            }
 
-        let strengthLevel: "Fraca" | "Média" | "Forte";
-        if (passedChecks <= 2) {
-            strengthLevel = "Fraca";
-        } else if (passedChecks === 3 || passedChecks === 4) {
-            strengthLevel = "Média";
-        } else {
-            strengthLevel = "Forte";
-        }
-
-        return {
-            hasMinLength,
-            hasNumber,
-            hasUppercase,
-            hasLowercase,
-            hasSpecialChar,
-            strengthLevel,
+            return {
+                hasMinLength,
+                hasNumber,
+                hasUppercase,
+                hasLowercase,
+                hasSpecialChar,
+                strengthLevel,
+            };
         };
-    };
+
+        setValidationResult(validatePassword());
+    }, [password]);
 
     const togglePasswordVisible = (index: number) => {
         setPasswordVisible((prevData) => (
@@ -105,8 +107,8 @@ export default function AlterarSenha() {
                 Authorization: `Bearer ${user.token}`
             }
         })
-            .then((res) => {
-                console.log(res)
+            .then(() => {
+                router.push("/perfil");
             })
             .catch((err) => {
                 setError(err.response.data.error);

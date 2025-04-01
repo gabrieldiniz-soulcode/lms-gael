@@ -4,16 +4,16 @@ import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { useContext, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import { FaRegCalendarAlt } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
 import { GoHome } from "react-icons/go";
 import Image from "next/image";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
-import { MdOutlineDashboard } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import logo from "/public/logos/logo_soulcode_passaporte_digital_vertical.png";
 
+// import { FaRegCalendarAlt } from "react-icons/fa";
+// import { MdOutlineDashboard } from "react-icons/md";
 // import { MdOutlineForum } from "react-icons/md";
 
 export default function Sidebar() {
@@ -34,10 +34,10 @@ export default function Sidebar() {
                 <GoHome color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Home'}
             </a>
-            <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
+            {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <MdOutlineDashboard color="#fff" size={20} />
                 {open && 'Dashboard'}
-            </div>
+            </div> */}
 
             <a href="/perfil" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <PiStudentBold color="#fff" size={20} />
@@ -54,10 +54,10 @@ export default function Sidebar() {
                 {open && 'Certificados'}
             </a>
 
-            <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
+            {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <FaRegCalendarAlt color="#fff" size={20} />
                 {open && 'Eventos'}
-            </div>
+            </div> */}
 
             <a href="/perfil" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <GoGear color="#fff" size={20} strokeWidth={0.5} />

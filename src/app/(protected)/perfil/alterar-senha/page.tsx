@@ -5,15 +5,6 @@ import { useContext, useEffect } from "react";
 import AlterarSenha from "./components/AlterarSenha";
 import { LoaderContext } from "@/contexts/LoaderContext";
 
-type PasswordValidationResult = {
-    hasMinLength: boolean;
-    hasNumber: boolean;
-    hasUppercase: boolean;
-    hasLowercase: boolean;
-    hasSpecialChar: boolean;
-    strengthLevel: "Fraca" | "Média" | "Forte";
-  };
-
 export default function Page() {
 
     const { setResponses, updateResponses } = useContext(LoaderContext);
@@ -21,7 +12,7 @@ export default function Page() {
     useEffect(() => {
         setResponses([false]);
         updateResponses();
-    }, [setResponses]);
+    }, [setResponses, updateResponses]);
 
     return (
         <main>

@@ -118,7 +118,7 @@ export default function Formulario() {
             if (name && value) {
                 setPerfil((prevPerfil) => {
                     if (!prevPerfil) return prevPerfil;
-                    const updatedPerfil: User = { ...prevPerfil, [name]: name == "opentowork" ? opentowork : value };
+                    const updatedPerfil: User = { ...prevPerfil, [name]: name == "opentowork" ? opentowork : opentowork };
                     return updatedPerfil;
                 });
             }
@@ -164,8 +164,7 @@ export default function Formulario() {
         formData.append('imagem', e.target.files![0]);
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/upload`, formData, {
             headers: {
-                "database": user?.database,
-                "userid": user?.id
+                Authorization: `Bearer ${user?.token}`
             }
         })
             .then(() => {
@@ -184,8 +183,12 @@ export default function Formulario() {
                 <div className="col-xxl-5">
                     <div className="row">
                         <div className="col-md-4 col-12 d-flex flex-column align-items-center gap-2">
-                            <Image src={perfil?.imagealt} width={160} height={160} alt="foto de perfil" style={{ borderRadius: '100%', border: "#93C01F 4px solid" }} />
-                            <span className='text-white fs-12 fw-700' onClick={handleAlterarFoto}>Alterar Foto</span>
+                            {
+                                perfil?.imagealt
+                                &&
+                                <Image src={perfil?.imagealt || ""} width={160} height={160} alt="foto de perfil" style={{ borderRadius: '100%', border: "#93C01F 4px solid" }} />
+                            }
+                            <span className='text-white fs-12 fw-700 cursor-pointer' onClick={handleAlterarFoto}>Alterar Foto</span>
                             <input
                                 type="file"
                                 multiple={false}
@@ -217,6 +220,7 @@ export default function Formulario() {
                             name="opentowork"
                             value={perfil.opentowork}
                             onChange={handleChange}
+                            checked={perfil.opentowork == 1}
                         />
                     </button>
                 </div>
@@ -318,7 +322,6 @@ export default function Formulario() {
                     </Form.Group>
                 </div>
             </div>
-
         </Form>
     )
 

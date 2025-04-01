@@ -6,16 +6,17 @@ import { useContext, useEffect, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 import { AuthContext } from '@/contexts/AuthContext';
-import { FaRegCalendarAlt } from "react-icons/fa";
 import { GoGear } from "react-icons/go";
 import { GoHome } from "react-icons/go";
 import Image from 'next/image';
 import { LiaCertificateSolid } from "react-icons/lia";
-import { MdOutlineDashboard } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import aluno from "/public/aluno_2.png";
 import axios from 'axios';
 import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
+
+// import { FaRegCalendarAlt } from "react-icons/fa";
+// import { MdOutlineDashboard } from "react-icons/md";
 
 interface User {
   firstname: string;
@@ -103,10 +104,10 @@ export default function Header() {
               <GoHome color="#fff" size={20} strokeWidth={0.5} className="me-2" />
               Home
             </a>
-            <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
+            {/* <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <MdOutlineDashboard color="#fff" size={18} className="me-2" />
               Dashboard
-            </div>
+            </div> */}
 
             <a href="/perfil" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <PiStudentBold color="#fff" size={18} className="me-2" />
@@ -123,10 +124,10 @@ export default function Header() {
               Certificados
             </a>
 
-            <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
+            {/* <div className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <FaRegCalendarAlt color="#fff" size={18} className="me-2" />
               Eventos
-            </div>
+            </div> */}
 
             <a href="/perfil" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white mb-5">
               <GoGear color="#fff" size={18} className="me-2" strokeWidth={0.5} />

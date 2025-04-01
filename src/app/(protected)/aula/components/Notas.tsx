@@ -54,7 +54,7 @@ export default function Notas() {
     }, [user, id]);
 
     function postNotes() {
-        if (!user.database || !user.id) {
+        if (!user.database || !user.id || !data || data == "") {
             return;
         }
 
@@ -64,7 +64,7 @@ export default function Notas() {
             content: data
         }, {
             headers: {
-                "database": user.database
+                Authorization: `Bearer ${user.token}`
             }
         })
             .then(() => {

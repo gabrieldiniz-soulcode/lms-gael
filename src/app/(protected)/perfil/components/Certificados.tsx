@@ -29,7 +29,7 @@ export default function Certificados() {
         <div className="row row-gap-4 pb-5">
             <div className="d-flex justify-content-between row-gap-4">
                 <span className="fs-28 fw-700 text-auxiliary1-project">Certificados</span>
-                <a href="" className="pt-5 me-3 text-decoration-none d-flex align-items-center gap-2">
+                <a href="/certificados" className="pt-5 me-3 text-decoration-none d-flex align-items-center gap-2">
                     Ver todos
                     <FaChevronRight size={16} />
                 </a>
