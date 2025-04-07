@@ -1,11 +1,11 @@
 import { Col, Image, Row } from "react-bootstrap";
+
 import aluno1 from "/public/aluno_1.png";
 import aluno2 from "/public/aluno_2.png";
 import aluno3 from "/public/aluno_3.png";
 import grafismo1 from "/public/grafismo_1.png";
 
 export default function Depoimentos() {
-
 
     return (
         <Row className="depoimentos py-5 px-md-5 mx-md-5 row-gap-4">

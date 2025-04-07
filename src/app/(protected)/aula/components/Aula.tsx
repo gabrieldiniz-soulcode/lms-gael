@@ -158,13 +158,13 @@ export default function Aula() {
                     {aulas[activeIndex]?.data_module.name}
                 </h2>
                 <div className="d-flex justify-content-end gap-3">
-                    <button disabled={activeIndex < 1} className="d-flex gap-3 align-items-center pe-3 border-0 cursor-pointer rounded-5 bg-white" onClick={() => prevOrNext(false)}>
+                    <button disabled={activeIndex < 1} className="d-flex gap-3 align-items-center text-auxiliary1-project pe-3 border-0 cursor-pointer rounded-5 bg-white" onClick={() => prevOrNext(false)}>
                         <div className="p-2 bg-auxiliary6-project rounded-5">
                             <FaChevronLeft className="mx-1" />
                         </div>
                         Anterior
                     </button>
-                    <button disabled={activeIndex > aulas.length - 2} className="d-flex gap-3 align-items-center ps-3 border-0 cursor-pointer rounded-5 bg-white" onClick={() => prevOrNext(true)}>
+                    <button disabled={activeIndex > aulas.length - 2} className="d-flex gap-3 align-items-center text-auxiliary1-project ps-3 border-0 cursor-pointer rounded-5 bg-white" onClick={() => prevOrNext(true)}>
                         Próximo
                         <div className="p-2 bg-auxiliary6-project rounded-5">
                             <FaChevronRight className="mx-1" />

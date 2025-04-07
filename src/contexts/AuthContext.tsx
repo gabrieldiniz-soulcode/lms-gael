@@ -16,6 +16,7 @@ type AuthContextData = {
     user: User;
     signIn: (email: string, password: string, rememberMe: boolean) => void;
     signOut: () => void;
+    signInByRecoveryPassword: (user: User) => void;
 }
 
 interface Props {
@@ -39,19 +40,18 @@ export function AuthContextProvider({ children }: Props) {
         function checkAuth() {
             const localUser = localStorage.getItem('user');
             const sessionUser = sessionStorage.getItem('user');
-
-            if (sessionUser && pathname === '/login/') {
+            if (sessionUser && pathname.includes("/login")) {
                 router.push('/');
                 return;
             }
-            if (!localUser && !sessionUser && pathname !== '/login') {
+            if (!localUser && !sessionUser && !pathname.includes("/login")) {
                 router.push('/login');
                 return;
             }
         }
 
         checkAuth();
-    }, [router, pathname]);
+    }, [router, pathname, user]);
 
     function signIn(email: string, password: string, rememberMe: boolean) {
         const userObj = {} as User;
@@ -94,6 +94,12 @@ export function AuthContextProvider({ children }: Props) {
             });
     }
 
+    function signInByRecoveryPassword(user: User) {
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
+        sessionStorage.setItem('user', JSON.stringify(user));
+        router.push("/");
+    }
 
     function signOut() {
         localStorage.removeItem('user');
@@ -105,7 +111,7 @@ export function AuthContextProvider({ children }: Props) {
     function loadUserFromStorage() {
         const localUser = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
-
+        console.log(localUser)
         if (localUser) {
             setUser(JSON.parse(localUser));
         } else if (sessionUser) {
@@ -114,7 +120,7 @@ export function AuthContextProvider({ children }: Props) {
     }
 
     return (
-        <AuthContext.Provider value={{ user, signOut, signIn }}>
+        <AuthContext.Provider value={{ user, signOut, signIn, signInByRecoveryPassword }}>
             {children}
         </AuthContext.Provider>
     );
