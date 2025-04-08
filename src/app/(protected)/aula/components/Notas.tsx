@@ -77,7 +77,7 @@ export default function Notas() {
 
     return (
         <div className="row notas">
-            <div className="col-xl-8 col-12 position-relative">
+            <div className="col-12 position-relative">
                 <span className="fw-700">Anotações</span>
                 <div className="position-relative mt-2">
                     <textarea rows={10} className="w-100 rounded-3 bg-auxiliary6-project p-3 border-0" value={data} onChange={(e) => setData(e.target.value)} />

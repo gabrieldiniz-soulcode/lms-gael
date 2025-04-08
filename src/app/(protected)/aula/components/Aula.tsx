@@ -8,6 +8,8 @@ import MdlCustomcert from "./MdlCustomcert";
 import MdlPage from "./MdlPage";
 import MdlQuiz from "./MdlQuiz";
 import MdlUrl from "./MdlUrl";
+import Notas from "./Notas";
+import Ranking from "./Ranking";
 import axios from "axios";
 
 interface Module {
@@ -153,7 +155,7 @@ export default function Aula() {
                 <FaChevronLeft size={16} />
                 Voltar para carreira
             </a>
-            <div className="col-xl-8 col-12">
+            <div className="col-xxl-8 col-12">
                 <h2 className="fs-18 fw-700">
                     {aulas[activeIndex]?.data_module.name}
                 </h2>
@@ -174,6 +176,12 @@ export default function Aula() {
                 <div className="mt-4 position-relative d-flex justify-content-center align-items-center">
                     {getDisplay()}
                 </div>
+                <div className="my-5">
+                    <Notas />
+                </div>
+            </div>
+            <div className="col-xxl-4 col-12 d-xxl-block d-none">
+                <Ranking />
             </div>
         </div>
     )
