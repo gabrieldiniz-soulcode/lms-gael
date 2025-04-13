@@ -14,7 +14,7 @@ interface User {
 
 type AuthContextData = {
     user: User;
-    signIn: (email: string, password: string, rememberMe: boolean) => void;
+    signIn: (email: string, password: string, rememberMe: boolean) => Promise<boolean>;
     signOut: () => void;
     signInByRecoveryPassword: (user: User) => void;
 }
@@ -53,45 +53,46 @@ export function AuthContextProvider({ children }: Props) {
         checkAuth();
     }, [router, pathname, user]);
 
-    function signIn(email: string, password: string, rememberMe: boolean) {
+    async function signIn(email: string, password: string, rememberMe: boolean) {
         const userObj = {} as User;
 
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
-            username: email,
-            password: password,
-            database: process.env.NEXT_PUBLIC_DATABASE
-        })
-            .then((authResponse) => {
-
-                if (authResponse.data.error) {
-                    alert('CREDENCIAIS INVÁLIDAS');
-                    return;
-                }
-
-                userObj.id = authResponse.data.data.userid;
-                userObj.name = authResponse.data.data.database;
-                userObj.database = authResponse.data.data.database!;
-                userObj.token = authResponse.data.token;
-
-                setUser(userObj);
-
-                if (rememberMe) {
-                    localStorage.setItem('user', JSON.stringify(userObj));
-                }
-                else {
-                    sessionStorage.setItem('user', JSON.stringify(userObj));
-                }
-
-                if (authResponse.data.data.forcepasswordchange == 1) {
-                    router.push("/perfil/alterar-senha");
-                    return;
-                }
-
-                router.push("/");
+        try {
+            const authResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
+                username: email,
+                password: password,
+                database: process.env.NEXT_PUBLIC_DATABASE
             })
-            .catch(error => {
-                console.error(error);
-            });
+
+            if (authResponse.data.error) {
+                return true;
+            }
+
+            userObj.id = authResponse.data.data.userid;
+            userObj.name = authResponse.data.data.database;
+            userObj.database = authResponse.data.data.database!;
+            userObj.token = authResponse.data.token;
+
+            setUser(userObj);
+
+            if (rememberMe) {
+                localStorage.setItem('user', JSON.stringify(userObj));
+            }
+            else {
+                sessionStorage.setItem('user', JSON.stringify(userObj));
+            }
+
+            if (authResponse.data.data.forcepasswordchange == 1) {
+                router.push("/perfil/alterar-senha");
+                return false;
+            }
+
+            router.push("/");
+
+            return false;
+        }
+        catch {
+            return true;
+        }
     }
 
     function signInByRecoveryPassword(user: User) {

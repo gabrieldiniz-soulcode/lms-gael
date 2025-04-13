@@ -7,13 +7,14 @@ import { Suspense, useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import EsqueciSenha from "./EsqueciSenha";
 
-export default function FormLogin({ forgotPassword = false}: {forgotPassword?: boolean}) {
+export default function FormLogin({ forgotPassword = false }: { forgotPassword?: boolean }) {
 
     const [passwordVisible, setPasswordVisible] = useState<boolean>(false);
     const [email, setEmail] = useState<string>('');
     const [password, setPassword] = useState<string>('');
     const [rememberMe, setRememberMe] = useState<boolean>(false);
     const [esqueciSenha, setEsqueciSenha] = useState<boolean>(forgotPassword);
+    const [error, setError] = useState<string>();
 
     const { signIn } = useContext(AuthContext);
 
@@ -21,9 +22,12 @@ export default function FormLogin({ forgotPassword = false}: {forgotPassword?: b
         setPasswordVisible(!passwordVisible);
     }
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        signIn(email, password, rememberMe);
+        const res = await signIn(email, password, rememberMe);
+        if (res) {
+            setError("Credenciais inválidas");
+        }
     }
 
     function validate(): boolean {
@@ -38,7 +42,7 @@ export default function FormLogin({ forgotPassword = false}: {forgotPassword?: b
                 <span className="fs-21 text-white">
                     Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site da <a href="https://soulcode.com/assinatura-cursos-online" className="text-white" target="_blank">SoulCode</a> para realizar sua assinatura.</span>
             </Col>
-            <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{minHeight: 324}}>
+            <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{ minHeight: 324 }}>
                 {
                     esqueciSenha
                         ?
@@ -58,6 +62,8 @@ export default function FormLogin({ forgotPassword = false}: {forgotPassword?: b
                                         <FaRegEye className="form-password-icon-login" onClick={togglePasswordVisible} />
                                 }
                             </div>
+                            <div className="text-end w-100 text-danger fs-12">{error}</div>
+
                             <div className="d-flex justify-content-between flex-wrap">
                                 <Form.Check
                                     className="fw-300 text-auxiliary2-project cursor-pointer fs-15"
@@ -69,6 +75,7 @@ export default function FormLogin({ forgotPassword = false}: {forgotPassword?: b
                                 />
                                 <span className="fw-300 text-auxiliary2-project cursor-pointer fs-15" onClick={() => setEsqueciSenha(true)}>Esqueci a senha</span>
                             </div>
+
                             <Button className="fs-15" disabled={validate()} onClick={e => handleSubmit(e)}>Acessar</Button>
                             <Button className="btn-secondary fs-15">Faça sua assinatura</Button>
                             <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Cosnosco</a></span>
