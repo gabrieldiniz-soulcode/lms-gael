@@ -97,7 +97,7 @@ export default function Hero() {
                                         <FaRegClock className='text-auxiliary1-project me-2' />
                                         {course?.carga} DE ESTUDO
                                     </span>
-                                    <a href={`/curso?id=${course.id}`} className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4">
+                                    <a href={`/curso?id=${course.id}`} className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-exxl-4">
                                         Acessar Carreira
                                         <RiPlayMiniLine size={20} strokeWidth={0.5} className="ms-1" />
                                     </a>

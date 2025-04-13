@@ -4,6 +4,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import Carreira from "./Carreira";
 import { FaChevronLeft } from "react-icons/fa6";
 import { LoaderContext } from "@/contexts/LoaderContext";
+import Ranking from "./Ranking";
 import { Spinner } from "react-bootstrap";
 import SubCurso from "./SubCurso";
 import axios from "axios";
@@ -112,6 +113,11 @@ export default function Curso() {
                 </div>
                 :
                 <div className={`${mobile ? 'd-xl-none' : 'd-xl-block d-none'}`}>
+                    {
+                        !mobile
+                        &&
+                        <Ranking />
+                    }
                     <SubCurso subCurso={subCurso} carreiraId={id || ""} />
                 </div>
         );
