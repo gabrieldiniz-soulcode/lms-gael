@@ -18380,6 +18380,10 @@ body {
   line-height: 31.5px !important;
 }
 
+.fs-51 {
+  font-size: 3.1875rem;
+}
+
 .p-24 {
   padding: 24px;
 }
@@ -18666,6 +18670,12 @@ a {
   .carrossel-carreiras .carrossel-carreiras-slide {
     width: 320px;
   }
+}
+
+.certificado {
+  width: 1440px;
+  height: 900px;
+  background-image: url("/certificado.png") !important;
 }
 
 .header-login {
