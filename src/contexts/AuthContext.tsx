@@ -44,7 +44,7 @@ export function AuthContextProvider({ children }: Props) {
                 router.push('/');
                 return;
             }
-            if (!localUser && !sessionUser && !pathname.includes("/login")) {
+            if (!localUser && !sessionUser && !pathname.includes("/login") && !pathname.includes("/validar-certificado")) {
                 router.push('/login');
                 return;
             }

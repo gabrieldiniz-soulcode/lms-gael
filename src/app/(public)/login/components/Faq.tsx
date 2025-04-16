@@ -33,6 +33,12 @@ export default function Faq() {
                             Nesse caso, faremos a cobrança em modo recorrente, ou seja, o limite a ser consumido será apenas do valor da parcela!
                         </AccordionBody>
                     </AccordionItem>
+                    <AccordionItem eventKey="4" className="mb-2">
+                        <AccordionHeader>Como validar o certificado?</AccordionHeader>
+                        <AccordionBody>
+                            Você pode validar o certificado <a href="/validar-certificado">clicando aqui</a>!
+                        </AccordionBody>
+                    </AccordionItem>
                 </Accordion>
             </Col>
         </Row>
