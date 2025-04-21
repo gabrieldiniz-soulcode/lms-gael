@@ -15,7 +15,8 @@ interface CertificateData {
 type Props = {
     certificado: CertificateData | null;
     onDownloaded?: () => void;
-    triggerDownload: boolean;
+    triggerDownload: boolean[];
+    index: number;
 };
 
 const meses = [
@@ -31,7 +32,7 @@ function formatarData(timestamp: number) {
     return `${dia} de ${mes} de ${ano}`;
 }
 
-export default function Certificado({ certificado, onDownloaded, triggerDownload }: Props) {
+export default function Certificado({ certificado, onDownloaded, triggerDownload, index }: Props) {
     const certificateRef = useRef<HTMLDivElement>(null);
     const [downloaded, setDownloaded] = useState(false);
 
@@ -47,10 +48,10 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
             if (onDownloaded) onDownloaded();
         }
 
-        if (certificado && triggerDownload && !downloaded) {
+        if (certificado && triggerDownload[index] && !downloaded) {
             handleDownload();
         }
-    }, [certificado, triggerDownload, downloaded, onDownloaded]);
+    }, [certificado, triggerDownload, downloaded, onDownloaded, index]);
 
     if (!certificado || !triggerDownload || downloaded) return null;
 

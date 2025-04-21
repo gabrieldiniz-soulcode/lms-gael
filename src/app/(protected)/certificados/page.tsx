@@ -7,12 +7,11 @@ import { LoaderContext } from "@/contexts/LoaderContext";
 
 export default function Page() {
 
-    const { setResponses, updateResponses } = useContext(LoaderContext);
+    const { setResponses } = useContext(LoaderContext);
 
     useEffect(() => {
         setResponses([false]);
-        updateResponses();
-    }, [setResponses, updateResponses]);
+    }, [setResponses]);
 
     return (
         <main>

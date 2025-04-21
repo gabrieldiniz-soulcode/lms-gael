@@ -38,7 +38,7 @@ export default function MdlCustomcert({ sequence }: Props) {
     const { user } = useContext(AuthContext);
 
     const [certificado, setCertificado] = useState<CertificateData | null>(null);
-    const [triggerDownload, setTriggerDownload] = useState(false);
+    const [triggerDownload, setTriggerDownload] = useState<boolean[]>([false]);
 
     const buscarCertificado = async () => {
         if (!user?.token) return;
@@ -50,7 +50,7 @@ export default function MdlCustomcert({ sequence }: Props) {
             }
         });
         setCertificado(res.data);
-        setTriggerDownload(true);
+        setTriggerDownload([true]);
     };
 
     return (
@@ -59,8 +59,9 @@ export default function MdlCustomcert({ sequence }: Props) {
             <Certificado
                 certificado={certificado}
                 triggerDownload={triggerDownload}
-                onDownloaded={() => setTriggerDownload(false)}
-            />  
+                index={0}
+                onDownloaded={() => setTriggerDownload([false])}
+            />
         </div>
     );
 }
