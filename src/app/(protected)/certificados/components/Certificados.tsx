@@ -73,11 +73,11 @@ export default function Certificados() {
                         newTrigger[index] = true;
                         setTriggerDownload(newTrigger);
                     }}>
-                        <div className="d-flex flex-column bg-white me-3 rounded-3">
+                        <div className="d-flex flex-column bg-white me-3 rounded-3 h-100">
                             <div className="py-5 px-4 mx-xl-5 mx-md-3 mx-4">
                                 <FaRegFilePdf className="w-100 h-auto px-4" color="#FF3B30" />
                             </div>
-                            <div className="bg-auxiliary5-project pb-3 pt-4 px-4 fw-700 rounded-bottom-3">
+                            <div className="bg-auxiliary5-project pb-3 pt-4 px-4 fw-700 h-100 rounded-bottom-3">
                                 {item.coursename}
                             </div>
                         </div>
