@@ -31,13 +31,61 @@ interface ApiResponse {
     data: Course[];
 }
 
+interface UserDetails {
+    firstname?: string;
+    lastname?: string;
+    city?: string;
+    imagealt?: string;
+}
+
+interface UserData {
+    userid?: number;
+    xp_total?: number;
+    level?: number;
+    user?: UserDetails;
+}
+
+interface ApiResponse2 {
+    data: UserData[];
+}
+
 export default function Hero() {
+
+    const [ranking, setRanking] = useState<UserData[]>();
+    const [width, setWidth] = useState(90)
 
     const { user } = useContext(AuthContext);
     const { updateResponses } = useContext(LoaderContext);
     const [course, setCourse] = useState<Course>();
 
-    const [width, setWidth] = useState(90)
+    useEffect(() => {
+        function getPerfil() {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+                headers: {
+                    "database": user.database,
+                    "Authorization": `Bearer ${user.token}`
+                }
+            })
+                .then((res: ApiResponse2) => {
+                    setRanking(res.data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                })
+
+        }
+
+        if (user?.token && !ranking) {
+            getPerfil();
+        }
+    }, [user]);
+
+    function verificarImg(userData: UserData, placeholder: string): string {
+        if (userData?.user?.imagealt !== "") {
+            return userData?.user?.imagealt || "";
+        }
+        return placeholder;
+    }
 
     useEffect(() => {
         setWidth(window?.screen.width > 1580 ? 75 : 65);
@@ -128,11 +176,11 @@ export default function Hero() {
                 </div>
                 <div className="bg-auxiliary1-project h-100 p-2 rounded-3 mt-3 d-flex flex-column gap-3 align-items-center">
                     <h3 className="text-white text-center mt-exxl-3 mt-4 fs-21 fw-700">Rank</h3>
-                    <Image src={"https://placehold.co/65x65"} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
-                    <Image src={"https://placehold.co/65x65"} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
-                    <Image src={"https://placehold.co/65x65"} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
-                    <Image src={"https://placehold.co/65x65"} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
-                    <Image src={"https://placehold.co/65x65"} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
+                    {
+                        ranking?.map((item, index) => (
+                            <Image key={index} src={verificarImg(item, "https://placehold.co/65x65")} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
+                        ))
+                    }
                 </div>
             </div>
         </div>
