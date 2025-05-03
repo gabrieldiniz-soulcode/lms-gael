@@ -59,7 +59,7 @@ export default function Sidebar() {
                 {open && 'Eventos'}
             </div> */}
 
-            <a href="/perfil" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
+            <a href="/perfil/editar" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <GoGear color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Configurações'}
             </a>

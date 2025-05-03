@@ -129,7 +129,7 @@ export default function Header() {
               Eventos
             </div> */}
 
-            <a href="/perfil" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white mb-5">
+            <a href="/perfil/editar" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white mb-5">
               <GoGear color="#fff" size={18} className="me-2" strokeWidth={0.5} />
               Configurações
             </a>
