@@ -103,7 +103,7 @@ export default function Aula() {
                 .catch(() => { });
         }
 
-        if (aulas[activeIndex] && user && cursoId && !aulas[activeIndex].complete) {
+        if (aulas[activeIndex] && user && cursoId) {
             completeModule();
         }
 

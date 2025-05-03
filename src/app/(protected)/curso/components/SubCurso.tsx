@@ -1,11 +1,11 @@
-import { Fragment } from "react";
 import { Accordion } from "react-bootstrap";
-import { FaRegFilePdf } from "react-icons/fa";
 import { FaRegCirclePlay } from "react-icons/fa6";
+import { FaRegFilePdf } from "react-icons/fa";
+import { Fragment } from "react";
+import { IoIosLock } from "react-icons/io";
+import { MdDone } from "react-icons/md";
 import { MdOutlineQuiz } from "react-icons/md";
 import { PiCertificate } from "react-icons/pi";
-import { MdDone } from "react-icons/md";
-import { IoIosLock } from "react-icons/io";
 
 interface Module {
     name: string;

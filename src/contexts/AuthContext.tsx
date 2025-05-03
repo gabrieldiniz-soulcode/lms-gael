@@ -4,6 +4,7 @@ import { createContext, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import axios from "axios";
+import { jwtDecode } from 'jwt-decode';
 
 interface User {
     name: string;
@@ -74,10 +75,18 @@ export function AuthContextProvider({ children }: Props) {
 
             setUser(userObj);
 
+            const decoded = jwtDecode(userObj.token);
+            const expiry = decoded.exp || 0 * 1000;
+            const data = {
+                user: userObj,
+                expiry: expiry
+            };
+
+            console.log(data)
+
             if (rememberMe) {
-                localStorage.setItem('user', JSON.stringify(userObj));
-            }
-            else {
+                localStorage.setItem('user', JSON.stringify(data));
+            } else {
                 sessionStorage.setItem('user', JSON.stringify(userObj));
             }
 
@@ -97,7 +106,6 @@ export function AuthContextProvider({ children }: Props) {
 
     function signInByRecoveryPassword(user: User) {
         setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
         sessionStorage.setItem('user', JSON.stringify(user));
         router.push("/");
     }
@@ -110,11 +118,11 @@ export function AuthContextProvider({ children }: Props) {
     }
 
     function loadUserFromStorage() {
-        const localUser = localStorage.getItem('user');
+        const local = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
-        console.log(localUser)
-        if (localUser) {
-            setUser(JSON.parse(localUser));
+        const localUser = JSON.parse(local || "")
+        if (localUser?.user) {
+            setUser(localUser.user);
         } else if (sessionUser) {
             setUser(JSON.parse(sessionUser));
         }
