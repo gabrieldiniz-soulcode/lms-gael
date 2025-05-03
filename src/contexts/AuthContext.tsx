@@ -120,7 +120,7 @@ export function AuthContextProvider({ children }: Props) {
     function loadUserFromStorage() {
         const local = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
-        const localUser = JSON.parse(local || "")
+        const localUser = JSON.parse(local!);
         if (localUser?.user) {
             setUser(localUser.user);
         } else if (sessionUser) {
