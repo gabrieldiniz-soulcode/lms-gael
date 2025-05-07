@@ -44,6 +44,8 @@ export default function Certificados() {
     }, [triggerDownload, user?.token]);
 
     return (
+        certificados.length > 0
+        &&
         <div className="row row-gap-4 pb-5">
             <div className="d-flex justify-content-between row-gap-4">
                 <span className="fs-28 fw-700 text-auxiliary1-project">Certificados</span>

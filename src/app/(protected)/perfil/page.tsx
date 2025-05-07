@@ -1,10 +1,11 @@
 "use client";
 
-import { LoaderContext } from "@/contexts/LoaderContext";
 import { useContext, useEffect } from "react";
-import Perfil from "./components/Perfil";
+
 import Carreiras from "./components/Carreiras";
 import Certificados from "./components/Certificados";
+import { LoaderContext } from "@/contexts/LoaderContext";
+import Perfil from "./components/Perfil";
 
 export default function Page() {
 

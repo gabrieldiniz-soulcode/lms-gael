@@ -1,4 +1,5 @@
 import { RefObject, useRef, useState } from "react";
+
 import { Button } from "react-bootstrap";
 import { useOnClickOutside } from "usehooks-ts";
 
@@ -25,14 +26,14 @@ export default function Bootcamps() {
                         <div className="rounded-3 w-100 bg-white" onClick={(e) => e.stopPropagation()}>
                             <div className="p-3">
                                 <div className="d-flex justify-content-between">
-                                    <span className="fs-21">Inteligência Artificial LLM</span>
-                                    <a href="" className="btn btn-success z-2">Vagas Abertas</a>
+                                    <span className="fs-21">Porto - Programa de formação da TI</span>
+                                    <a href="https://soulcode.com/porto-programa-de-formacao-da-ti" target="_blank" className="btn btn-success z-2">Vagas Abertas</a>
                                 </div>
                             </div>
                             <div className="p-3">
                                 <div className="d-flex justify-content-between">
-                                    <span className="fs-21">Análise de Dados e Plataformas Low-Code </span>
-                                    <a href="" className="btn btn-success z-2">Vagas Abertas</a>
+                                    <span className="fs-21">Porto - Programa de formação da TI</span>
+                                    <a href="https://soulcode.com/vendas-e-logistica-alta-perfomance" target="_blank" className="btn btn-success z-2">Vagas Abertas</a>
                                 </div>
                             </div>
                         </div>

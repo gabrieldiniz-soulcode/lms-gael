@@ -27,7 +27,7 @@ export default function Carreiras() {
 
     const { user } = useContext(AuthContext);
     const { updateResponses } = useContext(LoaderContext);
-    const [course, setCourse] = useState<Course[]>();
+    const [course, setCourse] = useState<Course[]>([]);
 
     useEffect(() => {
         function getCourse() {
@@ -50,13 +50,13 @@ export default function Carreiras() {
                 });
         }
 
-        if (user?.name && user?.token && !course) {
+        if (user?.name && user?.token && course.length < 1) {
             getCourse();
         }
     }, [user, updateResponses, course]);
 
     return (
-        course
+        course.length > 0
         &&
         <div>
             <span className="fs-28 fw-700 text-auxiliary1-project">Carreiras em andamento</span>
