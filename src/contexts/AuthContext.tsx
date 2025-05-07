@@ -76,13 +76,11 @@ export function AuthContextProvider({ children }: Props) {
             setUser(userObj);
 
             const decoded = jwtDecode(userObj.token);
-            const expiry = decoded.exp || 0 * 1000;
+            const expiry = decoded.exp ? decoded.exp * 1000 : 0;
             const data = {
                 user: userObj,
                 expiry: expiry
             };
-
-            console.log(data)
 
             if (rememberMe) {
                 localStorage.setItem('user', JSON.stringify(data));
@@ -91,7 +89,9 @@ export function AuthContextProvider({ children }: Props) {
             }
 
             if (authResponse.data.data.forcepasswordchange == 1) {
-                router.push("/perfil/alterar-senha");
+                setTimeout(() => {
+                    router.push("/perfil/alterar-senha");
+                }, 1000);
                 return false;
             }
 
@@ -117,15 +117,41 @@ export function AuthContextProvider({ children }: Props) {
         router.push("/login");
     }
 
+    function isTokenExpired(token: string) {
+        if (!token) return true;
+        try {
+            const decoded = jwtDecode(token);
+            if (!decoded.exp) return true;
+            return Date.now() >= decoded.exp * 1000;
+        } catch (e) {
+            console.error(e);
+            return true;
+        }
+    }
+
     function loadUserFromStorage() {
         const local = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
-        const localUser = JSON.parse(local!);
-        if (localUser?.user) {
-            setUser(localUser.user);
+        let userObj = null;
+
+        if (local) {
+            const localUser = JSON.parse(local);
+            if (localUser?.user) {
+                userObj = localUser.user;
+                if (isTokenExpired(userObj.token)) {
+                    localStorage.removeItem('user');
+                    return;
+                }
+            }
         } else if (sessionUser) {
-            setUser(JSON.parse(sessionUser));
+            userObj = JSON.parse(sessionUser);
+            if (isTokenExpired(userObj.token)) {
+                sessionStorage.removeItem('user');
+                return;
+            }
         }
+
+        if (userObj) setUser(userObj);
     }
 
     return (

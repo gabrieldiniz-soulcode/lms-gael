@@ -45,7 +45,7 @@ export default function ValidarCertificado() {
                 <pre>{response}</pre>
                 <Button className="fs-15 mt-auto" onClick={e => handleSubmit(e)}>Validar Código</Button>
                 <Button className="btn-secondary fs-15">Ir para Login</Button>
-                <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Cosnosco</a></span>
+                <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Conosco</a></span>
             </Col>
         </Row>
     )

@@ -97,6 +97,10 @@ export default function Perfil() {
                         <MdOutlineModeEditOutline size={22} className="me-2" />
                         Editar Perfil
                     </a>
+                    <a className="w-100 btn btn-secondary fs-12 fw-700 mt-3" href="/perfil/alterar-senha">
+                        <MdOutlineModeEditOutline size={22} className="me-2" />
+                        Alterar Senha
+                    </a>
                     <button disabled className="w-100 fs-12 fw-700 text-auxiliary10-project opacity-100 d-flex align-items-center gap-3 justify-content-center btn btn-outline-light mt-3">
                         Disponível para ofertas de emprego?
                         <Form.Switch

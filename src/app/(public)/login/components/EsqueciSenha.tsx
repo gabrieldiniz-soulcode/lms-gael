@@ -155,7 +155,7 @@ export default function EsqueciSenha({ setEsqueciSenha }: Props) {
                 <div className="text-end w-100 text-danger fs-12">{error}</div>
                 <Button className="fs-15 mt-auto" onClick={handleForgotPassword}>Alterar senha</Button>
                 <Button className="btn-secondary fs-15" onClick={() => setEsqueciSenha(false)}>Voltar ao login</Button>
-                <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Cosnosco</a></span>
+                <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Conosco</a></span>
             </>
             :
             <>
@@ -163,7 +163,7 @@ export default function EsqueciSenha({ setEsqueciSenha }: Props) {
                 <div className="text-end w-100 fs-12">{mensagem}</div>
                 <Button className="fs-15 mt-auto" onClick={handleRecoveryPassword}>Enviar e-mail</Button>
                 <Button className="btn-secondary fs-15" onClick={() => setEsqueciSenha(false)}>Voltar ao login</Button>
-                <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Cosnosco</a></span>
+                <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Conosco</a></span>
             </>
     );
 }

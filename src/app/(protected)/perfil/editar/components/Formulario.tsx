@@ -112,13 +112,12 @@ export default function Formulario() {
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         if (perfil) {
             const { name, value } = e.target;
-
             const opentowork = value == "0" ? 1 : 0;
 
-            if (name && value) {
+            if (name) {
                 setPerfil((prevPerfil) => {
                     if (!prevPerfil) return prevPerfil;
-                    const updatedPerfil: User = { ...prevPerfil, [name]: name == "opentowork" ? opentowork : opentowork };
+                    const updatedPerfil: User = { ...prevPerfil, [name]: name == "opentowork" ? opentowork : value };
                     return updatedPerfil;
                 });
             }
@@ -168,6 +167,7 @@ export default function Formulario() {
             }
         })
             .then(() => {
+                getPerfil();
             });
     };
 

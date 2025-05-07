@@ -1,15 +1,16 @@
+import Image, { StaticImageData } from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import Image from "next/image";
 import axios from "axios";
 import img from "/public/rectangle_ranking.png";
+import placeholder from "/public/placeholder.png";
 
 interface UserDetails {
     firstname?: string;
     lastname?: string;
     city?: string;
-    imagealt?: string;
+    imagealt?: string | StaticImageData;
 }
 
 interface UserData {
@@ -53,18 +54,18 @@ export default function Ranking() {
 
     }, [user]);
 
-    function verificarImg(userData: UserData, placeholder: string): string {
+    function verificarImg(userData: UserData): string | StaticImageData {
 
         if (!userData) {
             userData = {
-                "user": {
-                    "imagealt": ""
+                user: {
+                    imagealt: placeholder
                 }
             }
         }
 
         if (userData?.user?.imagealt !== "") {
-            return userData?.user?.imagealt || "";
+            return userData?.user?.imagealt || placeholder;
         }
 
         return placeholder;
@@ -80,19 +81,19 @@ export default function Ranking() {
                     <span className="text-white fs-21 fw-700">Ranking</span>
                     <div className="d-flex mt-2 gap-3 position-relative">
                         <div className="mt-5 rounded-circle d-flex flex-column">
-                            <Image src={verificarImg(ranking[1], "https://placehold.co/90x90")} width={90} height={90} alt="" className="rounded-circle perfil-ranking-aula2" />
+                            <Image src={verificarImg(ranking[1])} width={90} height={90} alt="" className="rounded-circle perfil-ranking-aula2" />
                             <div className="d-flex justify-content-center">
                                 <span className="px-2 py-1 rounded-circle colocacao-ranking-aula2 text-white fw-700" style={{ marginTop: -18 }}>2º</span>
                             </div>
                         </div>
                         <div className="mt-2 rounded-circle d-flex flex-column">
-                            <Image src={verificarImg(ranking[0], "https://placehold.co/120x120")} width={120} height={120} alt="" className="rounded-circle perfil-ranking-aula1" />
+                            <Image src={verificarImg(ranking[0])} width={120} height={120} alt="" className="rounded-circle perfil-ranking-aula1" />
                             <div className="d-flex justify-content-center">
                                 <span className="px-2 py-1 rounded-circle colocacao-ranking-aula1 text-white fw-700" style={{ marginTop: -18 }}>1º</span>
                             </div>
                         </div>
                         <div className="mt-5 rounded-circle d-flex flex-column">
-                            <Image src={verificarImg(ranking[2], "https://placehold.co/90x90")} width={90} height={90} alt="" className="rounded-circle perfil-ranking-aula3" />
+                            <Image src={verificarImg(ranking[2])} width={90} height={90} alt="" className="rounded-circle perfil-ranking-aula3" />
                             <div className="d-flex justify-content-center">
                                 <span className="px-2 py-1 rounded-circle colocacao-ranking-aula3 text-white fw-700" style={{ marginTop: -18 }}>3º</span>
                             </div>
@@ -108,7 +109,7 @@ export default function Ranking() {
                                 <span className="p-4 rounded-3 ms-3 colocacao">{index + 1}°</span>
                             </div>
                             <div className="d-flex col-7 gap-3 align-items-center perfil p-0">
-                                <Image src={verificarImg(item, "https://placehold.co/90x90")} width={60} height={60} alt="" className="rounded-circle ms-4" />
+                                <Image src={verificarImg(item)} width={60} height={60} alt="" className="rounded-circle ms-4" />
                                 <div className="d-flex flex-column">
                                     <span className="fw-700 fs-13">{item.user?.firstname} {item.user?.lastname}</span>
                                     <span className="fs-13">{item.user?.city}</span>

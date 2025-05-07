@@ -38,7 +38,7 @@ export default function Categorias() {
                 }
             })
                 .then((res: ApiResponse) => {
-                    const cursos = res.data.filter((car) => car.carreira === "sim");
+                    const cursos = res.data.filter((car) => car.carreira === "sim" && car.inscrito == 1);
                     const categorias = [...new Set(cursos.map(curso => curso.category))];
                     const cursosPorCategoria = categorias.map(categoria => {
                         return cursos.filter(curso => curso.category === categoria);

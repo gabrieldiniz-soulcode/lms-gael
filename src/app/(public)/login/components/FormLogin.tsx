@@ -78,7 +78,7 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
 
                             <Button className="fs-15" disabled={validate()} onClick={e => handleSubmit(e)}>Acessar</Button>
                             <Button className="btn-secondary fs-15">Faça sua assinatura</Button>
-                            <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Cosnosco</a></span>
+                            <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Conosco</a></span>
                         </>
                 }
             </Col>

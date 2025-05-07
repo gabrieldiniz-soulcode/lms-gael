@@ -39,7 +39,7 @@ export default function Carreiras() {
                 }
             })
                 .then((res: ApiResponse) => {
-                    const carreiras = res.data.filter((car) => car.carreira === "sim" && parseInt(car?.progresso || "0") > 0 && parseInt(car?.progresso || "0") < 100);
+                    const carreiras = res.data.filter((car) => car.carreira === "sim" && car.inscrito == 1 && parseInt(car?.progresso || "0") > 0 && parseInt(car?.progresso || "0") < 100);
                     setCourse(carreiras);
                 })
                 .catch((err) => {

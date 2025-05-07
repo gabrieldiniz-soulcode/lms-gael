@@ -1,8 +1,8 @@
+import Image, { StaticImageData } from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import { FaRegClock } from "react-icons/fa";
-import Image from "next/image";
 import { IoRadioSharp } from "react-icons/io5";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import { ProgressBar } from "react-bootstrap";
@@ -11,6 +11,7 @@ import axios from "axios";
 import bannerDiscord from "/public/discord.png";
 import bannerDiscord2 from "/public/discord_2.png";
 import bannerYT from "/public/ao_vivo_yt.png";
+import placeholder from "/public/placeholder.png";
 import trofeu from "/public/trofeu.png";
 
 interface Course {
@@ -35,7 +36,7 @@ interface UserDetails {
     firstname?: string;
     lastname?: string;
     city?: string;
-    imagealt?: string;
+    imagealt?: string | StaticImageData;
 }
 
 interface UserData {
@@ -80,10 +81,19 @@ export default function Hero() {
         }
     }, [user]);
 
-    function verificarImg(userData: UserData, placeholder: string): string {
-        if (userData?.user?.imagealt !== "") {
-            return userData?.user?.imagealt || "";
+    function verificarImg(userData: UserData): string | StaticImageData {
+        if (!userData) {
+            userData = {
+                user: {
+                    imagealt: placeholder
+                }
+            }
         }
+
+        if (userData?.user?.imagealt !== "") {
+            return userData?.user?.imagealt || placeholder;
+        }
+
         return placeholder;
     }
 
@@ -120,22 +130,28 @@ export default function Hero() {
         return text.replace(/<[^>]*>/g, '');
     }
 
+    function getImgUrl(url: string) {
+        const regex = /<img[^>]+src\s*=\s*['"]([^'"]+)['"][^>]*>/i;
+        const match = url.match(regex);
+        return match ? match[1] : "";
+    }
+
     return (
         course
         &&
         <div className="row hero-carreiras">
             <div className="col-xxl-11 p-xxl-0 m-xxl-0 pe-xxl-2">
                 <div className="row row-gap-4">
-                    <a href="#" className="col-12 d-md-block d-none px-2">
+                    <a href="https://discord.com/invite/e4q3Mfab" target="_blank" className="col-12 d-md-block d-none px-2">
                         <Image src={bannerDiscord.src} width={0} height={0} className="w-100 h-auto" alt="Banner Discord" />
                     </a>
-                    <a href="#" className="col-12 d-md-none d-block px-2">
+                    <a href="https://discord.com/invite/e4q3Mfab" target="_blank" className="col-12 d-md-none d-block px-2">
                         <Image src={bannerDiscord2.src} width={0} height={0} className="w-100 h-auto" alt="Banner Discord" />
                     </a>
                     <div className="col-xxl-6 col-12 card-hero d-md-block d-none">
                         <div className="d-flex box-shadow-hero rounded-3">
                             <div className="col-5 px-0 rounded-start-3">
-                                <Image src="https://placehold.co/223x288" width={0} height={288} className="w-100 object-fit-cover rounded-start-3" alt="Imagem ilustrativa da carreira" />
+                                <Image src={getImgUrl(course?.icon || "")} width={0} height={288} className="w-100 object-fit-cover rounded-start-3" alt="Imagem ilustrativa da carreira" />
                             </div>
                             <div className="col-7 bg-white d-flex flex-column py-4 px-3 justify-content-between rounded-end-3">
                                 <span className="fw-700 fs-21 card-title-hero">{course?.fullname}</span>
@@ -178,7 +194,7 @@ export default function Hero() {
                     <h3 className="text-white text-center mt-exxl-3 mt-4 fs-21 fw-700">Rank</h3>
                     {
                         ranking?.map((item, index) => (
-                            <Image key={index} src={verificarImg(item, "https://placehold.co/65x65")} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
+                            <Image key={index} src={verificarImg(item) || ""} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
                         ))
                     }
                 </div>

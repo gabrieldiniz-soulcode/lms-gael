@@ -58,10 +58,10 @@ export default function Curso() {
             })
                 .then((res: ApiResponse) => {
                     res.data.map((item) => {
-                        if (item.sequence[0]?.module == "mdl_forum" || item.sequence[1]?.module == "mdl_forum") {
+                        if (item.sequence[0]?.module == "mdl_forum" || item.sequence[0]?.module == null ||item.sequence[1]?.module == "mdl_forum") {
                             // setForum(item);
                         }
-                        if (item.sequence[1]?.module == "mdl_subcourse") {
+                        if (item.sequence[0]?.module == "mdl_subcourse") {
                             setCurso(item);
                             getSubCurso(item.sequence[0].data_module.refcourse, user?.token);
                         }

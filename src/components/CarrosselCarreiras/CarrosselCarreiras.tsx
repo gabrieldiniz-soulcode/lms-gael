@@ -47,10 +47,16 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
             setCarreirasFiltradas(carreiras.filter((carreira) => carreira.fullname.toLocaleLowerCase().includes(search.toLocaleLowerCase())));
             const section = document.getElementById('carreiras');
             if (section) {
-              section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     }, [search, pathname, carreiras]);
+
+    function getImgUrl(url: string) {
+        const regex = /<img[^>]+src\s*=\s*['"]([^'"]+)['"][^>]*>/i;
+        const match = url.match(regex);
+        return match ? match[1] : "";
+    }
 
     return (
         carreirasFiltradas.length > 0 &&
@@ -71,7 +77,7 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                 {
                     carreirasFiltradas.map((carreira, index) => (
                         <SwiperSlide key={index} className={`carrossel-carreiras-slide rounded-3 ${progresso ? 'carrossel-carreiras-slide-progresso' : ''}`}>
-                            <Image src="https://placehold.co/375x160" width={0} height={160} className="w-100 object-fit-cover rounded-top-3" alt="Imagem representativa da Carreira" />
+                            <Image src={getImgUrl(carreira?.icon || "")} width={0} height={160} className="w-100 object-fit-contain rounded-top-3" alt="Imagem representativa da Carreira" />
                             <div className="px-4 d-flex flex-column justify-content-between carrossel-carreiras-infos">
                                 <div>
                                     <div className="d-flex justify-content-between py-4">
