@@ -20,10 +20,6 @@ interface UserData {
     user?: UserDetails;
 }
 
-interface ApiResponse {
-    data: UserData[];
-}
-
 export default function Ranking() {
 
     const [width1, setWidth1] = useState(90)
@@ -35,32 +31,33 @@ export default function Ranking() {
     }, [])
 
     const [ranking, setRanking] = useState<UserData[]>();
-
-    const { user } = useContext(AuthContext);
+    const { user, setUserLevel } = useContext(AuthContext);
 
     useEffect(() => {
+        async function getPerfil() {
+            try {
+                const res = await axios.get<UserData[]>(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+                    headers: {
+                        "database": user.database,
+                        "Authorization": `Bearer ${user.token}`
+                    }
+                });
 
-        function getPerfil() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
-                headers: {
-                    "database": user.database,
-                    "Authorization": `Bearer ${user.token}`
+                setRanking(res.data);
+
+                const currentUser = res.data.find(item => item.userid === Number(user.id));
+                if (currentUser && currentUser.level !== undefined) {
+                    setUserLevel(currentUser.level);
                 }
-            })
-                .then((res: ApiResponse) => {
-                    setRanking(res.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-
+            } catch (err) {
+                console.log(err);
+            }
         }
 
-        if (user?.token && !ranking) {
+        if (user?.token) {
             getPerfil();
         }
-
-    }, [user]);
+    }, [user, setUserLevel]);
 
     function verificarImg(userData: UserData): string | StaticImageData {
 

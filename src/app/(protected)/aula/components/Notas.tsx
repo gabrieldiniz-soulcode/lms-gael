@@ -34,8 +34,9 @@ export default function Notas() {
                 }
             }).
                 then((res: ApiResponse) => {
-                    setPrevData(res.data.content);
-                    setData(res.data.content);
+                    const content = res.data?.content ?? "";
+                    setPrevData(content);
+                    setData(content);
                 })
                 .catch((err) => {
                     console.log(err);
@@ -54,7 +55,12 @@ export default function Notas() {
     }, [user, id]);
 
     function postNotes() {
-        if (!user.database || !user.id || !data || data == "") {
+        if (!user.database || !user.id) {
+            return;
+        }
+        
+        // Bloqueia salvar vazio APENAS se ainda não existe nota nenhuma salva
+        if (!data.trim() && !prevData.trim()) {
             return;
         }
 

@@ -1,15 +1,18 @@
 import Image from "next/image";
 import { ProgressBar } from "react-bootstrap";
 import trofeu from "/public/trofeu.png";
+import { AuthContext } from "@/contexts/AuthContext";
+import { useContext } from "react";
 
 export default function Ranking() {
+    const { userLevel } = useContext(AuthContext);
 
     return (
         <div className="d-flex bg-auxiliary1-project rounded-3 mb-4 px-3" style={{ height: 112 }}>
             <div className="w-100 d-flex flex-column justify-content-center gap-2 pe-3">
-                <span className="text-white fw-700">Lv. 4</span>
+                <span className="text-white fw-700">Lv. {userLevel}</span> 
                 <div className="w-100">
-                <ProgressBar now={5} color="#000" variant="auxiliary7-project"/>
+                <ProgressBar min={1}max={20} now={Number(userLevel)} color="#000" variant="auxiliary7-project"/>
 
                 </div>
             </div>

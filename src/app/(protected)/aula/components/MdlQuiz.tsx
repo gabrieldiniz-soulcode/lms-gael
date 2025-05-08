@@ -126,7 +126,7 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
                             </thead>
                             <tbody>
                                 {
-                                    quiz.attempts.map((attempt, index) => (
+                                    quiz.attempts?.map((attempt, index) => (
                                         <tr key={index}>
                                             <th className="text-center">
                                                 {attempt.attempt}

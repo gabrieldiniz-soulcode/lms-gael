@@ -1,7 +1,8 @@
 "use client";
 
-import { createContext, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { StaticImageData } from "next/image";
 
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
@@ -13,8 +14,24 @@ interface User {
     id: string;
 }
 
+interface UserData {
+    userid?: number;
+    xp_total?: number;
+    level?: number;
+    user?: UserDetails;
+}
+
+interface UserDetails {
+    firstname?: string;
+    lastname?: string;
+    city?: string;
+    imagealt?: string | StaticImageData;
+}
+
 type AuthContextData = {
     user: User;
+    userLevel: number | null;
+    setUserLevel: (level: number) => void;
     signIn: (email: string, password: string, rememberMe: boolean) => Promise<boolean>;
     signOut: () => void;
     signInByRecoveryPassword: (user: User) => void;
@@ -29,13 +46,10 @@ export const AuthContext = createContext({} as AuthContextData)
 export function AuthContextProvider({ children }: Props) {
 
     const [user, setUser] = useState<User>({} as User);
+    const [userLevel, setUserLevel] = useState<number | null>(null);
 
     const router = useRouter();
     const pathname = usePathname();
-
-    useEffect(() => {
-        loadUserFromStorage();
-    }, []);
 
     useEffect(() => {
         function checkAuth() {
@@ -88,6 +102,8 @@ export function AuthContextProvider({ children }: Props) {
                 sessionStorage.setItem('user', JSON.stringify(userObj));
             }
 
+            await fetchUserLevel(userObj.id, userObj.database, userObj.token);
+
             if (authResponse.data.data.forcepasswordchange == 1) {
                 setTimeout(() => {
                     router.push("/perfil/alterar-senha");
@@ -107,13 +123,14 @@ export function AuthContextProvider({ children }: Props) {
     function signInByRecoveryPassword(user: User) {
         setUser(user);
         sessionStorage.setItem('user', JSON.stringify(user));
+        fetchUserLevel(user.id, user.database, user.token);
         router.push("/");
     }
 
     function signOut() {
         localStorage.removeItem('user');
         sessionStorage.removeItem('user');
-
+        setUserLevel(null);
         router.push("/login");
     }
 
@@ -129,11 +146,29 @@ export function AuthContextProvider({ children }: Props) {
         }
     }
 
-    function loadUserFromStorage() {
+    const fetchUserLevel = useCallback(async (userid: string | number, database: string, token: string) => {
+        try {
+            const res = await axios.get<UserData[]>(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+                headers: {
+                    "database": database,
+                    "Authorization": `Bearer ${token}`
+                }
+            });
+    
+            const currentUser = res.data.find(item => item.userid === Number(userid));
+            if (currentUser && currentUser.level !== undefined) {
+                setUserLevel(currentUser.level);
+            }
+        } catch (err) {
+            console.error("Erro ao buscar o nível do usuário:", err);
+        }
+    }, []);
+
+    const loadUserFromStorage = useCallback(() => {
         const local = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
         let userObj = null;
-
+    
         if (local) {
             const localUser = JSON.parse(local);
             if (localUser?.user) {
@@ -150,12 +185,19 @@ export function AuthContextProvider({ children }: Props) {
                 return;
             }
         }
+    
+        if (userObj) {
+            setUser(userObj);
+            fetchUserLevel(userObj.id, userObj.database, userObj.token);
+        }
+    }, [fetchUserLevel]);
 
-        if (userObj) setUser(userObj);
-    }
+    useEffect(() => {
+        loadUserFromStorage();
+    }, [loadUserFromStorage]);
 
     return (
-        <AuthContext.Provider value={{ user, signOut, signIn, signInByRecoveryPassword }}>
+        <AuthContext.Provider value={{ user, userLevel, setUserLevel, signOut, signIn, signInByRecoveryPassword }}>
             {children}
         </AuthContext.Provider>
     );

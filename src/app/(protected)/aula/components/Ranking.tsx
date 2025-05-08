@@ -1,5 +1,5 @@
 import Image, { StaticImageData } from "next/image";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
@@ -20,60 +20,48 @@ interface UserData {
     user?: UserDetails;
 }
 
-interface ApiResponse {
-    data: UserData[];
-}
-
 export default function Ranking() {
-
     const [ranking, setRanking] = useState<UserData[]>();
+    const { user, setUserLevel } = useContext(AuthContext);
 
-    const { user } = useContext(AuthContext);
-
-    useEffect(() => {
-
-        function getPerfil() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+    const fetchRanking = useCallback(async () => {
+        try {
+            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
                 headers: {
                     "database": user.database,
                     "Authorization": `Bearer ${user.token}`
                 }
-            })
-                .then((res: ApiResponse) => {
-                    setRanking(res.data);
-                })
-                .catch((err) => {
-                    console.log(err);
-                })
-
+            });
+    
+            const data = res.data as UserData[];
+            setRanking(data);
+    
+            // Atualiza o nível do usuário logado
+            const currentUser = data.find(item => item.userid === Number(user.id));
+            if (currentUser && currentUser.level !== undefined) {
+                setUserLevel(currentUser.level);
+            }
+        } catch (err) {
+            console.error("Erro ao buscar o ranking:", err);
         }
+    }, [user.database, user.token, user.id, setUserLevel]);
 
-        if (user?.token && !ranking) {
-            getPerfil();
-        }
-
-    }, [user]);
+    useEffect(() => {
+        fetchRanking();
+    }, [fetchRanking]);
 
     function verificarImg(userData: UserData): string | StaticImageData {
-
         if (!userData) {
-            userData = {
-                user: {
-                    imagealt: placeholder
-                }
-            }
+            return placeholder;
         }
-
         if (userData?.user?.imagealt !== "") {
             return userData?.user?.imagealt || placeholder;
         }
-
         return placeholder;
     }
 
     return (
-        ranking
-        &&
+        ranking &&
         <div className="bg-auxiliary1-project rounded-3" style={{ overflow: 'hidden' }}>
             <div className="position-relative">
                 <Image src={img.src} width={0} height={0} className="w-100 h-auto" alt="" />
@@ -102,31 +90,29 @@ export default function Ranking() {
                 </div>
             </div>
             <div className="d-flex flex-column gap-3 mx-4 my-3">
-                {
-                    ranking.map((item, index) => (
-                        <div key={index} className="row rounded-3 justify-content-center lista-ranking-aula-active">
-                            <div className="py-2 col-2 d-flex align-items-center justify-content-center">
-                                <span className="p-4 rounded-3 ms-3 colocacao">{index + 1}°</span>
+                {ranking.map((item, index) => (
+                    <div key={index} className="row rounded-3 justify-content-center lista-ranking-aula-active">
+                        <div className="py-2 col-2 d-flex align-items-center justify-content-center">
+                            <span className="p-4 rounded-3 ms-3 colocacao">{index + 1}°</span>
+                        </div>
+                        <div className="d-flex col-7 gap-3 align-items-center perfil p-0">
+                            <Image src={verificarImg(item)} width={60} height={60} alt="" className="rounded-circle ms-4" />
+                            <div className="d-flex flex-column">
+                                <span className="fw-700 fs-13">{item.user?.firstname} {item.user?.lastname}</span>
+                                <span className="fs-13">{item.user?.city}</span>
                             </div>
-                            <div className="d-flex col-7 gap-3 align-items-center perfil p-0">
-                                <Image src={verificarImg(item)} width={60} height={60} alt="" className="rounded-circle ms-4" />
-                                <div className="d-flex flex-column">
-                                    <span className="fw-700 fs-13">{item.user?.firstname} {item.user?.lastname}</span>
-                                    <span className="fs-13">{item.user?.city}</span>
-                                </div>
-                            </div>
-                            <div className="col-3 d-flex align-items-center justify-content-end">
-                                <div className="hexagon">
-                                    <div>
-                                        <span>{item.xp_total}</span>
-                                        <br />
-                                        <span className="fs-13 fw-400">xp</span>
-                                    </div>
+                        </div>
+                        <div className="col-3 d-flex align-items-center justify-content-end">
+                            <div className="hexagon">
+                                <div>
+                                    <span>{item.xp_total}</span>
+                                    <br />
+                                    <span className="fs-13 fw-400">xp</span>
                                 </div>
                             </div>
                         </div>
-                    ))
-                }
+                    </div>
+                ))}
             </div>
         </div>
     );

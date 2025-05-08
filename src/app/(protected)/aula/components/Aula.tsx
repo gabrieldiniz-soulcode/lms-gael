@@ -102,11 +102,19 @@ export default function Aula() {
                 })
                 .catch(() => { });
         }
-
-        if (aulas[activeIndex] && user && cursoId) {
-            completeModule();
+    
+        if (user && cursoId) {
+            const content = aulas[activeIndex]?.data_module?.content;
+        
+            if (content) {
+                const isVideo = content.includes("<video") || content.includes("<source");
+        
+                if (!isVideo) {
+                    completeModule();
+                }
+            }
         }
-
+    
     }, [aulas, activeIndex, user, cursoId]);
 
     useEffect(() => {

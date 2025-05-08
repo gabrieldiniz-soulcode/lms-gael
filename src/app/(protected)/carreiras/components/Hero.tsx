@@ -79,7 +79,7 @@ export default function Hero() {
         if (user?.token && !ranking) {
             getPerfil();
         }
-    }, [user]);
+    }, [user, ranking]);
 
     function verificarImg(userData: UserData): string | StaticImageData {
         if (!userData) {

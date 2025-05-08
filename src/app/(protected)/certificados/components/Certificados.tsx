@@ -23,29 +23,25 @@ export default function Certificados() {
     const [triggerDownload, setTriggerDownload] = useState<boolean[]>([]);
 
     useEffect(() => {
-
-        function getCertificates() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate/my`, {
-                headers: {
-                    Authorization: `Bearer ${user?.token}`
-                }
-            })
-                .then((res) => {
-                    res.data.map(() => {
-                        setTriggerDownload([...triggerDownload, false])
-                    })
-                    setCertificados(res.data);
-                })
-                .finally(() => {
-                    updateResponses();
+        async function getCertificates() {
+            try {
+                const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate/my`, {
+                    headers: {
+                        Authorization: `Bearer ${user?.token}`
+                    }
                 });
+                const triggerArray = new Array(res.data.length).fill(false);
+                setTriggerDownload(triggerArray);
+                setCertificados(res.data);
+            } finally {
+                updateResponses();
+            }
         }
 
         if (user?.token && triggerDownload.length < 1) {
             getCertificates();
         }
-
-    }, [triggerDownload, user?.token]);
+    }, [triggerDownload, user?.token, updateResponses]);
 
     return (
         <div className="row row-gap-5 mt-4 mb-5">
