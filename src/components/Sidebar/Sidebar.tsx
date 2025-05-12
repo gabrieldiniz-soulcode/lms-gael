@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { GoGear } from "react-icons/go";
 import { GoHome } from "react-icons/go";
+import { PiLightning } from "react-icons/pi";
 import Image from "next/image";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
@@ -53,6 +54,11 @@ export default function Sidebar() {
                 <LiaCertificateSolid color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Certificados'}
             </a>
+            
+            {/* <a href="/chat" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
+                <PiLightning color="#fff" size={20} strokeWidth={0.5} />
+                {open && 'Tutor IA'}
+            </a> */}
 
             {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <FaRegCalendarAlt color="#fff" size={20} />
