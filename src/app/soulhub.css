@@ -18859,6 +18859,19 @@ a {
   height: 12px;
 }
 
+.curso-content {
+  margin-top: 100px;
+  padding-left: 100px;
+  max-width: 1920px;
+}
+
+@media (max-width: 959px) {
+  .curso-content {
+    margin-top: 100px;
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+}
 .chat-messages-container {
   width: 100%;
   overflow-x: hidden;
@@ -18883,11 +18896,11 @@ a {
 
 .copy-btn {
   position: absolute;
-  top: 0.5rem; /* top-2 */
-  right: 0.5rem; /* right-2 */
-  font-size: 0.75rem; /* text-xs → 12px */
-  padding: 0.25rem 0.5rem; /* py-1 px-2 */
-  border-radius: 0.25rem; /* rounded → 4px */
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }

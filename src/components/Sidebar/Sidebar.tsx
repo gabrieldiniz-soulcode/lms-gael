@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { GoGear } from "react-icons/go";
 import { GoHome } from "react-icons/go";
-import { PiLightning } from "react-icons/pi";
+// import { PiLightning } from "react-icons/pi";
 import Image from "next/image";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
@@ -23,15 +23,17 @@ export default function Sidebar() {
 
     const [open, setOpen] = useState<boolean>(false);
 
+    const { user } = useContext(AuthContext);
+
     return (
         <div className={`d-lg-flex d-none gap-1 sidebar position-fixed bg-auxiliary1-project position-relative flex-column align-items-center px-3 py-4 ${open ? 'sidebar-open' : ''}`}>
 
 
-            <a href="/carreiras">
+            <a href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"}>
                 <Image src={logo.src} width={logo.width} height={logo.width} alt="Logo Soulcode Passaporte Digital" className="mb-5" />
             </a>
 
-            <a href="/carreiras" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>
+            <a href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"} className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>
                 <GoHome color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Home'}
             </a>
@@ -55,10 +57,10 @@ export default function Sidebar() {
                 {open && 'Certificados'}
             </a>
             
-            <a href="/chat" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
+            {/* <a href="/chat" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <PiLightning color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Tutor IA'}
-            </a>
+            </a> */}
 
             {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <FaRegCalendarAlt color="#fff" size={20} />

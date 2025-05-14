@@ -29,6 +29,16 @@ interface UserDetails {
     imagealt?: string | StaticImageData;
 }
 
+interface DecodedToken {
+    userid: number;
+    username: string;
+    database: string;
+    type_render: "curso" | "carreira";
+    iat: number;
+    exp: number;
+}
+
+
 type AuthContextData = {
     user: User;
     userLevel: number | null;
@@ -88,7 +98,7 @@ export function AuthContextProvider({ children }: Props) {
             userObj.database = authResponse.data.data.database!;
             userObj.token = authResponse.data.token;
 
-            const decoded: any = jwtDecode(userObj.token);
+            const decoded: DecodedToken = jwtDecode<DecodedToken>(userObj.token);
             userObj.type_render = decoded.type_render;
 
             setUser(userObj);

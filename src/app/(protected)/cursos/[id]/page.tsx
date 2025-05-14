@@ -1,7 +1,7 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams } from "next/navigation";
 import { Spinner } from "react-bootstrap";
 
 import { AuthContext } from "@/contexts/AuthContext";
@@ -9,6 +9,7 @@ import { LoaderContext } from "@/contexts/LoaderContext";
 import SubCurso from "../../curso/components/SubCurso";
 import Ranking from "../../carreiras/components/Ranking";
 import axios from "axios";
+import Link from "next/link";
 
 interface Module {
     id: number;
@@ -41,7 +42,6 @@ export default function CursoTopicosPage() {
     const { user } = useContext(AuthContext);
     const { updateResponses } = useContext(LoaderContext);
     const params = useParams();
-    const router = useRouter();
 
     const cursoId = params?.id as string;
 
@@ -73,9 +73,9 @@ export default function CursoTopicosPage() {
 
     return (
         <div className="row mb-5 mx-auto curso-content">
-            <a href="/cursos" className="col-12 mt-2 mb-4 text-decoration-none d-flex align-items-center gap-2">
+            <Link href="/cursos" className="col-12 mt-2 mb-4 text-decoration-none d-flex align-items-center gap-2">
                 Voltar para cursos
-            </a>
+            </Link>
 
             {loading ? (
                 <div className="w-100 d-flex justify-content-center">
