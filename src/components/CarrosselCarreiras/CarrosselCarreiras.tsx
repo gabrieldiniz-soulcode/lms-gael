@@ -4,13 +4,14 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from "next/navigation";
 
 import { FaRegClock } from "react-icons/fa";
 import Image from "next/image";
 import { ProgressBar } from 'react-bootstrap';
 import { RiPlayMiniLine } from "react-icons/ri";
+import { AuthContext } from "@/contexts/AuthContext";
 
 interface Course {
     id: number;
@@ -35,6 +36,7 @@ interface Props {
 export default function CarrosselCarreiras({ carreiras, progresso = false, categoria }: Props) {
 
     const [carreirasFiltradas, setCarreirasFiltradas] = useState<Course[]>([]);
+    const { user } = useContext(AuthContext);
 
     const searchParams = useSearchParams();
     const pathname = usePathname();
@@ -85,8 +87,15 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                                             <FaRegClock className='text-auxiliary1-project me-2' />
                                             {carreira.carga}H DE ESTUDO
                                         </span>
-                                        <a href={`/curso?id=${carreira.id}`} className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4">
-                                            Acessar Carreira
+                                        <a
+                                            href={
+                                                user?.type_render === 'curso'
+                                                    ? `/cursos/${carreira.id}`
+                                                    : `/curso?id=${carreira.id}`
+                                            }
+                                            className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4"
+                                        >
+                                            {user?.type_render === 'curso' ? 'Acessar Curso' : 'Acessar Carreira'}
                                             <RiPlayMiniLine size={20} strokeWidth={0.5} className="ms-1" />
                                         </a>
                                     </div>

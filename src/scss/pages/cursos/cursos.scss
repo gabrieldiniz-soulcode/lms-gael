@@ -1,0 +1,14 @@
+.curso-content {
+    margin-top: 100px;
+    padding-left: 100px;
+    max-width: 1920px;
+} 
+
+
+@media (max-width: 959px) {
+    .curso-content {
+    margin-top: 100px;
+    padding-left: 24px;
+    padding-right: 24px;
+} 
+}

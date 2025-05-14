@@ -25,6 +25,7 @@ export default function Ranking() {
     const { user, setUserLevel } = useContext(AuthContext);
 
     const fetchRanking = useCallback(async () => {
+        if (!user?.token || !user?.database || !user?.id) return;
         try {
             const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
                 headers: {
@@ -32,10 +33,10 @@ export default function Ranking() {
                     "Authorization": `Bearer ${user.token}`
                 }
             });
-    
+
             const data = res.data as UserData[];
             setRanking(data);
-    
+
             // Atualiza o nível do usuário logado
             const currentUser = data.find(item => item.userid === Number(user.id));
             if (currentUser && currentUser.level !== undefined) {
@@ -47,8 +48,9 @@ export default function Ranking() {
     }, [user.database, user.token, user.id, setUserLevel]);
 
     useEffect(() => {
+        if (!user?.token || !user?.database || !user?.id) return;
         fetchRanking();
-    }, [fetchRanking]);
+    }, [fetchRanking, user?.token, user?.database, user?.id]);
 
     function verificarImg(userData: UserData): string | StaticImageData {
         if (!userData) {

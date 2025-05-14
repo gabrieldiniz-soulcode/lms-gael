@@ -87,35 +87,38 @@ export default function Aula() {
     }, [id, updateResponses, user, cursoId, aulas]);
 
     useEffect(() => {
-        function completeModule() {
+        if (!user?.token || !user?.database || aulas.length === 0) return;
+
+        const sequence = aulas[activeIndex];
+        if (!sequence || !sequence.data_module) return;
+
+        const { module, data_module } = sequence;
+
+        const shouldComplete = () => {
+            if (module === "mdl_page") {
+                const content = data_module.content;
+                const isVideo = content?.includes("<video") || content?.includes("<source");
+                return content && !isVideo;
+            }
+
+            return true;
+        };
+
+        if (shouldComplete()) {
             axios.post(`${process.env.NEXT_PUBLIC_API_URL}/module/completion`, {
-                cmid: aulas[activeIndex].cmid,
-                course: aulas[activeIndex].data_module.course,
+                cmid: sequence.cmid,
+                course: data_module.course,
             }, {
                 headers: {
                     "database": user.database,
-                    "Authorization": `Bearer ${user?.token}`
+                    "Authorization": `Bearer ${user.token}`
                 }
             })
-                .then((res) => {
-                    console.log(res);
-                })
-                .catch(() => { });
+                .then((res) => console.log("Módulo concluído:", res))
+                .catch((err) => console.error("Erro ao concluir módulo:", err));
         }
-    
-        if (user && cursoId) {
-            const content = aulas[activeIndex]?.data_module?.content;
-        
-            if (content) {
-                const isVideo = content.includes("<video") || content.includes("<source");
-        
-                if (!isVideo) {
-                    completeModule();
-                }
-            }
-        }
-    
-    }, [aulas, activeIndex, user, cursoId]);
+
+    }, [aulas, activeIndex, user?.token, user?.database]);
 
     useEffect(() => {
         function updateIdSearchParam() {
@@ -159,9 +162,12 @@ export default function Aula() {
         aulas
         &&
         <div className="row">
-            <a href={`/curso?id=${carreiraId}`} className="col-12 mt-2 mb-4 text-decoration-none d-flex align-items-center gap-2">
+            <a
+                href={user.type_render === 'curso' ? `/cursos/${cursoId}` : `/curso?id=${carreiraId}`}
+                className="col-12 mt-2 mb-4 text-decoration-none d-flex align-items-center gap-2"
+            >
                 <FaChevronLeft size={16} />
-                Voltar para carreira
+                {user.type_render === 'curso' ? 'Voltar para curso' : 'Voltar para carreira'}
             </a>
             <div className="col-xxl-8 col-12">
                 <h2 className="fs-18 fw-700">

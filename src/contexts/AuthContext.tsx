@@ -12,6 +12,7 @@ interface User {
     token: string;
     database: string;
     id: string;
+    type_render?: "curso" | "carreira";
 }
 
 interface UserData {
@@ -87,9 +88,11 @@ export function AuthContextProvider({ children }: Props) {
             userObj.database = authResponse.data.data.database!;
             userObj.token = authResponse.data.token;
 
+            const decoded: any = jwtDecode(userObj.token);
+            userObj.type_render = decoded.type_render;
+
             setUser(userObj);
 
-            const decoded = jwtDecode(userObj.token);
             const expiry = decoded.exp ? decoded.exp * 1000 : 0;
             const data = {
                 user: userObj,
@@ -154,7 +157,7 @@ export function AuthContextProvider({ children }: Props) {
                     "Authorization": `Bearer ${token}`
                 }
             });
-    
+
             const currentUser = res.data.find(item => item.userid === Number(userid));
             if (currentUser && currentUser.level !== undefined) {
                 setUserLevel(currentUser.level);
@@ -168,7 +171,7 @@ export function AuthContextProvider({ children }: Props) {
         const local = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
         let userObj = null;
-    
+
         if (local) {
             const localUser = JSON.parse(local);
             if (localUser?.user) {
@@ -185,7 +188,7 @@ export function AuthContextProvider({ children }: Props) {
                 return;
             }
         }
-    
+
         if (userObj) {
             setUser(userObj);
             fetchUserLevel(userObj.id, userObj.database, userObj.token);

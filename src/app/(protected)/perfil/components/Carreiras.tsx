@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-
 import { AuthContext } from "@/contexts/AuthContext";
 import CarrosselCarreiras from "@/components/CarrosselCarreiras/CarrosselCarreiras";
 import { LoaderContext } from "@/contexts/LoaderContext";
@@ -23,8 +22,7 @@ interface ApiResponse {
     data: Course[];
 }
 
-export default function Carreiras() {
-
+export default function PerfilCursos() {
     const { user } = useContext(AuthContext);
     const { updateResponses } = useContext(LoaderContext);
     const [course, setCourse] = useState<Course[]>([]);
@@ -39,8 +37,27 @@ export default function Carreiras() {
                 }
             })
                 .then((res: ApiResponse) => {
-                    const carreiras = res.data.filter((car) => car.carreira === "sim" && car.inscrito == 1 && parseInt(car?.progresso || "0") > 0 && parseInt(car?.progresso || "0") < 100);
-                    setCourse(carreiras);
+                    let filtrados: Course[] = [];
+
+                    if (user?.type_render === 'carreira') {
+                        // Carreiras em andamento (progresso entre 0 e 100)
+                        filtrados = res.data.filter((car) =>
+                            car.carreira === "sim" &&
+                            car.inscrito === 1 &&
+                            parseInt(car?.progresso || "0") > 0 &&
+                            parseInt(car?.progresso || "0") < 100
+                        );
+                    } else {
+                        // Cursos individuais em andamento
+                        filtrados = res.data.filter((car) =>
+                            car.carreira === "não" &&
+                            car.inscrito === 1 &&
+                            parseInt(car?.progresso || "0") > 0 &&
+                            parseInt(car?.progresso || "0") < 100
+                        );
+                    }
+
+                    setCourse(filtrados);
                 })
                 .catch((err) => {
                     console.error(err);
@@ -55,11 +72,13 @@ export default function Carreiras() {
         }
     }, [user, updateResponses, course]);
 
+    if (course.length === 0) return null;
+
     return (
-        course.length > 0
-        &&
         <div>
-            <span className="fs-28 fw-700 text-auxiliary1-project">Carreiras em andamento</span>
+            <span className="fs-28 fw-700 text-auxiliary1-project">
+                {user?.type_render === 'carreira' ? 'Carreiras' : 'Cursos'} em andamento
+            </span>
             <div className="mt-4">
                 <CarrosselCarreiras carreiras={course} progresso={true} />
             </div>
