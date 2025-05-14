@@ -55,10 +55,10 @@ export default function Sidebar() {
                 {open && 'Certificados'}
             </a>
             
-            {/* <a href="/chat" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
+            <a href="/chat" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <PiLightning color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Tutor IA'}
-            </a> */}
+            </a>
 
             {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <FaRegCalendarAlt color="#fff" size={20} />
