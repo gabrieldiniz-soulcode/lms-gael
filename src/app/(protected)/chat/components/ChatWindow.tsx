@@ -107,9 +107,8 @@ export default function ChatWindow({
         {messages.map((msg, idx) => (
           <div
             key={idx}
-            className={`text-${
-              msg.sender === "user" ? "end" : "start d-flex"
-            } mb-2`}
+            className={`text-${msg.sender === "user" ? "end" : "start d-flex"
+              } mb-2`}
           >
             {msg.sender === "model" && (
               <Image
@@ -122,11 +121,10 @@ export default function ChatWindow({
               />
             )}
             <div
-              className={`d-inline-block px-3 py-2 rounded ${
-                msg.sender === "user"
-                  ? "bg-primary text-white"
-                  : "bg-light message"
-              }`}
+              className={`d-inline-block px-3 py-2 rounded ${msg.sender === "user"
+                ? "bg-primary text-white"
+                : "bg-light message"
+                }`}
             >
               {msg.sender === "model" ? (
                 <ReactMarkdown
@@ -142,7 +140,16 @@ export default function ChatWindow({
                         {children}
                       </a>
                     ),
-                    code({ node, inline, className, children, ...props }: any) {
+                    code({
+                      inline,
+                      className,
+                      children,
+                      ...props
+                    }: {
+                      inline?: boolean;
+                      className?: string;
+                      children?: React.ReactNode;
+                    }) {
                       const match = /language-(\w+)/.exec(className || "");
                       const codeString = String(children).replace(/\n$/, "");
                       return !inline && match ? (
