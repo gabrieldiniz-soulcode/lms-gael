@@ -1,0 +1,41 @@
+.chat-messages-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.chat-messages-container pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto !important;
+  max-width: 100%;
+}
+
+.chat-messages-container pre div {
+  max-width: 100% !important;
+}
+
+.chat-messages-container .message {
+  max-width: 95%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.relative {
+  position: relative;
+}
+
+button.copy-btn {
+  font-family: monospace;
+  transition: background 0.2s ease;
+}

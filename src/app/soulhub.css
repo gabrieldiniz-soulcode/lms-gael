@@ -18859,4 +18859,46 @@ a {
   height: 12px;
 }
 
+.chat-messages-container {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.chat-messages-container pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto !important;
+  max-width: 100%;
+}
+
+.chat-messages-container pre div {
+  max-width: 100% !important;
+}
+
+.chat-messages-container .message {
+  max-width: 95%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.copy-btn {
+  position: absolute;
+  top: 0.5rem; /* top-2 */
+  right: 0.5rem; /* right-2 */
+  font-size: 0.75rem; /* text-xs → 12px */
+  padding: 0.25rem 0.5rem; /* py-1 px-2 */
+  border-radius: 0.25rem; /* rounded → 4px */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.relative {
+  position: relative;
+}
+
+button.copy-btn {
+  font-family: monospace;
+  transition: background 0.2s ease;
+}
+
 /*# sourceMappingURL=soulhub.css.map */
