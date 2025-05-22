@@ -1,4 +1,49 @@
 .carrossel-carreiras {
+
+    overflow: visible !important;
+
+    .swiper-wrapper {
+        height: 345px;
+    }
+
+    .swiper-pagination-fraction, .swiper-pagination-custom, .swiper-horizontal > .swiper-pagination-bullets, .swiper-pagination-bullets.swiper-pagination-horizontal {
+        bottom: var(--swiper-pagination-bottom, 0px);
+        top: var(--swiper-pagination-top, auto);
+        left: 0;
+        width: 100%;
+    }
+
+    .custom-prev,
+    .custom-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 10;
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+    }
+
+    .custom-prev {
+        left: 0;
+    }
+
+    .custom-next {
+        right: 0;
+    }
+
+    .card-curso {
+        transition: all 0.3s ease;
+        transform: translateY(0);
+        box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+        cursor: pointer;
+    }
+
+    .card-curso:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+    }
+
     .carrossel-carreiras-slide {
         width: 375px;
         height: 320px;

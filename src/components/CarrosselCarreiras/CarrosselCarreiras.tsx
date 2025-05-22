@@ -6,6 +6,7 @@ import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useContext, useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from "next/navigation";
+import { Navigation, Pagination } from 'swiper/modules';
 
 import { FaRegClock } from "react-icons/fa";
 import Image from "next/image";
@@ -62,23 +63,29 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
 
     return (
         carreirasFiltradas.length > 0 &&
-        <>
+        <div className='overflow-hidden'>
             {
                 categoria
                 &&
                 <h1 className="fs-28 fw-700 mb-4 mt-5">{categoria}</h1>
             }
             <Swiper
+                modules={[Navigation, Pagination]}
                 slidesPerView={"auto"}
                 spaceBetween={30}
                 pagination={{
                     clickable: true,
                 }}
+                navigation={{
+                    prevEl: '.custom-prev',
+                    nextEl: '.custom-next',
+                }}
                 className="mySwiper carrossel-carreiras"
             >
+
                 {
                     carreirasFiltradas.map((carreira, index) => (
-                        <SwiperSlide key={index} className={`carrossel-carreiras-slide rounded-3 ${progresso ? 'carrossel-carreiras-slide-progresso' : ''}`}>
+                        <SwiperSlide key={index} className={`card-curso carrossel-carreiras-slide rounded-3 ${progresso ? 'carrossel-carreiras-slide-progresso' : ''}`}>
                             <Image src={getImgUrl(carreira?.icon || "")} width={0} height={160} className="w-100 object-fit-contain rounded-top-3" alt="Imagem representativa da Carreira" />
                             <div className="px-4 d-flex flex-column justify-content-between carrossel-carreiras-infos">
                                 <div>
@@ -115,7 +122,9 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                         </SwiperSlide>
                     ))
                 }
+
             </Swiper>
-        </>
+
+        </div>
     )
 }
