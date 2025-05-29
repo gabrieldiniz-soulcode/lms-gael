@@ -1,7 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
+import Fabricio from '../../../public/Fabricio.png';
+import Carmela from '../../../public/Carmela.png';
 
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import Image from "next/image";
 
 interface CertificateData {
     certificate_created: number;
@@ -84,12 +87,20 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                         <span className="fs-28 fw-700">Curso</span>
                         <span className="fs-51 fw-700">{certificado.coursename}</span>
                     </div>
-                    <div className="d-flex justify-content-between ms-5 ps-5 mt-auto mb-5 pb-5">
+                    <div className="d-flex flex-column justify-content-between ms-5 ps-5 mt-auto">
                         <span className="fs-21 fw-700">CÓDIGO DE VALIDAÇÃO: {certificado.code}</span>
-                        <div className="d-flex gap-5 me-5">
-                            <span className="fs-21">Assinatura 1</span>
-                            <span className="fs-21">Assinatura 2</span>
-                        </div>
+                    </div>
+                    <div className="d-flex mx-auto mb-5 py-5">
+                        <span className="d-flex flex-column align-items-center justify-content-center">
+                            <Image src={Fabricio} width={300} alt="Assinatura" />
+                            <div>FABRICIO CARDOSO</div>
+                            <div>Cofundador</div>
+                        </span>
+                        <span className="d-flex flex-column align-items-center justify-content-center">
+                            <Image src={Carmela} width={350} alt="Assinatura" />
+                            <div>CARMELA BORST</div>
+                            <div>Fundadora</div>
+                        </span>
                     </div>
                 </div>
             </div>
