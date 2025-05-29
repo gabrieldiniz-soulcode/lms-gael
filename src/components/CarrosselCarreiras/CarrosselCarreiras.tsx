@@ -45,15 +45,26 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
     const search = searchParams.get('search');
 
     useEffect(() => {
-        setCarreirasFiltradas(carreiras);
-        if (pathname.includes('carreiras') && search) {
-            setCarreirasFiltradas(carreiras.filter((carreira) => carreira.fullname.toLocaleLowerCase().includes(search.toLocaleLowerCase())));
-            const section = document.getElementById('carreiras');
+        if (!user) return;
+
+        let listaFiltrada = carreiras.filter(c => c.inscrito === 1);
+
+        const searchTerm = search?.toLowerCase() || "";
+        const rota = user.type_render === "curso" ? "cursos" : "carreiras";
+
+        if (searchTerm && pathname.includes(rota)) {
+            listaFiltrada = listaFiltrada.filter((carreira) =>
+                carreira.fullname.toLowerCase().includes(searchTerm)
+            );
+
+            const section = document.getElementById("carreiras");
             if (section) {
-                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                section.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         }
-    }, [search, pathname, carreiras]);
+
+        setCarreirasFiltradas(listaFiltrada);
+    }, [search, pathname, carreiras, user]);
 
     function getImgUrl(url: string) {
         const regex = /<img[^>]+src\s*=\s*['"]([^'"]+)['"][^>]*>/i;

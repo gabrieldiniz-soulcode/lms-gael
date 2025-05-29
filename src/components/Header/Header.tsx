@@ -61,16 +61,17 @@ export default function Header() {
   }, [user, perfil]);
 
   function handleSearch() {
-    if (!pathname.includes("carreiras")) {
-      push(`/carreiras?search=${value}`);
+    const destino = user?.type_render === 'curso' ? '/cursos' : '/carreiras';
+  
+    if (!pathname.includes(destino.replace("/", ""))) {
+      push(`${destino}?search=${value}`);
       return;
     }
-    if (pathname.includes("carreiras")) {
-      const params = new URLSearchParams(searchParams.toString());
-      params.set("search", value || "");
-      window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
-    }
-  }
+  
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("search", value || "");
+    window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
+  }  
 
   return (
     <Navbar expand="lg" className="header bg-auxiliary1-project py-lg-2 py-4 position-absolute w-100" style={{ zIndex: 500 }}>
