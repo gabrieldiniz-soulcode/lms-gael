@@ -35,9 +35,17 @@ export default function MdlPage({ sequence, paused, setPaused }: Props) {
     const { user } = useContext(AuthContext);
 
     function getVideoLink(): string {
-        const regex = /<source\s+src="([^"]+)"/g;
+        const regex = /<source\s+src="([^"]+)"/;
         const match = regex.exec(sequence.data_module.content);
         return match ? match[1] : "";
+    }
+
+    function getContentWithoutVideo(): string {
+        return sequence.data_module.content.replace(/<video[\s\S]*?<\/video>/gi, "").trim();
+    }
+
+    function hasVideo(): boolean {
+        return sequence.data_module.content.includes("<video") || sequence.data_module.content.includes("<source");
     }
 
     function isLinkOrText(): string {
@@ -104,39 +112,49 @@ export default function MdlPage({ sequence, paused, setPaused }: Props) {
         isLinkOrText() === "link"
             ?
             <div className="position-relative w-100">
-                <video
-                    src={getVideoLink()}
-                    controls={!paused}
-                    ref={videoRef}
-                    className="w-100 rounded-3 position-relative bg-auxiliary6-project"
-                    onClick={play}
-                    onTimeUpdate={handleTimeUpdate}
-                    onSeeking={handleSeeking}
-                    onSeeked={handleSeeked}
-                ></video>
-                {
-                    paused &&
-                    <div className="position-absolute top-50 start-50 translate-middle cursor-pointer" onClick={play}>
-                        <Image src={playImg.src} width={150} height={150} alt="play" />
-                    </div>
-                }
 
-                {/* Barra de progresso + check */}
-                <div className="d-flex align-items-center mt-3 gap-3">
-                    <div className="progress flex-grow-1" style={{ height: '10px' }}>
-                        <div
-                            className="progress-bar bg-success"
-                            role="progressbar"
-                            style={{ width: `${displayedProgress}%` }}
-                            aria-valuenow={displayedProgress}
-                            aria-valuemin={0}
-                            aria-valuemax={100}
-                        ></div>
-                    </div>
-                    {completed && (
-                        <FaCheckCircle size={24} color="green" />
-                    )}
-                </div>
+                {hasVideo() && (
+                    <>
+                        <video
+                            src={getVideoLink()}
+                            controls={!paused}
+                            ref={videoRef}
+                            className="w-100 rounded-3 position-relative bg-auxiliary6-project"
+                            onClick={play}
+                            onTimeUpdate={handleTimeUpdate}
+                            onSeeking={handleSeeking}
+                            onSeeked={handleSeeked}
+                        ></video>
+
+                        {paused && (
+                            <div
+                                className="position-absolute top-50 start-50 translate-middle cursor-pointer"
+                                onClick={play}
+                            >
+                                <Image src={playImg.src} width={150} height={150} alt="play" />
+                            </div>
+                        )}
+
+                        <div className="d-flex align-items-center mt-3 gap-3">
+                            <div className="progress flex-grow-1" style={{ height: '10px' }}>
+                                <div
+                                    className="progress-bar bg-success"
+                                    role="progressbar"
+                                    style={{ width: `${displayedProgress}%` }}
+                                    aria-valuenow={displayedProgress}
+                                    aria-valuemin={0}
+                                    aria-valuemax={100}
+                                ></div>
+                            </div>
+                            {completed && <FaCheckCircle size={24} color="green" />}
+                        </div>
+                    </>
+                )}
+
+                <span
+                    className="dangerouslySetInnerHTML"
+                    dangerouslySetInnerHTML={{ __html: getContentWithoutVideo() }}
+                ></span>
             </div>
             :
             <div className="w-100">
