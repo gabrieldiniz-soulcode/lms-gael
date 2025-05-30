@@ -1,7 +1,6 @@
 import { Accordion } from "react-bootstrap";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { FaRegFilePdf } from "react-icons/fa";
-import { Fragment } from "react";
 import { IoIosLock } from "react-icons/io";
 import { MdDone } from "react-icons/md";
 import { MdOutlineQuiz } from "react-icons/md";
