@@ -1,9 +1,10 @@
-import { useRef, useState, useContext } from "react";
-import playImg from "/public/play.png";
-import Image from "next/image";
-import axios from "axios";
+import { useContext, useRef, useState } from "react";
+
 import { AuthContext } from "@/contexts/AuthContext";
 import { FaCheckCircle } from "react-icons/fa";
+import Image from "next/image";
+import axios from "axios";
+import playImg from "/public/play.png";
 
 interface Sequence {
     cmid: number,
@@ -115,25 +116,27 @@ export default function MdlPage({ sequence, paused, setPaused }: Props) {
 
                 {hasVideo() && (
                     <>
-                        <video
-                            src={getVideoLink()}
-                            controls={!paused}
-                            ref={videoRef}
-                            className="w-100 rounded-3 position-relative bg-auxiliary6-project"
-                            onClick={play}
-                            onTimeUpdate={handleTimeUpdate}
-                            onSeeking={handleSeeking}
-                            onSeeked={handleSeeked}
-                        ></video>
-
-                        {paused && (
-                            <div
-                                className="position-absolute top-50 start-50 translate-middle cursor-pointer"
+                        <div className="position-relative">
+                            <video
+                                src={getVideoLink()}
+                                controls={!paused}
+                                ref={videoRef}
+                                className="w-100 rounded-3 position-relative bg-auxiliary6-project"
                                 onClick={play}
-                            >
-                                <Image src={playImg.src} width={150} height={150} alt="play" />
-                            </div>
-                        )}
+                                onTimeUpdate={handleTimeUpdate}
+                                onSeeking={handleSeeking}
+                                onSeeked={handleSeeked}
+                            ></video>
+
+                            {paused && (
+                                <div
+                                    className="position-absolute top-50 start-50 translate-middle cursor-pointer"
+                                    onClick={play}
+                                >
+                                    <Image src={playImg.src} width={150} height={150} alt="play" />
+                                </div>
+                            )}
+                        </div>
 
                         <div className="d-flex align-items-center mt-3 gap-3">
                             <div className="progress flex-grow-1" style={{ height: '10px' }}>

@@ -18682,7 +18682,6 @@ a {
   transition: all 0.3s ease;
   transform: translateY(0);
   box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-  cursor: pointer;
 }
 .carrossel-carreiras .card-curso:hover {
   transform: translateY(-5px);
