@@ -82,7 +82,7 @@ export default function Header() {
             e.preventDefault();
             handleSearch();
           }}>
-            <Form.Control className="form-input-header" type="texto" placeholder="Buscar Cursos" onChange={(e) => setValue(e.target.value)} />
+            <Form.Control className="form-input-header" type="text" placeholder="Buscar Cursos" onChange={(e) => setValue(e.target.value)} />
             <FaSearch className="form-input-icon-header cursor-pointer" color="#fff" onClick={handleSearch} />
           </form>
         </div>
