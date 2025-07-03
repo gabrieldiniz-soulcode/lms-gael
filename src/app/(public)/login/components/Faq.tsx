@@ -10,35 +10,48 @@ export default function Faq() {
 
                 <Accordion alwaysOpen>
                     <AccordionItem eventKey="0" className="mb-2">
-                        <AccordionHeader>O Passaporte Digital é gratuíto</AccordionHeader>
+                        <AccordionHeader>Como funciona?</AccordionHeader>
                         <AccordionBody>
-                            Você pode testar por até 30 dias grátis. Satisfação garantida ou seu dinheiro de volta!
+                            O Passaporte Digital é uma plataforma com aulas gravadas para estudar quando e onde quiser.
                         </AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="1" className="mb-2">
-                        <AccordionHeader>O curso oferece certificado?</AccordionHeader>
+                        <AccordionHeader>Tenho contato direto com o professor?</AccordionHeader>
                         <AccordionBody>
-                            Todos os cursos possuem certificados
+                            Você pode tirar todas as suas dúvidas dentro do discord, ou no email suporte@soulcode.com.
                         </AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="2" className="mb-2">
-                        <AccordionHeader>Preciso ter algum conhecimento na área? </AccordionHeader>
+                        <AccordionHeader>Vou receber certificado de cada carreira finalizada? </AccordionHeader>
                         <AccordionBody>
-                            Você não precisa ter conhecimento prévio e pode estudar quando e onde quiser!
+                            Recebe sim! Tanto os certificados de cada curso, quanto os certificados de cada carreira.
                         </AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="3" className="mb-2">
-                        <AccordionHeader>Sem limites no cartão de crédito?</AccordionHeader>
+                        <AccordionHeader>Os cursos do Passaporte Digital são válidos como ensino superior?</AccordionHeader>
                         <AccordionBody>
-                            Nesse caso, faremos a cobrança em modo recorrente, ou seja, o limite a ser consumido será apenas do valor da parcela!
+                            Não, cursos livres não fornecem formação superior.
                         </AccordionBody>
                     </AccordionItem>
                     <AccordionItem eventKey="4" className="mb-2">
-                        <AccordionHeader>Como validar o certificado?</AccordionHeader>
+                        <AccordionHeader>A plataforma do Passaporte Digital tem conteúdos básicos ou avançados?</AccordionHeader>
                         <AccordionBody>
-                            Você pode validar o certificado <a href="/validar-certificado">clicando aqui</a>!
+                            A plataforma oferece cursos desde o nível básico ao avançado.
                         </AccordionBody>
                     </AccordionItem>
+                    <AccordionItem eventKey="5" className="mb-2">
+                        <AccordionHeader>Qual a diferença entre bootcamp e Passaporte Digital?</AccordionHeader>
+                        <AccordionBody>
+                            Passaporte Digital:
+                            É uma plataforma de aprendizado contínuo com diversos cursos online. Seu objetivo é permitir que os usuários desenvolvam habilidades digitais no próprio ritmo, sem um cronograma fixo. Os cursos são com aulas gravadas com fóruns disponíveis para esclarecer dúvidas.
+                            Bootcamp:
+                            É um programa intensivo e imersivo, com duração fixa e um cronograma estruturado. Os bootcamps incluem aulas ao vivo, interação com professores e colegas, projetos práticos e, em alguns casos, a possibilidade de conexão com empresas parceiras para vagas de emprego. Eles são voltados para quem busca uma experiência mais aprofundada e acelerada em uma área específica.    
+                        </AccordionBody>
+                    </AccordionItem>
+                    <AccordionItem eventKey="6" className="mb-2">
+                        <AccordionHeader>Estou com dificuldades para acessar a plataforma. O que fazer?</AccordionHeader>
+                        <AccordionBody>Entre em contato no chat, Whatsapp ou e-mail atendimento@soulcode.com e informe qual plataforma você está tentando acessar: Starter, Passaporte Digital ou Processo Seletivo, descrevendo o erro que aparece. Se possível, envie uma captura de tela para facilitar o entendimento do problema. Também é importante compartilhar o e-mail usado no cadastro para verificarmos possíveis problemas no login. Com essas informações poderemos orientar sobre os próximos passos.</AccordionBody>
+                        </AccordionItem>    
                 </Accordion>
             </Col>
         </Row>

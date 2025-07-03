@@ -133,10 +133,10 @@ export default function Hero() {
         <div className="row hero-carreiras">
             <div className="col-xxl-11 p-xxl-0 m-xxl-0 pe-xxl-2">
                 <div className="row row-gap-4">
-                    <a href="https://discord.com/invite/e4q3Mfab" target="_blank" className="col-12 d-md-block d-none px-2">
+                    <a href="https://discord.gg/F5VXyWnt" target="_blank" className="col-12 d-md-block d-none px-2">
                         <Image src={bannerDiscord.src} width={0} height={0} className="w-100 h-auto" alt="Banner Discord" />
                     </a>
-                    <a href="https://discord.com/invite/e4q3Mfab" target="_blank" className="col-12 d-md-none d-block px-2">
+                    <a href="https://discord.gg/F5VXyWnt" target="_blank" className="col-12 d-md-none d-block px-2">
                         <Image src={bannerDiscord2.src} width={0} height={0} className="w-100 h-auto" alt="Banner Discord" />
                     </a>
                     <div className="col-xxl-6 col-12 card-hero d-md-block d-none">
@@ -174,7 +174,7 @@ export default function Hero() {
                         </div>
                     </div>
                     <div className="col-xxl-6 col-12 card-hero">
-                        <a href="https://www.youtube.com/@SoulCodeAcademy/streams" target="_blank" className="d-flex text-decoration-none flex-column justify-content-center h-100 rounded-3 box-shadow-hero">
+                        <a href="https://www.youtube.com/live/L5-731SY_6c?si=Y4Tl1hgFezU-gxTC" target="_blank" className="d-flex text-decoration-none flex-column justify-content-center h-100 rounded-3 box-shadow-hero">
                             <Image src={bannerYT.src} width={0} height={0} className="w-100 h-100 rounded-top-3 overflow-hidden" alt="Banner Youtube" />
                             <span className="py-3 bg-white rounded-bottom-3 text-center fs-21 fw-700">
                                 Ao vivo no YouTube

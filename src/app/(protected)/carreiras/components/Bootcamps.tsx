@@ -26,19 +26,30 @@ export default function Bootcamps() {
                         <div className="rounded-3 w-100 bg-white" onClick={(e) => e.stopPropagation()}>
                             <div className="p-3">
                                 <div className="d-flex justify-content-between">
-                                    <span className="fs-21">Porto - Programa de formação da TI</span>
-                                    <a href="https://soulcode.com/porto-programa-de-formacao-da-ti" target="_blank" className="btn btn-success z-2">Vagas Abertas</a>
+                                    <span className="fs-21">Vendas e Logísticas de Alta Performance</span>
+                                    <a href="https://soulcode.com/vendas-e-logistica-alta-perfomance" target="_blank" className="btn btn-success z-2">Vagas Abertas</a>
                                 </div>
                             </div>
                             <div className="p-3">
                                 <div className="d-flex justify-content-between">
-                                    <span className="fs-21">Porto - Programa de formação da TI</span>
-                                    <a href="https://soulcode.com/vendas-e-logistica-alta-perfomance" target="_blank" className="btn btn-success z-2">Vagas Abertas</a>
+                                    <span className="fs-21">ElasTech | PagBank</span>
+                                    <a href="https://soulcode.com/elastech" target="_blank" className="btn btn-success z-2">Vagas Abertas</a>
+                                </div>
+                            </div>
+                            <div className="p-3">
+                                <div className="d-flex justify-content-between">
+                                    <span className="fs-21">ACCIONA</span>
+                                    <a href="https://soulcode.com/acciona-bootcamp" target="_blank" className="btn btn-success z-2">Vagas Abertas</a>
                                 </div>
                             </div>
                         </div>
                 }
-            </div>
-        </div>
+            </div>           
+        </div>        
+
+                          
+                
+            
+        
     )
 }
