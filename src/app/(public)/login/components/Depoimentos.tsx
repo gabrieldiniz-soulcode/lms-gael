@@ -1,9 +1,11 @@
 import { Col, Image, Row } from "react-bootstrap";
 
+import grafismo1 from "/public/grafismo_1.png";
+
 //import aluno1 from "/public/aluno_1.png";
 //import aluno2 from "/public/aluno_2.png";
 //import aluno3 from "/public/aluno_3.png";
-import grafismo1 from "/public/grafismo_1.png";
+
 
 export default function Depoimentos() {
 
@@ -12,7 +14,7 @@ export default function Depoimentos() {
             <h2 className="text-center fw-700 fs-28 mb-5">Depoimentos</h2>
 
             <Col xxl={4} lg={6} md={12}>
-                <div className="d-flex flex-column position-relative align-items-center bg-auxiliary1-project py-4 rounded-3 depoimentos-card gap-2">
+                <div className="d-flex flex-column position-relative align-items-center bg-auxiliary1-project py-4 rounded-3 depoimentos-card gap-2 h-100">
                     {/*<Image src={aluno2.src} width={90} height={90} alt="foto de aluno" className="depoimentos-foto" />*/}
                     <span className="text-auxiliary7-project fs-21 fw-700">Thais B.</span>
                     <span className="text-auxiliary7-project">Analista de Dados</span>
@@ -23,7 +25,7 @@ export default function Depoimentos() {
             </Col>
 
             <Col xxl={4} lg={6} md={12} className="">
-                <div className="d-flex flex-column position-relative align-items-center bg-auxiliary1-project py-4 rounded-3 depoimentos-card gap-2">
+                <div className="d-flex flex-column position-relative align-items-center bg-auxiliary1-project py-4 rounded-3 depoimentos-card gap-2 h-100">
                     {/*<Image src={aluno3.src} width={90} height={90} alt="foto de aluno" className="depoimentos-foto" />*/}
                     <span className="text-auxiliary7-project fs-21 fw-700">Junior Cesar S.</span>
                     <span className="text-auxiliary7-project">Analista de TI</span>
@@ -34,7 +36,7 @@ export default function Depoimentos() {
             </Col>
 
             <Col xxl={4} lg={6} md={12} className="">
-                <div className="d-flex flex-column position-relative align-items-center bg-auxiliary1-project py-4 rounded-3 depoimentos-card gap-2">
+                <div className="d-flex flex-column position-relative align-items-center bg-auxiliary1-project py-4 rounded-3 depoimentos-card gap-2 h-100">
                     {/*<Image src={aluno1.src} width={90} height={90} alt="foto de aluno" className="depoimentos-foto" />*/}
                     <span className="text-auxiliary7-project fs-21 fw-700">Maiza Maria L.</span>
                     <span className="text-auxiliary7-project">Desenvolvedora front-end e back-end</span>

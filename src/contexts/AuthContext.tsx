@@ -2,8 +2,8 @@
 
 import { createContext, useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
-import { StaticImageData } from "next/image";
 
+import { StaticImageData } from "next/image";
 import axios from "axios";
 import { jwtDecode } from 'jwt-decode';
 
@@ -70,7 +70,7 @@ export function AuthContextProvider({ children }: Props) {
                 router.push('/');
                 return;
             }
-            if (!localUser && !sessionUser && !pathname.includes("/login") && !pathname.includes("/validar-certificado")) {
+            if (!localUser && !sessionUser && !pathname.includes("/login") && !pathname.includes("/validar-certificado") && !pathname.includes("/user-logado")) {
                 router.push('/login');
                 return;
             }
