@@ -121,6 +121,7 @@ export default function AlterarSenha() {
                 <h2 className="fw-700 fs-28 mb-4">Redefinir Senha</h2>
                 <p>Para proteger sua conta, crie uma senha com pelo menos 8 caracteres, misturando letras maiúsculas, minúsculas, números e símbolos.</p>
                 <p>Evite sequências óbvias e informações pessoais. <br />Segurança em primeiro lugar!</p>
+                <p>Se este é o seu primeiro acesso, utilize a senha padrão <b>Mudar@123</b> para alterar sua senha.</p>
             </div>
             <div className="row gap-5 mt-5 pt-4">
                 <div className="col-xl-4 col-xl-5 col-12 bg-white rounded rounded-3 px-4 py-5">
