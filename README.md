@@ -1,4 +1,4 @@
-# API – Integração de Credenciais Moodle (Inscrição + Eventos CDP)
+# API – Integração de Credenciais SoulHub - Moodle Backend (Inscrição + Eventos CDP)
 
 Versão: 1.0 • Última atualização: 27/08/2025
 
