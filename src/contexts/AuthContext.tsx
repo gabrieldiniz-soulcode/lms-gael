@@ -135,7 +135,7 @@ export function AuthContextProvider({ children }: Props) {
 
     function signInByRecoveryPassword(user: User) {
         setUser(user);
-        sessionStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(user));
         fetchUserLevel(user.id, user.database, user.token);
         router.push("/");
     }
