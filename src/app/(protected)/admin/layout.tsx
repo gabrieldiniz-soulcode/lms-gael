@@ -1,7 +1,6 @@
 import Footer from "@/components/Footer/Footer";
 import HeaderAdmin from "@/components/Header/HeaderAdmin";
 import Loader from "@/components/Loader/Loader";
-import Sidebar from "@/components/Sidebar/Sidebar";
 import SidebarAdmin from "@/components/Sidebar/SidebarAdmin";
 
 export default function Layout({ children, }: Readonly<{ children: React.ReactNode; }>) {

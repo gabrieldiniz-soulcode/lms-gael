@@ -1,14 +1,21 @@
 "use client";
-
+import dynamic from "next/dynamic";
 import { useCallback, useEffect, useState } from "react";
-
 import { Button } from "react-bootstrap";
-import ModalIngest from "./components/ModalIngest";
-import ModalMapping from "./components/ModalMapping";
-import ModalTutor from "./components/ModalTutor";
 import Tutor from "./components/Tutor";
 import { apiTutor } from "@/shared/api/apiTutor";
 
+const ModalIngest = dynamic(() => import("./components/ModalIngest"), {
+  ssr: false,
+});
+
+const ModalMapping = dynamic(() => import("./components/ModalMapping"), {
+  ssr: false,
+});
+
+const ModalTutor = dynamic(() => import("./components/ModalTutor"), {
+  ssr: false,
+});
 export default function Page() {
   const [tutors, setTutors] = useState<any[]>([]);
   const [tutor, setTutor] = useState<any | null>(null);

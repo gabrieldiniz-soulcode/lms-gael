@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+
 import { Button } from "react-bootstrap";
 import { LiaEdit } from "react-icons/lia";
 
