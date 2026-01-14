@@ -13,6 +13,7 @@ interface User {
     database: string;
     id: string;
     type_render?: "curso" | "carreira";
+    isAdmin: boolean;
 }
 
 interface UserData {
@@ -38,6 +39,14 @@ interface DecodedToken {
     exp: number;
 }
 
+interface Profile {
+    firstname: string;
+    imagealt: string;
+}
+
+interface ApiResponse {
+    data: Profile;
+}
 
 type AuthContextData = {
     user: User;
@@ -46,6 +55,7 @@ type AuthContextData = {
     signIn: (email: string, password: string, rememberMe: boolean) => Promise<boolean>;
     signOut: () => void;
     signInByRecoveryPassword: (user: User) => void;
+    perfil: Profile;
 }
 
 interface Props {
@@ -58,6 +68,8 @@ export function AuthContextProvider({ children }: Props) {
 
     const [user, setUser] = useState<User>({} as User);
     const [userLevel, setUserLevel] = useState<number | null>(null);
+    const [perfil, setPerfil] = useState<Profile>({} as Profile);
+
 
     const router = useRouter();
     const pathname = usePathname();
@@ -66,10 +78,23 @@ export function AuthContextProvider({ children }: Props) {
         function checkAuth() {
             const localUser = localStorage.getItem('user');
             const sessionUser = sessionStorage.getItem('user');
-            if (sessionUser && pathname.includes("/login")) {
-                router.push('/');
+            if (sessionUser || localUser) {
+                const user = localUser ? JSON.parse(localUser) : JSON.parse(sessionUser || '');
+
+                if (!user.isAdmin && (pathname.includes("/admin"))) {
+                    router.push("/");
+                }
+
+                if (user.isAdmin && (!pathname.includes("/admin"))) {
+                    router.push("/admin");
+                }
+
+                if (pathname.includes("/login")) {
+                    router.push(user.isAdmin ? "/admin" : "/");
+                }
                 return;
             }
+
             if (!localUser && !sessionUser && !pathname.includes("/login") && !pathname.includes("/validar-certificado") && !pathname.includes("/user-logado")) {
                 router.push('/login');
                 return;
@@ -93,13 +118,19 @@ export function AuthContextProvider({ children }: Props) {
                 return true;
             }
 
+            console.log(authResponse.data)
+
             userObj.id = authResponse.data.data.userid;
-            userObj.name = authResponse.data.data.database;
+            userObj.name = authResponse.data.data.username;
             userObj.database = authResponse.data.data.database!;
             userObj.token = authResponse.data.token;
+            userObj.isAdmin = authResponse.data.data.isAdmin;
+
 
             const decoded: DecodedToken = jwtDecode<DecodedToken>(userObj.token);
             userObj.type_render = decoded.type_render;
+            console.log(userObj)
+            getPerfil(userObj);
 
             setUser(userObj);
 
@@ -132,6 +163,23 @@ export function AuthContextProvider({ children }: Props) {
             return true;
         }
     }
+
+    function getPerfil(userObj: User) {
+        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+            headers: {
+                "database": userObj.database,
+                "Authorization": `Bearer ${userObj.token}`
+            }
+        })
+            .then((res: ApiResponse) => {
+                setPerfil(res.data);
+                localStorage.setItem('profile', JSON.stringify(res.data));
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+    }
+
 
     function signInByRecoveryPassword(user: User) {
         setUser(user);
@@ -180,6 +228,7 @@ export function AuthContextProvider({ children }: Props) {
     const loadUserFromStorage = useCallback(() => {
         const local = localStorage.getItem('user');
         const sessionUser = sessionStorage.getItem('user');
+        const profile = localStorage.getItem('profile');
         let userObj = null;
 
         if (local) {
@@ -200,6 +249,7 @@ export function AuthContextProvider({ children }: Props) {
         }
 
         if (userObj) {
+            setPerfil(JSON.parse(profile || '{}'));
             setUser(userObj);
             fetchUserLevel(userObj.id, userObj.database, userObj.token);
         }
@@ -210,7 +260,7 @@ export function AuthContextProvider({ children }: Props) {
     }, [loadUserFromStorage]);
 
     return (
-        <AuthContext.Provider value={{ user, userLevel, setUserLevel, signOut, signIn, signInByRecoveryPassword }}>
+        <AuthContext.Provider value={{ user, userLevel, setUserLevel, signOut, signIn, signInByRecoveryPassword, perfil }}>
             {children}
         </AuthContext.Provider>
     );
