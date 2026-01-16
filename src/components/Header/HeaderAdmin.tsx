@@ -7,8 +7,8 @@ import { AuthContext } from '@/contexts/AuthContext';
 import { FaUpload } from "react-icons/fa6";
 import Image from 'next/image';
 import { RiAiGenerate2 } from 'react-icons/ri';
-import aluno from "/public/aluno_2.png";
-import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
+import aluno from "/public/placeholder_2.png";
+import logoTrident from "/public/logos/logo_trident.png";
 import { useContext } from 'react';
 
 export default function HeaderAdmin() {
@@ -25,7 +25,7 @@ export default function HeaderAdmin() {
       </div>
 
       <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100">
-        <Image src={logo.src} width={logo.width} height={logo.height - 20} alt="logo soulcode + passaporte digital" className="w-75 object-fit-contain" />
+        <Image src={logoTrident.src} width={logoTrident.width} height={logoTrident.height - 20} alt="logo trident" className="w-75 object-fit-contain" />
         <NavbarToggle aria-controls="basic-navbar-nav" />
       </div>
 

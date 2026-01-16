@@ -4,7 +4,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
 import img from "/public/rectangle_ranking.png";
-import placeholder from "/public/placeholder.png";
+import placeholder from "/public/placeholder_2.png";
 
 interface UserDetails {
     firstname?: string;

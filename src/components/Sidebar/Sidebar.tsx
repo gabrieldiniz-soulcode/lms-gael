@@ -11,7 +11,7 @@ import Image from "next/image";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
-import logo from "/public/logos/logo_soulcode_passaporte_digital_vertical.png";
+import logoTrident from "/public/logos/logo_trident.png";
 
 // import { FaRegCalendarAlt } from "react-icons/fa";
 // import { MdOutlineDashboard } from "react-icons/md";
@@ -30,7 +30,7 @@ export default function Sidebar() {
 
 
             <a href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"}>
-                <Image src={logo.src} width={logo.width} height={logo.width} alt="Logo Soulcode Passaporte Digital" className="mb-5" />
+                <Image src={logoTrident.src} width={80} height={40} alt="Logo Trident" className="mb-5" />
             </a>
 
             <a href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"} className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>

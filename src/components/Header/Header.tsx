@@ -11,8 +11,8 @@ import { GoHome } from "react-icons/go";
 import Image from 'next/image';
 import { LiaCertificateSolid } from "react-icons/lia";
 import { PiStudentBold } from "react-icons/pi";
-import aluno from "/public/aluno_2.png";
-import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
+import aluno from "/public/placeholder_2.png";
+import logoTrident from "/public/logos/logo_trident.png"
 
 export default function Header() {
 
@@ -59,7 +59,7 @@ export default function Header() {
       </div>
 
       <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100">
-        <Image src={logo.src} width={logo.width} height={logo.height - 20} alt="logo soulcode + passaporte digital" className="w-75 object-fit-contain" />
+        <Image src={logoTrident.src} width={logoTrident.width} height={logoTrident.height - 20} alt="logo trident" className="w-75 object-fit-contain" />
         <NavbarToggle aria-controls="basic-navbar-nav" />
       </div>
 
@@ -76,7 +76,7 @@ export default function Header() {
               Minhas Carreiras
             </a>
 
-            <a href="/certificados" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
+            <a href="/certificasos" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <LiaCertificateSolid color="#fff" size={18} className="me-2" strokeWidth={0.5} />
               Certificados
             </a>

@@ -11,7 +11,7 @@ import axios from "axios";
 import bannerDiscord from "/public/discord.png";
 import bannerDiscord2 from "/public/discord_2.png";
 import bannerYT from "/public/ao_vivo_yt.png";
-import placeholder from "/public/placeholder.png";
+import placeholder from "/public/placeholder_2.png";
 import trofeu from "/public/trofeu.png";
 
 interface Course {

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import { FaChalkboardTeacher, FaChevronLeft, FaChevronRight, FaLink, FaUpload } from "react-icons/fa";
@@ -7,7 +8,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import Image from "next/image";
 import { MdLogout } from "react-icons/md";
 import { RiAiGenerate2 } from "react-icons/ri";
-import logo from "/public/logos/logo_soulcode_passaporte_digital_vertical.png";
+import logoTrident from "/public/logos/logo_trident.png";
 
 export default function SidebarAdmin() {
 
@@ -22,7 +23,7 @@ export default function SidebarAdmin() {
 
 
             <a href="/admin">
-                <Image src={logo.src} width={logo.width} height={logo.width} alt="Logo Soulcode Passaporte Digital" className="mb-5" />
+                <Image src={logoTrident.src} width={logoTrident.width} height={logoTrident.width} alt="Logo Trident" className="mb-5" />
             </a>
 
             <a href="/admin" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>
