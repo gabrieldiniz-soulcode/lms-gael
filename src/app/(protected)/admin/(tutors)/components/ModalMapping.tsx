@@ -173,7 +173,7 @@ export default function ModalMapping({
           </div>
 
           <Form.Group className="mb-3" controlId="mapping-course-name">
-            <Form.Label>Course name</Form.Label>
+            <Form.Label>Nome do Curso</Form.Label>
             <Form.Control
               type="text"
               placeholder='Ex.: "Desenvolvedor Python"'
@@ -188,7 +188,7 @@ export default function ModalMapping({
           </Form.Group>
 
           <Form.Group className="mb-2" controlId="mapping-course-id">
-            <Form.Label>Course ID</Form.Label>
+            <Form.Label>ID do Curso</Form.Label>
             <Form.Control
               type="text"
               placeholder='Ex.: "desenvolvedor-python"'

@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
 import { Alert, Button, Form, Modal, Spinner } from "react-bootstrap";
 import React, { useEffect, useMemo, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -92,11 +90,14 @@ const metadataSchema = z
 
 const ingestSchema = z.object({
   file: z
-    .custom<FileList>()
-    .refine((fl) => fl instanceof FileList && fl.length > 0, "Selecione um arquivo.")
+    .any()
+    .refine(
+      (fl) => fl && typeof fl === "object" && "length" in fl && fl.length > 0,
+      "Selecione um arquivo."
+    )
     .refine(
       (fl) => {
-        const f = fl?.item?.(0) ?? (fl as any)?.[0];
+        const f = fl?.[0];
         if (!f) return true;
         return f.size <= MAX_FILE_SIZE_MB * 1024 * 1024;
       },
@@ -104,7 +105,7 @@ const ingestSchema = z.object({
     )
     .refine(
       (fl) => {
-        const f = fl?.item?.(0) ?? (fl as any)?.[0];
+        const f = fl?.[0];
         if (!f) return true;
         return !f.type || ACCEPTED_MIME.includes(f.type);
       },
@@ -112,8 +113,8 @@ const ingestSchema = z.object({
     ),
 
   metadata: metadataSchema,
-  module_id: z.string().trim().optional(),
-  course: z.string().trim().optional(),
+  module_id: z.string().trim().min(2, "Module é obrigatório."),
+  course: z.string().trim().min(2, "Curso é obrigatório."),
 
   doc_type_override: z.string().trim().optional(),
   trail: z.string().trim().optional(),
@@ -181,7 +182,9 @@ export default function ModalIngest({
 
   const fileList = watch("file");
   const selectedFile: File | null =
-    fileList instanceof FileList && fileList.length > 0 ? fileList[0] : null;
+    fileList && typeof fileList === "object" && fileList.length > 0
+      ? fileList[0]
+      : null;
 
   const fileHint = useMemo(() => {
     if (!selectedFile) return "Selecione um arquivo para ingestão.";
@@ -285,7 +288,7 @@ export default function ModalIngest({
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="ingest-course">
-            <Form.Label>Course (opcional)</Form.Label>
+            <Form.Label>Curso</Form.Label>
             <Form.Control
               type="text"
               placeholder='Ex.: "desenvolvedor python"'
@@ -299,7 +302,7 @@ export default function ModalIngest({
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="ingest-module-id">
-            <Form.Label>Module ID (opcional)</Form.Label>
+            <Form.Label>Module ID</Form.Label>
             <Form.Control
               type="text"
               placeholder='Ex.: "primeiros passos com python"'

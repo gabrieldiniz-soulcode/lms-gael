@@ -5,8 +5,6 @@ import SidebarAdmin from "@/components/Sidebar/SidebarAdmin";
 
 export default function Layout({ children, }: Readonly<{ children: React.ReactNode; }>) {
 
-
-
   return (
     <div className="d-flex flex-column min-h-100 position-relative justify-content-between">
       <header>

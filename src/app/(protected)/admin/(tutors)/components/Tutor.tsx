@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client";
-
 import { Button } from "react-bootstrap";
 import { LiaEdit } from "react-icons/lia";
 
@@ -12,7 +9,7 @@ type TutorProps = {
   voice_id?: string;
   setShowModalTutor: (show: boolean) => void;
   setShowModalMapping: (show: boolean) => void;
-  setShowModalIngest: (show: boolean) => void; // ✅ novo
+  setShowModalIngest: (show: boolean) => void;
   setTutor?: (tutor: any) => void;
 };
 
@@ -31,7 +28,7 @@ export default function Tutor({
   id,
   setShowModalTutor,
   setShowModalMapping,
-  setShowModalIngest, // ✅ novo
+  setShowModalIngest,
   setTutor,
   voice_id,
 }: TutorProps) {

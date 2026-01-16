@@ -7,8 +7,8 @@ import { AuthContext } from '@/contexts/AuthContext';
 import { FaUpload } from "react-icons/fa6";
 import Image from 'next/image';
 import { RiAiGenerate2 } from 'react-icons/ri';
-import aluno from "/public/placeholder_2.png";
-import logoTrident from "/public/logos/logo_trident.png";
+import aluno from "/public/aluno_2.png";
+import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
 import { useContext } from 'react';
 
 export default function HeaderAdmin() {
@@ -25,7 +25,7 @@ export default function HeaderAdmin() {
       </div>
 
       <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100">
-        <Image src={logoTrident.src} width={logoTrident.width} height={logoTrident.height - 20} alt="logo trident" className="w-75 object-fit-contain" />
+        <Image src={logo.src} width={logo.width} height={logo.height - 20} alt="logo soulcode + passaporte digital" className="w-75 object-fit-contain" />
         <NavbarToggle aria-controls="basic-navbar-nav" />
       </div>
 
@@ -34,22 +34,7 @@ export default function HeaderAdmin() {
           <div className="d-flex flex-column align-items-center gap-1">
             <a href="/admin" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar mt-5 text-white">
               <FaChalkboardTeacher color="#fff" size={20} strokeWidth={0.5} className="me-2" />
-              Tutors
-            </a>
-
-            <a href="/admin/mappgins" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
-              <FaLink color="#fff" size={18} className="me-2" />
-              Mappgins
-            </a>
-
-            <a href="/admin/ingest" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
-              <FaUpload color="#fff" size={18} className="me-2" strokeWidth={0.5} />
-              Ingest
-            </a>
-
-            <a href="/admin/generate" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
-              <RiAiGenerate2 color="#fff" size={18} className="me-2" strokeWidth={0.5} />
-              Generate
+              Tutores educacionais
             </a>
           </div>
         </Nav>

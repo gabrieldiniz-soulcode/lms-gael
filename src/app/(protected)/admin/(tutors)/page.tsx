@@ -1,21 +1,16 @@
 "use client";
-import dynamic from "next/dynamic";
+
 import { useCallback, useEffect, useState } from "react";
+
 import { Button } from "react-bootstrap";
+import ModalFindMapping from "./components/ModalFindMapping";
+import ModalGenerateMultiple from "./components/ModalGenerateMultiple";
+import ModalIngest from "./components/ModalIngest";
+import ModalMapping from "./components/ModalMapping";
+import ModalTutor from "./components/ModalTutor";
 import Tutor from "./components/Tutor";
 import { apiTutor } from "@/shared/api/apiTutor";
 
-const ModalIngest = dynamic(() => import("./components/ModalIngest"), {
-  ssr: false,
-});
-
-const ModalMapping = dynamic(() => import("./components/ModalMapping"), {
-  ssr: false,
-});
-
-const ModalTutor = dynamic(() => import("./components/ModalTutor"), {
-  ssr: false,
-});
 export default function Page() {
   const [tutors, setTutors] = useState<any[]>([]);
   const [tutor, setTutor] = useState<any | null>(null);
@@ -23,6 +18,8 @@ export default function Page() {
   const [showModalTutor, setShowModalTutor] = useState(false);
   const [showModalMapping, setShowModalMapping] = useState(false);
   const [showModalIngest, setShowModalIngest] = useState(false);
+  const [showModalGenerate, setShowModalGenerate] = useState(false);
+  const [showModalFindMapping, setShowModalFindMapping] = useState(false);
 
   const fetchTutors = useCallback(async () => {
     try {
@@ -38,24 +35,27 @@ export default function Page() {
   }, [fetchTutors]);
 
   return (
-    <main className="container container-ajuste mt-5 pt-5" style={{ minHeight: `80vh` }}>
-      <section className="d-flex justify-content-between mb-3">
-        <h1 className="fw-bold">Tutors</h1>
+    <main className="container container-ajuste mt-5 pt-5 d-flex flex-column justify-content-between row-gap-3" style={{ minHeight: `80vh` }}>
+      <section className="d-flex justify-content-between mb-3 flex-wrap">
+        <h2 className="fw-bold">Tutores educacionais</h2>
 
-        <Button
-          variant="primary"
-          onClick={() => {
-            setTutor(null);
-            setShowModalTutor(true);
-          }}
-        >
-          Criar novo Tutor
-        </Button>
+        <div className="d-flex gap-3">
+          <Button variant="primary" onClick={() => setShowModalGenerate(true)}>Gerar PDF de conteúdo</Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              setTutor(null);
+              setShowModalTutor(true);
+            }}
+          >
+            Criar novo Tutor
+          </Button>
+        </div>
       </section>
 
-      <section className="row">
+      <section className="row row-gap-3">
         {tutors.map((t: any) => (
-          <div className="col-3" key={t.id}>
+          <div className="col-xxl-3 col-xl-4 col-md-6" key={t.id}>
             <Tutor
               {...t}
               setTutor={setTutor}
@@ -65,6 +65,22 @@ export default function Page() {
             />
           </div>
         ))}
+      </section>
+
+      <section className="mt-auto mb-2">
+        <div className="d-flex gap-3 justify-content-end">
+          <Button variant="dark" onClick={() => setShowModalFindMapping(true)}>Buscar Mappings</Button>
+          {/* <Button
+            variant="danger"
+            className="text-white"
+            onClick={() => {
+              setTutor(null);
+              setShowModalTutor(true);
+            }}
+          >
+            Desafazer mapping
+          </Button> */}
+        </div>
       </section>
 
       <ModalTutor
@@ -107,6 +123,17 @@ export default function Page() {
           setShowModalIngest(false);
           setTutor(null);
         }}
+      />
+
+      <ModalGenerateMultiple
+        show={showModalGenerate}
+        onHide={() => setShowModalGenerate(false)}
+      />
+
+      <ModalFindMapping
+        show={showModalFindMapping}
+        onHide={() => setShowModalFindMapping(false)}
+        onDeleted={(courseId) => console.log("Mapping deletado:", courseId)}
       />
     </main>
   );

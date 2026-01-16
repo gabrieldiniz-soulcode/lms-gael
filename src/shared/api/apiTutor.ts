@@ -2,7 +2,7 @@ import axios from "axios";
 
 const baseURL = process.env.NEXT_PUBLIC_TUTOR1_API_URL;
 
-export const apiTutor = axios.create({ baseURL, timeout: 10000 });
+export const apiTutor = axios.create({ baseURL, timeout: 1000000 });
 
 apiTutor.interceptors.request.use(async (config) => {
   const token = localStorage.getItem("token");
