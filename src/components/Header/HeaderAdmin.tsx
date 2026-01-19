@@ -1,12 +1,10 @@
 "use client";
 
-import { FaChalkboardTeacher, FaLink } from 'react-icons/fa';
+import { FaChalkboardTeacher } from 'react-icons/fa';
 import { Nav, Navbar, NavbarCollapse, NavbarToggle } from 'react-bootstrap';
 
 import { AuthContext } from '@/contexts/AuthContext';
-import { FaUpload } from "react-icons/fa6";
 import Image from 'next/image';
-import { RiAiGenerate2 } from 'react-icons/ri';
 import aluno from "/public/aluno_2.png";
 import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
 import { useContext } from 'react';

@@ -171,7 +171,7 @@ export default function Perfil() {
                                         </Tooltip>
                                     }
                                 >
-                                    <div className={`frequency display-inline-block ${perfil.frequency[data] == 1 ? 'bg-primary' : 'bg-auxiliary6-project'}`}></div>
+                                    <div className={`frequency display-inline-block ${perfil.frequency[data] == 1 ? 'bg-red' : 'bg-auxiliary6-project'}`}></div>
                                 </OverlayTrigger>
                             ))
                         }

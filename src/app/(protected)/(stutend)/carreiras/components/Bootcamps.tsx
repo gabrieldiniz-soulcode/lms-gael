@@ -1,6 +1,6 @@
 import { RefObject, useRef, useState } from "react";
 
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import { useOnClickOutside } from "usehooks-ts";
 
 export default function Bootcamps() {
@@ -21,7 +21,7 @@ export default function Bootcamps() {
                 {
                     !open
                         ?
-                        <Button className="w-100 fw-700 fs-21 rounded-3">Próximos Bootcamp’s</Button>
+                        <></>
                         :
                         <div className="rounded-3 w-100 bg-white" onClick={(e) => e.stopPropagation()}>
                             <div className="p-3">

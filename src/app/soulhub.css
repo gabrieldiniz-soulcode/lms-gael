@@ -75,7 +75,7 @@
   --bs-auxiliary14-project-rgb: 254, 44, 84;
   --bs-auxiliary15-project-rgb: 254, 44, 84;
   --bs-auxiliary16-project-rgb: 254, 44, 84;
-  --bs-primary-rgb: 0, 0, 255;
+  --bs-primary-rgb: 0, 220, 3;
   --bs-secondary-rgb: 253, 235, 200;
   --bs-success-rgb: 25, 135, 84;
   --bs-info-rgb: 13, 202, 240;
@@ -18661,6 +18661,10 @@ a {
   top: var(--swiper-pagination-top, auto);
   left: 0;
   width: 100%;
+}
+
+.bg-red{
+  background-color: var(--bs-red) !important;
 }
 .carrossel-carreiras .swiper-pagination-bullet-active {
   background-color: var(--bs-red) !important;
