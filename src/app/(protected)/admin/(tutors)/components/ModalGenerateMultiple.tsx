@@ -9,7 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 type ApiGenerateItem = { pdf_name?: string };
 type ApiGenerateResponse = { success?: boolean; count?: number; data?: ApiGenerateItem[] };
 
-const MAX_TOPICS = 20;
+const MAX_TOPICS = 10;
 
 const schema = z.object({
   course: z.string().trim().min(2, "Informe o curso."),

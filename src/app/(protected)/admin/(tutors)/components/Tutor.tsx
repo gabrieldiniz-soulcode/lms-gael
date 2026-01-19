@@ -1,5 +1,8 @@
+import { LiaEdit, LiaTrashAlt } from "react-icons/lia";
+
 import { Button } from "react-bootstrap";
-import { LiaEdit } from "react-icons/lia";
+import ConfirmModal from "@/components/ConfirmModal/ConfirmModal";
+import { useState } from "react";
 
 type TutorProps = {
   name: string;
@@ -10,7 +13,8 @@ type TutorProps = {
   setShowModalTutor: (show: boolean) => void;
   setShowModalMapping: (show: boolean) => void;
   setShowModalIngest: (show: boolean) => void;
-  setTutor?: (tutor: any) => void;
+  setTutor?: (tutor: unknown) => void;
+  deleteTutor: (tutor: unknown) => void;
 };
 
 function truncateString(str: string, maxLength: number): string {
@@ -31,24 +35,32 @@ export default function Tutor({
   setShowModalIngest,
   setTutor,
   voice_id,
+  deleteTutor
 }: TutorProps) {
   const tutorPayload = { id, name, welcome_message, system_prompt, voice_id };
+  const [showConfirm, setShowConfirm] = useState(false);
 
   return (
     <div className="d-flex flex-column p-3 gap-3 container bg-white rounded-3 mb-3 h-100 card">
       <div className="d-flex justify-content-between">
         <span className="fw-bold fs-6">{id}</span>
-
-        <Button
-          variant="transparent"
-          className="p-0"
-          onClick={() => {
-            setShowModalTutor(true);
-            setTutor?.(tutorPayload);
-          }}
-        >
-          <LiaEdit size={24} />
-        </Button>
+        <div className="d-flex gap-3">
+          <Button
+            variant="transparent"
+            className="p-0" onClick={() => setShowConfirm(true)}>
+            <LiaTrashAlt size={24} />
+          </Button>
+          <Button
+            variant="transparent"
+            className="p-0"
+            onClick={() => {
+              setShowModalTutor(true);
+              setTutor?.(tutorPayload);
+            }}
+          >
+            <LiaEdit size={24} />
+          </Button>
+        </div>
       </div>
 
       <span>{name}</span>
@@ -80,6 +92,21 @@ export default function Tutor({
           </Button>
         </div>
       </div>
+
+      <ConfirmModal
+        show={showConfirm}
+        title="Deletar mapping"
+        message={
+          <>
+            Tem certeza que deseja deletar o mapping do curso <code>{id}</code>?
+          </>
+        }
+        confirmText="Sim, deletar"
+        cancelText="Cancelar"
+        variant="danger"
+        onCancel={() => setShowConfirm(false)}
+        onConfirm={() => deleteTutor(id)}
+      />
     </div>
   );
 }

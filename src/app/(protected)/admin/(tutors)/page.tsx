@@ -30,6 +30,16 @@ export default function Page() {
     }
   }, []);
 
+  const deleteTutor = (async (id) => {
+    try {
+      await apiTutor.delete(`/tutors/${id}`);
+      fetchTutors();
+    }
+    catch (error) {
+      console.error("Erro ao deletar tutor:", error);
+    }
+  });
+
   useEffect(() => {
     fetchTutors();
   }, [fetchTutors]);
@@ -62,6 +72,7 @@ export default function Page() {
               setShowModalTutor={setShowModalTutor}
               setShowModalMapping={setShowModalMapping}
               setShowModalIngest={setShowModalIngest}
+              deleteTutor={deleteTutor}
             />
           </div>
         ))}

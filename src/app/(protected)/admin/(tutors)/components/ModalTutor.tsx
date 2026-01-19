@@ -89,10 +89,11 @@ export default function ModalTutor({
     try {
       if (tutor) {
         await apiTutor.put(`/tutors/${tutor.id}`, payload);
-        onSaved?.(res.data);
+        onSaved?.();
       }
       else {
         await apiTutor.post(`/tutors`, payload);
+        onSaved?.();
       }
 
 
