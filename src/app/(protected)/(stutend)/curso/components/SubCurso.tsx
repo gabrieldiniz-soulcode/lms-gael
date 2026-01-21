@@ -5,7 +5,6 @@ import { IoIosLock } from "react-icons/io";
 import { MdDone } from "react-icons/md";
 import { MdOutlineQuiz } from "react-icons/md";
 import { PiCertificate } from "react-icons/pi";
-import { useEffect } from "react";
 
 interface Module {
     name: string;
@@ -29,10 +28,11 @@ interface Sequence {
 interface Props {
     subCurso: Module[];
     carreiraId: string;
-    curso: any;
+    curso: string;
+    carreira: string;
 }
 
-export default function SubCurso({ subCurso, carreiraId, curso }: Props) {
+export default function SubCurso({ subCurso, carreiraId, carreira, curso }: Props) {
 
     function getIcon(module: string) {
         switch (module) {
@@ -61,7 +61,7 @@ export default function SubCurso({ subCurso, carreiraId, curso }: Props) {
                                 <div className="d-flex flex-column gap-3">
                                     {sub.sequence.map((aula) => (
                                         <a
-                                            href={`/aula?id=${aula.cmid}&cursoId=${sub.course}&carreiraId=${carreiraId}&name=${curso.sequence[sub.section - 1]?.data_module.name}`}
+                                            href={`/aula?id=${aula.cmid}&cursoId=${sub.course}&carreiraId=${carreiraId}&carreira=${carreira}&curso=${curso}`}
                                             key={aula.cmid}
                                             className="d-flex align-items-center gap-3 text-decoration-none"
                                         >

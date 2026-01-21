@@ -12,6 +12,8 @@ export default function RootPage() {
   useEffect(() => {
     if (!user) return;
 
+    if (user?.isAdmin) return;
+
     if (user.type_render === 'carreira') {
       router.replace('/carreiras');
     } else {

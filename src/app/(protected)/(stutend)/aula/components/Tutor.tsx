@@ -10,6 +10,7 @@ import axios from "axios";
 
 interface TutorProps {
   curso?: string | null;
+  carreira?: string | null;
 }
 
 type Sender = "user" | "tutor";
@@ -27,6 +28,7 @@ interface InitResponse {
 
 interface ChatResponse {
   answer?: string;
+  selected_tutor_id: string;
 }
 
 type ChatHistoryPair = [string, string];
@@ -47,7 +49,7 @@ function buildChatHistory(messages: Message[], maxPairs = 12): ChatHistoryPair[]
   return pairs.slice(-maxPairs);
 }
 
-export default function Tutor({ curso }: TutorProps) {
+export default function Tutor({ curso, carreira }: TutorProps) {
   const { user, perfil } = useContext(AuthContext);
 
   const [messages, setMessages] = useState<Message[]>([]);
@@ -57,13 +59,15 @@ export default function Tutor({ curso }: TutorProps) {
 
   const [userName, setUserName] = useState("Você");
   const [tutorName, setTutorName] = useState("Tutor");
-  const [tutorId, setTutorId] = useState("Tutor");
+  const [tutorIds, setTutorsIds] = useState();
+  const [selectTutorId, setSelectTutorId] = useState<string | null>(null);
 
   const TUTOR_URL = process.env.NEXT_PUBLIC_TUTOR1_API_URL;
 
   const chatBoxRef = useRef<HTMLDivElement | null>(null);
 
-  const cursoKey = useMemo(() => (curso ?? "").trim().toLocaleLowerCase().replace(/\s+/g, "-"), [curso]);
+  // const cursoKey = useMemo(() => (curso ?? "").trim().toLocaleLowerCase().replace(/\s+/g, "-"), [curso]);
+  const carreiraKey = useMemo(() => (carreira ?? "").trim().toLocaleLowerCase().replace(/\s+/g, "-"), [carreira]);
 
   useEffect(() => {
     if (!chatBoxRef.current) return;
@@ -71,7 +75,7 @@ export default function Tutor({ curso }: TutorProps) {
   }, [messages]);
 
   useEffect(() => {
-    if (!user?.token || !user?.id || !TUTOR_URL || !cursoKey || !perfil) return;
+    if (!user?.token || !user?.id || !TUTOR_URL || !carreiraKey || !perfil) return;
 
     let cancelled = false;
 
@@ -81,16 +85,15 @@ export default function Tutor({ curso }: TutorProps) {
       setUserName("Você");
       setTutorName("Tutor");
 
-
       try {
-        const resTutorId = await apiTutor.get(`/mappings/course/${cursoKey}`)
+        const resTutorId = await apiTutor.get(`/mappings/course/${carreiraKey}`)
 
-        setTutorId(resTutorId.data.tutor_id);
+        setTutorsIds(resTutorId.data.tutor_ids);
 
         const res = await axios.get<InitResponse>(`${TUTOR_URL}/chat/init`, {
           params: {
             user_id: perfil.firstname.toLocaleLowerCase(),
-            tutor_id: resTutorId.data.tutor_id,
+            tutor_id: resTutorId.data.tutor_ids[0],
             _ts: Date.now(),
           },
           headers: { Authorization: `Bearer ${user.token}` },
@@ -116,10 +119,10 @@ export default function Tutor({ curso }: TutorProps) {
     return () => {
       cancelled = true;
     };
-  }, [user?.id, user?.token, TUTOR_URL, cursoKey, perfil]);
+  }, [user?.id, user?.token, TUTOR_URL, carreiraKey, perfil]);
 
   const handleSend = async () => {
-    if (!input.trim() || !user?.token || !user?.id || !TUTOR_URL || !cursoKey) return;
+    if (!input.trim() || !user?.token || !user?.id || !TUTOR_URL || !curso) return;
 
     const text = input.trim();
     setInput("");
@@ -136,9 +139,10 @@ export default function Tutor({ curso }: TutorProps) {
         `${TUTOR_URL}/chat`,
         {
           user_id: perfil.firstname.toLocaleLowerCase(),
-          tutor_id: tutorId,
-          module_id: cursoKey,
+          tutor_id: selectTutorId,
+          module_id: curso,
           message: text,
+          candidate_tutor_ids: tutorIds,
           chat_history,
           hints: { boost_terms: ["string"], filters: { additionalProp1: {} }, top_k: 8, },
         },
@@ -149,6 +153,8 @@ export default function Tutor({ curso }: TutorProps) {
           },
         }
       );
+
+      setSelectTutorId(res.data.selected_tutor_id);
 
       const tutorText = res.data?.answer ?? "...";
       setMessages((prev) => [...prev, { sender: "tutor", text: tutorText }]);
