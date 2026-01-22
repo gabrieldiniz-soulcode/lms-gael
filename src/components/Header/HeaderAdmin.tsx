@@ -22,8 +22,8 @@ export default function HeaderAdmin() {
         </a>
       </div>
 
-      <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100">
-        <Image src={logo.src} width={logo.width} height={logo.height - 20} alt="logo soulcode + passaporte digital" className="w-75 object-fit-contain" />
+      <div className="d-lg-none d-flex flex-nowrap justify-content-between w-100">
+        <Image src={logo.src} width={logo.width} height={logo.height - 20} alt="logo soulcode + passaporte digital" className="w-25 h-auto object-fit-contain" />
         <NavbarToggle aria-controls="basic-navbar-nav" />
       </div>
 

@@ -58,8 +58,8 @@ export default function Header() {
         </a>
       </div>
 
-      <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100">
-        <Image src={logoTrident.src} width={logoTrident.width} height={logoTrident.height - 20} alt="logo trident" className="w-75 object-fit-contain" />
+      <div className="d-lg-none d-flex flex-nowrap justify-content-between w-100">
+        <Image src={logoTrident.src} width={logoTrident.width} height={logoTrident.height - 20} alt="logo trident" className="w-25 h-auto object-fit-contain" />
         <NavbarToggle aria-controls="basic-navbar-nav" />
       </div>
 
