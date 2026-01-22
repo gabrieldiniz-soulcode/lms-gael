@@ -70,7 +70,6 @@ export function AuthContextProvider({ children }: Props) {
     const [userLevel, setUserLevel] = useState<number | null>(null);
     const [perfil, setPerfil] = useState<Profile>({} as Profile);
 
-
     const router = useRouter();
     const pathname = usePathname();
 
@@ -83,10 +82,6 @@ export function AuthContextProvider({ children }: Props) {
 
                 if (!user.isAdmin && (pathname.includes("/admin"))) {
                     router.push("/");
-                }
-
-                if (user.isAdmin && (!pathname.includes("/admin"))) {
-                    router.push("/admin");
                 }
 
                 if (pathname.includes("/login")) {
@@ -174,6 +169,7 @@ export function AuthContextProvider({ children }: Props) {
             .then((res: ApiResponse) => {
                 setPerfil(res.data);
                 localStorage.setItem('profile', JSON.stringify(res.data));
+                sessionStorage.setItem('profile', JSON.stringify(res.data));
             })
             .catch((err) => {
                 console.log(err);

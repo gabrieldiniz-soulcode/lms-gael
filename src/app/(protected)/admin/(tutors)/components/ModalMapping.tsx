@@ -26,6 +26,7 @@ const mappingSchema = z.object({
 type MappingFormValues = z.infer<typeof mappingSchema>;
 
 type VoiceMappingApiResponse = unknown;
+type ApiGetResponse = { tutor_ids: string[] };
 
 type ApiErrorShape =
   | { message?: string; error?: string }
@@ -115,12 +116,23 @@ export default function ModalMapping({
       return;
     }
 
+    const res = await apiTutor.get<ApiGetResponse>(
+      `/mappings/course/${encodeURIComponent(values.course_id.trim())}`
+    );
+
+    if (res.data.tutor_ids.find((tutor) => tutor == tutorId)) {
+      return;
+    }
+
+    const tutorIds = res.data.tutor_ids;
+    tutorIds.push(tutorId);
+
     setSubmitting(true);
     setServerError(null);
 
     const payload = {
       course_id: values.course_id.trim(),
-      tutor_id: tutorId,
+      tutor_ids: tutorIds,
       course_title: values.course_name.trim(),
     };
 

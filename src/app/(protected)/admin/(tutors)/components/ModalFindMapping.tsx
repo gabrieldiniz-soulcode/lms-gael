@@ -20,7 +20,7 @@ const schema = z.object({
 
 type FormValues = z.infer<typeof schema>;
 
-type ApiGetResponse = { tutor_id: string };
+type ApiGetResponse = { tutor_ids: string[] };
 type ApiErrorShape =
   | { message?: string; error?: string }
   | { errors?: Array<{ field?: string; message?: string }> };
@@ -48,14 +48,13 @@ export default function ModalFindMapping({
   const [submitting, setSubmitting] = useState(false);
   const [deleting, setDeleting] = useState(false);
 
-  const [resultTutorId, setResultTutorId] = useState<string | null>(null);
+  const [resultTutorIds, setResultTutorIds] = useState<string[] | null>(null);
   const [searchedCourseId, setSearchedCourseId] = useState<string | null>(null);
 
   const {
     register,
     handleSubmit,
     reset,
-    watch,
     formState: { errors, isDirty, isValid },
   } = useForm<FormValues>({
     resolver: zodResolver(schema),
@@ -68,17 +67,15 @@ export default function ModalFindMapping({
     setServerError(null);
     setSubmitting(false);
     setDeleting(false);
-    setResultTutorId(null);
+    setResultTutorIds(null);
     setSearchedCourseId(null);
     reset(DEFAULT_VALUES);
   }, [show, reset]);
 
-  const courseId = watch("course_id");
-
   const onSubmit: SubmitHandler<FormValues> = async (values) => {
     setSubmitting(true);
     setServerError(null);
-    setResultTutorId(null);
+    setResultTutorIds(null);
     setSearchedCourseId(null);
 
     try {
@@ -86,7 +83,7 @@ export default function ModalFindMapping({
         `/mappings/course/${encodeURIComponent(values.course_id.trim())}`
       );
 
-      setResultTutorId(res.data?.tutor_id ?? null);
+      setResultTutorIds(res.data?.tutor_ids ?? null);
       setSearchedCourseId(values.course_id.trim());
     } catch (err) {
       setServerError(getAxiosErrorMessage(err));
@@ -107,7 +104,7 @@ export default function ModalFindMapping({
       );
       onDeleted?.(searchedCourseId);
 
-      setResultTutorId(null);
+      setResultTutorIds(null);
       setSearchedCourseId(null);
       reset(DEFAULT_VALUES);
       onHide();
@@ -124,8 +121,8 @@ export default function ModalFindMapping({
   };
 
   const showResult = useMemo(
-    () => !!searchedCourseId && !!resultTutorId,
-    [searchedCourseId, resultTutorId]
+    () => !!searchedCourseId && !!resultTutorIds,
+    [searchedCourseId, resultTutorIds]
   );
 
   return (
@@ -170,9 +167,11 @@ export default function ModalFindMapping({
                   <strong>Course ID:</strong>{" "}
                   <code>{searchedCourseId ?? "—"}</code>
                 </div>
-                <div>
-                  <strong>Tutor ID:</strong> <code>{resultTutorId ?? "—"}</code>
-                </div>
+                {resultTutorIds?.map((tutor) => (
+                  <div key={tutor}>
+                    <strong>Tutor ID:</strong> <code>{tutor ?? "—"}</code>
+                  </div>
+                ))}
               </div>
             </div>
           ) : null}

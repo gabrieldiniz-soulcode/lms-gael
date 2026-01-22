@@ -8,7 +8,6 @@ import MdlCustomcert from "./MdlCustomcert";
 import MdlPage from "./MdlPage";
 import MdlQuiz from "./MdlQuiz";
 import MdlUrl from "./MdlUrl";
-import Notas from "./Notas";
 import Ranking from "./Ranking";
 import Tutor from "./Tutor";
 import axios from "axios";
@@ -58,8 +57,10 @@ export default function Aula() {
     const id = searchParams.get('id');
     const cursoId = searchParams.get('cursoId');
     const carreiraId = searchParams.get('carreiraId');
-    const name = searchParams.get('name');
-    const cursoDecoded = decodeQueryParam(String(name));
+    const carreira = searchParams.get('carreira');
+    const curso = searchParams.get('curso');
+    const carreiraDecoded = decodeQueryParam(String(carreira));
+    const cursoDecoded = decodeQueryParam(String(curso));
 
     useEffect(() => {
         function getModule() {
@@ -198,8 +199,8 @@ export default function Aula() {
                     {getDisplay()}
                 </div>
                 <div className="my-5">
-                    <Notas />
-                    <Tutor curso={cursoDecoded} />
+                    {/* <Notas /> */}
+                    <Tutor carreira={carreiraDecoded} curso={cursoDecoded} />
                 </div>
             </div>
             <div className="col-xxl-4 col-12 d-xxl-block d-none">

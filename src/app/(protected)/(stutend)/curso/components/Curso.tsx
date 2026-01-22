@@ -1,7 +1,7 @@
+import Carreira, { Course } from "./Carreira";
 import { Fragment, useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import Carreira from "./Carreira";
 import { FaChevronLeft } from "react-icons/fa6";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import Ranking from "./Ranking";
@@ -34,6 +34,10 @@ interface Sequence {
     }
 }
 
+interface ApiResponseCarreira {
+    data: Course[];
+}
+
 export default function Curso() {
 
     const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -41,12 +45,37 @@ export default function Curso() {
     // const [forum, setForum] = useState<Module>();
     const [subCurso, setSubCurso] = useState<Module[]>([]);
     const [subCursoLoading, setSubCursoLoading] = useState<boolean>(true);
+    const [carreira, setCarreira] = useState<Course>();
 
     const { user } = useContext(AuthContext);
-    const { updateResponses } = useContext(LoaderContext);
+    const { updateResponses, responses } = useContext(LoaderContext);
 
     const searchParams = useSearchParams();
     const id = searchParams.get('id');
+
+    useEffect(() => {
+        function getCourse() {
+            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
+                headers: {
+                    "database": user?.database,
+                    "Authorization": `Bearer ${user?.token}`
+                }
+            })
+                .then((res: ApiResponseCarreira) => {
+                    setCarreira(res.data.find((item) => item.id == parseInt(id || "0")));
+                })
+                .catch((err) => {
+                    console.error(err);
+                })
+                .finally(() => {
+                    updateResponses();
+                });
+        }
+
+        if (user?.name && user?.database && !responses?.every((value) => value === true)) {
+            getCourse();
+        }
+    }, [user, updateResponses, id, responses]);
 
     useEffect(() => {
 
@@ -103,7 +132,6 @@ export default function Curso() {
     }
 
     function getSubCursoComponent(mobile: boolean) {
-
         return (
             subCursoLoading
                 ?
@@ -119,7 +147,7 @@ export default function Curso() {
                         &&
                         <Ranking />
                     }
-                    <SubCurso subCurso={subCurso} carreiraId={id || ""} curso={curso} />
+                    <SubCurso curso={curso?.sequence[activeIndex]?.data_module.name || ""} subCurso={subCurso} carreiraId={id || ""} carreira={carreira?.fullname || ""} />
                 </div>
         );
     }
@@ -133,7 +161,10 @@ export default function Curso() {
                 Voltar para home
             </a>
             <div className="col-xl-6 col-12 d-flex flex-column gap-3">
-                <Carreira />
+                {
+                    carreira &&
+                    <Carreira {...carreira} />
+                }
                 {
                     curso.sequence.map((cur, index) => (
                         <Fragment key={index}>
