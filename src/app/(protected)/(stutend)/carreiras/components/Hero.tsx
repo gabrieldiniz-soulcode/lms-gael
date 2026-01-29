@@ -134,13 +134,13 @@ export default function Hero() {
         <div className="row hero-carreiras">
             <div className="col-xxl-11 p-xxl-0 m-xxl-0 pe-xxl-2">
                 <div className="row row-gap-4">
-                    <a href="https://discord.gg/F5VXyWnt" target="_blank" className="col-12 d-lg-block d-none px-3.5 ">
+                    <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-lg-block d-none px-3.5 ">
                         <Image src={bannerDesktop.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
-                    <a href="https://discord.gg/F5VXyWnt" target="_blank" className="col-12 d-lg-none d-md-block d-none px-2">
+                    <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-lg-none d-md-block d-none px-2">
                         <Image src={bannerTablet.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
-                    <a href="https://discord.gg/F5VXyWnt" target="_blank" className="col-12 d-md-none d-block px-2">
+                    <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-md-none d-block px-2">
                         <Image src={bannerCelular.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
                     <div className="col-xxl-6 col-12 card-hero d-md-block d-none">
