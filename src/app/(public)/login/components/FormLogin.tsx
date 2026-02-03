@@ -40,7 +40,7 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
             <Col xl={4} md={8} className="p-0">
                 <h1 className="fs-38 fw-700 text-auxiliary7-project">Bem- vindo(a)</h1>
                 <span className="fs-21 text-white">
-                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site da <a href="https://soulcode.com/assinatura-cursos-online" className="text-white" target="_blank">SoulCode</a> para realizar sua assinatura.</span>
+                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site do programa <a href="https://tridentcreatorgames.soulcode.com/" className="text-white" target="_blank">Trident Creator Games</a> e se inscreva! </span>
             </Col>
             <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{ minHeight: 324 }}>
                 {
