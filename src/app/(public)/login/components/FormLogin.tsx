@@ -37,10 +37,14 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
 
     return (
         <Row className="container-login d-flex align-items-center justify-content-center row-gap-5">
-            <Col xl={4} md={8} className="p-0">
+            <Col xl={4} md={8} className="p-0 d-flex flex-column gap-3">
                 <h1 className="fs-38 fw-700 text-auxiliary7-project">Bem- vindo(a)</h1>
+                <span className="fs-21 text-white mb-3">
+                    O próximo passo da sua jornada no Trident Creator Games começa agora. Para acessar a jornada, faça login na plataforma.
+                </span>
                 <span className="fs-21 text-white">
-                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site do programa <a href="https://tridentcreatorgames.soulcode.com/" className="text-white" target="_blank">Trident Creator Games</a> e se inscreva! </span>
+                    Ainda não tem acesso? Visite o site do <a href="https://tridentcreatorgames.soulcode.com/" className="text-white" target="_blank">Trident Creator Games</a>, inscreva-se e garanta sua vaga para começar a criar, aprender e evoluir no universo do entretenimento digital.
+                </span>
             </Col>
             <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{ minHeight: 324 }}>
                 {

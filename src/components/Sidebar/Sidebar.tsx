@@ -6,16 +6,13 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { GoGear } from "react-icons/go";
 import { GoHome } from "react-icons/go";
-// import { PiLightning } from "react-icons/pi";
 import Image from "next/image";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
-import logoTrident from "/public/logos/logo_trident.png";
-
-// import { FaRegCalendarAlt } from "react-icons/fa";
-// import { MdOutlineDashboard } from "react-icons/md";
-// import { MdOutlineForum } from "react-icons/md";
+import logo1 from "/public/logos_trident/logo_kings.png";
+import logo2 from "/public/logos_trident/logo_sc_branco.svg";
+import logo3 from "/public/logos_trident/logo_trident.png";
 
 export default function Sidebar() {
 
@@ -29,49 +26,31 @@ export default function Sidebar() {
         <div className={`d-lg-flex d-none gap-1 sidebar position-fixed bg-auxiliary1-project position-relative flex-column align-items-center px-3 py-4 ${open ? 'sidebar-open' : ''}`}>
 
 
-            <a href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"}>
-                <Image src={logoTrident.src} width={80} height={40} alt="Logo Trident" className="mb-5" />
+            <a className="d-flex gap-2 flex-wrap" href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"}>
+                <Image src={logo3.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+                <Image src={logo1.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+                <Image src={logo2.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
             </a>
 
             <a href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"} className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>
                 <GoHome color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Home'}
             </a>
-            {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
-                <MdOutlineDashboard color="#fff" size={20} />
-                {open && 'Dashboard'}
-            </div> */}
 
             <a href="/perfil" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <PiStudentBold color="#fff" size={20} />
                 {open && 'Minhas Carreiras'}
             </a>
 
-            {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
-                <MdOutlineForum color="#fff" size={20} />
-                {open && 'Fórum'}
-            </div> */}
-
             <a href="/certificados" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <LiaCertificateSolid color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Certificados'}
             </a>
-            
-            {/* <a href="/chat" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
-                <PiLightning color="#fff" size={20} strokeWidth={0.5} />
-                {open && 'Tutor IA'}
-            </a> */}
-
-            {/* <div className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
-                <FaRegCalendarAlt color="#fff" size={20} />
-                {open && 'Eventos'}
-            </div> */}
 
             <a href="/perfil/editar" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar text-white`}>
                 <GoGear color="#fff" size={20} strokeWidth={0.5} />
                 {open && 'Configurações'}
             </a>
-
 
             <div className={`${open ? 'w-100 icon-18-sidebar py-2' : ''} logout-sidebar align-item-center justify-content-center fs-12 text-auxiliary1-project div-icon-sidebar mt-auto bg-white`} onClick={signOut}>
                 <MdLogout className="text-auxiliary1-project" size={20} />

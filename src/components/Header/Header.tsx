@@ -12,7 +12,9 @@ import Image from 'next/image';
 import { LiaCertificateSolid } from "react-icons/lia";
 import { PiStudentBold } from "react-icons/pi";
 import aluno from "/public/placeholder_2.png";
-import logoTrident from "/public/logos/logo_trident.png"
+import logo1 from "/public/logos_trident/logo_kings.png";
+import logo2 from "/public/logos_trident/logo_sc_branco.svg";
+import logo3 from "/public/logos_trident/logo_trident.png";
 
 export default function Header() {
 
@@ -52,16 +54,19 @@ export default function Header() {
           </form>
         </div>
         <a href="/perfil" className="d-flex gap-2 align-items-center">
-          <Image src={perfil?.imagealt || aluno.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" />
+          <Image src={perfil?.imagealt || logo3.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" style={{ borderColor: `#00dc00` }} />
           <span className="fw-300 fs-12 text-white">Olá, {perfil?.firstname || "Estudante"}</span>
           <FaChevronRight color="#fff" size={18} />
         </a>
       </div>
 
-      <div className="d-lg-none d-flex flex-nowrap justify-content-between w-100">
-        <Image src={logoTrident.src} width={logoTrident.width} height={logoTrident.height - 20} alt="logo trident" className="w-25 h-auto object-fit-contain" />
-        <NavbarToggle aria-controls="basic-navbar-nav" />
+      <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100 gap-3">
+        <Image src={logo3.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+        <Image src={logo1.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+        <Image src={logo2.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
       </div>
+
+      <NavbarToggle aria-controls="basic-navbar-nav" className="ms-auto" />
 
       <NavbarCollapse id="basic-navbar-nav">
         <Nav className="me-auto d-lg-none">

@@ -8,27 +8,22 @@ import { useSearchParams } from "next/navigation";
 
 export default function LoginWithEmail() {
     const [logado, setLogado] = useState(false);
-    
     const { signIn } = useContext(AuthContext);
 
     const searchParams = useSearchParams();
-
-    const email = searchParams.get('email');
+    const email = searchParams.get("email");
 
     useEffect(() => {
-        if (!logado) {
-            login();
-        }
-    }, [login]);
-    async function login() {
+        if (logado) return;
+
         if (email) {
             setLogado(true);
-            await signIn(email, 'Mudar@123', true);
+            signIn(email, "Mudar@123", true);
         }
-    }
+    }, [email, logado, signIn]);
 
     return (
-        <div className={`d-flex justify-content-center align-items-center h-100 `}>
+        <div className="d-flex justify-content-center align-items-center h-100">
             <Spinner animation="border" role="status">
                 <span className="visually-hidden">Loading...</span>
             </Spinner>

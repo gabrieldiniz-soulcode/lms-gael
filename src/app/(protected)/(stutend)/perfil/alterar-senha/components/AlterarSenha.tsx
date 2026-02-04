@@ -108,9 +108,10 @@ export default function AlterarSenha() {
             }
         })
             .then(() => {
-                router.push("/perfil");
+                router.push("/carreiras");
             })
             .catch((err) => {
+                router.push("/login");
                 setError(err.response.data.error);
             });
     }

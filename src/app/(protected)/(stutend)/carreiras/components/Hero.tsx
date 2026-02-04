@@ -8,12 +8,12 @@ import { LoaderContext } from "@/contexts/LoaderContext";
 import { ProgressBar } from "react-bootstrap";
 import { RiPlayMiniLine } from "react-icons/ri";
 import axios from "axios";
+import bannerCelular from "/public/bannerhometridentmobile.webp";
+import bannerDesktop from "/public/bannerhometridentmobile.webp";
+import bannerTablet from "/public/bannerhometridentmobile.webp";
 import bannerYT from "/public/ao_vivo_yt.png";
 import placeholder from "/public/placeholder_2.png";
 import trofeu from "/public/trofeu.png";
-import bannerCelular from "/public/banner_trident_celular.png";
-import bannerTablet from "/public/banner_trident_tablet.png";
-import bannerDesktop from "/public/banner_trident_desktop.png";
 
 interface Course {
     id: number;
@@ -90,7 +90,7 @@ export default function Hero() {
                     let curso;
 
                     if (user?.type_render === 'carreira') {
-                        curso = res.data.find((car) => car.destaque === 1);
+                        curso = res.data.find((car) => car.id === 371);
                     } else if (user?.type_render === 'curso') {
                         curso = res.data.find((car) => !car.carreira || car.carreira.toUpperCase() !== 'SIM');
                     }
@@ -143,6 +143,20 @@ export default function Hero() {
                     <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-md-none d-block px-2">
                         <Image src={bannerCelular.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
+                    <div className="col-xxl-6 col-12 card-hero">
+                        <div className="bg-auxiliary1-project p-3 rounded-3 h-100 d-flex flex-column gap-2">
+                            <h5 className="fw-700 text-auxiliary7-project">Boas-vindas ao Trident Creator Games!</h5>
+                            <span className="text-white">
+                                Aqui, aprender vai muito além da teoria: é sobre se tornar um criador de conteúdo e profissional do ecossistema de esportes, games e entretenimento digital.
+                            </span>
+                            <span className="text-white">
+                                Para começar sua jornada, acesse a trilha Criação de Conteúdo Viral. Nela, você vai aprender como transformar ideias em conteúdos que engajam e ganham alcance.
+                            </span>
+                            <span className="text-white">
+                                Explore a plataforma no seu ritmo, mergulhe nos desafios e aproveite cada etapa. Agora é sua vez de criar!
+                            </span>
+                        </div>
+                    </div>
                     <div className="col-xxl-6 col-12 card-hero d-md-block d-none">
                         <div className="d-flex box-shadow-hero rounded-3">
                             <div className="col-5 px-0 rounded-start-3">
@@ -154,6 +168,7 @@ export default function Hero() {
                                     alt="Imagem ilustrativa"
                                 />
                             </div>
+
                             <div className="col-7 bg-white d-flex flex-column py-4 px-3 justify-content-between rounded-end-3">
                                 <span className="fw-700 fs-21 card-title-hero">{course?.fullname}</span>
                                 <span className="card-text-hero">{removeHtmlTags(course?.summary || "")}</span>
@@ -176,15 +191,6 @@ export default function Hero() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-xxl-6 col-12 card-hero">
-                        <a href="https://www.youtube.com/live/L5-731SY_6c?si=Y4Tl1hgFezU-gxTC" target="_blank" className="d-flex text-decoration-none flex-column justify-content-center h-100 rounded-3 box-shadow-hero">
-                            <Image src={bannerYT.src} width={0} height={0} className="w-100 h-100 rounded-top-3 overflow-hidden" alt="Banner Youtube" />
-                            <span className="py-3 bg-white rounded-bottom-3 text-center fs-21 fw-700">
-                                Ao vivo no YouTube
-                                <IoRadioSharp size={24} className="ms-2" />
-                            </span>
-                        </a>
                     </div>
                 </div>
             </div>

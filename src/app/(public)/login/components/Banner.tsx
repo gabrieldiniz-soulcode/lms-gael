@@ -1,6 +1,6 @@
 import Image from "next/image";
-import banner from "/public/banner_login.png";
 import { Row } from "react-bootstrap";
+import banner from "/public/banner_login_trident1920x1080.jpg";
 
 export default function Banner() {
 
