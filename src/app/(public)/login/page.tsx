@@ -3,7 +3,7 @@ import FormLogin from "./components/FormLogin";
 export default function Login() {
 
     return (
-        <section className="bg-black">
+        <section>
             <div className="container">
                 <FormLogin />
             </div>

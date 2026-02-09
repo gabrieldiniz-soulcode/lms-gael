@@ -11,10 +11,10 @@ import { GoHome } from "react-icons/go";
 import Image from 'next/image';
 import { LiaCertificateSolid } from "react-icons/lia";
 import { PiStudentBold } from "react-icons/pi";
-import aluno from "/public/placeholder_2.png";
-import logo1 from "/public/logos_trident/logo_kings.png";
-import logo2 from "/public/logos_trident/logo_sc_branco.svg";
-import logo3 from "/public/logos_trident/logo_trident.png";
+import aluno from "/public/ifood/logos/corre_play_red.png";
+import logo1 from "/public/ifood/logos/chega_junto.png";
+import logo2 from "/public/ifood/logos/i_tech_for_good.png";
+import logo3 from "/public/logos/logo_soulcode_grande.png";
 
 export default function Header() {
 
@@ -53,17 +53,17 @@ export default function Header() {
             <FaSearch className="form-input-icon-header cursor-pointer" color="#fff" onClick={handleSearch} />
           </form>
         </div>
-        <a href="/perfil" className="d-flex gap-2 align-items-center">
-          <Image src={perfil?.imagealt || logo3.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" style={{ borderColor: `#00dc00` }} />
+        <a href="/perfil" className="d-flex gap-2 align-items-center text-decoration-none">
+          <Image src={perfil?.imagealt || aluno.src} width={55} height={55} alt="foto de aluno" className="foto-aluno-header" />
           <span className="fw-300 fs-12 text-white">Olá, {perfil?.firstname || "Estudante"}</span>
           <FaChevronRight color="#fff" size={18} />
         </a>
       </div>
 
       <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100 gap-3">
-        <Image src={logo3.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
-        <Image src={logo1.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
-        <Image src={logo2.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+        <Image src={logo3.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
+        <Image src={logo1.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
+        <Image src={logo2.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
       </div>
 
       <NavbarToggle aria-controls="basic-navbar-nav" className="ms-auto" />

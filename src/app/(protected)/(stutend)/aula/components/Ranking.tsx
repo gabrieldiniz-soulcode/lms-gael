@@ -4,7 +4,7 @@ import { useCallback, useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import axios from "axios";
 import img from "/public/rectangle_ranking.png";
-import placeholder from "/public/placeholder_2.png";
+import placeholder from "/public/placeholder.png";
 
 interface UserDetails {
     firstname?: string;
@@ -64,7 +64,7 @@ export default function Ranking() {
 
     return (
         ranking &&
-        <div className="bg-auxiliary1-project rounded-3" style={{ overflow: 'hidden' }}>
+        <div className="bg-auxiliary2-project rounded-3 mb-3" style={{ overflow: 'hidden' }}>
             <div className="position-relative">
                 <Image src={img.src} width={0} height={0} className="w-100 h-auto" alt="" />
                 <div className="position-absolute mt-exxl-4 mt-3 d-flex flex-column justify-content-center align-items-center w-100 top-0">

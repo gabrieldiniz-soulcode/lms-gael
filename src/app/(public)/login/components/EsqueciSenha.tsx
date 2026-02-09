@@ -112,7 +112,8 @@ export default function EsqueciSenha({ setEsqueciSenha }: Props) {
     const handleRecoveryPassword = () => {
         axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/forgotpassword`, {
             username: email,
-            database: process.env.NEXT_PUBLIC_DATABASE
+            database: process.env.NEXT_PUBLIC_DATABASE,
+            plataform: `Trident`
         })
             .then((res) => {
                 setMensagem(res.data.message);

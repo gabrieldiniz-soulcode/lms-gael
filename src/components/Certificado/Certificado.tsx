@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
-import Fabricio from '../../../public/Fabricio.png';
-import Carmela from '../../../public/Carmela.png';
 
+import Carmela from '../../../public/ca.png';
+import Fabricio from '../../../public/fa.png';
+import Image from "next/image";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import Image from "next/image";
+import logo1 from "/public/ifood/logos/chega_junto.png";
+import logo2 from "/public/ifood/logos/i_tech_for_good.png";
+import logo3 from "/public/logos/logo_soulcode_grande.png";
 
 interface CertificateData {
     certificate_created: number;
@@ -70,38 +73,43 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                 overflow: 'hidden'
             }}
         >
-            <div className="certificado row position-relative mb-5">
+            <div className="certificado row position-relative mb-5 text-auxiliary2-project">
                 <div className="col-9 d-flex flex-column">
                     <div className="mt-5 pt-5 ps-5 ms-5 fs-51 d-flex flex-column">
-                        <span style={{ lineHeight: '50px' }} className="fw-700">CERTIFICADO</span>
-                        <span>DE CONCLUSÃO</span>
+                        <span style={{ lineHeight: '50px' }} className="fw-700 text-auxiliary2-project">CERTIFICADO</span>
+                        <span className="text-auxiliary2-project">DE CONCLUSÃO</span>
                     </div>
-                    <div className="d-flex justify-content-end mt-5 pt-5 me-5">
+                    <div className="d-flex justify-content-start mt-3 ps-5 ms-5 pt-5 mb-5">
                         <div className="d-flex flex-column gap-2">
-                            <span className="fs-21 fw-700">Concluiu o curso online com carga horária estimada em {certificado.workload} horas.</span>
-                            <span className="mt-2">Finalizado em {formatarData(certificado.certificate_created)}</span>
-                            <span className="fs-38 fw-700">{certificado.firstname} {certificado.lastname}</span>
+                            <span className="text-auxiliary2-project">Concluiu o curso online com carga horária estimada em {certificado.workload} horas.</span>
+                            <span className="text-auxiliary2-project">Finalizado em {formatarData(certificado.certificate_created)}</span>
+                            <span className="fs-38 fw-700 text-auxiliary2-project">{certificado.firstname} {certificado.lastname}</span>
                         </div>
                     </div>
                     <div className="d-flex flex-column gap-3 ps-5 ms-5">
-                        <span className="fs-28 fw-700">Curso</span>
-                        <span className="fs-51 fw-700">{certificado.coursename}</span>
+                        <span className="fs-21 fw-700 text-auxiliary2-project">Curso</span>
+                        <span className="fs-51 fw-700 text-auxiliary2-project">{certificado.coursename}</span>
                     </div>
                     <div className="d-flex flex-column justify-content-between ms-5 ps-5 mt-auto">
-                        <span className="fs-21 fw-700">CÓDIGO DE VALIDAÇÃO: {certificado.code}</span>
+                        <span className="fs-21 fw-700 text-auxiliary2-project">CÓDIGO DE VALIDAÇÃO: {certificado.code}</span>
                     </div>
-                    <div className="d-flex mx-auto mb-5 py-5">
+                    <div className="d-flex justify-content-end mb-5 py-5">
                         <span className="d-flex flex-column align-items-center justify-content-center">
                             <Image src={Fabricio} width={300} alt="Assinatura" />
-                            <div>FABRICIO CARDOSO</div>
-                            <div>Cofundador</div>
+                            <div className="text-auxiliary2-project">FABRICIO CARDOSO</div>
+                            <div className="text-auxiliary2-project">Cofundador</div>
                         </span>
                         <span className="d-flex flex-column align-items-center justify-content-center">
                             <Image src={Carmela} width={350} alt="Assinatura" />
-                            <div>CARMELA BORST</div>
-                            <div>Fundadora</div>
+                            <div className="text-auxiliary2-project">CARMELA BORST</div>
+                            <div className="text-auxiliary2-project">Fundadora</div>
                         </span>
                     </div>
+                </div>
+                <div className="col-3 d-flex flex-column align-items-center gap-5 pt-5">
+                    <Image src={logo3.src} width={170} height={105} alt="logo Trident" className="header-login-logo mt-3 h-auto object-fit-contain" />
+                    <Image src={logo1.src} width={190} height={115} alt="logo Trident" className="header-login-logo h-auto object-fit-contain" />
+                    <Image src={logo2.src} width={190} height={140} alt="logo Trident" className="header-login-logo h-auto object-fit-contain" />
                 </div>
             </div>
         </div>

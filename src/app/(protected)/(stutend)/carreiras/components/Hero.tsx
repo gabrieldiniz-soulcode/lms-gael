@@ -3,16 +3,14 @@ import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import { FaRegClock } from "react-icons/fa";
-import { IoRadioSharp } from "react-icons/io5";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import { ProgressBar } from "react-bootstrap";
 import { RiPlayMiniLine } from "react-icons/ri";
 import axios from "axios";
-import bannerCelular from "/public/bannerhometridentmobile.webp";
-import bannerDesktop from "/public/bannerhometridentmobile.webp";
-import bannerTablet from "/public/bannerhometridentmobile.webp";
-import bannerYT from "/public/ao_vivo_yt.png";
-import placeholder from "/public/placeholder_2.png";
+import bannerCelular from "/public/discord_2.png";
+import bannerDesktop from "/public/discord.png";
+import bannerTablet from "/public/discord_2.png";
+import placeholder from "/public/placeholder.png";
 import trofeu from "/public/trofeu.png";
 
 interface Course {
@@ -133,7 +131,7 @@ export default function Hero() {
         course &&
         <div className="row hero-carreiras">
             <div className="col-xxl-11 p-xxl-0 m-xxl-0 pe-xxl-2">
-                <div className="row row-gap-4">
+                <div className="row row-gap-4 mt-lg-0 mt-5">
                     <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-lg-block d-none px-3.5 ">
                         <Image src={bannerDesktop.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
@@ -145,15 +143,15 @@ export default function Hero() {
                     </a>
                     <div className="col-xxl-6 col-12 card-hero">
                         <div className="bg-auxiliary1-project p-3 rounded-3 h-100 d-flex flex-column gap-2">
-                            <h5 className="fw-700 text-auxiliary7-project">Boas-vindas ao Trident Creator Games!</h5>
+                            <h5 className="fw-700 text-auxiliary7-project">Lorem ipsum dolor sit amet consectetur adipisicing.</h5>
                             <span className="text-white">
-                                Aqui, aprender vai muito além da teoria: é sobre se tornar um criador de conteúdo e profissional do ecossistema de esportes, games e entretenimento digital.
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, recusandae quia. Culpa labore autem nesciunt!
                             </span>
                             <span className="text-white">
-                                Para começar sua jornada, acesse a trilha Criação de Conteúdo Viral. Nela, você vai aprender como transformar ideias em conteúdos que engajam e ganham alcance.
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa unde, autem praesentium quisquam dolor quos adipisci!
                             </span>
                             <span className="text-white">
-                                Explore a plataforma no seu ritmo, mergulhe nos desafios e aproveite cada etapa. Agora é sua vez de criar!
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quaerat amet sequi cumque id!
                             </span>
                         </div>
                     </div>

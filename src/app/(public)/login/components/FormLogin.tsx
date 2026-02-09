@@ -6,6 +6,8 @@ import { Suspense, useContext, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import EsqueciSenha from "./EsqueciSenha";
+import Image from "next/image";
+import logo1 from "/public/ifood/logos/corre_play_red.png";
 
 export default function FormLogin({ forgotPassword = false }: { forgotPassword?: boolean }) {
 
@@ -38,12 +40,10 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
     return (
         <Row className="container-login d-flex align-items-center justify-content-center row-gap-5">
             <Col xl={4} md={8} className="p-0 d-flex flex-column gap-3">
-                <h1 className="fs-38 fw-700 text-auxiliary7-project">Bem- vindo(a)</h1>
-                <span className="fs-21 text-white mb-3">
-                    O próximo passo da sua jornada no Trident Creator Games começa agora. Para acessar a jornada, faça login na plataforma.
-                </span>
-                <span className="fs-21 text-white">
-                    Ainda não tem acesso? Visite o site do <a href="https://tridentcreatorgames.soulcode.com/" className="text-white" target="_blank">Trident Creator Games</a>, inscreva-se e garanta sua vaga para começar a criar, aprender e evoluir no universo do entretenimento digital.
+                <Image src={logo1.src} width={264} height={117} alt="logo Trident" className="object-fit-contain" />
+                <h1 className="fs-38 fw-700 text-primary">Bem- vindo(a)</h1>
+                <span className="fs-21 text-black mb-3">
+                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site do programa para realizar sua inscrição.
                 </span>
             </Col>
             <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{ minHeight: 324 }}>
