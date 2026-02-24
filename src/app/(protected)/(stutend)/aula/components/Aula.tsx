@@ -30,6 +30,7 @@ interface Sequence {
         content: string;
         externalurl: string;
         id: number;
+        templateid: number;
     }
 }
 
@@ -169,7 +170,7 @@ export default function Aula() {
     return (
         aulas
         &&
-        <div className="row">
+        <div className="row mt-2">
             <a
                 href={user.type_render === 'curso' ? `/cursos/${cursoId}` : `/curso?id=${carreiraId}`}
                 className="col-12 mt-2 mb-4 text-decoration-none d-flex align-items-center gap-2"

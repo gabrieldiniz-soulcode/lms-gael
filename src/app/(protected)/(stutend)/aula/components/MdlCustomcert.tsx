@@ -15,6 +15,7 @@ interface Sequence {
         content: string;
         externalurl: string;
         id: number;
+        templateid: number;
     }
 }
 
@@ -29,6 +30,7 @@ interface CertificateData {
     firstname: string;
     lastname: string;
     workload: string;
+    name: string;
 }
 
 export default function MdlCustomcert({ sequence }: Props) {
@@ -46,7 +48,8 @@ export default function MdlCustomcert({ sequence }: Props) {
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate`, {
             headers: {
                 Authorization: `Bearer ${user?.token}`,
-                course: sequence.data_module.course
+                course: sequence.data_module.course,
+                template_id: sequence.data_module.templateid
             }
         });
         setCertificado(res.data);

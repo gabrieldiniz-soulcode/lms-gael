@@ -12,6 +12,7 @@ interface CertificateData {
     firstname: string;
     lastname: string;
     workload: string;
+    name: string;
 }
 
 export default function Certificados() {
@@ -70,7 +71,7 @@ export default function Certificados() {
                                     <FaRegFilePdf className="w-100 h-auto px-4" color="#FF3B30" />
                                 </div>
                                 <div className="bg-auxiliary5-project pb-3 pt-4 px-4 h-100 fw-700 rounded-bottom-3">
-                                    {item.coursename}
+                                    {item.name}
                                 </div>
                             </div>
                             <Certificado

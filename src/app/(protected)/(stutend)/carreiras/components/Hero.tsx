@@ -89,7 +89,7 @@ export default function Hero() {
                     let curso;
 
                     if (user?.type_render === 'carreira') {
-                        curso = res.data.find((car) => car.id === 371);
+                        curso = res.data.find((car) => car.id === 382);
                     } else if (user?.type_render === 'curso') {
                         curso = res.data.find((car) => !car.carreira || car.carreira.toUpperCase() !== 'SIM');
                     }
