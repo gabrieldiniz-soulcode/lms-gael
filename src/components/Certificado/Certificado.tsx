@@ -6,8 +6,8 @@ import Image from "next/image";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import logo1 from "/public/ifood/logos/chega_junto.png";
-import logo2 from "/public/ifood/logos/i_tech_for_good.png";
-import logo3 from "/public/logos/logo_soulcode_grande.png";
+import logo2 from "/public/ifood/logos/Logo SoulCode.svg";
+import logo3 from "/public/ifood/logos/soulcode.png";
 
 interface CertificateData {
     certificate_created: number;
@@ -107,8 +107,8 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     </div>
                 </div>
                 <div className="col-3 d-flex flex-column align-items-center gap-5 pt-5">
+                    <Image src={logo1.src} width={190} height={115} alt="logo Trident" className="header-login-logo h-auto object-fit-contain mt-4" />
                     <Image src={logo3.src} width={170} height={105} alt="logo Trident" className="header-login-logo mt-3 h-auto object-fit-contain" />
-                    <Image src={logo1.src} width={190} height={115} alt="logo Trident" className="header-login-logo h-auto object-fit-contain" />
                     <Image src={logo2.src} width={190} height={140} alt="logo Trident" className="header-login-logo h-auto object-fit-contain" />
                 </div>
             </div>

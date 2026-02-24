@@ -1,5 +1,5 @@
 .perfil-ranking-aula1 {
-    border: 3px solid #F9B040;
+    border: 3px solid #fff;
 }
 
 .perfil-ranking-aula3 {
@@ -11,7 +11,7 @@
 }
 
 .colocacao-ranking-aula1 {
-    background-color: #F9B040;
+    background-color: #fff;
 }
 
 .colocacao-ranking-aula2 {
@@ -36,6 +36,7 @@
         img {
             border: 3px solid #F9B040;
         }
+
         div {
             span {
                 color: white;
@@ -57,15 +58,15 @@
                 100% 75%,
                 50% 100%,
                 0% 75%,
-                0% 25%
-            );
+                0% 25%);
         border-radius: 15px;
+
         div {
             span {
                 color: #F9B040;
             }
         }
-    }   
+    }
 }
 
 .lista-ranking-aula-active {
@@ -82,6 +83,7 @@
         img {
             border: 3px solid #3D3D3D;
         }
+
         div {
             span {
                 color: #3D3D3D;
@@ -103,8 +105,7 @@
                 100% 75%,
                 50% 100%,
                 0% 75%,
-                0% 25%
-            );
+                0% 25%);
         border-radius: 15px;
     }
 }

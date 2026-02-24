@@ -21,3 +21,69 @@
         -webkit-box-orient: vertical;
     }
 }
+
+.hero-ifood-card {
+    --card-h: 288px;
+    /* altura fixa do card */
+    --img-w: 180px;
+    /* “tamanho” do boneco */
+    --img-h: 220px;
+    --pad: 18px;
+
+    height: var(--card-h);
+    background: #e4002b;
+    border-radius: 18px;
+    position: relative;
+    overflow: hidden;
+    /* garante que nada vaze */
+}
+
+/* Caixa de texto maior */
+.hero-ifood-card__textbox {
+    position: absolute;
+    top: var(--pad);
+    bottom: var(--pad);
+    left: calc(var(--img-w) - 30px);
+    /* aproxima o texto do boneco (caixa maior) */
+    right: var(--pad);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f6f0dd;
+    border-radius: 16px;
+    padding: 18px 20px;
+    z-index: 1;
+}
+
+/* Texto NÃO pode estourar: limita linhas */
+.hero-ifood-card__text {
+    margin: 0;
+    color: #111;
+    font-size: clamp(16px, 1.6vw, 24px);
+    line-height: 1.15;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 7;
+    /* ajuste quantas linhas cabem no seu card fixo */
+    overflow: hidden;
+}
+
+/* Imagem por cima da caixa (overlap) */
+.hero-ifood-card__imgwrap {
+    position: absolute;
+    left: 18px;
+    bottom: 14px;
+    width: var(--img-w);
+    height: var(--img-h);
+    z-index: 2;
+
+    transform: translateY(-10px);
+    /* “ligeiramente encima” da caixa */
+}
+
+.hero-ifood-card__img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    image-rendering: pixelated;
+}

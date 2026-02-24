@@ -1,12 +1,12 @@
 "use client";
 
-import { FaChalkboardTeacher } from 'react-icons/fa';
 import { Nav, Navbar, NavbarCollapse, NavbarToggle } from 'react-bootstrap';
 
 import { AuthContext } from '@/contexts/AuthContext';
+import { FaChalkboardTeacher } from 'react-icons/fa';
 import Image from 'next/image';
 import aluno from "/public/aluno_2.png";
-import logo from "/public/logos/logo_soulcode_passaporte_digital_horizontal.png";
+import logo from "/public/ifood/logos/soulcode.png";
 import { useContext } from 'react';
 
 export default function HeaderAdmin() {

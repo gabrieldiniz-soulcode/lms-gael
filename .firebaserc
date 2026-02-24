@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "trident-lms"
-  }
+    "default": "ifood-lms",
+    "y": "ifood-lms"
+  },
+  "targets": {},
+  "etags": {}
 }

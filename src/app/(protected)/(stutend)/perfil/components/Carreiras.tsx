@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+
 import { AuthContext } from "@/contexts/AuthContext";
 import CarrosselCarreiras from "@/components/CarrosselCarreiras/CarrosselCarreiras";
 import { LoaderContext } from "@/contexts/LoaderContext";
@@ -76,7 +77,7 @@ export default function PerfilCursos() {
 
     return (
         <div>
-            <span className="fs-28 fw-700 text-auxiliary1-project">
+            <span className="fs-28 fw-700 text-auxiliary2-project">
                 {user?.type_render === 'carreira' ? 'Carreiras' : 'Cursos'} em andamento
             </span>
             <div className="mt-4">

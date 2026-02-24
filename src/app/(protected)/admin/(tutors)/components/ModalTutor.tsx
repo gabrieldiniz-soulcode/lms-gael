@@ -25,6 +25,14 @@ const tutorSchema = z.object({
   voice_id: z
     .string()
     .trim()
+    .optional(),
+  welcome_message_generic: z
+    .string()
+    .trim()
+    .optional(),
+  expertise_description: z
+    .string()
+    .trim()
     .optional()
 });
 
@@ -32,7 +40,9 @@ const DEFAULT_VALUES = {
   name: "",
   system_prompt: "",
   welcome_message: "Saudações, {user_name}!",
-  voice_id: "pt-BR-Wavenet-B"
+  voice_id: "pt-BR-Wavenet-B",
+  expertise_description: "",
+  welcome_message_generic: ""
 };
 
 type ModalTutorProps = {
@@ -80,6 +90,7 @@ export default function ModalTutor({
     console.log(values)
 
     const payload = {
+      ...values,
       name: values.name.trim(),
       system_prompt: values.system_prompt.trim(),
       welcome_message: values.welcome_message.trim(),

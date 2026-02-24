@@ -13,8 +13,8 @@ import { LiaCertificateSolid } from "react-icons/lia";
 import { PiStudentBold } from "react-icons/pi";
 import aluno from "/public/ifood/logos/corre_play_red.png";
 import logo1 from "/public/ifood/logos/chega_junto.png";
-import logo2 from "/public/ifood/logos/i_tech_for_good.png";
-import logo3 from "/public/logos/logo_soulcode_grande.png";
+import logo2 from "/public/ifood/logos/Logo SoulCode.svg";
+import logo3 from "/public/ifood/logos/soulcode.png";
 
 export default function Header() {
 

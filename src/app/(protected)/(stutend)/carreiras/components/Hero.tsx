@@ -7,9 +7,10 @@ import { LoaderContext } from "@/contexts/LoaderContext";
 import { ProgressBar } from "react-bootstrap";
 import { RiPlayMiniLine } from "react-icons/ri";
 import axios from "axios";
-import bannerCelular from "/public/discord_2.png";
-import bannerDesktop from "/public/discord.png";
-import bannerTablet from "/public/discord_2.png";
+import bannerCelular from "/public/ifood/banner_home_desktop.png";
+import bannerDesktop from "/public/ifood/banner_home_desktop.png";
+import bannerTablet from "/public/ifood/banner_home_desktop.png";
+import entregador from "/public/ifood/entregador.png";
 import placeholder from "/public/placeholder.png";
 import trofeu from "/public/trofeu.png";
 
@@ -141,20 +142,6 @@ export default function Hero() {
                     <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-md-none d-block px-2">
                         <Image src={bannerCelular.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
-                    <div className="col-xxl-6 col-12 card-hero">
-                        <div className="bg-auxiliary1-project p-3 rounded-3 h-100 d-flex flex-column gap-2">
-                            <h5 className="fw-700 text-auxiliary7-project">Lorem ipsum dolor sit amet consectetur adipisicing.</h5>
-                            <span className="text-white">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, recusandae quia. Culpa labore autem nesciunt!
-                            </span>
-                            <span className="text-white">
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsa unde, autem praesentium quisquam dolor quos adipisci!
-                            </span>
-                            <span className="text-white">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit quaerat amet sequi cumque id!
-                            </span>
-                        </div>
-                    </div>
                     <div className="col-xxl-6 col-12 card-hero d-md-block d-none">
                         <div className="d-flex box-shadow-hero rounded-3">
                             <div className="col-5 px-0 rounded-start-3">
@@ -187,6 +174,29 @@ export default function Hero() {
                                     </div>
                                     {course?.progresso || "0"}%
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="col-xxl-6 col-12 card-hero">
+                        <div className="hero-ifood-card">
+                            <div className="hero-ifood-card__textbox">
+                                <p className="hero-ifood-card__text">
+                                    Com aulas 100% online, lives com especialistas e uso da Godot Engine, os participantes
+                                    aprendem do zero até publicar um game simulador de entrega, acessível, colaborativo e com
+                                    foco na direção responsável.
+                                </p>
+                            </div>
+
+                            <div className="hero-ifood-card__imgwrap">
+                                <Image
+                                    src={entregador}
+                                    alt="Entregador iFood"
+                                    width={280}
+                                    height={280}
+                                    className="hero-ifood-card__img"
+                                    priority
+                                />
                             </div>
                         </div>
                     </div>

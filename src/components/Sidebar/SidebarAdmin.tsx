@@ -6,8 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import Image from "next/image";
 import { MdLogout } from "react-icons/md";
-import { RiAiGenerate2 } from "react-icons/ri";
-import logo from "/public/logos/logo_soulcode_passaporte_digital_vertical.png";
+import logo from "/public/ifood/logos/soulcode.png";
 
 export default function SidebarAdmin() {
 
@@ -15,14 +14,12 @@ export default function SidebarAdmin() {
 
     const [open, setOpen] = useState<boolean>(false);
 
-    const { user } = useContext(AuthContext);
-
     return (
         <div className={`d-lg-flex d-none gap-1 sidebar position-fixed bg-auxiliary1-project position-relative flex-column align-items-center px-3 py-4 ${open ? 'sidebar-open' : ''}`}>
 
 
             <a href="/admin">
-                <Image src={logo.src} width={logo.width} height={logo.width} alt="Logo Soulcode Passaporte Digital" className="mb-5" />
+                <Image src={logo.src} width={50} height={50} alt="Logo Soulcode Passaporte Digital" className="mb-5 mt-3 h-auto" />
             </a>
 
             <a href="/admin" className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>

@@ -17,7 +17,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Trident Creator Games",
+  title: "Corre Play",
   description: "",
 };
 
