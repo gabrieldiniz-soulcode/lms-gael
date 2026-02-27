@@ -87,10 +87,7 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                 pagination={{
                     clickable: true,
                 }}
-                navigation={{
-                    prevEl: '.custom-prev',
-                    nextEl: '.custom-next',
-                }}
+                navigation={true}
                 className="mySwiper carrossel-carreiras"
             >
 

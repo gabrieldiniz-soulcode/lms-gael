@@ -5,7 +5,7 @@ import { Button } from "react-bootstrap";
 import Certificado from "@/components/Certificado/Certificado";
 import axios from "axios";
 
-interface Sequence {
+export interface Sequence {
     cmid: number,
     module: string;
     complete: boolean;
@@ -21,9 +21,10 @@ interface Sequence {
 
 interface Props {
     sequence: Sequence;
+    setbuttons: () => React.ReactElement;
 }
 
-interface CertificateData {
+export interface CertificateData {
     certificate_created: number;
     code: string;
     coursename: string;
@@ -33,7 +34,7 @@ interface CertificateData {
     name: string;
 }
 
-export default function MdlCustomcert({ sequence }: Props) {
+export default function MdlCustomcert({ sequence, setbuttons }: Props) {
 
     console.log(sequence)
 
@@ -57,14 +58,18 @@ export default function MdlCustomcert({ sequence }: Props) {
     };
 
     return (
-        <div className="w-100">
-            <Button className="px-3" onClick={buscarCertificado}>Baixar Certificado</Button>
-            <Certificado
-                certificado={certificado}
-                triggerDownload={triggerDownload}
-                index={0}
-                onDownloaded={() => setTriggerDownload([false])}
-            />
+        <div className="">
+            {setbuttons()}
+            <div className="w-100">
+
+                <Button className="px-3" onClick={buscarCertificado}>Baixar Certificado</Button>
+                <Certificado
+                    certificado={certificado}
+                    triggerDownload={triggerDownload}
+                    index={0}
+                    onDownloaded={() => setTriggerDownload([false])}
+                />
+            </div>
         </div>
     );
 }

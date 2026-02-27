@@ -142,23 +142,23 @@ export default function Hero() {
                     <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-md-none d-block px-2">
                         <Image src={bannerCelular.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
-                    <div className="col-xxl-6 col-12 card-hero d-md-block d-none">
-                        <div className="d-flex box-shadow-hero rounded-3">
-                            <div className="col-5 px-0 rounded-start-3">
+                    <div className="col-xxl-6 col-12 card-hero d-block ">
+                        <div className="d-flex box-shadow-hero rounded-3  h-100">
+                            <div className="col-5 px-0 rounded-start-3 ">
                                 <Image
                                     src={getImgUrl(course?.icon || "")}
                                     width={0}
-                                    height={288}
-                                    className="w-100 object-fit-cover rounded-start-3"
+                                    height={0}
+                                    className="w-100   h-100 object-fit-cover rounded-start-3"
                                     alt="Imagem ilustrativa"
                                 />
                             </div>
 
-                            <div className="col-7 bg-white d-flex flex-column py-4 px-3 justify-content-between rounded-end-3">
-                                <span className="fw-700 fs-21 card-title-hero">{course?.fullname}</span>
+                            <div className="col-7 bg-white d-flex flex-column  py-4 px-3 justify-content-between rounded-end-3">
+                                <span className="fw-700 fs-21 text-start ">{course?.fullname}</span>
                                 <span className="card-text-hero">{removeHtmlTags(course?.summary || "")}</span>
-                                <div className="d-flex justify-content-between py-4">
-                                    <span className="fs-12 d-flex align-items-center">
+                                <div className="d-flex flex-column flex-md-row justify-content-between py-md-4 py-2">
+                                    <span className="fs-12 d-flex align-items-center my-md-0 my-3">
                                         <FaRegClock className='text-auxiliary1-project me-2' />
                                         {course?.carga} DE ESTUDO
                                     </span>

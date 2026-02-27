@@ -19015,4 +19015,14 @@ button.copy-btn {
   transition: background 0.2s ease;
 }
 
+.arrows {
+  transition: ease 0.3s;
+  filter: brightness(0.4);
+  cursor: pointer;
+}
+.arrows:hover {
+  transition: ease 0.3s;
+  transform: scale(1.1);
+  filter: brightness(0.7);
+}
 /*# sourceMappingURL=soulhub.css.map */

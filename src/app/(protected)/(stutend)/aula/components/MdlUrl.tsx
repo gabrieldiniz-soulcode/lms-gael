@@ -15,14 +15,19 @@ interface Sequence {
 
 interface Props {
     sequence: Sequence;
+    setbuttons: () => React.ReactElement;
+
 }
 
-export default function MdlUrl({ sequence }: Props) {
+export default function MdlUrl({ sequence, setbuttons }: Props) {
 
     return (
-        <div className="d-flex gap-2 align-items-center w-100">
-            <a href={sequence.data_module.externalurl} target="_blank">Link Externo</a>
-            <FaRegFilePdf />
+        <div>
+            {setbuttons()}
+            < div className="d-flex gap-2 align-items-center w-100" >
+                <a href={sequence.data_module.externalurl} target="_blank">Link Externo</a>
+                <FaRegFilePdf />
+            </ div>
         </div>
     );
 }

@@ -156,7 +156,7 @@ export default function Curso() {
         curso
         &&
         <div className="row mb-5">
-            <a href="/carreiras" className="col-12 mt-2 mb-4 text-decoration-none d-flex align-items-center gap-2">
+            <a href="/carreiras" className="col-12 mt-4 mb-4 text-decoration-none d-flex align-items-center gap-2">
                 <FaChevronLeft size={16} />
                 Voltar para home
             </a>

@@ -23,9 +23,10 @@ interface Props {
     sequence: Sequence;
     paused: boolean;
     setPaused: (newPaused: boolean) => void;
+    setbuttons: () => React.ReactElement;
 }
 
-export default function MdlPage({ sequence, paused, setPaused }: Props) {
+export default function MdlPage({ sequence, paused, setPaused, setbuttons }: Props) {
 
     const videoRef = useRef<HTMLVideoElement>(null);
     const [progress, setProgress] = useState<number>(0);
@@ -151,16 +152,17 @@ export default function MdlPage({ sequence, paused, setPaused }: Props) {
                             </div>
                             {completed && <FaCheckCircle size={24} color="green" />}
                         </div>
+                        {setbuttons()}
                     </>
                 )}
 
                 <span
-                    className="dangerouslySetInnerHTML"
+                    className="dangerouslySetInnerHTML w-100 px-0"
                     dangerouslySetInnerHTML={{ __html: getContentWithoutVideo() }}
                 ></span>
             </div>
             :
-            <div className="w-100">
+            <div className="w-100 px-0">
                 <span
                     className="dangerouslySetInnerHTML"
                     dangerouslySetInnerHTML={{ __html: sequence.data_module.content }}

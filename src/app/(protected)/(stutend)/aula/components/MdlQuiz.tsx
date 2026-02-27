@@ -1,15 +1,20 @@
-import { Button, Spinner } from "react-bootstrap";
+import { Button, Modal, Spinner } from "react-bootstrap";
 import { Suspense, useContext, useEffect, useState } from "react"
 
 import { AuthContext } from "@/contexts/AuthContext";
 import Quiz from "./Quiz";
 import axios from "axios";
+import { CertificateData, Sequence } from "./MdlCustomcert";
+import Certificado from "@/components/Certificado/Certificado";
 
 interface Props {
     userid: string,
     database: string,
     cmid: number,
     instance: number
+    setbuttons: () => React.ReactElement;
+    sequence: Sequence;
+    nexturl?: string
 }
 
 interface Tentativa {
@@ -43,11 +48,12 @@ interface Resposta {
 interface ApiResponse {
     data: Resposta;
 }
-export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
+export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, sequence, nexturl }: Props) {
 
     const [quiz, setQuiz] = useState<Resposta>();
     const [loading, setLoading] = useState<boolean>(true);
     const [quizAttempt, setQuizAttempt] = useState<boolean>(false);
+    const [wasAttempLoading, setWasAttempLoading] = useState<boolean>(false);
 
     const { user } = useContext(AuthContext);
 
@@ -63,6 +69,13 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
             })
                 .then((res: ApiResponse) => {
                     setQuiz(res.data);
+
+                    if (wasAttempLoading) {
+                        setWasAttempLoading(false)
+                        handleShow()
+                    }
+
+
                 })
                 .catch((err) => {
                     console.error(err);
@@ -90,6 +103,31 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
         return `${dia}/${mes}/${ano}`;
     }
 
+    const [show, setShow] = useState(false);
+
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+
+    const [certificado, setCertificado] = useState<CertificateData | null>(null);
+    const [triggerDownload, setTriggerDownload] = useState<boolean[]>([false]);
+
+    const buscarCertificado = async () => {
+
+        if (!user?.token) return;
+
+        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate`, {
+            headers: {
+                Authorization: `Bearer ${user?.token}`,
+                course: sequence.data_module.course,
+                template_id: sequence.data_module.templateid
+            }
+        }).catch(e => console.log(e))
+        if (!res) return
+        setCertificado(res.data);
+        setTriggerDownload([true]);
+    };
+
+
     return (
         loading
             ?
@@ -103,19 +141,25 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
                 quizAttempt
                     ?
                     <Suspense>
-                        <Quiz
-                            cmid={cmid}
-                            database={database}
-                            instance={(quiz?.action == "continue_attempt" ? quiz.attempt_id : instance)}
-                            userid={userid}
-                            newAttempt={(quiz?.action == "continue_attempt" ? false : true)}
-                            setQuizAttempt={setQuizAttempt}
-                        />
+                        <div>
+
+                            <Quiz
+                                cmid={cmid}
+                                database={database}
+                                instance={(quiz?.action == "continue_attempt" ? quiz.attempt_id : instance)}
+                                userid={userid}
+                                newAttempt={(quiz?.action == "continue_attempt" ? false : true)}
+                                setQuizAttempt={setQuizAttempt}
+                                setWasAttempLoading={setWasAttempLoading}
+
+                            />
+                        </div>
                     </Suspense>
                     :
                     <div className="w-100">
-                        <Button className="px-3" onClick={() => setQuizAttempt(true)}>{quiz.message}</Button>
-                        <table className="table mt-4">
+                        {setbuttons()}
+                        <Button className="px-3 my-3" onClick={() => setQuizAttempt(true)}>{quiz.message}</Button>
+                        <table className="table my-4">
                             <thead>
                                 <tr>
                                     <th scope="col d-flex justify-content-center">Tentativa</th>
@@ -140,7 +184,43 @@ export default function MdlQuiz({ userid, database, cmid, instance }: Props) {
                                 }
                             </tbody>
                         </table>
-                    </div>
+
+
+
+
+                        {/* <Button variant="primary" onClick={handleShow}>
+                            Launch demo modal
+                        </Button> */}
+
+                        <Modal show={show} onHide={handleClose} className="position-relative" backdrop="static">
+                            <img src="/modulo400.png" className="w-100 position-relative z-1 rounded" alt="" />
+                            <div className="position-absolute h-100 z-2 d-flex justify-content-around w-100 ">
+                                <div className=" d-flex justify-content-center align-items-end pb-5 w-100 mb-5 gap-3">
+
+                                    <Button variant="secondary" onClick={buscarCertificado}>
+                                        Baixe seu certificado
+                                        <span className=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" /></svg></span>
+                                    </Button>
+                                    <Certificado
+                                        certificado={certificado}
+                                        triggerDownload={triggerDownload}
+                                        index={0}
+                                        onDownloaded={() => setTriggerDownload([false])}
+                                    />
+
+                                    <a className="btn btn-primary" href={nexturl}>
+                                        ir para o próximo módulo
+                                        <span className="">
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z" /></svg>
+                                        </span>
+
+                                    </a>
+                                </div>
+                            </div>
+
+                        </Modal>
+
+                    </div >
             )
     );
 }
