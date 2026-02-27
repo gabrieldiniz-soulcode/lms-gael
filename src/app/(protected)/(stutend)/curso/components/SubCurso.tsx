@@ -61,6 +61,14 @@ export default function SubCurso({ subCurso, carreiraId, carreira, curso }: Prop
                 break;
         }
     }
+    function boldifcerticate(module: string) {
+        switch (module) {
+            case "mdl_customcert":
+                return 'fw-bold'
+            default:
+                break;
+        }
+    }
 
     return (
         <Accordion defaultActiveKey="0" className="bg-white accordion-curso rounded-3">
@@ -81,7 +89,8 @@ export default function SubCurso({ subCurso, carreiraId, carreira, curso }: Prop
                                             <span className="">
                                                 {getIcon(aula.module)}
                                             </span>
-                                            <span>
+
+                                            <span className={boldifcerticate(aula.module)} >
                                                 {aula?.data_module.name}
                                             </span>
                                         </div>

@@ -19321,4 +19321,14 @@ button.copy-btn {
   transform: scale(1.1);
   filter: brightness(0.7);
 }
+@media (max-width: 500px) {
+  .fs-18 {
+    font-size: 15px;
+  }
+}
+@media (max-width: 500px) {
+  .fs-28 {
+    font-size: 1.2rem;
+  }
+}
 /*# sourceMappingURL=soulhub.css.map */

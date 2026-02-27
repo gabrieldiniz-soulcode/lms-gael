@@ -139,7 +139,7 @@ export default function MdlPage({ sequence, paused, setPaused, setbuttons }: Pro
                             )}
                         </div>
 
-                        <div className="d-flex align-items-center mt-3 gap-3">
+                        <div className="d-flex align-items-center my-3 gap-3">
                             <div className="progress flex-grow-1" style={{ height: '10px' }}>
                                 <div
                                     className="progress-bar bg-success"
