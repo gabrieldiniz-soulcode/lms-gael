@@ -132,7 +132,7 @@ export default function Hero() {
         course &&
         <div className="row hero-carreiras">
             <div className="col-xxl-11 p-xxl-0 m-xxl-0 pe-xxl-2">
-                <div className="row row-gap-4 mt-lg-0 mt-5">
+                <div className="row row-gap-4 mt-lg-0 mt-2">
                     <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-lg-block d-none px-3.5 ">
                         <Image src={bannerDesktop.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
                     </a>
@@ -168,7 +168,7 @@ export default function Hero() {
                                         <RiPlayMiniLine size={20} strokeWidth={0.5} className="ms-1" />
                                     </a>
                                 </div>
-                                <div className="d-flex gap-2 align-items-center fs-12 fw-700">
+                                <div className="d-flex gap-2 align-items-center fs-12 my-2 fw-700">
                                     <div className="w-100">
                                         <ProgressBar now={parseInt(course?.progresso || "0")} />
                                     </div>

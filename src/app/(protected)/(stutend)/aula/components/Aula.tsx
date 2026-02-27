@@ -217,7 +217,7 @@ export default function Aula() {
                     {aulas[activeIndex]?.data_module.name}
                 </h2>
                 <div className="d-flex  justify-content-between mt-4">
-                    <a href="#tutor" className="d-flex bg-primary px-4 gap-2 align-items-center p-2 rounded text-decoration-none ">
+                    <a href="#tutor" className="d-flex bg-primary px-4 gap-2 align-items-center p-2 rounded text-decoration-none text-white ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 64 64" id="ai-powered-robot">
                             <g id="AI powered robot">
                                 <g id="Union">
