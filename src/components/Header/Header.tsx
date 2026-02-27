@@ -20,7 +20,9 @@ export default function Header() {
 
   const [value, setValue] = useState<string>();
 
-  const { user, perfil } = useContext(AuthContext);
+  const { user, perfil,
+    // signOut
+  } = useContext(AuthContext);
 
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -60,13 +62,12 @@ export default function Header() {
         </a>
       </div>
 
-      <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100 gap-3">
+      <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100 gap-3 position-relative">
         <Image src={logo3.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
         <Image src={logo1.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
         <Image src={logo2.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
+        <NavbarToggle aria-controls="basic-navbar-nav" className="ms-auto position-absolute top-3 right-3" style={{ top: 6, right: 3 }} />
       </div>
-
-      <NavbarToggle aria-controls="basic-navbar-nav" className="ms-auto" />
 
       <NavbarCollapse id="basic-navbar-nav">
         <Nav className="me-auto d-lg-none">
@@ -90,6 +91,12 @@ export default function Header() {
               <GoGear color="#fff" size={18} className="me-2" strokeWidth={0.5} />
               Configurações
             </a>
+
+            {/* <button className="btn bg-white w-50" onClick={signOut}>
+              <MdLogout className="text-auxiliary1-project me-2" size={20} />
+              <span>Sair</span>
+            </button> */}
+
           </div>
         </Nav>
       </NavbarCollapse>
