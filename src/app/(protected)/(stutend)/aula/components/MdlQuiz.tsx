@@ -187,10 +187,10 @@ export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, 
 
 
 
-
+{/* 
                         <Button variant="primary" onClick={handleShow}>
                             Launch demo modal
-                        </Button>
+                        </Button> */}
 
                         <Modal show={show} onHide={handleClose} className="position-relative" backdrop="static">
                             <img src="/modulo400.png" className="w-100 position-relative z-1 rounded" alt="" />
