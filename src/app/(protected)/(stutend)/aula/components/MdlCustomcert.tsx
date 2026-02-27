@@ -44,6 +44,7 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
     const [triggerDownload, setTriggerDownload] = useState<boolean[]>([false]);
 
     const buscarCertificado = async () => {
+
         if (!user?.token) return;
 
         const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate`, {
@@ -58,11 +59,10 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
     };
 
     return (
-        <div className="">
-            {setbuttons()}
-            <div className="w-100">
+        <div className="w-100">
+            <div className="w-100 my-3 mb-5 d-flex">
 
-                <Button className="px-3" onClick={buscarCertificado}>Baixar Certificado</Button>
+                <Button className="px-3 w-100" onClick={buscarCertificado}>Baixar Certificado</Button>
                 <Certificado
                     certificado={certificado}
                     triggerDownload={triggerDownload}
@@ -70,6 +70,8 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
                     onDownloaded={() => setTriggerDownload([false])}
                 />
             </div>
+            {setbuttons()}
+
         </div>
     );
 }

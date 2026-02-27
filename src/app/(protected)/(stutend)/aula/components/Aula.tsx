@@ -44,17 +44,10 @@ function decodeQueryParam(value: string) {
 
 export default function Aula() {
 
-
-    function safeAtob(value?: string | null) {
-        try {
-            return value ? atob(value) : "";
-        } catch {
-            return "";
-        }
-    }
     const [aulas, setAulas] = useState<Sequence[]>([]);
     const [activeIndex, setActiveIndex] = useState<number>(0);
     const [paused, setPaused] = useState<boolean>(true);
+    const [nextStepIsCertificate, setNextStepIsCertificate] = useState<boolean>(false);
 
     const { user } = useContext(AuthContext);
     const { updateResponses } = useContext(LoaderContext);
@@ -68,12 +61,19 @@ export default function Aula() {
     const carreiraId = searchParams.get('carreiraId');
     const carreira = searchParams.get('carreira');
     const curso = searchParams.get('curso');
+    const nextModule = searchParams.get('nextModule');
     const carreiraDecoded = decodeQueryParam(String(carreira));
     const cursoDecoded = decodeQueryParam(String(curso));
-    const [nextStepIsCertificate, setNextStepIsCertificate] = useState<boolean>(false);
-    const nextModule = searchParams.get('nextModule');
+    function safeAtob(value?: string | null) {
+        try {
+            return value ? atob(value) : "";
+        } catch {
+            return "";
+        }
+    }
     useEffect(() => {
         function getModule() {
+
             axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
                 headers: {
                     "course": cursoId,
@@ -140,9 +140,16 @@ export default function Aula() {
 
     useEffect(() => {
         function updateIdSearchParam() {
+
             const params = new URLSearchParams(window.location.search);
             params.set('id', aulas[activeIndex].cmid.toString());
-            if (aulas[activeIndex + 1].module == "mdl_customcert") setNextStepIsCertificate(true)
+
+
+
+            console.log(aulas[activeIndex + 1]?.module == "mdl_customcert")
+            setNextStepIsCertificate(aulas[activeIndex + 1]?.module == "mdl_customcert")
+
+
             window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
         }
 
@@ -151,6 +158,7 @@ export default function Aula() {
         }
 
     }, [activeIndex, aulas, pathname, replace, searchParams]);
+
     function setbuttons() {
         return <div className="d-flex  d-md-none justify-content-between gap-3">
 
@@ -208,8 +216,7 @@ export default function Aula() {
                 <h2 className="fs-18 fw-700">
                     {aulas[activeIndex]?.data_module.name}
                 </h2>
-                <div className="d-flex  justify-content-between ">
-
+                <div className="d-flex  justify-content-between mt-4">
                     <a href="#tutor" className="d-flex bg-primary px-4 gap-2 align-items-center p-2 rounded text-decoration-none ">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 64 64" id="ai-powered-robot">
                             <g id="AI powered robot">
@@ -238,6 +245,8 @@ export default function Aula() {
                             </div>
                         </button>
                     </div>
+                </div>
+                <div>
 
                 </div>
                 <div className="mt-4 position-relative d-flex justify-content-center align-items-center">
