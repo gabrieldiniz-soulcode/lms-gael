@@ -67,7 +67,18 @@ export default function Tutor({ curso, carreira }: TutorProps) {
   const chatBoxRef = useRef<HTMLDivElement | null>(null);
 
   // const cursoKey = useMemo(() => (curso ?? "").trim().toLocaleLowerCase().replace(/\s+/g, "-"), [curso]);
-  const carreiraKey = useMemo(() => (carreira ?? "").trim().toLocaleLowerCase().replace(/\s+/g, "-"), [carreira]);
+
+  const slugify = (s: string | null | undefined) =>
+    (s ?? "")
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/[^a-z0-9\s-]/g, "")
+      .replace(/\s+/g, "-")
+      .replace(/-+/g, "-");
+
+  const carreiraKey = useMemo(() => slugify(carreira), [carreira]);
 
   useEffect(() => {
     if (!chatBoxRef.current) return;
