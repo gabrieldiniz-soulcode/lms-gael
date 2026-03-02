@@ -226,7 +226,7 @@ export default function Tutor({ curso, carreira }: TutorProps) {
 
           <div className="position-relative mt-3 d-flex gap-2">
             <input
-              className="w-100 rounded-3 bg-auxiliary6-project p-3 border-0"
+              className="w-100 rounded-3 bg-auxiliary6-project p-3 border-0 text-dark"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleKeyDown}

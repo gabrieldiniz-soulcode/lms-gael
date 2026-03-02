@@ -76,32 +76,27 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
         >
             <div className="certificado row position-relative mb-5 text-auxiliary2-project">
                 <div className="col-9 d-flex flex-column">
-                    <div className="mt-5 pt-5 ps-5 ms-5 fs-51 d-flex flex-column">
+                    <div className="mt-5 pt-5 ps-3 ms-5 fs-51 d-flex flex-column">
                         <span style={{ lineHeight: '50px' }} className="fw-700 text-auxiliary2-project">CERTIFICADO</span>
                         <span className="text-auxiliary2-project">DE CONCLUSÃO</span>
                     </div>
-                    <div className="d-flex justify-content-start mt-3 ps-5 ms-5 pt-5 mb-5">
+                    <div className="d-flex justify-content-start mt-3 ms-5 ps-3">
                         <div className="d-flex flex-column gap-2">
-                            <span className="text-auxiliary2-project">Concluiu o curso online com carga horária estimada em {certificado.workload} horas.</span>
-                            <span className="text-auxiliary2-project">Finalizado em {formatarData(certificado.certificate_created)}</span>
+                            <span className="mt-2 text-auxiliary2-project">Finalizado em {formatarData(certificado.certificate_created)}</span>
                             <span className="fs-38 fw-700 text-auxiliary2-project">{certificado.firstname} {certificado.lastname}</span>
                         </div>
                     </div>
-                    <div className="d-flex flex-column gap-3 ps-5 ms-5">
-                        <span className="fs-21 fw-700 text-auxiliary2-project">Curso</span>
+                    <div className="d-flex flex-column gap-3 ps-3 ms-5 mt-5">
                         <span className="fs-51 fw-700 text-auxiliary2-project">{certificado.name}</span>
                     </div>
-                    <div className="d-flex flex-column justify-content-between ms-5 ps-5 mt-auto">
-                        <span className="fs-21 fw-700 text-auxiliary2-project">CÓDIGO DE VALIDAÇÃO: {certificado.code}</span>
-                    </div>
-                    <div className="d-flex justify-content-end mb-5 py-5">
-                        <span className="d-flex flex-column align-items-center justify-content-center">
-                            <Image src={Fabricio} width={300} height={100} alt="Assinatura" />
+                    <div className="d-flex mb-3 py-5 justify-content-end">
+                        <span className="d-flex flex-column justify-content-center align-items-center">
+                            <Image src={Fabricio} width={300} alt="Assinatura" />
                             <div className="text-auxiliary2-project">FABRICIO CARDOSO</div>
                             <div className="text-auxiliary2-project">Cofundador</div>
                         </span>
-                        <span className="d-flex flex-column align-items-center justify-content-center">
-                            <Image src={Carmela} width={350} height={150} alt="Assinatura" />
+                        <span className="d-flex flex-column justify-content-center align-items-center">
+                            <Image src={Carmela} width={350} alt="Assinatura" />
                             <div className="text-auxiliary2-project">CARMELA BORST</div>
                             <div className="text-auxiliary2-project">Fundadora</div>
                         </span>

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { StaticImageData } from "next/image";
 import axios from "axios";
-import { jwtDecode } from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 
 interface User {
     name: string;
@@ -56,16 +56,17 @@ type AuthContextData = {
     signOut: () => void;
     signInByRecoveryPassword: (user: User) => void;
     perfil: Profile;
-}
+};
 
 interface Props {
     children: React.ReactNode;
 }
 
-export const AuthContext = createContext({} as AuthContextData)
+type StoredUser = { user: User; expiry: number };
+
+export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthContextProvider({ children }: Props) {
-
     const [user, setUser] = useState<User>({} as User);
     const [userLevel, setUserLevel] = useState<number | null>(null);
     const [perfil, setPerfil] = useState<Profile>({} as Profile);
@@ -73,133 +74,56 @@ export function AuthContextProvider({ children }: Props) {
     const router = useRouter();
     const pathname = usePathname();
 
-    useEffect(() => {
-        function checkAuth() {
-            const localUser = localStorage.getItem('user');
-            const sessionUser = sessionStorage.getItem('user');
-            if (sessionUser || localUser) {
-                const user = localUser ? JSON.parse(localUser) : JSON.parse(sessionUser || '');
-
-                if (!user.isAdmin && (pathname.includes("/admin"))) {
-                    router.push("/");
-                }
-
-                if (pathname.includes("/login")) {
-                    router.push(user.isAdmin ? "/admin" : "/");
-                }
-                return;
-            }
-
-            if (!localUser && !sessionUser && !pathname.includes("/login") && !pathname.includes("/validar-certificado") && !pathname.includes("/user-logado")) {
-                router.push('/login');
-                return;
-            }
-        }
-
-        checkAuth();
-    }, [router, pathname, user]);
-
-    async function signIn(email: string, password: string, rememberMe: boolean) {
-        const userObj = {} as User;
-
-        try {
-            const authResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
-                username: email,
-                password: password,
-                database: process.env.NEXT_PUBLIC_DATABASE
-            })
-
-            if (authResponse.data.error) {
-                return true;
-            }
-
-            console.log(authResponse.data)
-
-            userObj.id = authResponse.data.data.userid;
-            userObj.name = authResponse.data.data.username;
-            userObj.database = authResponse.data.data.database!;
-            userObj.token = authResponse.data.token;
-            userObj.isAdmin = authResponse.data.data.isAdmin;
-
-
-            const decoded: DecodedToken = jwtDecode<DecodedToken>(userObj.token);
-            userObj.type_render = decoded.type_render;
-            console.log(userObj)
-            getPerfil(userObj);
-
-            setUser(userObj);
-
-            const expiry = decoded.exp ? decoded.exp * 1000 : 0;
-            const data = {
-                user: userObj,
-                expiry: expiry
-            };
-
-            if (rememberMe) {
-                localStorage.setItem('user', JSON.stringify(data));
-            } else {
-                sessionStorage.setItem('user', JSON.stringify(userObj));
-            }
-
-            await fetchUserLevel(userObj.id, userObj.database, userObj.token);
-
-            if (authResponse.data.data.forcepasswordchange == 1) {
-                setTimeout(() => {
-                    router.push("/perfil/alterar-senha");
-                }, 1000);
-                return false;
-            }
-
-            router.push("/");
-
-            return false;
-        }
-        catch {
-            return true;
-        }
-    }
-
-    function getPerfil(userObj: User) {
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
-            headers: {
-                "database": userObj.database,
-                "Authorization": `Bearer ${userObj.token}`
-            }
-        })
-            .then((res: ApiResponse) => {
-                setPerfil(res.data);
-                localStorage.setItem('profile', JSON.stringify(res.data));
-                sessionStorage.setItem('profile', JSON.stringify(res.data));
-            })
-            .catch((err) => {
-                console.log(err);
-            })
-    }
-
-
-    function signInByRecoveryPassword(user: User) {
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        fetchUserLevel(user.id, user.database, user.token);
-        router.push("/");
-    }
-
-    function signOut() {
-        localStorage.removeItem('user');
-        sessionStorage.removeItem('user');
-        setUserLevel(null);
-        router.push("/login");
-    }
-
     function isTokenExpired(token: string) {
         if (!token) return true;
         try {
-            const decoded = jwtDecode(token);
-            if (!decoded.exp) return true;
+            const decoded: any = jwtDecode(token);
+            if (!decoded?.exp) return true;
             return Date.now() >= decoded.exp * 1000;
-        } catch (e) {
-            console.error(e);
+        } catch {
             return true;
+        }
+    }
+
+    function readStoredUser(): StoredUser | null {
+        const raw = localStorage.getItem("user") ?? sessionStorage.getItem("user");
+        if (!raw) return null;
+
+        try {
+            const parsed = JSON.parse(raw);
+
+            if (parsed?.user?.token) {
+                return parsed as StoredUser;
+            }
+
+            if (parsed?.token) {
+                const decoded: any = jwtDecode(parsed.token);
+                const expiry = (decoded?.exp ?? 0) * 1000;
+                return { user: parsed as User, expiry };
+            }
+
+            return null;
+        } catch {
+            return null;
+        }
+    }
+
+    function clearStoredUser() {
+        localStorage.removeItem("user");
+        sessionStorage.removeItem("user");
+    }
+
+    function saveUser(userObj: User, rememberMe: boolean) {
+        const decoded: any = jwtDecode(userObj.token);
+        const expiry = (decoded?.exp ?? 0) * 1000;
+        const payload: StoredUser = { user: userObj, expiry };
+
+        if (rememberMe) {
+            localStorage.setItem("user", JSON.stringify(payload));
+            sessionStorage.removeItem("user");
+        } else {
+            sessionStorage.setItem("user", JSON.stringify(payload));
+            localStorage.removeItem("user");
         }
     }
 
@@ -207,12 +131,12 @@ export function AuthContextProvider({ children }: Props) {
         try {
             const res = await axios.get<UserData[]>(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
                 headers: {
-                    "database": database,
-                    "Authorization": `Bearer ${token}`
-                }
+                    database,
+                    Authorization: `Bearer ${token}`,
+                },
             });
 
-            const currentUser = res.data.find(item => item.userid === Number(userid));
+            const currentUser = res.data.find((item) => item.userid === Number(userid));
             if (currentUser && currentUser.level !== undefined) {
                 setUserLevel(currentUser.level);
             }
@@ -221,39 +145,145 @@ export function AuthContextProvider({ children }: Props) {
         }
     }, []);
 
+    function getPerfil(userObj: User) {
+        axios
+            .get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+                headers: {
+                    database: userObj.database,
+                    Authorization: `Bearer ${userObj.token}`,
+                },
+            })
+            .then((res: ApiResponse) => {
+                setPerfil(res.data);
+                localStorage.setItem("profile", JSON.stringify(res.data));
+                sessionStorage.setItem("profile", JSON.stringify(res.data));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     const loadUserFromStorage = useCallback(() => {
-        const local = localStorage.getItem('user');
-        const sessionUser = sessionStorage.getItem('user');
-        const profile = localStorage.getItem('profile');
-        let userObj = null;
+        const stored = readStoredUser();
+        const profile = localStorage.getItem("profile") ?? sessionStorage.getItem("profile");
 
-        if (local) {
-            const localUser = JSON.parse(local);
-            if (localUser?.user) {
-                userObj = localUser.user;
-                if (isTokenExpired(userObj.token)) {
-                    localStorage.removeItem('user');
-                    return;
-                }
-            }
-        } else if (sessionUser) {
-            userObj = JSON.parse(sessionUser);
-            if (isTokenExpired(userObj.token)) {
-                sessionStorage.removeItem('user');
-                return;
-            }
+        if (!stored) return;
+
+        if (isTokenExpired(stored.user.token)) {
+            clearStoredUser();
+            return;
         }
 
-        if (userObj) {
-            setPerfil(JSON.parse(profile || '{}'));
-            setUser(userObj);
-            fetchUserLevel(userObj.id, userObj.database, userObj.token);
+        if (profile) {
+            try {
+                setPerfil(JSON.parse(profile));
+            } catch { }
         }
+
+        setUser(stored.user);
+        fetchUserLevel(stored.user.id, stored.user.database, stored.user.token);
     }, [fetchUserLevel]);
 
     useEffect(() => {
         loadUserFromStorage();
     }, [loadUserFromStorage]);
+
+    useEffect(() => {
+        function checkAuth() {
+            const stored = readStoredUser();
+            const publicPaths = ["/login", "/validar-certificado", "/user-logado", "/perfil/alterar-senha"];
+
+            if (stored?.user) {
+                const u = stored.user;
+
+                if (isTokenExpired(u.token)) {
+                    clearStoredUser();
+                    if (!publicPaths.some((p) => pathname.includes(p))) {
+                        router.replace("/login");
+                    }
+                    return;
+                }
+
+                if (!u.isAdmin && pathname.includes("/admin")) {
+                    router.replace("/");
+                    return;
+                }
+
+                if (u.isAdmin && !pathname.includes("/admin")) {
+                    router.replace("/admin");
+                    return;
+                }
+
+                if (pathname.includes("/login")) {
+                    router.replace(u.isAdmin ? "/admin" : "/");
+                    return;
+                }
+
+                return;
+            }
+
+            if (!publicPaths.some((p) => pathname.includes(p))) {
+                router.replace("/login");
+                return;
+            }
+        }
+
+        checkAuth();
+    }, [router, pathname]);
+
+    async function signIn(email: string, password: string, rememberMe: boolean) {
+        const userObj = {} as User;
+
+        try {
+            const authResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
+                username: email,
+                password,
+                database: process.env.NEXT_PUBLIC_DATABASE,
+            });
+
+            if (authResponse.data.error) {
+                return true;
+            }
+
+            userObj.id = authResponse.data.data.userid;
+            userObj.name = authResponse.data.data.username;
+            userObj.database = authResponse.data.data.database!;
+            userObj.token = authResponse.data.token;
+            userObj.isAdmin = authResponse.data.data.isAdmin;
+
+            const decoded: DecodedToken = jwtDecode<DecodedToken>(userObj.token);
+            userObj.type_render = decoded.type_render;
+
+            getPerfil(userObj);
+            setUser(userObj);
+            saveUser(userObj, rememberMe);
+
+            await fetchUserLevel(userObj.id, userObj.database, userObj.token);
+
+            if (authResponse.data.data.forcepasswordchange == 1) {
+                router.replace("/perfil/alterar-senha");
+                return false;
+            }
+
+            router.replace("/");
+            return false;
+        } catch {
+            return true;
+        }
+    }
+
+    function signInByRecoveryPassword(userObj: User) {
+        setUser(userObj);
+        saveUser(userObj, true);
+        fetchUserLevel(userObj.id, userObj.database, userObj.token);
+        router.replace("/");
+    }
+
+    function signOut() {
+        clearStoredUser();
+        setUserLevel(null);
+        router.replace("/login");
+    }
 
     return (
         <AuthContext.Provider value={{ user, userLevel, setUserLevel, signOut, signIn, signInByRecoveryPassword, perfil }}>
