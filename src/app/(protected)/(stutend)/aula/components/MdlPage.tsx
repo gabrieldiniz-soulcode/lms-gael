@@ -176,33 +176,32 @@ export default function MdlPage({ sequence, paused, setPaused }: Props) {
                         )}
                     </div>
 
-                        <div className="d-flex align-items-center mt-3 gap-3">
-                            <div className="progress flex-grow-1" style={{ height: '10px' }}>
-                                <div
-                                    className="progress-bar bg-success"
-                                    role="progressbar"
-                                    style={{ width: `${displayedProgress}%` }}
-                                    aria-valuenow={displayedProgress}
-                                    aria-valuemin={0}
-                                    aria-valuemax={100}
-                                ></div>
-                            </div>
-                            {completed && <FaCheckCircle size={24} color="green" />}
+                    <div className="d-flex align-items-center mt-3 gap-3">
+                        <div className="progress flex-grow-1" style={{ height: '10px' }}>
+                            <div
+                                className="progress-bar bg-success"
+                                role="progressbar"
+                                style={{ width: `${displayedProgress}%` }}
+                                aria-valuenow={displayedProgress}
+                                aria-valuemin={0}
+                                aria-valuemax={100}
+                            ></div>
                         </div>
-                    </>
-                )}
+                        {completed && <FaCheckCircle size={24} color="green" />}
+                    </div>
+                </>
+            )}
 
-                <span
-                    className="dangerouslySetInnerHTML"
-                    dangerouslySetInnerHTML={{ __html: getContentWithoutVideo() }}
-                ></span>
-            </div>
-            :
-            <div className="w-100">
-                <span
-                    className="dangerouslySetInnerHTML"
-                    dangerouslySetInnerHTML={{ __html: sequence.data_module.content }}
-                ></span>
-            </div>
-    );
+            <span
+                className="dangerouslySetInnerHTML"
+                dangerouslySetInnerHTML={{ __html: getContentWithoutVideo() }}
+            ></span>
+        </div>) :
+        <div className="w-100" >
+            <span
+                className="dangerouslySetInnerHTML"
+                dangerouslySetInnerHTML={{ __html: sequence.data_module.content }}
+            ></span>
+        </div >
+
 }
