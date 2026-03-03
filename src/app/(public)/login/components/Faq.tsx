@@ -54,7 +54,7 @@ export default function Faq() {
                     <AccordionItem eventKey="6" className="mb-2">
                         <AccordionHeader>Como posso me inscrever?</AccordionHeader>
                         <AccordionBody>
-                            Para se inscrever, basta preencher o formulário na página <a href="https://ifood-lp.web.app/" target="_blank">oficial do programa</a>.
+                            Para se inscrever, basta preencher o formulário na página <a href="https://correplay.soulcode.com/" target="_blank">oficial do programa</a>.
                         </AccordionBody>
                     </AccordionItem>
 
