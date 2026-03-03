@@ -38,11 +38,17 @@ export default function SubCurso({ subCurso, carreiraId, carreira, curso }: Prop
         if (!nextModule) return 0
         const nextAccordeon = arrayExterno
 
-        const url = `/aula?id=${nextAccordeon[indexModule + 1].sequence[0].cmid}&cursoId=${nextAccordeon[indexModule + 1].course}&carreiraId=${carreiraId}&carreira=${carreira}&curso=${curso}}`
+        const url = `/aula?id=${nextAccordeon[indexModule + 1].sequence[0].cmid}&cursoId=${nextAccordeon[indexModule + 1].course}&carreiraId=${carreiraId}&carreira=${carreira}&curso=${curso}`
 
-        return btoa(url)
+        return toBase64(url)
     }
-
+    function toBase64(str: string) {
+        return btoa(
+            new TextEncoder()
+                .encode(str)
+                .reduce((data, byte) => data + String.fromCharCode(byte), '')
+        );
+    }
     function getsubCoursesFiltred() {
 
         return subCurso?.filter((sub) => sub.name)

@@ -18,14 +18,15 @@ export default function Faq() {
                     <AccordionItem eventKey="1" className="mb-2">
                         <AccordionHeader>Qual a duração do programa?</AccordionHeader>
                         <AccordionBody>
-                            A formação tem duração total de 11 horas de conteúdo. A plataforma ficará disponível até o dia XX de XXX de 2026.
+                            A formação tem duração total de 11 horas de conteúdo.
+                            A plataforma ficará disponível até o dia  31 de maio de 2026 .
                         </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="2" className="mb-2">
                         <AccordionHeader>Qual a data de início e encerramento das inscrições?</AccordionHeader>
                         <AccordionBody>
-                            As inscrições terão início no dia 25 de fevereiro de 2026 e se encerram às 23h59 do dia XX de XXXX de 2026 ou até as vagas serem preenchidas.
+                            As inscrições terão início no dia 01 de março de 2026 e se encerram às 23h59 do dia 31 de maio de 2026 ou até as vagas serem preenchidas.
                         </AccordionBody>
                     </AccordionItem>
 

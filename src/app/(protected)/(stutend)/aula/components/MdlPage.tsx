@@ -26,7 +26,7 @@ interface Props {
     setbuttons: () => React.ReactElement;
 }
 
-export default function MdlPage({ sequence, paused, setPaused }: Props) {
+export default function MdlPage({ sequence, paused, setPaused ,setbuttons}: Props) {
 
     const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -189,7 +189,9 @@ export default function MdlPage({ sequence, paused, setPaused }: Props) {
                         </div>
                         {completed && <FaCheckCircle size={24} color="green" />}
                     </div>
+                    {setbuttons()}
                 </>
+
             )}
 
             <span
