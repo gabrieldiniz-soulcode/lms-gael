@@ -52,7 +52,7 @@ type AuthContextData = {
     user: User;
     userLevel: number | null;
     setUserLevel: (level: number) => void;
-    signIn: (email: string, password: string, rememberMe: boolean) => Promise<boolean>;
+    signIn: (email: string, password: string, rememberMe: boolean, origin?: string) => Promise<boolean>;
     signOut: () => void;
     signInByRecoveryPassword: (user: User) => void;
     perfil: Profile;
@@ -231,7 +231,7 @@ export function AuthContextProvider({ children }: Props) {
         checkAuth();
     }, [router, pathname]);
 
-    async function signIn(email: string, password: string, rememberMe: boolean) {
+    async function signIn(email: string, password: string, rememberMe: boolean, origin?: "autoLogin") {
         const userObj = {} as User;
 
         try {
@@ -239,6 +239,7 @@ export function AuthContextProvider({ children }: Props) {
                 username: email,
                 password,
                 database: process.env.NEXT_PUBLIC_DATABASE,
+                institution: "Ifood",
             });
 
             if (authResponse.data.error) {
@@ -268,6 +269,10 @@ export function AuthContextProvider({ children }: Props) {
             router.replace("/");
             return false;
         } catch {
+            if (origin === "autoLogin") {
+                router.replace("/login");
+                return true;
+            }
             return true;
         }
     }
