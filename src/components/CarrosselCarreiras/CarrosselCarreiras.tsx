@@ -62,8 +62,9 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                 section.scrollIntoView({ behavior: "smooth", block: "start" });
             }
         }
-
         setCarreirasFiltradas(listaFiltrada);
+        ordenarArquivos(listaFiltrada)
+
     }, [search, pathname, carreiras, user]);
     function slugify(value?: string | null): string {
         if (!value) return "default";
@@ -81,7 +82,18 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
         const match = url.match(regex);
         return match ? match[1] : "";
     }
+    function ordenarArquivos(list: any[]) {
+        if (categoria?.includes('DESENVOLVIMENTO DE GAMES')) {
+            const removiveis = list.slice(3, 5)
+            console.log(removiveis)
 
+            list.splice(1, 0, ...removiveis.reverse())
+            console.log(list)
+            list.splice(5, 2)
+            setCarreirasFiltradas(list);
+        }
+
+    }
     return (
         carreirasFiltradas.length > 0 &&
         <div className='overflow-hidden px-2'>
