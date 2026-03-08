@@ -12,6 +12,7 @@ interface Props {
     instance: number;
     newAttempt: boolean;
     setQuizAttempt: (newQuizAttempt: boolean) => void;
+    setWasAttempLoading: (newQuizAttempt: boolean) => void;
 }
 
 interface QuestionAnswer {
@@ -69,7 +70,7 @@ interface ApiResponse {
 
 const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 
-export default function Quiz({ userid, database, cmid, instance, newAttempt, setQuizAttempt }: Props) {
+export default function Quiz({ userid, database, cmid, instance, newAttempt, setQuizAttempt, setWasAttempLoading }: Props) {
 
     const [quiz, setQuiz] = useState<Quiz>();
     const [activeIndex, setActiveIndex] = useState<number>(0);
@@ -179,6 +180,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
         })
             .then(() => {
                 setQuizAttempt(false);
+                setWasAttempLoading(true)
             })
             .catch((err) => {
                 console.log(err);

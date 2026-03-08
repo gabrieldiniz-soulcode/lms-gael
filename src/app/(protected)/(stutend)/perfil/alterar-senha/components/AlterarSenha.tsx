@@ -117,7 +117,7 @@ export default function AlterarSenha() {
     }
 
     return (
-        <div className="px-2">
+        <div className="px-2 mt-5 mt-lg-0">
             <div className="">
                 <h2 className="fw-700 fs-28 mb-4">Redefinir Senha</h2>
                 <p>Para proteger sua conta, crie uma senha com pelo menos 8 caracteres, misturando letras maiúsculas, minúsculas, números e símbolos.</p>

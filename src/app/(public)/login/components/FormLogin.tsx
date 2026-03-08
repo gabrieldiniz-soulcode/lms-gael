@@ -32,6 +32,12 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
         }
     }
 
+    const openZendesk = () => {
+        if (window.zE) {
+            window.zE("messenger", "open");
+        }
+    };
+
     function validate(): boolean {
         if (!email || !password) return true;
         return false;
@@ -43,7 +49,7 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
                 <Image src={logo1.src} width={264} height={117} alt="logo Trident" className="object-fit-contain" />
                 <h1 className="fs-38 fw-700 text-primary">Bem- vindo(a)</h1>
                 <span className="fs-21 text-black mb-3">
-                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site do programa para realizar sua inscrição.
+                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site do programa para realizar sua inscrição clicando <a href="https://correplay.soulcode.com/" target="_blank" rel="noopener noreferrer">aqui</a>.
                 </span>
             </Col>
             <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{ minHeight: 324 }}>
@@ -81,8 +87,7 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
                             </div>
 
                             <Button className="fs-15" disabled={validate()} onClick={e => handleSubmit(e)}>Acessar</Button>
-                            <Button className="btn-secondary fs-15">Faça sua assinatura</Button>
-                            <span className="text-center fs-14">Precisa de ajuda? <a href="">Fale Conosco</a></span>
+                            <span className="text-center fs-14">Precisa de ajuda? <a className="cursor-pointer" onClick={() => openZendesk()}>Fale Conosco</a></span>
                         </>
                 }
             </Col>
