@@ -62,12 +62,16 @@ export default function Header() {
         </a>
       </div>
 
-      <div className="d-lg-none d-flex flex-nowrap justify-content-center w-100 gap-3 position-relative">
-        <Image src={logo3.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
-        <Image src={logo1.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
-        <Image src={logo2.src} width={70} height={70} alt="logo trident" className="object-fit-contain" />
-        <NavbarToggle aria-controls="basic-navbar-nav" className="ms-auto position-absolute top-3 right-3" style={{ top: 6, right: 3 }} />
+      <div className="d-lg-none  row d-flex  justify-content-center w-100 ">
+        <div className="d-flex justify-content-center gap-4  col-10">
+          <Image src={logo3.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+          <Image src={logo1.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+          <Image src={logo2.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+        </div>
+        <NavbarToggle aria-controls="basic-navbar-nav" className="col-2" />
+
       </div>
+
 
       <NavbarCollapse id="basic-navbar-nav">
         <Nav className="me-auto d-lg-none">

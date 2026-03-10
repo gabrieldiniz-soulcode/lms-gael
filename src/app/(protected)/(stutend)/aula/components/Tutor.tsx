@@ -188,7 +188,7 @@ export default function Tutor({ curso, carreira }: TutorProps) {
     <div className="row notas">
       <div className="col-12 position-relative">
         <span className="fw-700">
-          Chat <LuBotMessageSquare /> {tutorName ? `— ${tutorName}` : ""}
+          Chat <LuBotMessageSquare /> Tutor SoulCode
         </span>
 
         <div className="bg-white p-3 rounded-3 mt-2">

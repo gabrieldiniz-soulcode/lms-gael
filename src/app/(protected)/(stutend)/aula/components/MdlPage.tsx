@@ -26,12 +26,8 @@ interface Props {
     setbuttons: () => React.ReactElement;
 }
 
-export default function MdlPage({
-    sequence,
-    paused,
-    setPaused,
-    setbuttons,
-}: Props) {
+export default function MdlPage({ sequence, paused, setPaused ,setbuttons}: Props) {
+
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const [progress, setProgress] = useState<number>(0);
@@ -181,7 +177,7 @@ export default function MdlPage({
                     </div>
 
                     <div className="d-flex align-items-center mt-3 gap-3">
-                        <div className="progress flex-grow-1" style={{ height: "10px" }}>
+                        <div className="progress flex-grow-1" style={{ height: '10px' }}>
                             <div
                                 className="progress-bar bg-success"
                                 role="progressbar"
@@ -195,19 +191,19 @@ export default function MdlPage({
                     </div>
                     {setbuttons()}
                 </>
+
             )}
 
             <span
-                className="dangerouslySetInnerHTML w-100 px-0"
+                className="dangerouslySetInnerHTML"
                 dangerouslySetInnerHTML={{ __html: getContentWithoutVideo() }}
             ></span>
-        </div>
-    ) : (
-        <div className="w-100 px-0">
+        </div>) :
+        <div className="w-100" >
             <span
                 className="dangerouslySetInnerHTML"
                 dangerouslySetInnerHTML={{ __html: sequence.data_module.content }}
             ></span>
-        </div>
-    );
+        </div >
+
 }

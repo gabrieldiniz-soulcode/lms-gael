@@ -110,10 +110,10 @@ export default function EsqueciSenha({ setEsqueciSenha }: Props) {
     }
 
     const handleRecoveryPassword = () => {
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/forgotpassword`, {
+        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/v2/user/forgotpassword`, {
             username: email,
             database: process.env.NEXT_PUBLIC_DATABASE,
-            plataform: `Trident`
+            plataform: `ifood`
         })
             .then((res) => {
                 setMensagem(res.data.message);
