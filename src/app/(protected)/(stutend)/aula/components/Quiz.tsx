@@ -218,7 +218,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
             (quiz && selectedAnswer.length > 0)
             &&
             <div className="row w-100">
-                <div className="col-2 p-3 gap-3 rounded-3 bg-auxiliary6-project d-md-flex d-none flex-column">
+                <div style={{ minWidth: "84px" }} className="col-2 p-3 gap-3 rounded-3 bg-auxiliary6-project d-md-flex d-none flex-column">
                     <span className="text-center py-2 rounded-3 bg-primary text-white fw-700">Questões</span>
                     {
                         quiz.slots.map((_, index) => (
