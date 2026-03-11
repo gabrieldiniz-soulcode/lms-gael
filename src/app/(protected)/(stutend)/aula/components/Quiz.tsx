@@ -220,7 +220,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
             (quiz && selectedAnswer.length > 0)
             &&
             <div className="row w-100">
-                <div style={{ minWidth: "84px" }} className="col-2 p-3 gap-3 rounded-3 bg-auxiliary6-project d-md-flex d-none flex-column">
+                <div style={{ minWidth: "84px" }} className="col-3 p-3 gap-3 rounded-3 bg-auxiliary6-project d-md-flex d-none flex-column">
                     <span className="text-center py-2 rounded-3 bg-primary text-white fw-700">Questões</span>
                     {
                         quiz.slots.map((_, index) => (
@@ -230,7 +230,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
                     <span className="text-center py-2 rounded-3 bg-white my-1 cursor-pointer" onClick={completeQuizAttempt}>{isComplete() ? "Finalizar" : "Salvar"}</span>
                     <span className="text-center py-2 fs-12 rounded-3 bg-auxiliary7-project cursor-pointer" onClick={tryAgain}>Tentar <br /> novamente</span>
                 </div>
-                <div className="col-md-10 col-12 pt-md-5">
+                <div className="col-md-9 col-12 pt-md-5">
                     <div className="bg-auxiliary6-project d-flex flex-column mt-4 gap-3 p-3 rounded-3">
 
                         <span className="fw-700 fs-18">{removeHtmlTags(quiz.slots[activeIndex].questiontext)}</span>
