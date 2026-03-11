@@ -83,10 +83,10 @@ export default function Header() {
 
             <a href="/perfil" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <PiStudentBold color="#fff" size={18} className="me-2" />
-              Minhas Carreiras
+              Meu Perfil
             </a>
 
-            <a href="/certificasos" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
+            <a href="/certificados" className="ps-2 icon-18-sidebar header-item fs-12 fw-700 py-2 div-icon-sidebar text-white">
               <LiaCertificateSolid color="#fff" size={18} className="me-2" strokeWidth={0.5} />
               Certificados
             </a>
