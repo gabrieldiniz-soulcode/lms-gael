@@ -42,90 +42,6 @@ export default function Certificados() {
     });
   }, [certificados, search]);
 
-  const MOCK_CERTIFICATES: CertificateData[] = [
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-001",
-      coursename: "Curso Mock",
-      firstname: "João",
-      lastname: "Silva",
-      workload: "10",
-      name: "Certificado Mock #1",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-002",
-      coursename: "Curso Mock",
-      firstname: "Maria",
-      lastname: "Oliveira",
-      workload: "8",
-      name: "Certificado Mock #2",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-003",
-      coursename: "Curso Mock",
-      firstname: "Lucas",
-      lastname: "Almeida",
-      workload: "12",
-      name: "Certificado Mock #3",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-004",
-      coursename: "Curso Mock",
-      firstname: "Ana",
-      lastname: "Fernandes",
-      workload: "6",
-      name: "Certificado Mock #4",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-004",
-      coursename: "Curso Mock",
-      firstname: "Ana",
-      lastname: "Fernandes",
-      workload: "6",
-      name: "12312378913 #5",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-004",
-      coursename: "Curso Mock",
-      firstname: "Ana",
-      lastname: "Fernandes",
-      workload: "6",
-      name: "12312378913 #5",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-004",
-      coursename: "Curso Mock",
-      firstname: "Ana",
-      lastname: "Fernandes",
-      workload: "6",
-      name: "12312378913 #5",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-004",
-      coursename: "Curso Mock",
-      firstname: "Ana",
-      lastname: "Fernandes",
-      workload: "6",
-      name: "12312378913 #5",
-    },
-    {
-      certificate_created: 1700000000,
-      code: "MOCK-004",
-      coursename: "Curso Mock",
-      firstname: "Ana",
-      lastname: "Fernandes",
-      workload: "6",
-      name: "12312378913 #5",
-    },
-  ];
-
   useEffect(() => {
     async function getCertificates() {
       try {
@@ -137,12 +53,11 @@ export default function Certificados() {
             },
           },
         );
-        let data: CertificateData[] = Array.isArray(res.data) ? res.data : [];
-        // const data: CertificateData[] = Array.isArray(res.data) ? res.data : [];
+
+        const data: CertificateData[] = Array.isArray(res.data) ? res.data : [];
         const triggerArray = new Array(data.length).fill(false);
 
 
-        data = MOCK_CERTIFICATES;
         setTriggerDownload(triggerArray);
         setCertificados(data);
       } finally {
