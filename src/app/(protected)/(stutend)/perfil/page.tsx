@@ -3,6 +3,7 @@
 import { useContext, useEffect } from "react";
 
 import Carreiras from "./components/Carreiras";
+import CertificadoGeral from "./components/CertificadoGeral";
 import Certificados from "./components/Certificados";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import Perfil from "./components/Perfil";
@@ -22,6 +23,9 @@ export default function Page() {
             </section>
             <section className="container container-ajuste mt-5 pt-2">
                 <Carreiras />
+            </section>
+            <section className="container container-ajuste my-5 pt-2">
+                <CertificadoGeral />
             </section>
             <section className="container container-ajuste my-5 pt-2">
                 <Certificados />

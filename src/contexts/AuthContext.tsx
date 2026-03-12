@@ -41,6 +41,7 @@ interface DecodedToken {
 
 interface Profile {
     firstname: string;
+    lastname: string;
     imagealt: string;
 }
 
