@@ -1,4 +1,6 @@
-import { useContext, useEffect, useState } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @next/next/no-img-element */
+import { useContext, useEffect, useMemo, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import Certificado from "@/components/Certificado/Certificado";
@@ -27,6 +29,18 @@ export default function Certificados() {
   const [certificados, setCertificados] = useState<CertificateData[]>([]);
   const [triggerDownload, setTriggerDownload] = useState<boolean[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const filteredCertificates = useMemo(() => {
+    const term = search.trim().toLowerCase();
+    if (!term) return certificados;
+
+    return certificados.filter((cert) => {
+      return [cert.name, cert.coursename, cert.firstname, cert.lastname]
+        .filter(Boolean)
+        .some((value) => value.toLowerCase().includes(term));
+    });
+  }, [certificados, search]);
 
   const MOCK_CERTIFICATES: CertificateData[] = [
     {
@@ -72,7 +86,43 @@ export default function Certificados() {
       firstname: "Ana",
       lastname: "Fernandes",
       workload: "6",
-      name: "Certificado Mock #5",
+      name: "12312378913 #5",
+    },
+    {
+      certificate_created: 1700000000,
+      code: "MOCK-004",
+      coursename: "Curso Mock",
+      firstname: "Ana",
+      lastname: "Fernandes",
+      workload: "6",
+      name: "12312378913 #5",
+    },
+    {
+      certificate_created: 1700000000,
+      code: "MOCK-004",
+      coursename: "Curso Mock",
+      firstname: "Ana",
+      lastname: "Fernandes",
+      workload: "6",
+      name: "12312378913 #5",
+    },
+    {
+      certificate_created: 1700000000,
+      code: "MOCK-004",
+      coursename: "Curso Mock",
+      firstname: "Ana",
+      lastname: "Fernandes",
+      workload: "6",
+      name: "12312378913 #5",
+    },
+    {
+      certificate_created: 1700000000,
+      code: "MOCK-004",
+      coursename: "Curso Mock",
+      firstname: "Ana",
+      lastname: "Fernandes",
+      workload: "6",
+      name: "12312378913 #5",
     },
   ];
 
@@ -88,9 +138,11 @@ export default function Certificados() {
           },
         );
         let data: CertificateData[] = Array.isArray(res.data) ? res.data : [];
+        // const data: CertificateData[] = Array.isArray(res.data) ? res.data : [];
         const triggerArray = new Array(data.length).fill(false);
 
-        // data = MOCK_CERTIFICATES;
+
+        data = MOCK_CERTIFICATES;
         setTriggerDownload(triggerArray);
         setCertificados(data);
       } finally {
@@ -116,8 +168,8 @@ export default function Certificados() {
   }, []);
 
   return (
-    <div className="row row-gap-5 mt-4 mb-5">
-      <div className="mb-4">
+    <div className="row row-gap-2 mt-4 mb-5 min-h-100">
+      <div className="">
         <div className="d-flex align-items-center justify-content-between">
           <div className="d-flex align-items-center justify-content-between w-100 gap-2 mb-2">
             {isMobile && (
@@ -140,29 +192,44 @@ export default function Certificados() {
             )}
           </div>
         </div>
+
         <span>
           Estes são os certificados que você solicitou por email ou baixou
           manualmente.
         </span>
+
+        <div className="mt-3">
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Buscar certificado"
+            className="form-control"
+            type="search"
+            aria-label="Buscar certificados"
+          />
+        </div>
       </div>
 
-      {isMobile ? (
+      {filteredCertificates.length === 0 ? (
+        <div className="">
+          <span className="text-muted">Nenhum certificado encontrado.</span>
+        </div>
+      ) : isMobile ? (
         <div className="overflow-hidden">
           <Swiper
-            modules={[Navigation, Pagination]}
+            modules={[Navigation]}
             breakpoints={{
               0: { slidesPerView: 1, spaceBetween: 16 },
               576: { slidesPerView: 2, spaceBetween: 16 },
             }}
-            pagination={{ clickable: true }}
             navigation={{
               prevEl: ".custom-prev-certificados",
               nextEl: ".custom-next-certificados",
             }}
             className="mySwiper"
           >
-            {certificados.map((item, index) => (
-              <SwiperSlide key={item.code || index}>
+            {filteredCertificates.map((item, index) => (
+              <SwiperSlide key={`${item.code || 'cert'}-${index}`}>
                 <div
                   className="cursor-pointer"
                   onClick={() => {
@@ -207,9 +274,9 @@ export default function Certificados() {
           </Swiper>
         </div>
       ) : (
-        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
-          {certificados.map((item, index) => (
-            <div className="col" key={item.code || index}>
+        <div className="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4 min-h-100">
+          {filteredCertificates.map((item, index) => (
+            <div className="col" key={`${item.code || 'cert'}-${index}`}>
               <div
                 className="cursor-pointer"
                 onClick={() => {
