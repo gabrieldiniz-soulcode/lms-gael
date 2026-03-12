@@ -123,7 +123,7 @@ const CertificadoGeral: React.FC = () => {
 
 
     return {
-      certificate_created: 1,
+      certificate_created: new Date().getTime() / 1000,
       code: `GERAL-${data?.userid ?? '0000'}-${data?.cohortid ?? '153'}`,
       coursename: 'Desenvolvedor de Games Godot Engine',
       firstname: capitalizeFirstLetter(perfil.firstname),
