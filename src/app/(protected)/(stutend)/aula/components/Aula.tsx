@@ -78,7 +78,7 @@ export default function Aula() {
 
             api.get("/module", {
                 headers: {
-                    // "course": cursoId,
+                    "course": cursoId,
                     "Authorization": `Bearer ${user?.token}`
                 }
             })
