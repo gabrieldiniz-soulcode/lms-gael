@@ -23,8 +23,7 @@ export default function ChatWindow({
   messages,
   setMessages,
   userId,
-  onChatCreated,
-}: ChatWindowProps) {
+  onChatCreated}: ChatWindowProps) {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const endRef = useRef<HTMLDivElement | null>(null);
@@ -42,8 +41,7 @@ export default function ChatWindow({
     const novaMensagem: Message = {
       sender: "user",
       text: pergunta,
-      timestamp: Date.now() / 1000,
-    };
+      timestamp: Date.now() / 1000};
 
     setMessages([...messages, novaMensagem]);
     endRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -54,14 +52,12 @@ export default function ChatWindow({
       const res = await sendMessage({
         pergunta,
         user_id: String(userId),
-        chat_id: chatId || undefined,
-      });
+        chat_id: chatId || undefined});
 
       const resposta: Message = {
         sender: "model",
         text: res.data.resposta,
-        timestamp: Date.now() / 1000,
-      };
+        timestamp: Date.now() / 1000};
 
       setMessages((prev) => [...prev, resposta]);
 
@@ -162,8 +158,7 @@ export default function ChatWindow({
                             customStyle={{
                               borderRadius: "8px",
                               padding: "12px",
-                              maxWidth: "100%",
-                            }}
+                              maxWidth: "100%"}}
                             wrapLongLines={true}
                             {...props}
                           >
@@ -178,8 +173,7 @@ export default function ChatWindow({
                           {children}
                         </code>
                       );
-                    },
-                  }}
+                    }}}
                 >
                   {msg.text}
                 </ReactMarkdown>

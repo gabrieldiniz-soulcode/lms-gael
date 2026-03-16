@@ -1,3 +1,4 @@
+import { api } from "@/shared/api/api";
 "use client";
 
 import { FaChevronRight, FaRegFilePdf } from "react-icons/fa";
@@ -5,8 +6,6 @@ import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import Certificado from "@/components/Certificado/Certificado";
-import axios from "axios";
-
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -34,10 +33,8 @@ export default function Certificados() {
 
     useEffect(() => {
         async function getCertificates() {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate/my`, {
-                headers: {
-                    Authorization: `Bearer ${user?.token}`
-                }
+            const res = await api.get("/certificate/my", {
+                
             });
 
             const data: CertificateData[] = res.data || [];

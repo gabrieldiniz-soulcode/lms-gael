@@ -1,10 +1,9 @@
+import { api } from "@/shared/api/api";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import CarrosselCarreiras from "@/components/CarrosselCarreiras/CarrosselCarreiras";
 import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
-
 interface Course {
     id: number;
     fullname: string;
@@ -30,7 +29,7 @@ export default function PerfilCursos() {
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
+            api.get("/course", {
                 headers: {
                     "username": user?.name,
                     "database": user?.database,

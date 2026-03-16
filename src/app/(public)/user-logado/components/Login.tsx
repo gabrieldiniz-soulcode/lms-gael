@@ -56,8 +56,7 @@ export default function LoginWithEmail() {
           style={{
             margin: "10px 10px",
             padding: "24px 14px",
-            border: "solid 1px black",
-          }}
+            border: "solid 1px black"}}
           className="rounded shadow-xl py-24 px-24 bg-auxiliary1-project text-white d-flex flex-column align-items-center gap-4"
         >
           <div className="d-flex gap-4">

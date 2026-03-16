@@ -2,7 +2,6 @@
 
 import { Button, Col, Form, Row } from "react-bootstrap";
 
-import axios from "axios";
 import { useState } from "react";
 
 export default function ValidarCertificado() {
@@ -16,7 +15,7 @@ export default function ValidarCertificado() {
         setReponse('');
         setError('');
         axios
-            .get(`${process.env.NEXT_PUBLIC_API_URL}/verify_certificate`, {
+            .get("/verify_certificate", {
                 headers: {
                     database: process.env.NEXT_PUBLIC_DATABASE,
                     certificate: code

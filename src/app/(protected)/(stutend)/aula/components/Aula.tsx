@@ -10,7 +10,7 @@ import MdlQuiz from "./MdlQuiz";
 import MdlUrl from "./MdlUrl";
 import Ranking from "./Ranking";
 import Tutor from "./Tutor";
-import axios from "axios";
+import { api } from "@/shared/api/api";
 
 interface Module {
     name: string;
@@ -64,6 +64,7 @@ export default function Aula() {
     const nextModule = searchParams.get('nextModule');
     const carreiraDecoded = decodeQueryParam(String(carreira));
     const cursoDecoded = decodeQueryParam(String(curso));
+
     function safeAtob(value?: string | null) {
         try {
             return value ? atob(value) : "";
@@ -71,10 +72,10 @@ export default function Aula() {
             return "";
         }
     }
+
     useEffect(() => {
         function getModule() {
-
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
+            api.get("/module", {
                 headers: {
                     "course": cursoId,
                     "Authorization": `Bearer ${user?.token}`
@@ -123,9 +124,9 @@ export default function Aula() {
         };
 
         if (shouldComplete()) {
-            axios.post(`${process.env.NEXT_PUBLIC_API_URL}/module/completion`, {
+            api.post("/module/completion", {
                 cmid: sequence.cmid,
-                course: data_module.course,
+                course: data_module.course
             }, {
                 headers: {
                     "database": user.database,

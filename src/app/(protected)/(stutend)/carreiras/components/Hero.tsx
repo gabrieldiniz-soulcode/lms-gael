@@ -1,3 +1,4 @@
+import { api } from "@/shared/api/api";
 import Image, { StaticImageData } from "next/image";
 import { useContext, useEffect, useState } from "react";
 
@@ -6,7 +7,6 @@ import { FaRegClock } from "react-icons/fa";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import { ProgressBar } from "react-bootstrap";
 import { RiPlayMiniLine } from "react-icons/ri";
-import axios from "axios";
 import bannerCelular from "/public/ifood/banner_home_desktop.png";
 import bannerDesktop from "/public/ifood/banner_home_desktop.png";
 import bannerTablet from "/public/ifood/banner_home_desktop.png";
@@ -60,7 +60,7 @@ export default function Hero() {
 
     useEffect(() => {
         function getPerfil() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+            api.get("/ranking", {
                 headers: {
                     "database": user.database,
                     "Authorization": `Bearer ${user.token}`
@@ -79,7 +79,7 @@ export default function Hero() {
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
+            api.get("/course", {
                 headers: {
                     "database": user?.database,
                     "Authorization": `Bearer ${user?.token}`

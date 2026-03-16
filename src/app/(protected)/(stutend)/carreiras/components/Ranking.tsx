@@ -2,7 +2,7 @@ import Image, { StaticImageData } from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import axios from "axios";
+import { api } from "@/shared/api/api";
 import img from "/public/rectangle_ranking.png";
 import placeholder from "/public/placeholder.png";
 
@@ -36,10 +36,9 @@ export default function Ranking() {
     useEffect(() => {
         async function getPerfil() {
             try {
-                const res = await axios.get<UserData[]>(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+                const res = await api.get<UserData[]>("/ranking", {
                     headers: {
-                        "database": user.database,
-                        "Authorization": `Bearer ${user.token}`
+                        "database": user.database
                     }
                 });
 

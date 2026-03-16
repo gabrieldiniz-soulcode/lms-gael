@@ -1,17 +1,14 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable @next/next/no-img-element */
-import { useContext, useEffect, useMemo, useState } from "react";
+import { api } from "@/shared/api/api";
+import { useContext, useEffect, useState, useMemo } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import Certificado from "@/components/Certificado/Certificado";
 import { FaRegFilePdf } from "react-icons/fa";
 import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 
 interface CertificateData {
   certificate_created: number;
@@ -45,13 +42,9 @@ export default function Certificados() {
   useEffect(() => {
     async function getCertificates() {
       try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/certificate/my`,
+        const res = await api.get("/certificate/my",
           {
-            headers: {
-              Authorization: `Bearer ${user?.token}`,
             },
-          },
         );
 
         const data: CertificateData[] = Array.isArray(res.data) ? res.data : [];
@@ -139,8 +132,7 @@ export default function Certificados() {
             }}
             navigation={{
               prevEl: ".custom-prev-certificados",
-              nextEl: ".custom-next-certificados",
-            }}
+              nextEl: ".custom-next-certificados"}}
             className="mySwiper"
           >
             {filteredCertificates.map((item, index) => (

@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import CarrosselCarreiras from "@/components/CarrosselCarreiras/CarrosselCarreiras";
 import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
+import { api } from "@/shared/api/api";
 
 interface Course {
     id: number;
@@ -36,12 +36,11 @@ export default function Categorias() {
 
     useEffect(() => {
         function getCourse() {
-            axios
-                .get(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
+            api
+                .get("/course", {
                     headers: {
-                        database: user?.database,
-                        Authorization: `Bearer ${user?.token}`,
-                    },
+                        database: user?.database
+                    }
                 })
                 .then((res: ApiResponse) => {
                     const cursos = res.data.filter((car) => car.carreira === "sim" && car.inscrito == 1);

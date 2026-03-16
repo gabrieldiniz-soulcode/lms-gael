@@ -3,7 +3,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
-import axios from "axios";
 import playImg from "/public/play.png";
 
 interface Sequence {
@@ -110,18 +109,13 @@ export default function MdlPage({ sequence, paused, setPaused ,setbuttons}: Prop
 
     function completeModule() {
         axios
-            .post(
-                `${process.env.NEXT_PUBLIC_API_URL}/module/completion`,
+            .post("/module/completion",
                 {
                     cmid: sequence.cmid,
-                    course: sequence.data_module.course,
-                },
+                    course: sequence.data_module.course},
                 {
                     headers: {
-                        database: user.database,
-                        Authorization: `Bearer ${user.token}`,
-                    },
-                }
+                        database: user.database}}
             )
             .then((res) => {
                 console.log("Módulo concluído via vídeo!", res);

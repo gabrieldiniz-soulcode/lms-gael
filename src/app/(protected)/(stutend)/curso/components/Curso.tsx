@@ -1,3 +1,4 @@
+import { api } from "@/shared/api/api";
 import Carreira, { Course } from "./Carreira";
 import { Fragment, useContext, useEffect, useState } from "react";
 
@@ -7,7 +8,6 @@ import { LoaderContext } from "@/contexts/LoaderContext";
 import Ranking from "./Ranking";
 import { Spinner } from "react-bootstrap";
 import SubCurso from "./SubCurso";
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
 interface ApiResponse {
@@ -55,7 +55,7 @@ export default function Curso() {
 
     useEffect(() => {
         function getCourse() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/course`, {
+            api.get("/course", {
                 headers: {
                     "database": user?.database,
                     "Authorization": `Bearer ${user?.token}`
@@ -80,7 +80,7 @@ export default function Curso() {
     useEffect(() => {
 
         function getModule() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
+            api.get("/module", {
                 headers: {
                     "course": id,
                     "Authorization": `Bearer ${user?.token}`
@@ -114,7 +114,7 @@ export default function Curso() {
     function getSubCurso(courseId: number, token: string) {
         if (!token) return;
         setSubCursoLoading(true);
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
+        api.get("/module", {
             headers: {
                 "course": courseId,
                 "Authorization": `Bearer ${token}`

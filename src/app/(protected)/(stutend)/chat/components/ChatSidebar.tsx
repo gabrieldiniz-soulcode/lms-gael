@@ -3,8 +3,7 @@ import {
   ListGroup,
   Button,
   Modal,
-  Form,
-} from "react-bootstrap";
+  Form} from "react-bootstrap";
 import { GoPencil, GoTrash } from "react-icons/go";
 import { ChatSummary } from "./Chat";
 
@@ -24,8 +23,7 @@ export default function ChatSidebar({
   onSelectChat,
   onNewChat,
   onDeleteChat,
-  onRenameChat,
-}: ChatSidebarProps) {
+  onRenameChat}: ChatSidebarProps) {
   const [modalChatId, setModalChatId] = useState<string | null>(null);
   const [modalMode, setModalMode] = useState<"rename" | "delete" | null>(null);
   const [newTitle, setNewTitle] = useState("");

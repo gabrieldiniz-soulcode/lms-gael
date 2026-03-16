@@ -1,8 +1,8 @@
+import { api } from "@/shared/api/api";
 import Image, { StaticImageData } from "next/image";
 import { useCallback, useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import axios from "axios";
 import img from "/public/rectangle_ranking.png";
 import placeholder from "/public/placeholder.png";
 
@@ -27,7 +27,7 @@ export default function Ranking() {
     const fetchRanking = useCallback(async () => {
         if (!user?.token || !user?.database || !user?.id) return;
         try {
-            const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+            const res = await api.get("/ranking", {
                 headers: {
                     "database": user.database,
                     "Authorization": `Bearer ${user.token}`
