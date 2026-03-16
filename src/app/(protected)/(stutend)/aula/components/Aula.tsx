@@ -64,6 +64,7 @@ export default function Aula() {
     const nextModule = searchParams.get('nextModule');
     const carreiraDecoded = decodeQueryParam(String(carreira));
     const cursoDecoded = decodeQueryParam(String(curso));
+
     function safeAtob(value?: string | null) {
         try {
             return value ? atob(value) : "";
@@ -71,12 +72,13 @@ export default function Aula() {
             return "";
         }
     }
+
     useEffect(() => {
         function getModule() {
 
             api.get("/module", {
                 headers: {
-                    "course": cursoId,
+                    // "course": cursoId,
                     "Authorization": `Bearer ${user?.token}`
                 }
             })

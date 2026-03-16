@@ -1,8 +1,11 @@
 "use client";
 
 import { LoaderContext } from "@/contexts/LoaderContext";
-import { useContext } from "react";
 import { Spinner } from "react-bootstrap";
+import { registerUpdateResponses } from "@/shared/api/api";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { useLoader } from "@/shared/hooks/useLoader";
 
 interface Props {
     children: React.ReactNode;
@@ -11,6 +14,11 @@ interface Props {
 export default function Loader({ children }: Props) {
 
     const { isLoading } = useContext(LoaderContext);
+    const { updateResponses } = useLoader();
+
+    useEffect(() => {
+        registerUpdateResponses(updateResponses);
+    }, [updateResponses]);
 
     return (
         <>

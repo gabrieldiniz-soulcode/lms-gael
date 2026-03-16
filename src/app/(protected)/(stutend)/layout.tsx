@@ -6,7 +6,8 @@ import { LoaderProvider } from "@/contexts/LoaderContext";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import { Suspense } from "react";
 
-export default function Layout({ children}: Readonly<{ children: React.ReactNode; }>) {
+export default function Layout({ children }: Readonly<{ children: React.ReactNode; }>) {
+
   return (
     <LoaderProvider>
       <DataProvider>
