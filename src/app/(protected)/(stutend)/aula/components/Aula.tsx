@@ -75,7 +75,6 @@ export default function Aula() {
 
     useEffect(() => {
         function getModule() {
-
             api.get("/module", {
                 headers: {
                     "course": cursoId,

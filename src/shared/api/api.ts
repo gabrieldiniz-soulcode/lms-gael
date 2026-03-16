@@ -1,6 +1,6 @@
 "use client";
 
-import { addDoc, collection, getDocs } from "firebase/firestore";
+import { addDoc, collection } from "firebase/firestore";
 
 import { StoredUser } from "@/contexts/AuthContext";
 import axios from "axios";
@@ -16,7 +16,6 @@ export function registerUpdateResponses(fn: () => void) {
 
 const logErrorToFirebase = async (error: unknown, type: "request" | "response") => {
   updateResponsesFn?.();
-
 
   try {
     const storedUser = localStorage.getItem("user") || sessionStorage.getItem("user");
@@ -50,14 +49,7 @@ const logErrorToFirebase = async (error: unknown, type: "request" | "response") 
       origin: typeof window !== "undefined" ? window.location.href : null,
     };
 
-    console.log("API Error Logged:", payload);
-    const data = await getDocs(collection(db, "InscIfood")).catch((err) => {
-      console.error("Erro ao buscar dados para log de erro:", err);
-    });
-    console.log(data.docs.map(doc => doc.data()));
-
-    const ref = await addDoc(collection(db, "api_errors"), payload);
-    console.log("Erro de API registrado no Firebase com ID:", ref.id);
+    await addDoc(collection(db, "api_errors"), payload);
   } catch (logErr) {
     console.error("Falha ao salvar log de erro no Firebase", logErr);
   }
