@@ -118,12 +118,10 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                         }}
 
                         pagination={{
-                            clickable: true,
-                        }}
+                            clickable: true}}
                         navigation={{
                             prevEl: `.custom-prev-${slugify(categoria) || "default"}`,
-                            nextEl: `.custom-next-${slugify(categoria) || "default"}`,
-                        }}
+                            nextEl: `.custom-next-${slugify(categoria) || "default"}`}}
                         className="mySwiper carrossel-carreiras position-relative z-0"
                     >
 

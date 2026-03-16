@@ -1,9 +1,9 @@
+import { api } from "@/shared/api/api";
 import { Button, Form } from "react-bootstrap";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { useContext, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
 interface Props {
@@ -90,7 +90,7 @@ export default function EsqueciSenha({ setEsqueciSenha }: Props) {
     const handleForgotPassword = () => {
         if (!validatePassword()) return;
 
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/user/recoverpassword`, {
+        api.post("/user/recoverpassword", {
             token,
             database: process.env.NEXT_PUBLIC_DATABASE,
             new_password: senha
@@ -110,7 +110,7 @@ export default function EsqueciSenha({ setEsqueciSenha }: Props) {
     }
 
     const handleRecoveryPassword = () => {
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/v2/user/forgotpassword`, {
+        api.post("/v2/user/forgotpassword", {
             username: email,
             database: process.env.NEXT_PUBLIC_DATABASE,
             plataform: `ifood`

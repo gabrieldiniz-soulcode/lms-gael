@@ -1,8 +1,8 @@
+import { api } from "@/shared/api/api";
 import { Button, Form, Spinner } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
 interface Props {
@@ -84,7 +84,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
 
     useEffect(() => {
         function getQuiz() {
-            axios.post(`${process.env.NEXT_PUBLIC_API_URL}/quiz/new_attempt`, {
+            api.post("/quiz/new_attempt", {
                 cmid,
                 instance
             }, {
@@ -108,7 +108,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
         }
 
         function getQuizInProgress() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/quiz/continue_attempt`, {
+            api.get("/quiz/continue_attempt", {
                 headers: {
                     "database": database,
                     "attempt_id": instance,
@@ -145,7 +145,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
     function saveQuestionAttempt(answerId: number) {
         if (!quiz) return;
         console.log(quiz.question_usages_id)
-        axios.put(`${process.env.NEXT_PUBLIC_API_URL}/quiz/save_question_attempt`, {
+        api.put("/quiz/save_question_attempt", {
             slot: quiz.slots[activeIndex].slot,
             question_usages_id: quiz.question_usages_id,
             question_answer_id: answerId
@@ -168,7 +168,7 @@ export default function Quiz({ userid, database, cmid, instance, newAttempt, set
             setQuizAttempt(false);
             return;
         }
-        axios.put(`${process.env.NEXT_PUBLIC_API_URL}/quiz/complete_attempt`, {
+        api.put("/quiz/complete_attempt", {
             cmid,
             question_usages_id: quiz?.question_usages_id,
             course: cursoId

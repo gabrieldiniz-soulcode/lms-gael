@@ -1,11 +1,10 @@
+import { api } from "@/shared/api/api";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import Certificado from "@/components/Certificado/Certificado";
 import { FaRegFilePdf } from "react-icons/fa";
 import { LoaderContext } from "@/contexts/LoaderContext";
-import axios from "axios";
-
 import "swiper/css";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -36,8 +35,7 @@ export default function Certificados() {
       firstname: "João",
       lastname: "Silva",
       workload: "10",
-      name: "Certificado Mock #1",
-    },
+      name: "Certificado Mock #1"},
     {
       certificate_created: 1700000000,
       code: "MOCK-002",
@@ -45,8 +43,7 @@ export default function Certificados() {
       firstname: "Maria",
       lastname: "Oliveira",
       workload: "8",
-      name: "Certificado Mock #2",
-    },
+      name: "Certificado Mock #2"},
     {
       certificate_created: 1700000000,
       code: "MOCK-003",
@@ -54,8 +51,7 @@ export default function Certificados() {
       firstname: "Lucas",
       lastname: "Almeida",
       workload: "12",
-      name: "Certificado Mock #3",
-    },
+      name: "Certificado Mock #3"},
     {
       certificate_created: 1700000000,
       code: "MOCK-004",
@@ -63,8 +59,7 @@ export default function Certificados() {
       firstname: "Ana",
       lastname: "Fernandes",
       workload: "6",
-      name: "Certificado Mock #4",
-    },
+      name: "Certificado Mock #4"},
     {
       certificate_created: 1700000000,
       code: "MOCK-004",
@@ -72,20 +67,15 @@ export default function Certificados() {
       firstname: "Ana",
       lastname: "Fernandes",
       workload: "6",
-      name: "Certificado Mock #5",
-    },
+      name: "Certificado Mock #5"},
   ];
 
   useEffect(() => {
     async function getCertificates() {
       try {
-        const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/certificate/my`,
+        const res = await api.get("/certificate/my",
           {
-            headers: {
-              Authorization: `Bearer ${user?.token}`,
             },
-          },
         );
         let data: CertificateData[] = Array.isArray(res.data) ? res.data : [];
         const triggerArray = new Array(data.length).fill(false);
@@ -152,13 +142,11 @@ export default function Certificados() {
             modules={[Navigation, Pagination]}
             breakpoints={{
               0: { slidesPerView: 1, spaceBetween: 16 },
-              576: { slidesPerView: 2, spaceBetween: 16 },
-            }}
+              576: { slidesPerView: 2, spaceBetween: 16 }}}
             pagination={{ clickable: true }}
             navigation={{
               prevEl: ".custom-prev-certificados",
-              nextEl: ".custom-next-certificados",
-            }}
+              nextEl: ".custom-next-certificados"}}
             className="mySwiper"
           >
             {certificados.map((item, index) => (

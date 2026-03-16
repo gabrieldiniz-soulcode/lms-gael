@@ -44,8 +44,7 @@ export default function Chat() {
 
   const renameChat = (chatId: string, nome: string) =>
     axios.patch(`${process.env.NEXT_PUBLIC_TUTOR_API_URL}/chat/${chatId}`, {
-      nome,
-    });
+      nome});
 
   const deleteChat = (chatId: string) =>
     axios.delete(`${process.env.NEXT_PUBLIC_TUTOR_API_URL}/chat/${chatId}`);

@@ -1,8 +1,8 @@
+import { api } from "@/shared/api/api";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import { Button } from "react-bootstrap";
-import axios from "axios";
 import { useSearchParams } from "next/navigation";
 
 interface Nota {
@@ -27,7 +27,7 @@ export default function Notas() {
     useEffect(() => {
 
         function getNotes() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/notes`, {
+            api.get("/notes", {
                 headers: {
                     "Authorization": `Bearer ${user?.token}`,
                     "cmid": id
@@ -64,14 +64,12 @@ export default function Notas() {
             return;
         }
 
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/notes`, {
+        api.post("/notes", {
             userid: user.id,
             cmid: id,
             content: data
         }, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
+            
         })
             .then(() => {
                 setPrevData(data);

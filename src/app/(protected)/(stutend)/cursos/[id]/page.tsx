@@ -1,15 +1,15 @@
 "use client";
 
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "next/navigation";
-import { Spinner } from "react-bootstrap";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import { LoaderContext } from "@/contexts/LoaderContext";
-import SubCurso from "../../curso/components/SubCurso";
-import Ranking from "../../carreiras/components/Ranking";
-import axios from "axios";
 import Link from "next/link";
+import { LoaderContext } from "@/contexts/LoaderContext";
+import Ranking from "../../carreiras/components/Ranking";
+import { Spinner } from "react-bootstrap";
+import SubCurso from "../../curso/components/SubCurso";
+import { api } from "@/shared/api/api";
+import { useParams } from "next/navigation";
 
 interface Module {
     id: number;
@@ -49,17 +49,16 @@ export default function CursoTopicosPage() {
         if (!user?.token || !cursoId) return;
 
         async function getModule() {
-            
+
             try {
-                const res = await axios.get<Module[]>(`${process.env.NEXT_PUBLIC_API_URL}/module`, {
+                const res = await api.get<Module[]>("/module", {
                     headers: {
-                        course: cursoId,
-                        Authorization: `Bearer ${user.token}`,
-                    },
+                        course: cursoId
+                    }
                 });
 
                 setModulos(res.data);
-                
+
             } catch (err) {
                 console.error("Erro ao carregar módulos:", err);
             } finally {
@@ -85,7 +84,7 @@ export default function CursoTopicosPage() {
                 </div>
             ) : (
                 <div className="d-flex justify-content-center">
-                    
+
                     <div className="col-xl-8 col-12">
                         <SubCurso subCurso={modulos} carreiraId={cursoId} />
                     </div>

@@ -1,3 +1,4 @@
+import { api } from "@/shared/api/api";
 import { Form, OverlayTrigger, Tooltip } from "react-bootstrap";
 import { useContext, useEffect, useState } from "react";
 
@@ -6,8 +7,6 @@ import Image from "next/image";
 import { IoMailSharp } from "react-icons/io5";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import { MdOutlineModeEditOutline } from "react-icons/md";
-import axios from "axios";
-
 interface UserFrequency {
     [date: string]: number;
 }
@@ -47,7 +46,7 @@ export default function Perfil() {
     useEffect(() => {
 
         function getPerfil() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+            api.get("/profile", {
                 headers: {
                     "database": user.database,
                     "Authorization": `Bearer ${user.token}`

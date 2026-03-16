@@ -1,9 +1,9 @@
+import { api } from "@/shared/api/api";
 import { Button, Form } from "react-bootstrap";
 import { FaRegCheckCircle, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import { FormEvent, useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 interface PasswordValidationResult {
@@ -59,8 +59,7 @@ export default function AlterarSenha() {
                 hasUppercase,
                 hasLowercase,
                 hasSpecialChar,
-                strengthLevel,
-            };
+                strengthLevel};
         };
 
         setValidationResult(validatePassword());
@@ -99,13 +98,11 @@ export default function AlterarSenha() {
             return;
         }
 
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth/resetpassword`, {
+        api.post("/auth/resetpassword", {
             password: oldPasswrod,
             new_password: password
         }, {
-            headers: {
-                Authorization: `Bearer ${user.token}`
-            }
+            
         })
             .then(() => {
                 router.push("/carreiras");

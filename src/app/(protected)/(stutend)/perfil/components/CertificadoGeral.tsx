@@ -1,11 +1,10 @@
+import { api } from "@/shared/api/api";
 import { Button, Card, ProgressBar } from 'react-bootstrap';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { AuthContext } from '@/contexts/AuthContext';
 import Certificado from '@/components/Certificado/Certificado';
 import { FaRegFilePdf } from 'react-icons/fa';
-import axios from 'axios';
-
 interface Course {
   courseid: number;
   fullname: string;
@@ -68,17 +67,14 @@ const CertificadoGeral: React.FC = () => {
       setError('');
 
       try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/progress/user-cohort`,
+        const response = await api.get("/progress/user-cohort",
           {
             headers: {
               userid: user.id,
               cohortid: 153,
               subcourse_scope: 'all',
-              Authorization: `Bearer ${user.token}`,
-              scope: 'cohort',
-            },
-          }
+              
+              scope: 'cohort'}}
         );
 
         setData(response.data);
@@ -98,15 +94,13 @@ const CertificadoGeral: React.FC = () => {
     setError('');
 
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/progress/user-cohort`,
+      await api.post("/progress/user-cohort",
         {
           scope: 'cohort',
           userid: user.id,
           cohortid: 153,
-          subcourse_scope: 'all',
-        },
-        { headers: { Authorization: `Bearer ${user.token}`, }, }
+          subcourse_scope: 'all'},
+        { }
       );
     } catch {
       console.error('Erro ao atualizar progresso.');
@@ -129,8 +123,7 @@ const CertificadoGeral: React.FC = () => {
       firstname: capitalizeFirstLetter(perfil.firstname),
       lastname: capitalizeFirstLetter(perfil.lastname),
       workload: `${data?.totals?.courses ?? 0} cursos concluídos`,
-      name: 'Desenvolvedor de Games Godot Engine',
-    };
+      name: 'Desenvolvedor de Games Godot Engine'};
   }, [data?.cohortid, data?.totals?.courses, data?.userid, perfil.firstname, perfil.lastname]);
 
   if (loading) return <div>Carregando...</div>;

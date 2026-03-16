@@ -105,10 +105,8 @@ export default function Tutor({ curso, carreira }: TutorProps) {
           params: {
             user_id: perfil.firstname.toLocaleLowerCase(),
             tutor_id: resTutorId.data.tutor_ids[0],
-            _ts: Date.now(),
-          },
-          headers: { Authorization: `Bearer ${user.token}` },
-        });
+            _ts: Date.now()},
+          });
 
         if (cancelled) return;
 
@@ -155,14 +153,11 @@ export default function Tutor({ curso, carreira }: TutorProps) {
           message: text,
           candidate_tutor_ids: tutorIds,
           chat_history,
-          hints: { boost_terms: ["string"], filters: { additionalProp1: {} }, top_k: 8, },
-        },
+          hints: { boost_terms: ["string"], filters: { additionalProp1: {} }, top_k: 8}},
         {
           headers: {
-            Authorization: `Bearer ${user.token}`,
-            "Content-Type": "application/json",
-          },
-        }
+            
+            "Content-Type": "application/json"}}
       );
 
       setSelectTutorId(res.data.selected_tutor_id);

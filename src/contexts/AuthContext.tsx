@@ -4,6 +4,7 @@ import { createContext, useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { StaticImageData } from "next/image";
+import { api } from "@/shared/api/api";
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
@@ -63,7 +64,7 @@ interface Props {
     children: React.ReactNode;
 }
 
-type StoredUser = { user: User; expiry: number };
+export type StoredUser = { user: User; expiry: number };
 
 export const AuthContext = createContext({} as AuthContextData);
 
@@ -130,11 +131,10 @@ export function AuthContextProvider({ children }: Props) {
 
     const fetchUserLevel = useCallback(async (userid: string | number, database: string, token: string) => {
         try {
-            const res = await axios.get<UserData[]>(`${process.env.NEXT_PUBLIC_API_URL}/ranking`, {
+            const res = await api.get<UserData[]>("/ranking", {
                 headers: {
-                    database,
-                    Authorization: `Bearer ${token}`,
-                },
+                    database
+                }
             });
 
             const currentUser = res.data.find((item) => item.userid === Number(userid));
@@ -148,11 +148,10 @@ export function AuthContextProvider({ children }: Props) {
 
     function getPerfil(userObj: User) {
         axios
-            .get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+            .get("/profile", {
                 headers: {
-                    database: userObj.database,
-                    Authorization: `Bearer ${userObj.token}`,
-                },
+                    database: userObj.database
+                }
             })
             .then((res: ApiResponse) => {
                 setPerfil(res.data);
@@ -236,11 +235,11 @@ export function AuthContextProvider({ children }: Props) {
         const userObj = {} as User;
 
         try {
-            const authResponse = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/auth`, {
+            const authResponse = await api.post("/auth", {
                 username: email,
                 password,
                 database: process.env.NEXT_PUBLIC_DATABASE,
-                institution: "Ifood",
+                institution: "Ifood"
             });
 
             if (authResponse.data.error) {

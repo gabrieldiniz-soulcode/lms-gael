@@ -1,9 +1,9 @@
+import { api } from "@/shared/api/api";
 import { Button, Modal, Spinner } from "react-bootstrap";
 import { Suspense, useContext, useEffect, useState } from "react"
 
 import { AuthContext } from "@/contexts/AuthContext";
 import Quiz from "./Quiz";
-import axios from "axios";
 import { CertificateData, Sequence } from "./MdlCustomcert";
 import Certificado from "@/components/Certificado/Certificado";
 
@@ -60,7 +60,7 @@ export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, 
     useEffect(() => {
 
         function getQuiz() {
-            axios.get(`${process.env.NEXT_PUBLIC_API_URL}/quiz`, {
+            api.get("/quiz", {
                 headers: {
                     "Authorization": `Bearer ${user?.token}`,
                     "cmid": cmid,
@@ -115,9 +115,9 @@ export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, 
 
         if (!user?.token) return;
 
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate`, {
+        const res = await api.get("/certificate", {
             headers: {
-                Authorization: `Bearer ${user?.token}`,
+                
                 course: sequence.data_module.course,
                 template_id: sequence.data_module.templateid
             }

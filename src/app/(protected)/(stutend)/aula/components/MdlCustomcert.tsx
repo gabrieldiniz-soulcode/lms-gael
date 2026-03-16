@@ -1,10 +1,9 @@
+import { api } from "@/shared/api/api";
 import { useContext, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
 import { Button } from "react-bootstrap";
 import Certificado from "@/components/Certificado/Certificado";
-import axios from "axios";
-
 export interface Sequence {
     cmid: number,
     module: string;
@@ -47,9 +46,9 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
 
         if (!user?.token) return;
 
-        const res = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/certificate`, {
+        const res = await api.get("/certificate", {
             headers: {
-                Authorization: `Bearer ${user?.token}`,
+                
                 course: sequence.data_module.course,
                 template_id: sequence.data_module.templateid
             }

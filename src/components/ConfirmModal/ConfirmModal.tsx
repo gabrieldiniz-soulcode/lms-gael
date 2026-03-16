@@ -34,8 +34,7 @@ export default function ConfirmModal({
   disableBackdropClose = true,
   size,
   onConfirm,
-  onCancel,
-}: ConfirmModalProps) {
+  onCancel}: ConfirmModalProps) {
   const handleCancel = () => {
     if (loading) return;
     onCancel();

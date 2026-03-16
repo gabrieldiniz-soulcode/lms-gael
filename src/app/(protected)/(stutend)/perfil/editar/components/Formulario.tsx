@@ -1,3 +1,4 @@
+import { api } from "@/shared/api/api";
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { AuthContext } from "@/contexts/AuthContext";
@@ -85,7 +86,7 @@ export default function Formulario() {
     }, [])
 
     const getPerfil = useCallback(() => {
-        axios.get(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+        api.get("/profile", {
             headers: {
                 "database": user.database,
                 "Authorization": `Bearer ${user.token}`
@@ -141,7 +142,7 @@ export default function Formulario() {
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        axios.put(`${process.env.NEXT_PUBLIC_API_URL}/profile`, {
+        api.put("/profile", {
             userid: parseInt(user?.id),
             user_data: perfil
         }, {
@@ -161,10 +162,8 @@ export default function Formulario() {
     const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const formData = new FormData();
         formData.append('imagem', e.target.files![0]);
-        axios.post(`${process.env.NEXT_PUBLIC_API_URL}/upload`, formData, {
-            headers: {
-                Authorization: `Bearer ${user?.token}`
-            }
+        api.post("/upload", formData, {
+            
         })
             .then(() => {
                 getPerfil();
