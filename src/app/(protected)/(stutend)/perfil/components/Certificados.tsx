@@ -1,5 +1,5 @@
-import { api } from "@/shared/api/api";
 "use client";
+import { api } from "@/shared/api/api";
 
 import { FaChevronRight, FaRegFilePdf } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";

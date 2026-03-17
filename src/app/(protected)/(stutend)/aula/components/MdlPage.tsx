@@ -4,6 +4,7 @@ import { AuthContext } from "@/contexts/AuthContext";
 import { FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 import playImg from "/public/play.png";
+import { api } from "@/shared/api/api";
 
 interface Sequence {
     cmid: number;
@@ -108,7 +109,7 @@ export default function MdlPage({ sequence, paused, setPaused ,setbuttons}: Prop
     }
 
     function completeModule() {
-        axios
+        api
             .post("/module/completion",
                 {
                     cmid: sequence.cmid,
