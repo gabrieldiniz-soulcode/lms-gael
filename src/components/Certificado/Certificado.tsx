@@ -87,7 +87,7 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                         </div>
                     </div>
                     <div className="d-flex flex-column gap-3 ps-3 ms-5 mt-5">
-                        <span className="fs-51 fw-700 text-auxiliary2-project">{certificado.name}</span>
+                        <span className="fs-51 fw-700">{certificado.name == "Certificado de Conclusão" ? certificado.coursename : certificado.name}</span>
                     </div>
                     <div className="d-flex mb-3 py-5 justify-content-end">
                         <span className="d-flex flex-column justify-content-center align-items-center">
