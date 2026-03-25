@@ -131,13 +131,12 @@ export function AuthContextProvider({ children }: Props) {
 
     const fetchUserLevel = useCallback(async (userid: string | number, database: string, token: string) => {
         try {
-            const res = await api.get<UserData[]>("/ranking", {
+            const res = await api.get<UserData>("/ranking/me", {
                 headers: {
                     database
                 }
             });
-
-            const currentUser = res.data.find((item) => item.userid === Number(userid));
+            const currentUser = res.data;
             if (currentUser && currentUser.level !== undefined) {
                 setUserLevel(currentUser.level);
             }
