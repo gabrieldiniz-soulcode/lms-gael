@@ -9,6 +9,7 @@ import MdlPage from "./MdlPage";
 import MdlQuiz from "./MdlQuiz";
 import MdlUrl from "./MdlUrl";
 import Ranking from "./Ranking";
+import SendLesson from "./sendLesson";
 import Tutor from "./Tutor";
 import { api } from "@/shared/api/api";
 
@@ -64,6 +65,13 @@ export default function Aula() {
     const nextModule = searchParams.get('nextModule');
     const carreiraDecoded = decodeQueryParam(String(carreira));
     const cursoDecoded = decodeQueryParam(String(curso));
+    let receiveLesson : boolean = false;
+
+    console.log({ id, cursoId, carreiraId, carreiraDecoded, cursoDecoded })
+
+    if(id == "8469" && cursoId == "380" && carreiraId == "382"){
+        receiveLesson = true;
+    }
 
     function safeAtob(value?: string | null) {
         try {
@@ -253,6 +261,9 @@ export default function Aula() {
                 <div className="mt-4 position-relative d-flex justify-content-center align-items-center">
                     {getDisplay()}
                 </div>
+                {receiveLesson &&
+                    <SendLesson email={user.name} lessonId={id ?? ""} />
+                }
                 <div className="my-5" id="tutor">
                     {/* <Notas /> */}
                     <Tutor carreira={carreiraDecoded} curso={cursoDecoded} />
