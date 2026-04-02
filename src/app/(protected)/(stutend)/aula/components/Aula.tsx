@@ -69,7 +69,7 @@ export default function Aula() {
 
     console.log({ id, cursoId, carreiraId, carreiraDecoded, cursoDecoded })
 
-    if(id == "8469" && cursoId == "380" && carreiraId == "382"){
+    if(id == "10450" && cursoId == "395" && carreiraId == "396"){
         receiveLesson = true;
     }
 
