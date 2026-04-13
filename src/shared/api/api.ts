@@ -1,12 +1,14 @@
 "use client";
 
 import { addDoc, collection } from "firebase/firestore";
+import { trackEvent, truncate } from "@/lib/trackingService";
 
 import { StoredUser } from "@/contexts/AuthContext";
 import axios from "axios";
 import { db } from "@/lib/firebaseConfig";
 
 const baseURL = process.env.NEXT_PUBLIC_API_URL;
+const BLOCKED_URLS = ["/auth"];
 
 let updateResponsesFn: (() => void) | null = null;
 
@@ -61,6 +63,26 @@ api.interceptors.request.use(
     const storedUser = localStorage.getItem("user") || sessionStorage.getItem("user");
     const stored: StoredUser | null = storedUser ? JSON.parse(storedUser) : null;
     if (!!stored?.user?.token) config.headers.Authorization = `Bearer ${stored.user.token}`;
+
+    const isBlockedUrl = BLOCKED_URLS.some((u) => config.url?.includes(u));
+    const safeHeaders = { ...(config.headers as Record<string, unknown>) };
+    delete safeHeaders["Authorization"];
+    delete safeHeaders["authorization"];
+    void trackEvent({
+      type: "api_request",
+      userId: stored?.user?.id,
+      userName: stored?.user?.name,
+      timestamp: new Date().toISOString(),
+      page: typeof window !== "undefined" ? window.location.pathname : "",
+      data: {
+        url: config.url ?? null,
+        method: config.method ?? null,
+        params: config.params ? truncate(config.params) : null,
+        body: isBlockedUrl ? "[redacted]" : config.data ? truncate(config.data) : null,
+        headers: truncate(safeHeaders),
+      },
+    });
+
     return config;
   }, async (error) => {
     await logErrorToFirebase(error, "request");
@@ -68,7 +90,26 @@ api.interceptors.request.use(
   });
 
 api.interceptors.response.use(
-  (response) => response,
+  (response) => {
+    const storedUser = localStorage.getItem("user") || sessionStorage.getItem("user");
+    const stored: StoredUser | null = storedUser ? JSON.parse(storedUser) : null;
+
+    void trackEvent({
+      type: "api_response",
+      userId: stored?.user?.id,
+      userName: stored?.user?.name,
+      timestamp: new Date().toISOString(),
+      page: typeof window !== "undefined" ? window.location.pathname : "",
+      data: {
+        url: response.config.url ?? null,
+        method: response.config.method ?? null,
+        status: response.status,
+        responseData: truncate(response.data),
+      },
+    });
+
+    return response;
+  },
   async (error) => {
     await logErrorToFirebase(error, "response");
     return Promise.reject(error);
