@@ -10,8 +10,7 @@ import Image from "next/image";
 import { LiaCertificateSolid } from "react-icons/lia";
 import { MdLogout } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
-import logo1 from "/public/ifood/logos/chega_junto.png";
-import logo2 from "/public/ifood/logos/corre_play_white.png";
+import logo1 from "/public/gael/logo_login.png";
 
 export default function Sidebar() {
 
@@ -22,11 +21,10 @@ export default function Sidebar() {
     const { user } = useContext(AuthContext);
 
     return (
-        <div className={`d-lg-flex d-none gap-1 sidebar position-fixed bg-auxiliary1-project position-relative flex-column align-items-center px-3 py-4 ${open ? 'sidebar-open' : ''}`}>
+        <div className={`d-lg-flex d-none gap-1 sidebar position-fixed bg-auxiliary2-project position-relative flex-column align-items-center px-3 py-4 ${open ? 'sidebar-open' : ''}`}>
 
             <a className="d-flex gap-3 row-gap-0 flex-wrap" href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"}>
-                <Image src={logo1.src} width={66} height={66} alt="logo trident" className="object-fit-contain" />
-                <Image src={logo2.src} width={66} height={66} alt="logo trident" className="object-fit-contain" />
+                <Image src={logo1.src} width={70} height={45} alt="logo Gael" className="object-fit-contain" style={{ maxWidth: '70px' }} />
             </a>
 
             <a href={user?.type_render === 'carreira' ? "/carreiras" : "/cursos"} className={`${open ? 'w-100 ps-2 icon-18-sidebar fs-12 fw-700 py-2' : ''} div-icon-sidebar mt-5 text-white`}>

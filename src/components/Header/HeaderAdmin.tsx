@@ -6,7 +6,7 @@ import { AuthContext } from '@/contexts/AuthContext';
 import { FaChalkboardTeacher } from 'react-icons/fa';
 import Image from 'next/image';
 import aluno from "/public/aluno_2.png";
-import logo from "/public/ifood/logos/soulcode.png";
+import logo from "/public/gael/logo.png";
 import { useContext } from 'react';
 
 export default function HeaderAdmin() {

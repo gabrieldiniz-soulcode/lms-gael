@@ -11,7 +11,7 @@ export default function Faq() {
                     <AccordionItem eventKey="0" className="mb-2">
                         <AccordionHeader>Pra quem é o Programa?</AccordionHeader>
                         <AccordionBody>
-                            O programa é destinado para entregadores e entregadoras do iFood de todo Brasil que desejam aprender a criar e publicar jogos.
+                            O programa é destinado para pessoas de todo o Brasil que desejam aprender a empreender na economia criativa.
                         </AccordionBody>
                     </AccordionItem>
 

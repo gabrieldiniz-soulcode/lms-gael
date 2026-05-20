@@ -113,7 +113,7 @@ export default function EsqueciSenha({ setEsqueciSenha }: Props) {
         api.post("/v2/user/forgotpassword", {
             username: email,
             database: process.env.NEXT_PUBLIC_DATABASE,
-            plataform: `ifood`
+            plataform: `gael`
         })
             .then((res) => {
                 setMensagem(res.data.message);

@@ -1,7 +1,7 @@
 {
   "projects": {
-    "default": "ifood-lms",
-    "y": "ifood-lms"
+    "default": "lms-gael",
+    "y": "lms-gael"
   },
   "targets": {},
   "etags": {}

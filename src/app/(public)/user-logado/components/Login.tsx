@@ -6,9 +6,7 @@ import { Spinner, Modal } from "react-bootstrap";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 
-import logo1 from "/public/ifood/logos/chega_junto.png";
-import logo2 from "/public/ifood/logos/Logo SoulCode.svg";
-import logo3 from "/public/ifood/logos/soulcode.png";
+import logo1 from "/public/gael/logo.png";
 
 export default function LoginWithEmail() {
   const [logado, setLogado] = useState(false);
@@ -61,24 +59,10 @@ export default function LoginWithEmail() {
         >
           <div className="d-flex gap-4">
             <Image
-              src={logo3.src}
-              width={55}
-              height={55}
-              alt="logo Ifood"
-              className="object-fit-contain"
-            />
-            <Image
               src={logo1.src}
-              width={55}
+              width={100}
               height={55}
-              alt="logo chega junto"
-              className="object-fit-contain"
-            />
-            <Image
-              src={logo2.src}
-              width={55}
-              height={55}
-              alt="logo corre play"
+              alt="logo Gael"
               className="object-fit-contain"
             />
           </div>

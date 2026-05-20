@@ -238,7 +238,7 @@ export function AuthContextProvider({ children }: Props) {
                 username: email,
                 password,
                 database: process.env.NEXT_PUBLIC_DATABASE,
-                institution: "Ifood"
+                institution: "Gael"
             });
 
             if (authResponse.data.error) {

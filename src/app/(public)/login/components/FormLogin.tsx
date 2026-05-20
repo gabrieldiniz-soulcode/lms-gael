@@ -7,7 +7,7 @@ import { Suspense, useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import EsqueciSenha from "./EsqueciSenha";
 import Image from "next/image";
-import logo1 from "/public/ifood/logos/corre_play_red.png";
+import logo1 from "/public/gael/logo.png";
 
 export default function FormLogin({ forgotPassword = false }: { forgotPassword?: boolean }) {
 
@@ -46,10 +46,10 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
     return (
         <Row className="container-login d-flex align-items-center justify-content-center row-gap-5">
             <Col xl={4} md={8} className="p-0 d-flex flex-column gap-3">
-                <Image src={logo1.src} width={264} height={117} alt="logo Trident" className="object-fit-contain" />
-                <h1 className="fs-38 fw-700 text-primary">Bem- vindo(a)</h1>
-                <span className="fs-21 text-black mb-3">
-                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o site do programa para realizar sua inscrição clicando <a href="https://correplay.soulcode.com/" target="_blank" rel="noopener noreferrer">aqui</a>.
+                <Image src={logo1.src} width={300} height={150} alt="logo Gael" className="object-fit-contain" style={{ maxWidth: '300px', height: 'auto' }} />
+                <h1 className="fs-38 fw-700 text-primary">Bem-vindo(a)</h1>
+                <span className="fs-21 text-white mb-3">
+                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o <a href="https://criamais.soulcode.com/" target="_blank" rel="noopener noreferrer" className="text-white">site do programa</a> para realizar sua inscrição.
                 </span>
             </Col>
             <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{ minHeight: 324 }}>
@@ -87,6 +87,7 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
                             </div>
 
                             <Button className="fs-15" disabled={validate()} onClick={e => handleSubmit(e)}>Acessar</Button>
+                            <Button variant="secondary" className="fs-15 border-1 border-black" href="https://criamais.soulcode.com/" target="_blank">Faça sua assinatura</Button>
                             <span className="text-center fs-14">Precisa de ajuda? <a className="cursor-pointer" onClick={() => openZendesk()}>Fale Conosco</a></span>
                         </>
                 }

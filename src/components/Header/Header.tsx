@@ -11,10 +11,7 @@ import { GoHome } from "react-icons/go";
 import Image from 'next/image';
 import { LiaCertificateSolid } from "react-icons/lia";
 import { PiStudentBold } from "react-icons/pi";
-import aluno from "/public/ifood/logos/corre_play_red.png";
-import logo1 from "/public/ifood/logos/chega_junto.png";
-import logo2 from "/public/ifood/logos/Logo SoulCode.svg";
-import logo3 from "/public/ifood/logos/soulcode.png";
+import aluno from "/public/aluno_2.png";
 
 export default function Header() {
 
@@ -43,7 +40,7 @@ export default function Header() {
   }
 
   return (
-    <Navbar expand="lg" className="header bg-auxiliary1-project py-lg-2 py-4 position-absolute w-100" style={{ zIndex: 500 }}>
+    <Navbar expand="lg" className="header bg-auxiliary2-project py-lg-2 py-4 position-absolute w-100" style={{ zIndex: 500 }}>
 
       <div className='d-lg-flex d-none justify-content-end w-100 align-items-center gap-5'>
         <div className="position-relative">
@@ -64,9 +61,7 @@ export default function Header() {
 
       <div className="d-lg-none  row d-flex  justify-content-center w-100 ">
         <div className="d-flex justify-content-center gap-4  col-10">
-          <Image src={logo3.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
-          <Image src={logo1.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
-          <Image src={logo2.src} width={55} height={55} alt="logo trident" className="object-fit-contain" />
+          <Image src={aluno.src} width={55} height={55} alt="logo Gael" className="object-fit-contain" />
         </div>
         <NavbarToggle aria-controls="basic-navbar-nav" className="col-2" />
 

@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Carmela from '../../../public/ca.png';
-import Fabricio from '../../../public/fa.png';
+import Carmela from '../../../public/ca_white_1.webp';
+import Fabricio from '../../../public/fa_white_1.webp';
 import Image from "next/image";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-import logo1 from "/public/ifood/logos/chega_junto.png";
-import logo2 from "/public/ifood/logos/Logo SoulCode.svg";
-import logo3 from "/public/ifood/logos/soulcode.png";
 
 interface CertificateData {
     certificate_created: number;
@@ -46,7 +43,7 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
     useEffect(() => {
         async function handleDownload() {
             if (!certificateRef.current || !certificado) return;
-            const canvas = await html2canvas(certificateRef.current);
+            const canvas = await html2canvas(certificateRef.current, { useCORS: true });
             const imgData = canvas.toDataURL('image/png');
             const pdf = new jsPDF('landscape', 'pt', [canvas.width, canvas.height]);
             pdf.addImage(imgData, 'PNG', 0, 0, canvas.width, canvas.height);
@@ -62,6 +59,10 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
 
     if (!certificado || !triggerDownload || downloaded) return null;
 
+    const courseName = certificado.name === "Certificado de Conclusão"
+        ? certificado.coursename
+        : certificado.name;
+
     return (
         <div
             ref={certificateRef}
@@ -69,44 +70,118 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                 position: 'absolute',
                 left: '-9999px',
                 top: '-9999px',
-                width: '1420px',
-                height: '900px',
-                overflow: 'hidden'
+                width: '1120px',
+                height: '706px',
+                display: 'flex',
+                fontFamily: 'Arial, sans-serif',
+                overflow: 'hidden',
             }}
         >
-            <div className="certificado row position-relative mb-5 text-auxiliary2-project">
-                <div className="col-9 d-flex flex-column">
-                    <div className="mt-5 pt-5 ps-3 ms-5 fs-51 d-flex flex-column">
-                        <span style={{ lineHeight: '50px' }} className="fw-700 text-auxiliary2-project">CERTIFICADO</span>
-                        <span className="text-auxiliary2-project">DE CONCLUSÃO</span>
-                    </div>
-                    <div className="d-flex justify-content-start mt-3 ms-5 ps-3">
-                        <div className="d-flex flex-column gap-2">
-                            <span className="mt-2 text-auxiliary2-project">Finalizado em {formatarData(certificado.certificate_created)}</span>
-                            <span className="fs-38 fw-700 text-auxiliary2-project">{certificado.firstname} {certificado.lastname}</span>
+            {/* Lado esquerdo - fundo escuro com conteúdo */}
+            <div style={{
+                position: 'relative',
+                flex: '0 0 75%',
+                display: 'flex',
+                flexDirection: 'column',
+                overflow: 'hidden',
+            }} className="text-white">
+                {/* Camada 1 do background */}
+                <img
+                    src="/gael/bg_certificado_camada1.png"
+                    alt=""
+                    style={{
+                        position: 'absolute', inset: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'cover', zIndex: 0,
+                    }}
+                />
+                {/* Camada 2 do background */}
+                <img
+                    src="/gael/bg_certificado_camada2.png"
+                    alt=""
+                    style={{
+                        position: 'absolute', inset: 0,
+                        width: '100%', height: '100%',
+                        objectFit: 'cover', zIndex: 1,
+                    }}
+                />
+
+                {/* Conteúdo */}
+                <div style={{
+                    position: 'relative', zIndex: 2,
+                    display: 'flex', flexDirection: 'column',
+                    height: '100%', padding: '48px 56px',
+                    color: '#ffffff',
+                }}>
+                    {/* Título */}
+                    <div style={{ marginBottom: '32px' }}>
+                        <div style={{ fontSize: '42px', fontWeight: '900', lineHeight: 1, letterSpacing: '1px', color: '#ffffff' }}>
+                            CERTIFICADO
+                        </div>
+                        <div style={{ fontSize: '36px', fontWeight: '400', lineHeight: 1.2, color: '#ffffff' }}>
+                            DE CONCLUSÃO
                         </div>
                     </div>
-                    <div className="d-flex flex-column gap-3 ps-3 ms-5 mt-5">
-                        <span className="fs-51 fw-700">{certificado.name == "Certificado de Conclusão" ? certificado.coursename : certificado.name}</span>
+
+                    {/* Dados do aluno */}
+                    <div style={{ marginBottom: '24px' }}>
+                        <div style={{ fontSize: '13px', marginBottom: '4px', color: '#ffffff' }}>
+                            Concluiu o curso online com carga horária estimada em {certificado.workload} horas.
+                        </div>
+                        <div style={{ fontSize: '13px', marginBottom: '12px', color: '#ffffff' }}>
+                            Finalizado em {formatarData(certificado.certificate_created)}
+                        </div>
+                        <div style={{ fontSize: '26px', fontWeight: '700', color: '#ffffff' }}>
+                            {certificado.firstname} {certificado.lastname}
+                        </div>
                     </div>
-                    <div className="d-flex mb-3 py-5 justify-content-end">
-                        <span className="d-flex flex-column justify-content-center align-items-center">
-                            <Image src={Fabricio} width={300} alt="Assinatura" />
-                            <div className="text-auxiliary2-project">FABRICIO CARDOSO</div>
-                            <div className="text-auxiliary2-project">Cofundador</div>
-                        </span>
-                        <span className="d-flex flex-column justify-content-center align-items-center">
-                            <Image src={Carmela} width={350} alt="Assinatura" />
-                            <div className="text-auxiliary2-project">CARMELA BORST</div>
-                            <div className="text-auxiliary2-project">Fundadora</div>
-                        </span>
+
+                    {/* Nome do curso */}
+                    <div style={{ marginBottom: 'auto' }}>
+                        <div style={{ fontSize: '13px', marginBottom: '6px', color: '#ffffff' }}>Curso</div>
+                        <div style={{ fontSize: '36px', fontWeight: '900', lineHeight: 1.15, textTransform: 'uppercase', color: '#ffffff' }}>
+                            {courseName}
+                        </div>
+                    </div>
+
+                    {/* Assinaturas */}
+                    <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-end', justifyContent: "flex-end" }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} />
+                            <div style={{ fontSize: '12px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Fabrício Silva Cardoso</div>
+                        </div>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                            <Image src={Carmela} width={250} height={80} alt="Assinatura Carmela" style={{ objectFit: 'contain' }} />
+                            <div style={{ fontSize: '12px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Carmela Borst</div>
+                        </div>
                     </div>
                 </div>
-                <div className="col-3 d-flex flex-column align-items-center gap-5 pt-5">
-                    <Image src={logo1.src} width={190} height={115} alt="logo Trident" className="header-login-logo h-auto object-fit-contain mt-4" />
-                    <Image src={logo3.src} width={170} height={105} alt="logo Trident" className="header-login-logo mt-3 h-auto object-fit-contain" />
-                    <Image src={logo2.src} width={190} height={140} alt="logo Trident" className="header-login-logo h-auto object-fit-contain" />
-                </div>
+            </div>
+
+            {/* Lado direito - fundo laranja com logos */}
+            <div style={{
+                flex: '0 0 25%',
+                backgroundColor: '#F26522',
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: '32px 20px',
+                gap: '24px',
+            }}>
+                {/* Logo principal (CRIA MAIS) */}
+                <img
+                    src="/gael/logo_certificado.png"
+                    alt="Logo"
+                    style={{ width: '200px', height: '100px', objectFit: 'contain' }}
+                />
+
+                {/* Patrocinadores verticais */}
+                <img
+                    src="/gael/patriocinadores_vertical.png"
+                    alt="Patrocinadores"
+                    className="mt-3"
+                    style={{ width: '150px', height: '350px', objectFit: 'contain', flex: 1 }}
+                />
             </div>
         </div>
     );

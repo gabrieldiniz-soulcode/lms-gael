@@ -1,4 +1,3 @@
-import { api } from "@/shared/api/api";
 import Image, { StaticImageData } from "next/image";
 import { useContext, useEffect, useState } from "react";
 
@@ -7,10 +6,9 @@ import { FaRegClock } from "react-icons/fa";
 import { LoaderContext } from "@/contexts/LoaderContext";
 import { ProgressBar } from "react-bootstrap";
 import { RiPlayMiniLine } from "react-icons/ri";
-import bannerCelular from "/public/ifood/banner_home_desktop.png";
-import bannerDesktop from "/public/ifood/banner_home_desktop.png";
-import bannerTablet from "/public/ifood/banner_home_desktop.png";
-import entregador from "/public/ifood/entregador.png";
+import { api } from "@/shared/api/api";
+import bannerDesktop from "/public/gael/home_banner_desktop.png";
+import cardDireita from "/public/gael/home_card_direita.png";
 import placeholder from "/public/placeholder.png";
 import trofeu from "/public/trofeu.png";
 
@@ -133,15 +131,9 @@ export default function Hero() {
         <div className="row hero-carreiras">
             <div className="col-xxl-11 p-xxl-0 m-xxl-0 pe-xxl-2">
                 <div className="row row-gap-4 mt-lg-0 mt-2">
-                    <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-lg-block d-none px-3.5 ">
-                        <Image src={bannerDesktop.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
-                    </a>
-                    <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-lg-none d-md-block d-none px-2">
-                        <Image src={bannerTablet.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
-                    </a>
-                    <a href="https://www.instagram.com/trident_brasil/" target="_blank" className="col-12 d-md-none d-block px-2">
-                        <Image src={bannerCelular.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Discord" />
-                    </a>
+                    <div className="col-12 px-3.5">
+                        <Image src={bannerDesktop.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Gael" />
+                    </div>
                     <div className="col-xxl-6 col-12 card-hero d-block ">
                         <div className="d-flex box-shadow-hero rounded-3  h-100">
                             <div className="col-5 px-0 rounded-start-3 ">
@@ -179,24 +171,12 @@ export default function Hero() {
                     </div>
 
                     <div className="col-xxl-6 col-12 card-hero">
-                        <div className="hero-ifood-card">
-                            <div className="hero-ifood-card__textbox">
-                                <p className="hero-ifood-card__text">
-                                    Com aulas 100% online, lives com especialistas e uso da Godot Engine, os participantes
-                                    aprendem do zero até publicar um game simulador de entrega, acessível, colaborativo e com
-                                    foco na direção responsável.
+                        <div className="position-relative w-100 h-100 rounded-3 shadow overflow-hidden">
+                            <Image src={cardDireita.src} width={0} height={0} className="w-100 h-100 object-fit-cover" alt="Card direita" style={{ minHeight: '220px' }} />
+                            <div className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center p-4">
+                                <p className="text-white  text-center m-0" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.7)', fontSize: 30, fontWeight: 100 }}>
+                                    Sua criatividade tem valor! E quem cria precisa aprender a cuidar do que constrói
                                 </p>
-                            </div>
-
-                            <div className="hero-ifood-card__imgwrap">
-                                <Image
-                                    src={entregador}
-                                    alt="Entregador iFood"
-                                    width={280}
-                                    height={280}
-                                    className="hero-ifood-card__img"
-                                    priority
-                                />
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import Image from "next/image";
 import { MdLogout } from "react-icons/md";
-import logo from "/public/ifood/logos/soulcode.png";
+import logo from "/public/gael/logo.png";
 
 export default function SidebarAdmin() {
 
