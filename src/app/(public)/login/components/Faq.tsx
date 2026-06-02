@@ -9,66 +9,51 @@ export default function Faq() {
 
                 <Accordion alwaysOpen>
                     <AccordionItem eventKey="0" className="mb-2">
-                        <AccordionHeader>Pra quem é o Programa?</AccordionHeader>
+                        <AccordionHeader>Para quem é o Cria Mais?</AccordionHeader>
                         <AccordionBody>
-                            O programa é destinado para pessoas de todo o Brasil que desejam aprender a empreender na economia criativa.
+                            O programa foi feito para pessoas criativas, empreendedores, que trabalham por conta própria e querem aprender a organizar suas finanças.
                         </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="1" className="mb-2">
-                        <AccordionHeader>Qual a duração do programa?</AccordionHeader>
+                        <AccordionHeader>O curso é gratuito e com certificado?</AccordionHeader>
                         <AccordionBody>
-                            A formação tem duração total de 11 horas de conteúdo.
-                            A plataforma ficará disponível até o dia  31 de maio de 2026 .
+                            Sim! O programa é 100% gratuito do início ao fim. Ao final de cada trilha, você recebe um certificado referente e ao completar toda a jornada, você emite o certificado oficial consolidado do Cria Mais.
                         </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="2" className="mb-2">
-                        <AccordionHeader>Qual a data de início e encerramento das inscrições?</AccordionHeader>
+                        <AccordionHeader>Posso me inscrever a qualquer momento?</AccordionHeader>
                         <AccordionBody>
-                            As inscrições terão início no dia 01 de março de 2026 e se encerram às 23h59 do dia 31 de maio de 2026 ou até as vagas serem preenchidas.
+                            Sim! As aulas começam oficialmente no dia 22/06, mas as vagas são limitadas! Garanta o seu cadastro o quanto antes no formulário acima.
                         </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="3" className="mb-2">
-                        <AccordionHeader>O curso oferece certificação?</AccordionHeader>
+                        <AccordionHeader>Como funciona a seleção para ganhar as mentorias e o dinheiro (Capital Semente)?</AccordionHeader>
                         <AccordionBody>
-                            Sim. O programa é composto por 6 trilhas de aprendizado, e cada uma delas conta com certificação individual. Ao concluir todas as trilhas, o participante recebe a certificação oficial do CorrePlay.
+                            O prazo para as inscrições na pré-seleção acontecerão do dia 20 de Agosto ao dia 20 de setembro, após a conclusão das aulas e emissão do seu certificado da Fase I. Você poderá se inscrever para a pré-seleção, enviando o material solicitado (vídeo-pitch e uma apresentação do empreendimento). Uma banca avaliadora apresentará os 60 projetos que mais se destacaram, eles receberão 3 meses de mentoria e um capital semente no valor de R$ 6.000,00 para investir no negócio.
                         </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="4" className="mb-2">
-                        <AccordionHeader>Como posso tirar minhas dúvidas sobre o programa?</AccordionHeader>
+                        <AccordionHeader>Qual é a duração do Programa?</AccordionHeader>
                         <AccordionBody>
-                            Todas as dúvidas podem ser esclarecidas pelo e-mail atendimento@soulcode.com ou pelo WhatsApp (11) 97314-0687.
+                            A plataforma online oferece 20 horas de conteúdo dinâmico focado na prática. Após realizar o seu cadastro, você tem um prazo de até 90 dias para navegar e concluir todos os conteúdos disponíveis, no seu ritmo.
                         </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="5" className="mb-2">
-                        <AccordionHeader>Preciso ter conhecimento prévio para me inscrever?</AccordionHeader>
+                        <AccordionHeader>Preciso ter MEI ou empresa (CNPJ) para participar?</AccordionHeader>
                         <AccordionBody>
-                            Não é necessário possuir conhecimento técnico prévio para participar do CorrePlay.
+                            Não. Qualquer pessoa pode participar. Caso você queira disputar as vagas de mentoria e capital semente na Fase 2, basta enviar o material solicitado.
                         </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="6" className="mb-2">
                         <AccordionHeader>Como posso me inscrever?</AccordionHeader>
                         <AccordionBody>
-                            Para se inscrever, basta preencher o formulário na página <a href="https://correplay.soulcode.com/" target="_blank">oficial do programa</a>.
-                        </AccordionBody>
-                    </AccordionItem>
-
-                    <AccordionItem eventKey="7" className="mb-2">
-                        <AccordionHeader>O programa é gratuito?</AccordionHeader>
-                        <AccordionBody>
-                            Sim, as trilhas educacionais são 100% gratuitas para todos os participantes.
-                        </AccordionBody>
-                    </AccordionItem>
-
-                    <AccordionItem eventKey="8" className="mb-2">
-                        <AccordionHeader>As aulas serão online ou presenciais?</AccordionHeader>
-                        <AccordionBody>
-                            O programa será realizado no formato online, permitindo que participantes de diferentes regiões possam acompanhar a formação direto pelo celular ou computador.
+                            É super rápido! Vá até o nosso formulário de cadastro, preencha seus dados básicos e clique em avançar. Você receberá o acesso para entrar na plataforma e garantir sua vaga.
                         </AccordionBody>
                     </AccordionItem>
                 </Accordion>
