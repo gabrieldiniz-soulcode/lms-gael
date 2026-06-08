@@ -5,7 +5,6 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import Link from "next/link";
 import { LoaderContext } from "@/contexts/LoaderContext";
-import Ranking from "../../carreiras/components/Ranking";
 import { Spinner } from "react-bootstrap";
 import SubCurso from "../../curso/components/SubCurso";
 import { api } from "@/shared/api/api";
@@ -84,12 +83,8 @@ export default function CursoTopicosPage() {
                 </div>
             ) : (
                 <div className="d-flex justify-content-center">
-
                     <div className="col-xl-8 col-12">
                         <SubCurso subCurso={modulos} carreiraId={cursoId} />
-                    </div>
-                    <div className="col-xl-4 col-12 d-xl-block d-none">
-                        <Ranking />
                     </div>
                 </div>
             )}

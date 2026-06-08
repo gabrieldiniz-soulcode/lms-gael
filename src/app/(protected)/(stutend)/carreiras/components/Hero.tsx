@@ -1,4 +1,4 @@
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
@@ -9,8 +9,6 @@ import { RiPlayMiniLine } from "react-icons/ri";
 import { api } from "@/shared/api/api";
 import bannerDesktop from "/public/gael/home_banner_desktop.png";
 import cardDireita from "/public/gael/home_card_direita.png";
-import placeholder from "/public/placeholder.png";
-import trofeu from "/public/trofeu.png";
 
 interface Course {
     id: number;
@@ -30,50 +28,11 @@ interface ApiResponse {
     data: Course[];
 }
 
-interface UserDetails {
-    firstname?: string;
-    lastname?: string;
-    city?: string;
-    imagealt?: string | StaticImageData;
-}
-
-interface UserData {
-    userid?: number;
-    xp_total?: number;
-    level?: number;
-    user?: UserDetails;
-}
-
-interface ApiResponse2 {
-    data: UserData[];
-}
-
 export default function Hero() {
-    const [ranking, setRanking] = useState<UserData[]>();
-    const [width, setWidth] = useState(90);
     const [course, setCourse] = useState<Course>();
 
     const { user } = useContext(AuthContext);
     const { updateResponses } = useContext(LoaderContext);
-
-    useEffect(() => {
-        function getPerfil() {
-            api.get("/ranking", {
-                headers: {
-                    "database": user.database,
-                    "Authorization": `Bearer ${user.token}`
-                }
-            })
-                .then((res: ApiResponse2) => setRanking(res.data))
-                .catch((err) => console.log(err));
-        }
-
-        if (user?.token && !ranking) getPerfil();
-    }, [user, ranking]);
-
-    useEffect(() => {
-        setWidth(window?.screen.width > 1580 ? 75 : 65);
-    }, []);
 
     useEffect(() => {
         function getCourse() {
@@ -92,7 +51,6 @@ export default function Hero() {
                         curso = res.data.find((car) => !car.carreira || car.carreira.toUpperCase() !== 'SIM');
                     }
 
-
                     setCourse(curso);
                 })
                 .catch((err) => console.error(err))
@@ -103,18 +61,6 @@ export default function Hero() {
             getCourse();
         }
     }, [user, updateResponses, course]);
-
-    function verificarImg(userData: UserData): string | StaticImageData {
-        if (!userData) {
-            userData = { user: { imagealt: placeholder } };
-        }
-
-        if (userData?.user?.imagealt !== "") {
-            return userData?.user?.imagealt || placeholder;
-        }
-
-        return placeholder;
-    }
 
     function removeHtmlTags(text: string) {
         return text.replace(/<[^>]*>/g, '');
@@ -129,7 +75,7 @@ export default function Hero() {
     return (
         course &&
         <div className="row hero-carreiras">
-            <div className="col-xxl-11 p-xxl-0 m-xxl-0 pe-xxl-2">
+            <div className="col-12 p-xxl-0 m-xxl-0">
                 <div className="row row-gap-4 mt-lg-0 mt-2">
                     <div className="col-12 px-3.5">
                         <Image src={bannerDesktop.src} width={0} height={0} className="w-100 h-auto rounded-3 shadow" alt="Banner Gael" />
@@ -180,17 +126,6 @@ export default function Hero() {
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div className="col-1 d-xxl-block d-none p-0 rounded-3" style={{ overflow: 'hidden' }}>
-                <div className="bg-auxiliary1-project p-2 rounded-3">
-                    <Image src={trofeu.src} width={trofeu.width} height={trofeu.height} alt="troféu" className="w-100 h-auto px-3 py-2" />
-                </div>
-                <div className="bg-auxiliary1-project h-100 p-2 rounded-3 mt-3 d-flex flex-column gap-3 align-items-center">
-                    <h3 className="text-white text-center mt-exxl-3 mt-4 fs-21 fw-700">Rank</h3>
-                    {ranking?.map((item, index) => (
-                        <Image key={index} src={verificarImg(item) || ""} width={width} height={width} alt="" className="rounded-circle perfil-ranking-aula1" />
-                    ))}
                 </div>
             </div>
         </div>

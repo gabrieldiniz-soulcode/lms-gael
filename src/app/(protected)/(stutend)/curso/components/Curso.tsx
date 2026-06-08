@@ -5,7 +5,6 @@ import { Fragment, useContext, useEffect, useState } from "react";
 import { AuthContext } from "@/contexts/AuthContext";
 import { FaChevronLeft } from "react-icons/fa6";
 import { LoaderContext } from "@/contexts/LoaderContext";
-import Ranking from "./Ranking";
 import { Spinner } from "react-bootstrap";
 import SubCurso from "./SubCurso";
 import { useSearchParams } from "next/navigation";
@@ -142,11 +141,6 @@ export default function Curso() {
                 </div>
                 :
                 <div className={`${mobile ? 'd-xl-none' : 'd-xl-block d-none'}`}>
-                    {
-                        !mobile
-                        &&
-                        <Ranking />
-                    }
                     <SubCurso curso={curso?.sequence[activeIndex]?.data_module.name || ""} subCurso={subCurso} carreiraId={id || ""} carreira={carreira?.fullname || ""} />
                 </div>
         );

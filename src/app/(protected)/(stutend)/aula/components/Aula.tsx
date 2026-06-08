@@ -8,7 +8,6 @@ import MdlCustomcert from "./MdlCustomcert";
 import MdlPage from "./MdlPage";
 import MdlQuiz from "./MdlQuiz";
 import MdlUrl from "./MdlUrl";
-import Ranking from "./Ranking";
 import SendLesson from "./sendLesson";
 import Tutor from "./Tutor";
 import { api } from "@/shared/api/api";
@@ -268,9 +267,6 @@ export default function Aula() {
                     {/* <Notas /> */}
                     <Tutor carreira={carreiraDecoded} curso={cursoDecoded} />
                 </div>
-            </div>
-            <div className="col-xxl-4 col-12 d-xxl-block d-none">
-                <Ranking />
             </div>
         </div>
     )
