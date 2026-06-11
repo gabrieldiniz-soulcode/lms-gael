@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 
-import Carmela from '../../../public/ca_white_1.webp';
-import Fabricio from '../../../public/fa_white_1.webp';
-import Image from "next/image";
+// import Carmela from '../../../public/ca_white_1.webp';
+// import Fabricio from '../../../public/fa_white_1.webp';
+// import Image from "next/image";
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
@@ -23,17 +23,12 @@ type Props = {
     index: number;
 };
 
-const meses = [
-    "Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho",
-    "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"
-];
-
-function formatarData(timestamp: number) {
+function formatarDataCurta(timestamp: number) {
     const date = new Date(timestamp * 1000);
-    const dia = date.getDate();
-    const mes = meses[date.getMonth()];
+    const dia = String(date.getDate()).padStart(2, '0');
+    const mes = String(date.getMonth() + 1).padStart(2, '0');
     const ano = date.getFullYear();
-    return `${dia} de ${mes} de ${ano}`;
+    return `${dia}/${mes}/${ano}`;
 }
 
 export default function Certificado({ certificado, onDownloaded, triggerDownload, index }: Props) {
@@ -114,7 +109,7 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     color: '#ffffff',
                 }}>
                     {/* Título */}
-                    <div style={{ marginBottom: '32px' }}>
+                    <div style={{ marginBottom: '40px' }}>
                         <div style={{ fontSize: '42px', fontWeight: '900', lineHeight: 1, letterSpacing: '1px', color: '#ffffff' }}>
                             CERTIFICADO
                         </div>
@@ -123,36 +118,34 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                         </div>
                     </div>
 
-                    {/* Dados do aluno */}
-                    <div style={{ marginBottom: '24px' }}>
-                        <div style={{ fontSize: '13px', marginBottom: '4px', color: '#ffffff' }}>
-                            Concluiu o curso online com carga horária estimada em {certificado.workload} horas.
-                        </div>
-                        <div style={{ fontSize: '13px', marginBottom: '12px', color: '#ffffff' }}>
-                            Finalizado em {formatarData(certificado.certificate_created)}
-                        </div>
-                        <div style={{ fontSize: '26px', fontWeight: '700', color: '#ffffff' }}>
-                            {certificado.firstname} {certificado.lastname}
-                        </div>
-                    </div>
-
                     {/* Nome do curso */}
-                    <div style={{ marginBottom: 'auto' }}>
-                        <div style={{ fontSize: '13px', marginBottom: '6px', color: '#ffffff' }}>Curso</div>
+                    <div style={{ marginBottom: '36px' }}>
+                        <div style={{ fontSize: '20px', marginBottom: '6px', color: '#ffffff' }}>Trilha</div>
                         <div style={{ fontSize: '36px', fontWeight: '900', lineHeight: 1.15, textTransform: 'uppercase', color: '#ffffff' }}>
                             {courseName}
                         </div>
                     </div>
 
+                    {/* Descrição */}
+                    <div style={{ marginBottom: 'auto' }}>
+                        <div style={{
+                            fontSize: '16px', color: '#ffffff', lineHeight: 1.6, maxWidth: '500px'
+                        }}>
+                            <strong>{certificado.firstname} {certificado.lastname}</strong> concluiu em {formatarDataCurta(certificado.certificate_created)} a Trilha de {courseName} ({certificado.workload}h) parte integrante do curso livre CRIA MAIS | Educação Financeira para Empreendedores Criativos.
+                        </div>
+                    </div>
+
                     {/* Assinaturas */}
-                    <div style={{ display: 'flex', gap: '32px', alignItems: 'flex-end', justifyContent: "flex-end" }}>
+                    <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '70px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} />
-                            <div style={{ fontSize: '12px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Fabrício Silva Cardoso</div>
+                            {/* <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} /> */}
+                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Fabrício Cardoso</div>
+                            <div style={{ fontSize: '14px', fontWeight: '400', color: '#ffffff' }}>SOULCODE</div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <Image src={Carmela} width={250} height={80} alt="Assinatura Carmela" style={{ objectFit: 'contain' }} />
-                            <div style={{ fontSize: '12px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Carmela Borst</div>
+                            {/* <Image src={Carmela} width={250} height={80} alt="Assinatura Gaetano" style={{ objectFit: 'contain' }} /> */}
+                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Gaetano Lops</div>
+                            <div style={{ fontSize: '14px', fontWeight: '400', color: '#ffffff' }}>GAEL COMUNICAÇÃO E ENTRETENIMENTO</div>
                         </div>
                     </div>
                 </div>
