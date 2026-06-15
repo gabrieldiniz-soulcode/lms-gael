@@ -3,7 +3,7 @@ import Footer from "./login/components/Footer";
 import Header from "./login/components/Header";
 import Image from "next/image";
 import patriocinadoresH from "/public/gael/patriocinadores_horizontal.png";
-import patriocinadoresV from "/public/gael/patriocinadores_vertical.png";
+import patriocinadoresV from "/public/gael/footer_mobile.png";
 
 export default function PublicLayout({ children }: Readonly<{ children: React.ReactNode; }>) {
     return (
@@ -30,7 +30,7 @@ export default function PublicLayout({ children }: Readonly<{ children: React.Re
                     height={0}
                     alt="Patrocinadores"
                     className="h-auto d-md-none"
-                    style={{ width: '100%', maxWidth: '260px' }}
+                    style={{ width: '100%' }}
                 />
             </div>
             <Footer />

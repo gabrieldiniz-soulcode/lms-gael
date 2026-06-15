@@ -10,15 +10,17 @@ import { GoGear } from "react-icons/go";
 import { GoHome } from "react-icons/go";
 import Image from 'next/image';
 import { LiaCertificateSolid } from "react-icons/lia";
+import { MdLogout } from "react-icons/md";
 import { PiStudentBold } from "react-icons/pi";
 import aluno from "/public/aluno_2.png";
+import logo from "/public/gael/logo.png";
 
 export default function Header() {
 
   const [value, setValue] = useState<string>();
 
   const { user, perfil,
-    // signOut
+    signOut
   } = useContext(AuthContext);
 
   const searchParams = useSearchParams();
@@ -59,12 +61,11 @@ export default function Header() {
         </a>
       </div>
 
-      <div className="d-lg-none  row d-flex  justify-content-center w-100 ">
-        <div className="d-flex justify-content-center gap-4  col-10">
-          <Image src={aluno.src} width={55} height={55} alt="logo Gael" className="object-fit-contain" />
-        </div>
-        <NavbarToggle aria-controls="basic-navbar-nav" className="col-2" />
-
+      <div className="d-lg-none   d-flex  justify-content-between w-100 px-3 ">
+        <a href="/carreiras" className="d-flex justify-content-center gap-4  ">
+          <Image src={logo.src} width={72} height={42} alt="logo Gael" className="object-fit-contain" />
+        </a>
+        <NavbarToggle aria-controls="basic-navbar-nav" />
       </div>
 
 
@@ -91,10 +92,10 @@ export default function Header() {
               Configurações
             </a>
 
-            {/* <button className="btn bg-white w-50" onClick={signOut}>
+            <button className="btn bg-white w-50" onClick={signOut}>
               <MdLogout className="text-auxiliary1-project me-2" size={20} />
               <span>Sair</span>
-            </button> */}
+            </button>
 
           </div>
         </Nav>

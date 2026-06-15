@@ -1,10 +1,11 @@
-import { api } from "@/shared/api/api";
 import { Button, Card, ProgressBar } from 'react-bootstrap';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { AuthContext } from '@/contexts/AuthContext';
 import Certificado from '@/components/Certificado/Certificado';
 import { FaRegFilePdf } from 'react-icons/fa';
+import { api } from "@/shared/api/api";
+
 interface Course {
   courseid: number;
   fullname: string;
@@ -71,10 +72,12 @@ const CertificadoGeral: React.FC = () => {
           {
             headers: {
               userid: user.id,
-              cohortid: 153,
+              cohortid: 160,
               subcourse_scope: 'all',
-              
-              scope: 'cohort'}}
+
+              scope: 'cohort'
+            }
+          }
         );
 
         setData(response.data);
@@ -99,8 +102,9 @@ const CertificadoGeral: React.FC = () => {
           scope: 'cohort',
           userid: user.id,
           cohortid: 153,
-          subcourse_scope: 'all'},
-        { }
+          subcourse_scope: 'all'
+        },
+        {}
       );
     } catch {
       console.error('Erro ao atualizar progresso.');
@@ -123,7 +127,8 @@ const CertificadoGeral: React.FC = () => {
       firstname: capitalizeFirstLetter(perfil.firstname),
       lastname: capitalizeFirstLetter(perfil.lastname),
       workload: `${data?.totals?.courses ?? 0} cursos concluídos`,
-      name: 'Desenvolvedor de Games Godot Engine'};
+      name: 'Desenvolvedor de Games Godot Engine'
+    };
   }, [data?.cohortid, data?.totals?.courses, data?.userid, perfil.firstname, perfil.lastname]);
 
   if (loading) return <div>Carregando...</div>;

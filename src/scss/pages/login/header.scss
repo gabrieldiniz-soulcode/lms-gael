@@ -1,8 +1,20 @@
 .header-login {
-    height: 80px;
+    min-height: 30px;
+    font-size: 1rem; // 28px
 }
 
 .header-login-logo {
     max-width: 100%;
 }
 
+
+@media (min-width: 992px) {
+    .header-login {
+        height: 80px;
+        font-size: 1.75rem; // 28px
+    }
+
+    .footer-login {
+        font-size: 1.25rem; // 20px
+    }
+}

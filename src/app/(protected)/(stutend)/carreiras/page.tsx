@@ -20,10 +20,10 @@ export default function Carreiras() {
             <section className="container container-ajuste mt-5 pt-5">
                 <Hero />
             </section>
-            <section className="container container-ajuste mt-5">
+            {/* <section className="container container-ajuste mt-5">
                 <Bootcamps />
-            </section>
-            <section className="container container-ajuste mt-5 pe-xxl-0">
+            </section> */}
+            <section className="container container-ajuste mt-3 pe-xxl-0">
                 <Suspense>
                     <Categorias />
                 </Suspense>

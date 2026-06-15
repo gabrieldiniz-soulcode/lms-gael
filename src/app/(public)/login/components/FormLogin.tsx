@@ -27,7 +27,9 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const res = await signIn(email, password, rememberMe);
-        if (res) {
+        if (res === "not_enrolled") {
+            setError("Você não está inscrito no programa");
+        } else if (res === "invalid_credentials") {
             setError("Credenciais inválidas");
         }
     }

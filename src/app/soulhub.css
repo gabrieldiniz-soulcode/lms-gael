@@ -18717,13 +18717,23 @@ a {
 }
 
 .header-login {
-  height: 80px;
+  min-height: 30px;
+  font-size: 1rem;
 }
 
 .header-login-logo {
   max-width: 100%;
 }
 
+@media (min-width: 992px) {
+  .header-login {
+    height: 80px;
+    font-size: 1.75rem;
+  }
+  .footer-login {
+    font-size: 1.25rem;
+  }
+}
 .form-input-login {
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.25) !important;
   border-color: var(--bs-auxiliary2-project) !important;
@@ -18842,6 +18852,15 @@ a {
   image-rendering: pixelated;
 }
 
+.card-direita p {
+  font-size: 25px;
+}
+
+@media (min-width: 992px) {
+  .card-direita p {
+    font-size: 30px;
+  }
+}
 .accordion-curso .accordion-button {
   font-weight: 700;
   color: var(--bs-auxiliary1-project) !important;

@@ -1,11 +1,13 @@
 "use client";
 
+import { collection, getDocs, limit, query, where } from "firebase/firestore";
 import { createContext, useCallback, useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 
 import { StaticImageData } from "next/image";
 import { api } from "@/shared/api/api";
 import axios from "axios";
+import { db } from "@/lib/firebaseConfig";
 import { jwtDecode } from "jwt-decode";
 
 interface User {
@@ -54,7 +56,7 @@ type AuthContextData = {
     user: User;
     userLevel: number | null;
     setUserLevel: (level: number) => void;
-    signIn: (email: string, password: string, rememberMe: boolean, origin?: string) => Promise<boolean>;
+    signIn: (email: string, password: string, rememberMe: boolean, origin?: string) => Promise<"not_enrolled" | "invalid_credentials" | null>;
     signOut: () => void;
     signInByRecoveryPassword: (user: User) => void;
     perfil: Profile;
@@ -230,10 +232,23 @@ export function AuthContextProvider({ children }: Props) {
         checkAuth();
     }, [router, pathname]);
 
-    async function signIn(email: string, password: string, rememberMe: boolean, origin?: "autoLogin") {
+    async function checkEmailInFirestore(email: string): Promise<boolean> {
+        const collections = ["preInscricaoGael", "inscricaoGael"];
+        for (const col of collections) {
+            const q = query(collection(db, col), where("email", "==", email), limit(1));
+            const snap = await getDocs(q);
+            if (!snap.empty) return true;
+        }
+        return false;
+    }
+
+    async function signIn(email: string, password: string, rememberMe: boolean, origin?: string): Promise<"not_enrolled" | "invalid_credentials" | null> {
         const userObj = {} as User;
 
         try {
+            const isAllowed = await checkEmailInFirestore(email);
+            // if (!isAllowed) return "not_enrolled";
+
             const authResponse = await api.post("/auth", {
                 username: email,
                 password,
@@ -242,7 +257,7 @@ export function AuthContextProvider({ children }: Props) {
             });
 
             if (authResponse.data.error) {
-                return true;
+                return "invalid_credentials";
             }
 
             userObj.id = authResponse.data.data.userid;
@@ -262,17 +277,17 @@ export function AuthContextProvider({ children }: Props) {
 
             if (authResponse.data.data.forcepasswordchange == 1) {
                 router.replace("/perfil/alterar-senha");
-                return false;
+                return null;
             }
 
             router.replace("/");
-            return false;
+            return null;
         } catch {
             if (origin === "autoLogin") {
                 router.replace("/login");
-                return true;
+                return "invalid_credentials";
             }
-            return true;
+            return "invalid_credentials";
         }
     }
 
