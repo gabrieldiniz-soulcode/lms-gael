@@ -47,7 +47,7 @@ export default function Hero() {
                     let curso;
 
                     if (user?.type_render === 'carreira') {
-                        curso = res.data.find((car) => car.id === 505);
+                        curso = res.data.find((car) => car.id === 507);
                     } else if (user?.type_render === 'curso') {
                         curso = res.data.find((car) => !car.carreira || car.carreira.toUpperCase() !== 'SIM');
                     }

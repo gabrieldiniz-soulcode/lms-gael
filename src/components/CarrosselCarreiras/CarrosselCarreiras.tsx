@@ -4,16 +4,16 @@
 import 'swiper/css';
 import 'swiper/css/pagination';
 
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useContext, useEffect, useState } from 'react';
 import { usePathname, useSearchParams } from "next/navigation";
-import { Navigation, Pagination } from 'swiper/modules';
 
+import { AuthContext } from "@/contexts/AuthContext";
 import { FaRegClock } from "react-icons/fa";
 import Image from "next/image";
 import { ProgressBar } from 'react-bootstrap';
 import { RiPlayMiniLine } from "react-icons/ri";
-import { AuthContext } from "@/contexts/AuthContext";
 
 interface Course {
     id: number;
@@ -117,15 +117,15 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
 
                             1320: { slidesPerView: 3, spaceBetween: 30 }
                         }}
-
                         pagination={{
-                            clickable: true}}
+                            clickable: true
+                        }}
                         navigation={{
                             prevEl: `.custom-prev-${slugify(categoria) || "default"}`,
-                            nextEl: `.custom-next-${slugify(categoria) || "default"}`}}
+                            nextEl: `.custom-next-${slugify(categoria) || "default"}`
+                        }}
                         className="mySwiper carrossel-carreiras position-relative z-0"
                     >
-
                         {
                             carreirasFiltradas.map((carreira, index) => (
                                 <SwiperSlide key={index} className={`card-curso carrossel-carreiras-slide rounded-3 ${progresso ? 'carrossel-carreiras-slide-progresso' : ''}`}>
@@ -151,16 +151,16 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                                             </div>
                                             <span className="fs-18 fw-700">{carreira.fullname}</span>
                                         </div>
-                                        {
+                                        {/* {
                                             progresso
-                                            &&
-                                            <div className="d-flex pb-3 gap-2 align-items-center fs-12 fw-700">
-                                                <div className="w-100">
-                                                    <ProgressBar now={parseInt(carreira?.progresso || "0")} />
-                                                </div>
-                                                {carreira.progresso || "0"}%
+                                            && */}
+                                        <div className="d-flex pb-3 gap-2 align-items-center fs-12 fw-700">
+                                            <div className="w-100">
+                                                <ProgressBar now={parseInt(carreira?.progresso || "0")} />
                                             </div>
-                                        }
+                                            {carreira.progresso || "0"}%
+                                        </div>
+                                        {/* } */}
                                     </div>
                                 </SwiperSlide>
                             ))

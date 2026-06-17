@@ -64,11 +64,11 @@ export default function Aula() {
     const nextModule = searchParams.get('nextModule');
     const carreiraDecoded = decodeQueryParam(String(carreira));
     const cursoDecoded = decodeQueryParam(String(curso));
-    let receiveLesson : boolean = false;
+    let receiveLesson: boolean = false;
 
     console.log({ id, cursoId, carreiraId, carreiraDecoded, cursoDecoded })
 
-    if(id == "10450" && cursoId == "395" && carreiraId == "396"){
+    if (id == "10450" && cursoId == "395" && carreiraId == "396") {
         receiveLesson = true;
     }
 
