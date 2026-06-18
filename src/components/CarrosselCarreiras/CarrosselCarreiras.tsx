@@ -134,8 +134,7 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                                         <div>
                                             <div className="d-flex justify-content-between py-4">
                                                 <span className="fs-12 d-flex align-items-center">
-                                                    <FaRegClock className='text-auxiliary1-project me-2' />
-                                                    {carreira.carga}H DE ESTUDO
+                                                    TRILHA {index + 1}
                                                 </span>
                                                 <a
                                                     href={
@@ -145,7 +144,7 @@ export default function CarrosselCarreiras({ carreiras, progresso = false, categ
                                                     }
                                                     className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-md-4"
                                                 >
-                                                    {user?.type_render === 'curso' ? 'Acessar Curso' : 'Acessar Carreira'}
+                                                    {user?.type_render === 'curso' ? 'Acessar Curso' : 'Acessar Conteúdo'}
                                                     <RiPlayMiniLine size={20} strokeWidth={0.5} className="ms-1" />
                                                 </a>
                                             </div>

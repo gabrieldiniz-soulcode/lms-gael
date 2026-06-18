@@ -101,8 +101,8 @@ export default function Hero() {
                                 <span className="card-text-hero">{removeHtmlTags(course?.summary || "")}</span>
                                 <div className="d-flex flex-column flex-md-row justify-content-between py-md-4 py-2">
                                     <span className="fs-12 d-flex align-items-center my-md-0 my-3">
-                                        <FaRegClock className='text-auxiliary1-project me-2' />
-                                        {course?.carga} DE ESTUDO
+                                        {/* <FaRegClock className='text-auxiliary1-project me-2' /> */}
+                                        {/* {course?.carga} DE ESTUDO */}
                                     </span>
                                     <a href={user.type_render === 'curso' ? `/cursos/${course.id}` : `/curso?id=${course.id}`}
                                         className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-exxl-4">

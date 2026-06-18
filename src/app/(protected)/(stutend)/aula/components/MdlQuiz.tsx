@@ -1,11 +1,11 @@
-import { api } from "@/shared/api/api";
 import { Button, Modal, Spinner } from "react-bootstrap";
+import { CertificateData, Sequence } from "./MdlCustomcert";
 import { Suspense, useContext, useEffect, useState } from "react"
 
 import { AuthContext } from "@/contexts/AuthContext";
-import Quiz from "./Quiz";
-import { CertificateData, Sequence } from "./MdlCustomcert";
 import Certificado from "@/components/Certificado/Certificado";
+import Quiz from "./Quiz";
+import { api } from "@/shared/api/api";
 
 interface Props {
     userid: string,
@@ -48,7 +48,7 @@ interface Resposta {
 interface ApiResponse {
     data: Resposta;
 }
-export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, sequence, nexturl }: Props) {
+export default function MdlQuiz({ userid, database, cmid, instance, setbuttons }: Props) {
 
     const [quiz, setQuiz] = useState<Resposta>();
     const [loading, setLoading] = useState<boolean>(true);
@@ -72,7 +72,6 @@ export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, 
 
                     if (wasAttempLoading) {
                         setWasAttempLoading(false)
-                        handleShow()
                     }
 
 
@@ -102,31 +101,6 @@ export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, 
 
         return `${dia}/${mes}/${ano}`;
     }
-
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-
-    const [certificado, setCertificado] = useState<CertificateData | null>(null);
-    const [triggerDownload, setTriggerDownload] = useState<boolean[]>([false]);
-
-    const buscarCertificado = async () => {
-
-        if (!user?.token) return;
-
-        const res = await api.get("/certificate", {
-            headers: {
-                
-                course: sequence.data_module.course,
-                template_id: sequence.data_module.templateid
-            }
-        }).catch(e => console.log(e))
-        if (!res) return
-        setCertificado(res.data);
-        setTriggerDownload([true]);
-    };
-
 
     return (
         loading
@@ -184,42 +158,6 @@ export default function MdlQuiz({ userid, database, cmid, instance, setbuttons, 
                                 }
                             </tbody>
                         </table>
-
-
-
-{/* 
-                        <Button variant="primary" onClick={handleShow}>
-                            Launch demo modal
-                        </Button> */}
-
-                        <Modal show={show} onHide={handleClose} className="position-relative" backdrop="static">
-                            <img src="/modulo400.png" className="w-100 position-relative z-1 rounded" alt="" />
-                            <div className="position-absolute h-100 z-2 d-flex justify-content-around w-100 ">
-                                <div className=" d-flex justify-content-center align-items-end pb-5 w-100 mb-5 gap-3">
-
-                                    <Button variant="secondary" onClick={buscarCertificado}>
-                                        Baixe seu certificado
-                                        <span className=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" /></svg></span>
-                                    </Button>
-                                    <Certificado
-                                        certificado={certificado}
-                                        triggerDownload={triggerDownload}
-                                        index={0}
-                                        onDownloaded={() => setTriggerDownload([false])}
-                                    />
-
-                                    <a className="btn btn-primary" href={nexturl}>
-                                        ir para o próximo módulo
-                                        <span className="">
-                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z" /></svg>
-                                        </span>
-
-                                    </a>
-                                </div>
-                            </div>
-
-                        </Modal>
-
                     </div >
             )
     );

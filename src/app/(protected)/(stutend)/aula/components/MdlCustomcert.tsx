@@ -1,9 +1,10 @@
-import { api } from "@/shared/api/api";
+import { Button, Modal } from "react-bootstrap";
 import { useContext, useState } from "react";
 
 import { AuthContext } from "@/contexts/AuthContext";
-import { Button } from "react-bootstrap";
 import Certificado from "@/components/Certificado/Certificado";
+import { api } from "@/shared/api/api";
+
 export interface Sequence {
     cmid: number,
     module: string;
@@ -42,13 +43,18 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
     const [certificado, setCertificado] = useState<CertificateData | null>(null);
     const [triggerDownload, setTriggerDownload] = useState<boolean[]>([false]);
 
+
+    const [show, setShow] = useState(true);
+
+    const handleClose = () => setShow(false);
+
     const buscarCertificado = async () => {
 
         if (!user?.token) return;
 
         const res = await api.get("/certificate", {
             headers: {
-                
+
                 course: sequence.data_module.course,
                 template_id: sequence.data_module.templateid
             }
@@ -59,6 +65,47 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
 
     return (
         <div className="w-100">
+            <Modal show={show} centered onHide={handleClose} className="position-relative" backdrop={true}>
+                <img
+                    src="/gael/certificado_gael_grafismo_2.png"
+                    alt=""
+                    style={{
+                        position: 'absolute', width: 100,
+                        zIndex: 1, top: 8, right: 8,
+                    }}
+                />
+                {/* Camada 2 do background */}
+                <img
+                    src="/gael/certificado_gael_grafismo_1.png"
+                    alt=""
+                    style={{
+                        position: 'absolute', width: 100,
+                        zIndex: 1, bottom: 8, left: 8,
+                    }}
+                />
+                <div className="d-flex flex-column justify-content-center align-items-center pb-5 w-100 bg-secondary gap-3 h-100 border-primary rounded-3" style={{ border: "8px solid" }}>
+                    <h1 className="text-primary m-0 mt-5 fw-bold">Parabéns!</h1>
+                    <h2 className="text-auxiliary2-project m-0 mb-4">Módulo Concluído!</h2>
+                    <div className="d-flex justify-content-center gap-3 mt-4 pb-2">
+                        <a className="btn btn-outline-primary" href={"/carreiras"}>
+                            Voltar para home
+                            {/* <span className="" style={{ transform: 'scaleX(-1)' }}>
+                                            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="m560-240-56-58 142-142H160v-80h486L504-662l56-58 240 240-240 240Z" /></svg>
+                                        </span> */}
+                        </a>
+                        <Button variant="primary" onClick={buscarCertificado}>
+                            Baixe seu certificado
+                            <span className=""><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="black"><path d="M480-320 280-520l56-58 104 104v-326h80v326l104-104 56 58-200 200ZM240-160q-33 0-56.5-23.5T160-240v-120h80v120h480v-120h80v120q0 33-23.5 56.5T720-160H240Z" /></svg></span>
+                        </Button>
+                    </div>
+                </div>
+                <Certificado
+                    certificado={certificado}
+                    triggerDownload={triggerDownload}
+                    index={0}
+                    onDownloaded={() => setTriggerDownload([false])}
+                />
+            </Modal>
             <div className="w-100 my-3 mb-5 d-flex">
 
                 <Button className="px-3 w-100" onClick={buscarCertificado}>Baixar Certificado</Button>
@@ -70,7 +117,6 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
                 />
             </div>
             {setbuttons()}
-
         </div>
     );
 }

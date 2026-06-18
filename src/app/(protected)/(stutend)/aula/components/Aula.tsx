@@ -218,7 +218,7 @@ export default function Aula() {
                 className="col-12 mt-2 mb-4 text-decoration-none d-flex align-items-center gap-2"
             >
                 <FaChevronLeft size={16} />
-                {user.type_render === 'curso' ? 'Voltar para curso' : 'Voltar para carreira'}
+                {user.type_render === 'curso' ? 'Voltar para curso' : 'Voltar para conteúdo'}
             </a>
             <div className="col-xxl-8 col-12">
                 <h2 className="fs-18 fw-700">
@@ -246,12 +246,16 @@ export default function Aula() {
                             </div>
                             Anterior
                         </button>
-                        <button disabled={activeIndex > aulas.length - 2} className="d-flex gap-3 align-items-center text-auxiliary1-project ps-3 border-0 cursor-pointer rounded-5 bg-white" onClick={() => prevOrNext(true)}>
-                            Próximo
-                            <div className="p-2 bg-auxiliary6-project rounded-5">
-                                <FaChevronRight className="mx-1" />
-                            </div>
-                        </button>
+                        {
+                            activeIndex < aulas.length - 1 && (
+                                <button disabled={activeIndex > aulas.length - 2} className="d-flex gap-3 align-items-center text-auxiliary1-project ps-3 border-0 cursor-pointer rounded-5 bg-white" onClick={() => prevOrNext(true)}>
+                                    Próximo
+                                    <div className="p-2 bg-auxiliary6-project rounded-5">
+                                        <FaChevronRight className="mx-1" />
+                                    </div>
+                                </button>
+                            )
+                        }
                     </div>
                 </div>
                 <div>
