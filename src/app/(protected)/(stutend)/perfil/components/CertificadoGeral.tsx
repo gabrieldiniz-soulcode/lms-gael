@@ -2,7 +2,7 @@ import { Button, Card, ProgressBar } from 'react-bootstrap';
 import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 import { AuthContext } from '@/contexts/AuthContext';
-import Certificado from '@/components/Certificado/Certificado';
+import Certificado from '@/components/Certificado/CertificadoGeral';
 import { FaRegFilePdf } from 'react-icons/fa';
 import { api } from "@/shared/api/api";
 

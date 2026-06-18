@@ -31,11 +31,12 @@ function formatarDataCurta(timestamp: number) {
     return `${dia}/${mes}/${ano}`;
 }
 
-export default function Certificado({ certificado, onDownloaded, triggerDownload, index }: Props) {
+export default function CertificadoGeral({ certificado, onDownloaded, triggerDownload, index }: Props) {
     const certificateRef = useRef<HTMLDivElement>(null);
     const [downloaded, setDownloaded] = useState(false);
 
     useEffect(() => {
+        console.log("Trigger download:", triggerDownload, "Index:", index, "Downloaded:", downloaded);
         async function handleDownload() {
             if (!certificateRef.current || !certificado) return;
             const canvas = await html2canvas(certificateRef.current, { useCORS: true });
@@ -79,26 +80,24 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                 display: 'flex',
                 flexDirection: 'column',
                 overflow: 'hidden',
-            }} className="text-white">
+            }} className="text-auxiliary1-project position-relative bg-secondary">
+
                 {/* Camada 1 do background */}
                 <img
-                    src="/gael/bg_certificado_camada1.png"
+                    src="/gael/certificado_gael_grafismo_2.png"
                     alt=""
                     style={{
-                        position: 'absolute', inset: 0,
-                        width: '100%', height: '100%',
-                        objectFit: 'cover', zIndex: 0,
+                        position: 'absolute', width: 250,
+                        zIndex: 1, top: 0, right: 0,
                     }}
                 />
                 {/* Camada 2 do background */}
                 <img
-                    src="/gael/bg_certificado_camada2.png"
+                    src="/gael/certificado_gael_grafismo_1.png"
                     alt=""
                     style={{
-                        position: 'absolute', inset: 0,
-                        width: '100%', height: '100%',
-                        objectFit: 'cover', zIndex: 1,
-                        transform: 'scaleX(-1)',
+                        position: 'absolute', width: 250,
+                        zIndex: 1, bottom: 0, left: 0,
                     }}
                 />
 
@@ -110,43 +109,37 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     color: '#ffffff',
                 }}>
                     {/* Título */}
-                    <div style={{ marginBottom: '50px', marginTop: '50px' }}>
-                        <div style={{ fontSize: '42px', fontWeight: '900', lineHeight: 1, letterSpacing: '1px', color: '#ffffff' }}>
-                            CERTIFICADO
-                        </div>
-                        <div style={{ fontSize: '36px', fontWeight: '400', lineHeight: 1.2, color: '#ffffff' }}>
-                            DE CONCLUSÃO
-                        </div>
-                    </div>
 
                     {/* Nome do curso */}
-                    <div style={{ marginBottom: '36px' }}>
-                        <div style={{ fontSize: '20px', marginBottom: '6px', color: '#ffffff' }}>Trilha</div>
-                        <div style={{ fontSize: '36px', fontWeight: '900', lineHeight: 1.15, textTransform: 'uppercase', color: '#ffffff' }}>
-                            {courseName}
+                    <div style={{ marginBottom: '36px', marginTop: '100px' }}>
+                        <div style={{ fontSize: '36px', fontWeight: '900', lineHeight: 1.15, textTransform: 'uppercase' }}>
+                            CERTIFICADO CRIA MAIS
                         </div>
+                        <div style={{ fontSize: '36px', marginBottom: '6px', lineHeight: 1.2 }}>Educação Financeira para <br /> Empreendedores Criativos</div>
                     </div>
 
                     {/* Descrição */}
                     <div style={{ marginBottom: 'auto' }}>
                         <div style={{
-                            fontSize: '16px', color: '#ffffff', lineHeight: 1.6, maxWidth: '500px'
+                            fontSize: '16px', lineHeight: 1.6, maxWidth: '500px'
                         }}>
-                            <strong>{certificado.firstname} {certificado.lastname}</strong> concluiu em {formatarDataCurta(certificado.certificate_created)} a Trilha de {courseName?.toUpperCase()} ({certificado.workload}h) parte integrante do curso livre <b>CRIA MAIS | Educação Financeira para Empreendedores Criativos</b>.
+                            Certificamos que <strong>{certificado.firstname} {certificado.lastname}</strong> concluiu em {formatarDataCurta(certificado.certificate_created)} a jornada online do CRIA MAIS, com introdução à <b>Educação Financeira e ao Empreendedorismo Criativo</b>, totalizando 20 horas de conteúdo.
                         </div>
                     </div>
+
+
 
                     {/* Assinaturas */}
                     <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '70px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             {/* <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} /> */}
-                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Fabrício Cardoso</div>
-                            <div style={{ fontSize: '14px', fontWeight: '400', color: '#ffffff' }}>SOULCODE</div>
+                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px' }}>Fabrício Cardoso</div>
+                            <div style={{ fontSize: '14px', fontWeight: '400' }}>SOULCODE</div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             {/* <Image src={Carmela} width={250} height={80} alt="Assinatura Gaetano" style={{ objectFit: 'contain' }} /> */}
-                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Gaetano Lops</div>
-                            <div style={{ fontSize: '14px', fontWeight: '400', color: '#ffffff' }}>GAEL COMUNICAÇÃO E ENTRETENIMENTO</div>
+                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px' }}>Gaetano Lops</div>
+                            <div style={{ fontSize: '14px', fontWeight: '400' }}>GAEL COMUNICAÇÃO E ENTRETENIMENTO</div>
                         </div>
                     </div>
                 </div>
