@@ -85,7 +85,7 @@ export default function MdlCustomcert({ sequence, setbuttons }: Props) {
                 />
                 <div className="d-flex flex-column justify-content-center align-items-center pb-5 w-100 bg-secondary gap-3 h-100 border-primary rounded-3" style={{ border: "8px solid" }}>
                     <h1 className="text-primary m-0 mt-5 fw-bold">Parabéns!</h1>
-                    <h2 className="text-auxiliary2-project m-0 mb-4">Módulo Concluído!</h2>
+                    <h2 className="text-auxiliary2-project m-0 mb-4">Trilha Concluída!</h2>
                     <div className="d-flex justify-content-center gap-3 mt-4 pb-2">
                         <a className="btn btn-outline-primary" href={"/carreiras"}>
                             Voltar para home

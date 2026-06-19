@@ -1,8 +1,9 @@
+import { MdDone, MdPlayArrow, MdPlayLesson } from "react-icons/md";
+
 import { Accordion } from "react-bootstrap";
 import { FaRegCirclePlay } from "react-icons/fa6";
 import { FaRegFilePdf } from "react-icons/fa";
 import { IoIosLock } from "react-icons/io";
-import { MdDone } from "react-icons/md";
 import { MdOutlineQuiz } from "react-icons/md";
 import { PiCertificate } from "react-icons/pi";
 
@@ -84,34 +85,43 @@ export default function SubCurso({ subCurso, carreiraId, carreira, curso }: Prop
                         <Accordion.Header>{sub2.name}</Accordion.Header>
                         <Accordion.Body>
                             <div className="d-flex flex-column gap-3">
-                                {sub2.sequence.map((aula, index_inside) => (
+                                {sub2.sequence.map((aula, index_inside) => {
+                                    const canNext = sub2.sequence[index_inside - 1]?.complete || index_inside === 0;
+                                    return (
+                                        <a
+                                            href={canNext ? `/aula?id=${aula.cmid}&cursoId=${aula.data_module.course}&carreiraId=${carreiraId}&carreira=${carreira}&curso=${curso}` : "#"}
+                                            key={aula.cmid}
+                                            className="d-flex align-items-center justify-content-between gap-3 text-decoration-none"
+                                        >
+                                            <div className="d-flex gap-3 align-items-center">
+                                                <span className="">
+                                                    {getIcon(aula.module)}
+                                                </span>
 
-                                    <a
-                                        href={`/aula?id=${aula.cmid}&cursoId=${sub2.course}&carreiraId=${carreiraId}&carreira=${carreira}&curso=${curso}&nextModule=${isCerticate(index_inside, sub2.sequence, index, getsubCoursesFiltred())}`}
-                                        key={aula.cmid}
-                                        className="d-flex align-items-center justify-content-between gap-3 text-decoration-none"
-                                    >
-                                        <div className="d-flex gap-3 align-items-center">
-                                            <span className="">
-                                                {getIcon(aula.module)}
-                                            </span>
-
-                                            <span className={boldifcerticate(aula.module)} >
-                                                {aula?.data_module.name}
-                                            </span>
-                                        </div>
-                                        {aula.complete ? (
-                                            <div className="ms-auto bg-auxiliary9-project rounded-5 d-flex align-items-center justify-content-center">
-                                                <MdDone size={20} color="#fff" className="m-1" />
+                                                <span className={boldifcerticate(aula.module)} >
+                                                    {aula?.data_module.name}
+                                                </span>
                                             </div>
-                                        ) : (
-                                            <span >
+                                            {
+                                                aula.complete ? (
+                                                    <div className="ms-auto bg-auxiliary9-project rounded-5 d-flex align-items-center justify-content-center">
+                                                        <MdDone size={20} color="#fff" className="m-1" />
+                                                    </div>
+                                                ) :
+                                                    canNext ? (
+                                                        <div className="ms-auto bg-black rounded-5 d-flex align-items-center justify-content-center">
+                                                            <MdPlayArrow size={20} color="#fff" className="m-1" />
+                                                        </div>
+                                                    ) : (
+                                                        <span >
 
-                                                <IoIosLock size={24} className="ms-auto" />
-                                            </span>
-                                        )}
-                                    </a>
-                                ))}
+                                                            <IoIosLock size={24} className="ms-auto" />
+                                                        </span>
+                                                    )
+                                            }
+                                        </a>
+                                    )
+                                })}
                             </div>
                         </Accordion.Body>
                     </Accordion.Item>

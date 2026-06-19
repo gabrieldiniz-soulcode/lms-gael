@@ -148,15 +148,10 @@ export default function Aula() {
 
     useEffect(() => {
         function updateIdSearchParam() {
-
             const params = new URLSearchParams(window.location.search);
             params.set('id', aulas[activeIndex].cmid.toString());
 
-
-
-            console.log(aulas[activeIndex + 1]?.module == "mdl_customcert")
             setNextStepIsCertificate(aulas[activeIndex + 1]?.module == "mdl_customcert")
-
 
             window.history.replaceState(null, '', `${window.location.pathname}?${params.toString()}`);
         }
