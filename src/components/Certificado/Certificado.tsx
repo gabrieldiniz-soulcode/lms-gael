@@ -109,6 +109,12 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     height: '100%', padding: '48px 56px',
                     color: '#ffffff',
                 }}>
+
+                    <div className="my-3 text-white" style={{fontSize: 18}}>
+                        <strong>Ministério da Cultura</strong> e <strong>Mastercard</strong> apresentam
+                    </div>
+
+
                     {/* Título */}
                     <div style={{ marginBottom: '50px', marginTop: '50px' }}>
                         <div style={{ fontSize: '42px', fontWeight: '900', lineHeight: 1, letterSpacing: '1px', color: '#ffffff' }}>
@@ -121,8 +127,8 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
 
                     {/* Nome do curso */}
                     <div style={{ marginBottom: '36px' }}>
-                        <div style={{ fontSize: '20px', marginBottom: '6px', color: '#ffffff' }}>Trilha</div>
-                        <div style={{ fontSize: '36px', fontWeight: '900', lineHeight: 1.15, textTransform: 'uppercase', color: '#ffffff' }}>
+                        <div style={{ fontSize: '18px', marginBottom: '6px', color: '#ffffff' }}>Trilha</div>
+                        <div style={{ fontSize: '30px', fontWeight: '900', lineHeight: 1.15, textTransform: 'uppercase', color: '#ffffff' }}>
                             {courseName}
                         </div>
                     </div>
@@ -137,7 +143,7 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     </div>
 
                     {/* Assinaturas */}
-                    <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '70px' }}>
+                    <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '40px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             {/* <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} /> */}
                             <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Fabrício Cardoso</div>

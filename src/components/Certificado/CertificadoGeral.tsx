@@ -110,8 +110,12 @@ export default function CertificadoGeral({ certificado, onDownloaded, triggerDow
                 }}>
                     {/* Título */}
 
+                    <div className="my-3" style={{fontSize: 18}}>
+                        <strong>Ministério da Cultura</strong> e <strong>Mastercard</strong> apresentam
+                    </div>
+
                     {/* Nome do curso */}
-                    <div style={{ marginBottom: '36px', marginTop: '100px' }}>
+                    <div style={{ marginBottom: '36px', marginTop: '80px' }}>
                         <div style={{ fontSize: '36px', fontWeight: '900', lineHeight: 1.15, textTransform: 'uppercase' }}>
                             CERTIFICADO CRIA MAIS
                         </div>
@@ -130,7 +134,7 @@ export default function CertificadoGeral({ certificado, onDownloaded, triggerDow
 
 
                     {/* Assinaturas */}
-                    <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '70px' }}>
+                    <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '50px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                             {/* <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} /> */}
                             <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px' }}>Fabrício Cardoso</div>
