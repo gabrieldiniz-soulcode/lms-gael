@@ -110,7 +110,7 @@ export default function CertificadoGeral({ certificado, onDownloaded, triggerDow
                 }}>
                     {/* Título */}
 
-                    <div className="my-3" style={{fontSize: 18}}>
+                    <div className="my-3" style={{ fontSize: 18 }}>
                         <strong>Ministério da Cultura</strong> e <strong>Mastercard</strong> apresentam
                     </div>
 
@@ -131,10 +131,10 @@ export default function CertificadoGeral({ certificado, onDownloaded, triggerDow
                         </div>
                     </div>
 
-                   {/* Assinaturas */}
+                    {/* Assinaturas */}
                     <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '40px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img width={200} height={40} src="/gael/fabricio_black.webp" />
+                            <img width={200} height={35} src="/gael/fabricio_black.webp" className="mb-1" />
                             <div style={{ fontSize: '14px', fontWeight: '400' }}>SOULCODE</div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>

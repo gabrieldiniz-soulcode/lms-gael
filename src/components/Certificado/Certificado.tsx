@@ -145,7 +145,7 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     {/* Assinaturas */}
                     <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '40px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            <img width={200} height={40} src="/gael/fabricio_white.webp" />
+                            <img width={200} height={35} src="/gael/fabricio_white.webp" className="mb-1"/>
                             <div style={{ fontSize: '14px', fontWeight: '400', color: '#ffffff' }}>SOULCODE</div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
