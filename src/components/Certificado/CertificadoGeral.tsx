@@ -131,18 +131,14 @@ export default function CertificadoGeral({ certificado, onDownloaded, triggerDow
                         </div>
                     </div>
 
-
-
-                    {/* Assinaturas */}
-                    <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '50px' }}>
+                   {/* Assinaturas */}
+                    <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '40px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            {/* <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} /> */}
-                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px' }}>Fabrício Cardoso</div>
+                            <img width={200} height={40} src="/gael/fabricio_black.webp" />
                             <div style={{ fontSize: '14px', fontWeight: '400' }}>SOULCODE</div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            {/* <Image src={Carmela} width={250} height={80} alt="Assinatura Gaetano" style={{ objectFit: 'contain' }} /> */}
-                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px' }}>Gaetano Lops</div>
+                            <img width={200} height={40} src="/gael/gaetano_black.webp" />
                             <div style={{ fontSize: '14px', fontWeight: '400' }}>GAEL COMUNICAÇÃO E ENTRETENIMENTO</div>
                         </div>
                     </div>

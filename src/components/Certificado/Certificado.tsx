@@ -110,7 +110,7 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     color: '#ffffff',
                 }}>
 
-                    <div className="my-3 text-white" style={{fontSize: 18}}>
+                    <div className="my-3 text-white" style={{ fontSize: 18 }}>
                         <strong>Ministério da Cultura</strong> e <strong>Mastercard</strong> apresentam
                     </div>
 
@@ -145,13 +145,11 @@ export default function Certificado({ certificado, onDownloaded, triggerDownload
                     {/* Assinaturas */}
                     <div style={{ display: 'flex', gap: '60px', alignItems: 'flex-end', justifyContent: "flex-end", marginBottom: '40px' }}>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            {/* <Image src={Fabricio} width={250} height={80} alt="Assinatura Fabrício" style={{ objectFit: 'contain' }} /> */}
-                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Fabrício Cardoso</div>
+                            <img width={200} height={40} src="/gael/fabricio_white.webp" />
                             <div style={{ fontSize: '14px', fontWeight: '400', color: '#ffffff' }}>SOULCODE</div>
                         </div>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                            {/* <Image src={Carmela} width={250} height={80} alt="Assinatura Gaetano" style={{ objectFit: 'contain' }} /> */}
-                            <div style={{ fontSize: '16px', fontWeight: '600', marginTop: '4px', color: '#ffffff' }}>Gaetano Lops</div>
+                            <img width={200} height={40} src="/gael/gaetano_white.webp" />
                             <div style={{ fontSize: '14px', fontWeight: '400', color: '#ffffff' }}>GAEL COMUNICAÇÃO E ENTRETENIMENTO</div>
                         </div>
                     </div>
