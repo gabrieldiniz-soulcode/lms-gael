@@ -103,10 +103,11 @@ export default function Hero() {
                                     <span className="fs-12 d-flex align-items-center my-md-0 my-3">
                                         {/* <FaRegClock className='text-auxiliary1-project me-2' /> */}
                                         {/* {course?.carga} DE ESTUDO */}
+                                        TRILHA 2
                                     </span>
                                     <a href={user.type_render === 'curso' ? `/cursos/${course.id}` : `/curso?id=${course.id}`}
                                         className="btn btn-primary d-flex align-items-center justify-content-center fs-12 fw-700 px-exxl-4">
-                                        {user?.type_render === 'curso' ? 'Acessar Curso' : 'Acessar Carreira'}
+                                        {user?.type_render === 'curso' ? 'Acessar Curso' : 'Acessar Conteúdo'}
                                         <RiPlayMiniLine size={20} strokeWidth={0.5} className="ms-1" />
                                     </a>
                                 </div>

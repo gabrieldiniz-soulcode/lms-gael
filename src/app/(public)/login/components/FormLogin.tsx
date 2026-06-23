@@ -51,7 +51,7 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
                 <Image src={logo1.src} width={300} height={150} alt="logo Gael" className="object-fit-contain" style={{ maxWidth: '300px', height: 'auto' }} />
                 <h1 className="fs-38 fw-700 text-primary">Bem-vindo(a)</h1>
                 <span className="fs-21 text-white mb-3">
-                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o <a href="https://criamais.soulcode.com/" target="_blank" rel="noopener noreferrer" className="text-white">site do programa</a> para realizar sua inscrição.
+                    Para acessar nossos cursos, você deverá realizar login. Caso não tenha acesso, visite o <a href="https://criamaisfinancas.com.br/" target="_blank" rel="noopener noreferrer" className="text-white">site do programa</a> para realizar sua inscrição.
                 </span>
             </Col>
             <Col className="bg-white offset-xl-3 d-flex flex-column gap-3 p-4 rounded-3" xxl={4} xl={5} md={8} style={{ minHeight: 324 }}>
