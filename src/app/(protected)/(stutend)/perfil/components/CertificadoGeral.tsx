@@ -185,7 +185,7 @@ const CertificadoGeral: React.FC = () => {
                   postProgress();
                   setTriggerDownload(newTrigger);
                 }}
-                disabled={data.progress.overall < 99}
+              // disabled={data.progress.overall < 99}
               >
                 Baixar Certificado
                 <FaRegFilePdf color="#fff" className="ms-2" />

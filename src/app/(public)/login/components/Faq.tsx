@@ -32,7 +32,7 @@ export default function Faq() {
                     <AccordionItem eventKey="3" className="mb-2">
                         <AccordionHeader>Como funciona a seleção para ganhar as mentorias e o dinheiro (Capital Semente)?</AccordionHeader>
                         <AccordionBody>
-                            O prazo para as inscrições na pré-seleção acontecerão do dia 20 de Agosto ao dia 20 de setembro, após a conclusão das aulas e emissão do seu certificado da Fase I. Você poderá se inscrever para a pré-seleção, enviando o material solicitado (vídeo-pitch e uma apresentação do empreendimento). Uma banca avaliadora apresentará os 60 projetos que mais se destacaram, eles receberão 3 meses de mentoria e um capital semente no valor de R$ 6.000,00 para investir no negócio.
+                            O prazo para as inscrições na pré-seleção acontecerão do dia 20 de Agosto ao dia 20 de setembro, após a conclusão das aulas e emissão do seu certificado da Fase I. Você poderá se inscrever para a pré-seleção, enviando o material solicitado (vídeo-pitch e uma apresentação do empreendimento). Uma banca avaliadora apresentará os 60 projetos que mais se destacaram, eles receberão 3 meses de mentoria e um capital semente no valor de R$ 8.000,00 para investir no negócio.
                         </AccordionBody>
                     </AccordionItem>
 

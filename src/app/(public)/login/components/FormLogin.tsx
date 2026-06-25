@@ -89,7 +89,7 @@ export default function FormLogin({ forgotPassword = false }: { forgotPassword?:
                             </div>
 
                             <Button className="fs-15" disabled={validate()} onClick={e => handleSubmit(e)}>Acessar</Button>
-                            <Button variant="secondary" className="fs-15 border-1 border-black" href="https://criamais.soulcode.com/" target="_blank">Faça sua assinatura</Button>
+                            <Button variant="secondary" className="fs-15 border-1 border-black" href="https://criamaisfinancas.com.br/" target="_blank">Inscreva-se agora</Button>
                             <span className="text-center fs-14">Precisa de ajuda? <a className="cursor-pointer" onClick={() => openZendesk()}>Fale Conosco</a></span>
                         </>
                 }

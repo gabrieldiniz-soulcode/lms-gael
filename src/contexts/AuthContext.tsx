@@ -6,7 +6,6 @@ import { usePathname, useRouter } from "next/navigation";
 
 import { StaticImageData } from "next/image";
 import { api } from "@/shared/api/api";
-import axios from "axios";
 import { db } from "@/lib/firebaseConfig";
 import { jwtDecode } from "jwt-decode";
 
@@ -42,7 +41,7 @@ interface DecodedToken {
     exp: number;
 }
 
-interface Profile {
+export interface Profile {
     firstname: string;
     lastname: string;
     imagealt: string;
@@ -148,7 +147,7 @@ export function AuthContextProvider({ children }: Props) {
     }, []);
 
     function getPerfil(userObj: User) {
-        axios
+        api
             .get("/profile", {
                 headers: {
                     database: userObj.database
