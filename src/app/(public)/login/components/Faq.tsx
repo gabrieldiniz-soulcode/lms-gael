@@ -39,8 +39,7 @@ export default function Faq() {
                     <AccordionItem eventKey="4" className="mb-2">
                         <AccordionHeader>Qual é a duração do Programa?</AccordionHeader>
                         <AccordionBody>
-                            A plataforma online oferece 20 horas de conteúdo dinâmico focado na prática. Após realizar o seu cadastro, você tem um prazo de até 90 dias para navegar e concluir todos os conteúdos disponíveis, no seu ritmo.
-                        </AccordionBody>
+                            A plataforma online oferece 20 horas de conteúdo dinâmico focado na prática. O programa tem duração até dezembro, mas as vagas são limitadas!                        </AccordionBody>
                     </AccordionItem>
 
                     <AccordionItem eventKey="5" className="mb-2">
@@ -54,6 +53,13 @@ export default function Faq() {
                         <AccordionHeader>Como posso me inscrever?</AccordionHeader>
                         <AccordionBody>
                             É super rápido! Vá até o nosso formulário de cadastro, preencha seus dados básicos e clique em avançar. Você receberá o acesso para entrar na plataforma e garantir sua vaga.
+                        </AccordionBody>
+                    </AccordionItem>
+
+                    <AccordionItem eventKey="7" className="mb-2">
+                        <AccordionHeader>Fiquei com dúvidas sobre o conteúdo das aulas. O que eu faço?</AccordionHeader>
+                        <AccordionBody>
+                            Não se preocupe! Se você tiver qualquer dúvida relacionada aos assuntos ou materiais das nossas trilhas, pode enviar um e-mail direto para o duvidas.conteudo@criamaisfinancas.com.br. Nossa equipe está pronta para te ajudar!
                         </AccordionBody>
                     </AccordionItem>
                 </Accordion>

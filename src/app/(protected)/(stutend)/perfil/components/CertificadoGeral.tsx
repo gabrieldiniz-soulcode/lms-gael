@@ -5,6 +5,7 @@ import { AuthContext } from '@/contexts/AuthContext';
 import Certificado from '@/components/Certificado/CertificadoGeral';
 import { FaRegFilePdf } from 'react-icons/fa';
 import { api } from "@/shared/api/api";
+import { apiRd } from '@/shared/api/apiRd';
 
 interface Course {
   courseid: number;
@@ -113,6 +114,29 @@ const CertificadoGeral: React.FC = () => {
     }
   };
 
+  const sendObjectToRd = async () => {
+    const body = {
+      event_type: "CONVERSION",
+      event_family: "CDP",
+      payload: {
+        conversion_identifier: "gael_general_certificate_completion",
+        email: user.name,
+        firstname: certificadoMockado.firstname,
+        lastname: certificadoMockado.lastname,
+        cf_couse_name_soulhub: certificadoMockado.coursename,
+        workload: certificadoMockado.workload,
+        certificate_created: certificadoMockado.certificate_created
+      },
+    }
+    try {
+      const res = apiRd.post('/conversions', body);
+      console.log(res);
+    }
+    catch (error) {
+      console.log(error);
+    }
+  }
+
   const certificadoMockado: CertificateData = useMemo(() => {
     function capitalizeFirstLetter(text: string) {
       if (!text) return ""; // Retorna vazio se o texto for undefined, null ou ""
@@ -155,6 +179,7 @@ const CertificadoGeral: React.FC = () => {
               <Button
                 className="w-100"
                 onClick={() => {
+                  sendObjectToRd();
                   const newTrigger = [...triggerDownload];
                   newTrigger[0] = true;
                   postProgress();
