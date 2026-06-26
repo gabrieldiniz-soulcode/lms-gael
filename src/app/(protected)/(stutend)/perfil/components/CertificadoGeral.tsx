@@ -92,66 +92,20 @@ const CertificadoGeral: React.FC = () => {
     fetchProgress();
   }, [user?.id, user?.token]);
 
-  const postProgress = async () => {
-    if (!user?.token) return;
-
-    setError('');
-
-    try {
-      await api.post("/progress/user-cohort",
-        {
-          scope: 'cohort',
-          userid: user.id,
-          cohortid: 153,
-          subcourse_scope: 'all'
-        },
-        {}
-      );
-    } catch {
-      console.error('Erro ao atualizar progresso.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const sendObjectToRd = async () => {
-    const body = {
-      event_type: "CONVERSION",
-      event_family: "CDP",
-      payload: {
-        conversion_identifier: "gael_general_certificate_completion",
-        email: user.name,
-        firstname: certificadoMockado.firstname,
-        lastname: certificadoMockado.lastname,
-        cf_couse_name_soulhub: certificadoMockado.coursename,
-        workload: certificadoMockado.workload,
-        certificate_created: certificadoMockado.certificate_created
-      },
-    }
-    try {
-      const res = apiRd.post('/conversions', body);
-      console.log(res);
-    }
-    catch (error) {
-      console.log(error);
-    }
-  }
-
   const certificadoMockado: CertificateData = useMemo(() => {
     function capitalizeFirstLetter(text: string) {
       if (!text) return ""; // Retorna vazio se o texto for undefined, null ou ""
       return text.charAt(0).toUpperCase() + text.slice(1);
     }
 
-
     return {
       certificate_created: new Date().getTime() / 1000,
-      code: `GERAL-${data?.userid ?? '0000'}-${data?.cohortid ?? '153'}`,
-      coursename: 'Desenvolvedor de Games Godot Engine',
+      code: `GERAL-${data?.userid ?? '0000'}-${data?.cohortid ?? '160'}`,
+      coursename: '',
       firstname: capitalizeFirstLetter(perfil.firstname),
       lastname: capitalizeFirstLetter(perfil.lastname),
       workload: `${data?.totals?.courses ?? 0} cursos concluídos`,
-      name: 'Desenvolvedor de Games Godot Engine'
+      name: ''
     };
   }, [data?.cohortid, data?.totals?.courses, data?.userid, perfil.firstname, perfil.lastname]);
 
@@ -179,13 +133,11 @@ const CertificadoGeral: React.FC = () => {
               <Button
                 className="w-100"
                 onClick={() => {
-                  sendObjectToRd();
                   const newTrigger = [...triggerDownload];
                   newTrigger[0] = true;
-                  postProgress();
                   setTriggerDownload(newTrigger);
                 }}
-              // disabled={data.progress.overall < 99}
+                disabled={data.progress.overall < 99}
               >
                 Baixar Certificado
                 <FaRegFilePdf color="#fff" className="ms-2" />
