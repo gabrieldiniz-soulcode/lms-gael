@@ -39,7 +39,9 @@ export default function Categorias() {
             api
                 .get("/course", {
                     headers: {
-                        database: user?.database
+                        database: user?.database,
+                        enrolled_only: 1,
+                        cohortid: 160
                     }
                 })
                 .then((res: ApiResponse) => {
